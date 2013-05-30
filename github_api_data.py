@@ -26,7 +26,7 @@ def github_timeline():
     timeline = req.json
     return timeline
 
-def get_repos(count=10):
+def get_repos(limit=500, sleep_time=1.0):
 
     """Returns a DataFrame of repositories; 
     The count is the number of requests to the API. 
@@ -34,16 +34,18 @@ def get_repos(count=10):
 
     url = 'https://api.github.com/repositories'
     repos_df = pn.DataFrame()
-    while count > 0 :
+    url_next = ''
+    current_count = 0
+    while (url_next != url) and (current_count < limit):
         req = requests.get(url, auth=(USER, PASSWORD))
-        url = req.links['next']['url']
+        url_next = req.links['next']['url']
         if(req.ok):
             repoItem = req.json
-            repos_df_temp = pn.DataFrame.from_dict(repoItem)
-            repos_df = repos_df.append(repos_df_temp)
-            print 'fetched ', len(repos_df), 'rows'
-        time.sleep(1.0)
-        count -= 1
+            repos_df = repos_df.append(pn.DataFrame.from_dict(repoItem))
+            current_count = len(repos_df)
+            print 'fetched ', current_count, 'rows'
+        time.sleep(sleep_time)
+        repos_df = repos_df.fillna('')
     return repos_df
 
 def get_programming_languages(repos_df):
@@ -73,4 +75,24 @@ def get_programming_languages(repos_df):
     df_lang = df_lang.fillna(0)
     return df_lang
 
+def get_repository_commits( 
+    url = 'https://api.github.com/repos/torvalds/linux/commits',
+    limit = 500, sleep_time=1.0):
 
+    """Returns a dataframe of all the commit events in the repository"""
+
+    # 'https://github.com/torvalds/linux' is the sample repos
+    commit_df = pn.DataFrame()
+    url_next = ''
+    current_count = 0
+    while (url_next != url) and (current_count < limit):
+        req = requests.get(url, auth=(USER, PASSWORD))
+        url_next = req.links['next']['url']
+        if(req.ok):
+            repoItem = req.json
+            commits = [it['commit'] for it in repoItem]
+            commit_df = commit_df.append(commits)
+            current_count = len(commit_df)
+            print 'fetched ', current_count, 'rows from ', url
+        time.sleep(sleep_time)
+    return commit_df    

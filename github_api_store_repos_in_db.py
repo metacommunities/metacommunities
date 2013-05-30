@@ -15,6 +15,7 @@ import pandas as pn
 import time
 import MySQLdb
 from pandas.io import sql
+import github_api_data as gha
 
 USER_FILE = open('github_api_user.txt')
 USER = USER_FILE.readline().rstrip('\n')
@@ -23,7 +24,7 @@ USER_FILE.close()
 
 
 
-def save_repos(count=1000000):
+def save_repos(limit=1000000):
     """ to get list of repos .... 
     the count is the number of requests to the API. Each request returns 100 repos
     to 'resume' this after already adding records to table, 
@@ -33,21 +34,18 @@ def save_repos(count=1000000):
     """
 
     con = MySQLdb.connect("localhost", USER, PASSWORD, "git", charset='utf8')
-    url = 'https://api.github.com/repositories'
-    for x in xrange(1,count):
-        req = requests.get(url,auth=(USER,PASSWORD))
-        url = req.links['next']['url']
-        df_temp = pn.DataFrame()
-        if(req.ok):
-            repoItem = req.json
-            repos_df_temp = pn.DataFrame.from_dict(repoItem)
-            df_temp = repos_df_temp[['id','name','private','full_name','description','fork']]
-            df_temp = df_temp.fillna('')		
-            sql.write_frame(df_temp, con=con, name='repos', 
-                if_exists='append', flavor='mysql')
-        print 'fetched 100 rows'
-        time.sleep(1.0)
+    df_temp = gha.get_repos(limit)
+    sql.write_frame(
+        df_temp[['id', 'name', 'private', 'full_name', 'description', 'fork']],  
+        con=con,  name='repos',  
+        if_exists='append',  flavor='mysql')
     return df_temp
+
+def save_repos_commits( ):
+
+    """gets all the commits for a given repository and saves to
+    database"""
+    return
 
        
 
