@@ -3,21 +3,10 @@ Functions that generate dataframes from  the github api.
 
 Authentication with the github api increases the amount of 
 data that can be retrieved. 
-I've set up a github user id that we can use for api calls.
-It's in the 'spare_gh_pass.txt' file, and the user/pwd
-are read in when the module loads.
+I've set up a github user id that we can use for api calls. 
+In any case, user/pwd needs to be a 'github_api_user.txt' file. 
+The user/pwd are read in when the module loads.
 
-I tried some of the packages below. 
-Decided it was easier  not to use these packages. 
-I think they complicate things.
-
-e.g. from pygithub3 import Github
-
-gh = Github(login='YOURUSERNAME', password='YOURPASSWORD')
-kennethreitz_repos = gh.repos.list('kennethreitz').all()
-
-from github import Github
-g = Github(user,password)
 """
 
 import requests
