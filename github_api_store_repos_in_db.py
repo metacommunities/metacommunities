@@ -24,6 +24,7 @@ import github_api_data as gad
 USER_FILE = open('github_api_user.txt')
 USER = USER_FILE.readline().rstrip('\n')
 PASSWORD = USER_FILE.readline().rstrip('\n')
+print USER, PASSWORD
 USER_FILE.close()
 DB = 'git_test'
 
