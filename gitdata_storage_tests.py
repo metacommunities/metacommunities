@@ -152,3 +152,50 @@ def load_mongo_df(dbm):
     return mongo_df
 
 
+def calculate_storage_in_gbytes(days=1):
+
+    """Returns a dictionary with compressed and uncompressed total gigabytes 
+        for githubarchive data by the day. The average hourly figure  of 1133000 compressed bytes
+        is based on an average filesize calculated on 700 files.
+        @TODO: calculate the uncompressed values based on the uncompressed size of 700 files
+        @TODO: the same calculations for stackoverflow -- Richard?
+    """
+
+    average_gz_file = float(1133000)
+    gbyte = 1024*1024*1024 #hope this is right
+    #sample file only -- not necessarily representative!
+    gzip_file = gzip.GzipFile('data/2012-04-01-12.json.gz')
+    uncompressed_size = float(len(gzip_file.read())) * days * 24/gbyte
+    #hour = os.path.getsize('data/2012-04-01-12.json.gz')
+    total_comp = days * average_gz_file *24/gbyte
+    return {'compressed': total_comp, 'uncompressed': uncompressed_size}
+
+def uncompressed_hourly_average(hours=1):
+    
+    """Returns an average hourly uncompressed data size 
+        based on a random sample of hours
+        from 10 days over 3 years
+        @TODO: this is broken -- needs debug
+    """
+
+    hrs = np.random.random_integers(0, 24, hours)
+    days = np.random.random_integers(1, 28, 10)
+    months = np.random.random_integers(1, 12, 3)
+    years = np.random.random_integers(2011, 2013, 3)
+    files = []
+    for year in years:
+        for month in months:
+            for day in days:
+                for hour in hrs:
+                    files.append(
+                        construct_githubarchive_url(year, month, day, hour))
+    for fil in files:
+        try:
+            response = requests.get(fil)
+            compressed_file = StringIO.StringIO(response.content)
+            uncompressed_size = float(len(gzip.GzipFile(
+                fileobj=compressed_file).read()))
+            print uncompressed_size
+        except Exception, exce:
+            print exce
+

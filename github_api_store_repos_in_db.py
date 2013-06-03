@@ -8,47 +8,109 @@ CREATE TABLE  `git`.`repos` (
  `fork` TINYINT( 1 ) NOT NULL ,
 PRIMARY KEY (  `id` )
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin
+
+CREATE TABLE  `git`.`commits` (
+`date` TEXT NOT NULL ,
+`repository` TEXT COLLATE utf8_bin NOT NULL,
+ `name` TEXT COLLATE utf8_bin NOT NULL ,
+ `message` TEXT COLLATE utf8_bin NOT NULL ,
+ `sha`  TEXT COLLATE utf8_bin NOT NULL );
 '''
 
-import requests
-import pandas as pn
-import time
 import MySQLdb
 from pandas.io import sql
-import github_api_data as gha
+import github_api_data as gad
 
 USER_FILE = open('github_api_user.txt')
 USER = USER_FILE.readline().rstrip('\n')
 PASSWORD = USER_FILE.readline().rstrip('\n')
 USER_FILE.close()
+DB = 'git_test'
 
+def save_repos(limit = 1000):
+    
+    """ fetches up to the limit repos using the github api 
+    and stores all returned fields
+    in the database (currently mysql)
 
-
-def save_repos(limit=1000000):
-    """ to get list of repos .... 
-    the count is the number of requests to the API. Each request returns 100 repos
-    to 'resume' this after already adding records to table, 
-    add ?since=x where x is the last ID in your table.
-    I'm only saving 6 variables right now because most of the variables returned 
-    are URLs that follow a set structure and therefore could be easily built from the full_name'
+    Parameters
+    ------------------------------
+    limit: how many repositories to fetch and save
     """
 
-    con = MySQLdb.connect("localhost", USER, PASSWORD, "git", charset='utf8')
-    df_temp = gha.get_repos(limit)
-    sql.write_frame(
-        df_temp[['id', 'name', 'private', 'full_name', 'description', 'fork']],  
-        con=con,  name='repos',  
-        if_exists='append',  flavor='mysql')
-    return df_temp
+    repos_df = gad.get_repos(limit)
+    try: 
+        con = MySQLdb.connect("localhost", 
+            USER, PASSWORD, DB, charset='utf8')
+        sql.write_frame(
+            repos_df[['id', 'name', 'private', 'full_name', 'description', 'fork']],  
+            con=con,  name='repos',  
+            if_exists='append',  flavor='mysql')
+    except MySQLdb.MySQLError, sql_ex:
+        print sql_ex
+    finally:
+        con.close()
+    return repos_df
 
-def save_repos_commits( ):
+def read_repositories():
 
-    """gets all the commits for a given repository and saves to
-    database"""
-    return
+    """ Returns DataFrame of all repositories
+    """
+
+    try:
+        con = MySQLdb.connect("localhost", 
+            USER, PASSWORD, DB, charset='utf8')
+        query = "select * from repos"
+        repos_df = sql.read_frame(query, con)
+    except MySQLdb.MySQLError, sql_ex:
+        print sql_ex
+    finally:
+        con.close()
+    return repos_df
+
+
+def save_repo_commits(repository, limit  = 1000):
+
+    """Gets all the commits for a given repository and saves to
+    database. 
+
+    Parameters
+    --------------------------------------
+    repository:  should be in the form: torvalds/linux
+    limit: how many commits to fetch and save
+    """
+
+    df_temp = gad.get_repository_commits(repository, limit)
+    try:
+        con = MySQLdb.connect("localhost", 
+            USER, PASSWORD, DB, charset='utf8')
+        sql.write_frame(
+                df_temp,  
+                con=con,  name='commits',  
+                if_exists='append',  flavor='mysql')   
+    except MySQLdb.MySQLError, sql_ex:
+        print sql_ex
+    finally:
+        con.close()
+
 
        
+def read_repo_commits(repository):
 
+    """ Returns DataFrame of all commits in the database
+    for that repository
+    """
+
+    try:
+        con = MySQLdb.connect("localhost", 
+            USER, PASSWORD, DB, charset='utf8')
+        query = "select * from commits where repository='%s'" % repository
+        commits_df = sql.read_frame(query, con).unique()
+    except MySQLdb.MySQLError, sql_ex:
+        print sql_ex
+    finally:
+        con.close()
+    return commits_df
 
 
 

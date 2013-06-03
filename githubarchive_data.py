@@ -54,7 +54,7 @@ class ConcatJSONDecoder(json.JSONDecoder):
 
 def load_local_archive_dataframe(sample_file  = 'data/2012-04-01-12.json.gz'):
 
-    """returns a DataFrame with all the data 
+    """ Returns a DataFrame with all the data 
     from one sample githubarchive gzip file."""
     
     git_json = load_local_archive_json(sample_file)
@@ -65,7 +65,7 @@ def load_local_archive_dataframe(sample_file  = 'data/2012-04-01-12.json.gz'):
 
 def load_local_archive_json(sample_file  = 'data/2012-04-01-12.json.gz'):
 
-    """returns a json with all the data 
+    """ Returns a json with all the data 
     from one sample githubarchive gzip file."""
 
     gzfile = gzip.open(sample_file)
@@ -92,7 +92,8 @@ def construct_githubarchive_url(year=2012,  month=1, day=1,  hour = 12 ):
     else:
         day = str(day)
 
-    date_url = base_url +str(year) +'-'+month +'-' + day + '-' + str(hour) +suffix
+    date_url = base_url + str(year) + '-' 
+        + month + '-' + day + '-' + str(hour) + suffix
     return date_url
 
 def fetch_archive(url):
@@ -156,50 +157,4 @@ def github_event_explore(df_all):
     event_df = pn.Series(data = df_all['type'], index = df_all['created_at'])
     return event_df
 
-def calculate_storage_in_gbytes(days=1):
-
-    """Returns a dictionary with compressed and uncompressed total gigabytes 
-        for githubarchive data by the day. The average hourly figure  of 1133000 compressed bytes
-        is based on an average filesize calculated on 700 files.
-        @TODO: calculate the uncompressed values based on the uncompressed size of 700 files
-        @TODO: the same calculations for stackoverflow -- Richard?
-    """
-
-    average_gz_file = float(1133000)
-    gbyte = 1024*1024*1024 #hope this is right
-    #sample file only -- not necessarily representative!
-    gzip_file = gzip.GzipFile('data/2012-04-01-12.json.gz')
-    uncompressed_size = float(len(gzip_file.read())) * days * 24/gbyte
-    #hour = os.path.getsize('data/2012-04-01-12.json.gz')
-    total_comp = days * average_gz_file *24/gbyte
-    return {'compressed': total_comp, 'uncompressed': uncompressed_size}
-
-def uncompressed_hourly_average(hours=1):
     
-    """Returns an average hourly uncompressed data size 
-        based on a random sample of hours
-        from 10 days over 3 years
-        @TODO: this is broken -- needs debug
-    """
-
-    hrs = np.random.random_integers(0, 24, hours)
-    days = np.random.random_integers(1, 28, 10)
-    months = np.random.random_integers(1, 12, 3)
-    years = np.random.random_integers(2011, 2013, 3)
-    files = []
-    for year in years:
-        for month in months:
-            for day in days:
-                for hour in hrs:
-                    files.append(
-                        construct_githubarchive_url(year, month, day, hour))
-    for fil in files:
-        try:
-            response = requests.get(fil)
-            compressed_file = StringIO.StringIO(response.content)
-            uncompressed_size = float(len(gzip.GzipFile(
-                fileobj=compressed_file).read()))
-            print uncompressed_size
-        except Exception, exce:
-            print exce
-

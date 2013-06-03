@@ -36,9 +36,8 @@ def get_repos(limit=500, sleep_time=1.0):
     repos_df = pn.DataFrame()
     url_next = ''
     current_count = 0
-    while (url_next != url) and (current_count < limit):
+    while current_count < limit:
         req = requests.get(url, auth=(USER, PASSWORD))
-        url_next = req.links['next']['url']
         if(req.ok):
             repoItem = req.json
             repos_df = repos_df.append(pn.DataFrame.from_dict(repoItem))
@@ -46,6 +45,18 @@ def get_repos(limit=500, sleep_time=1.0):
             print 'fetched ', current_count, 'rows'
         time.sleep(sleep_time)
         repos_df = repos_df.fillna('')
+
+        # check if any more commits to fetch
+        if req.links.has_key('next'):
+            url_next = req.links['next']['url']
+        else:
+            break
+            
+        if url == url_next:
+            break
+        else:
+            url = url_next
+
     return repos_df
 
 def get_programming_languages(repos_df):
@@ -75,24 +86,53 @@ def get_programming_languages(repos_df):
     df_lang = df_lang.fillna(0)
     return df_lang
 
-def get_repository_commits( 
-    url = 'https://api.github.com/repos/torvalds/linux/commits',
-    limit = 500, sleep_time=1.0):
+def get_repository_commits(repository, limit = 500, sleep_time=1.0):
 
-    """Returns a dataframe of all the commit events in the repository"""
+    """Returns a dataframe of all the commit events in the repository
 
-    # 'https://github.com/torvalds/linux' is the sample repos
+    Parameters
+    -----------------------------------------
+    repository: should be in the form 'torvalds/linux'
+    limit: max number of commits to fetch
+    """
+
+    base_url = 'https://api.github.com/repos/'
+    suffix = '/commits'
+    url = base_url + repository + suffix
     commit_df = pn.DataFrame()
     url_next = ''
     current_count = 0
-    while (url_next != url) and (current_count < limit):
+    while current_count < limit:
         req = requests.get(url, auth=(USER, PASSWORD))
-        url_next = req.links['next']['url']
         if(req.ok):
             repoItem = req.json
+            #may need to get more fields from json object
             commits = [it['commit'] for it in repoItem]
-            commit_df = commit_df.append(commits)
+            date = [it['author']['date'] for it in commits]
+            name = [it['author']['name'] for it in commits]
+            message = [it['message'] for it in commits]
+            sha = [it['sha'] for it in repoItem]
+            data_dict = {
+                    'repository': repository,
+                    'date': date,
+                    'name': name,
+                    'message': message,
+                    'sha': sha} 
+            commit_temp  = pn.DataFrame(data_dict, index = sha)
+            commit_df = commit_df.append(commit_temp)
             current_count = len(commit_df)
             print 'fetched ', current_count, 'rows from ', url
         time.sleep(sleep_time)
+        
+        # check if any more commits to fetch
+        if req.links.has_key('next'):
+            url_next = req.links['next']['url']
+        else:
+            break
+        if url == url_next:
+            break
+        else:
+            url = url_next
     return commit_df    
+
+
