@@ -157,7 +157,7 @@ def read_repo_commits(repository):
         con = MySQLdb.connect("localhost", 
             USER, PASSWORD, DB_NAME, charset='utf8')
         query = "select * from commits where repository='%s'" % repository
-        commits_df = sql.read_frame(query, con).unique()
+        commits_df = sql.read_frame(query, con)
     except MySQLdb.MySQLError, sql_ex:
         print sql_ex
     finally:
