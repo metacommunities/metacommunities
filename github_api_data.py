@@ -86,19 +86,28 @@ def get_programming_languages(repos_df):
     df_lang = df_lang.fillna(0)
     return df_lang
 
-def get_repository_commits(repository, limit = 500, sleep_time=1.0):
+def get_repository_commits(repository, since = '2008-01-01', until = '',  limit = 500, sleep_time=1.0):
 
-    """Returns a dataframe of all the commit events in the repository
+    """Returns a dataframe of all the commit events in the repository.
+    We assume that github starts 1 Jan 2008, and that there is no 
+    data before then. 
 
     Parameters
     -----------------------------------------
     repository: should be in the form 'torvalds/linux'
+    since: the starting date for commits
+    until: the end date for commits
     limit: max number of commits to fetch
     """
 
     base_url = 'https://api.github.com/repos/'
     suffix = '/commits'
-    url = base_url + repository + suffix
+    url = base_url + repository + suffix + '?&since=' + since
+
+    # add time range 
+    if until != '':
+        url = url + '&until=' + until
+
     commit_df = pn.DataFrame()
     url_next = ''
     current_count = 0

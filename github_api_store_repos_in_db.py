@@ -23,25 +23,24 @@ DB_NAME = 'git_test'
 
 SQL_TABLES = {
 'repos':
-"""CREATE TABLE  IF NOT EXISTS `repos` (
-`id` INT( 11 ) NOT NULL ,
- `name` TEXT COLLATE utf8_bin NOT NULL ,
- `full_name` TEXT COLLATE utf8_bin NOT NULL ,
- `private` TINYINT( 1 ) NOT NULL ,
- `description` TEXT COLLATE utf8_bin NOT NULL ,
- `fork` TINYINT( 1 ) NOT NULL ,
-PRIMARY KEY (  `id` )
+    """CREATE TABLE  IF NOT EXISTS `repos` (
+    `id` INT( 11 ) NOT NULL ,
+     `name` TEXT COLLATE utf8_bin NOT NULL ,
+     `full_name` TEXT COLLATE utf8_bin NOT NULL ,
+     `private` TINYINT( 1 ) NOT NULL ,
+     `description` TEXT COLLATE utf8_bin NOT NULL ,
+     `fork` TINYINT( 1 ) NOT NULL ,
+    PRIMARY KEY (  `id` )
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;""",
 
 'commits': 
-"""CREATE TABLE  IF NOT EXISTS  `commits` (
-`date` TEXT NOT NULL ,
-`repository` TEXT COLLATE utf8_bin NOT NULL,
- `name` TEXT COLLATE utf8_bin NOT NULL ,
- `message` TEXT COLLATE utf8_bin NOT NULL ,
- `sha`  TEXT COLLATE utf8_bin NOT NULL );
+    """CREATE TABLE  IF NOT EXISTS  `commits` (
+    `date` TEXT NOT NULL ,
+    `repository` TEXT COLLATE utf8_bin NOT NULL,
+     `name` TEXT COLLATE utf8_bin NOT NULL ,
+     `message` TEXT COLLATE utf8_bin NOT NULL ,
+     `sha`  TEXT COLLATE utf8_bin NOT NULL );
 """}
-
 
 
 def db_setup(db_name = DB_NAME):
@@ -120,7 +119,6 @@ def read_repositories():
         con.close()
     return repos_df
 
-
 def save_repo_commits(repository, limit  = 1000):
 
     """Gets all the commits for a given repository and saves to
@@ -145,12 +143,14 @@ def save_repo_commits(repository, limit  = 1000):
     finally:
         con.close()
 
-
-       
 def read_repo_commits(repository):
 
     """ Returns DataFrame of all commits in the database
     for that repository
+
+    Parameters
+    --------------------------------------
+    repository:  should be in the form: torvalds/linux
     """
 
     try:
