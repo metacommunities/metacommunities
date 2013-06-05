@@ -13,6 +13,7 @@ import MySQLdb
 import githubarchive_data as ghd
 from pymongo import MongoClient
 import os
+import gzip
 
 # read passwords in.
 # I'm using the same one for API and sqldb
@@ -20,6 +21,7 @@ USER_FILE = open('github_api_user.txt')
 USER = USER_FILE.readline().rstrip('\n')
 PASSWORD = USER_FILE.readline()
 USER_FILE.close()
+DB_NAME = 'git'
 
 def mysql_setup():
     """Returns a mysql connection for the git database.
@@ -27,9 +29,9 @@ def mysql_setup():
     """
     try:
         con = MySQLdb.connect("localhost", 
-            USER, PASSWORD, "git", charset='utf8')
-    except Exception, e:
-        print e
+            USER, PASSWORD, DB_NAME, charset='utf8')
+    except MySQLdb.MySQLError, sql_ex:
+        print sql_ex
     return con
     
 def setup_test_data():
