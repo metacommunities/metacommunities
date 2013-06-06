@@ -2,6 +2,7 @@
 Functions to test ease and speed of search, retrieval
 from githubarchive on Google BigQuery.
 I found https://developers.google.com/bigquery/docs/queries to be useful.
+
 Some general info:
 --------------------------------------------
 https://www.googleapis.com/bigquery/v2/projects/metacommunities/datasets
@@ -9,7 +10,8 @@ the root url is:    https://www.googleapis.com/bigquery/v2
 
 NB: got these examples from https://developers.google.com/bigquery/docs/hello_bigquery_api
 
-Sample query:
+Sample query for 'sentiment analysis' using emoticons:
+-----------------------------------------------
 SELECT repository_name,
     /* Extracts the relevant emoticon from the GitHub commit message    */
     REGEXP_EXTRACT(payload_commit_msg, r'([\;:]-[\)\(])') AS emoticon,
@@ -33,13 +35,6 @@ where type='PushEvent'
         and PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-01-01 00:00:00')
         and PARSE_UTC_USEC(created_at) < PARSE_UTC_USEC('2013-01-01 00:00:00')
 group by actor, repository_language;
-
-Another one
---------------------------------
-        query_data = {'query':
-                'SELECT TOP( title, 10) as title, 
-                COUNT(*) as revision_count FROM [publicdata:samples.wikipedia] 
-                WHERE wp_namespace = 0;'}
 
 """
 
@@ -67,7 +62,7 @@ api_key_file.close()
 FLOW = flow_from_clientsecrets('client_secrets.json',
                  scope='https://www.googleapis.com/auth/bigquery')
 
-#a sample query to use for testing
+#a sample query to use for testing - it 
 QUERY_DATA = {'query': """select actor, repository_language, 
                             count(repository_language) 
                             as pushes
