@@ -99,12 +99,15 @@ def setup_bigquery():
     bigquery_service = build('bigquery', 'v2', http=http)
     return bigquery_service
 
-def query_table(query, timeout=1.0):
+def query_table(query, max_rows=1000000, timeout=1.0):
 
     """ Returns the results of query on the githubarchive
     args:
     ----------------
     query: a BigQuery SQL query
+    max_rows: maximum number of rows to return
+    timeout: how long to wait for results before
+    checking for actual data in the rows
 
     returns:
     ---------------------------
@@ -114,18 +117,20 @@ def query_table(query, timeout=1.0):
     try:
         bigquery_service = setup_bigquery()
         job_collection = bigquery_service.jobs()
+
+        print 'Executing query:', query['query'].replace('\n', '').replace('    ', ' ')
         query_reply = job_collection.query(projectId=PROJECT_NUMBER,
                                      body=query).execute()
 
         # query_reply = query_request.query(projectId=PROJECT_NUMBER,
                                              # body=query).execute()
-        jobReference = query_reply['jobReference']
+        job_reference = query_reply['jobReference']
 
         while (not query_reply['jobComplete']):
             print 'Job not yet complete...'
             query_reply = job_collection.getQueryResults(
-                              projectId=jobReference['projectId'],
-                              jobId=jobReference['jobId'],
+                              projectId=job_reference['projectId'],
+                              jobId=job_reference['jobId'],
                               timeoutMs=timeout).execute()
     
         results_df = pn.DataFrame()
@@ -140,10 +145,12 @@ def query_table(query, timeout=1.0):
 
 
         # Loop through each page of data
-        while('rows' in query_reply and currentrow < query_reply['totalRows']):
+        while('rows' in query_reply and 
+            currentrow < query_reply['totalRows'] and
+            currentrow < max_rows):
             query_reply = job_collection.getQueryResults(
-                             projectId=jobReference['projectId'],
-                             jobId=jobReference['jobId'],
+                             projectId=job_reference['projectId'],
+                             jobId=job_reference['jobId'],
                              startIndex=currentrow).execute()
             if('rows' in query_reply):
                 next_page_df = convert_results_to_dataframe(query_reply)
