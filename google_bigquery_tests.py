@@ -83,7 +83,8 @@ def setup_bigquery():
 
     """
     Does the authorization and returns a service object;
-    Assumes that you have sorted out the 
+    Assumes that you have sorted out the oauth2 stuff and 
+    stored the keys in local file 'client_secrets.json'
     """
 
     storage = Storage('bigquery_credentials.dat')
@@ -98,21 +99,60 @@ def setup_bigquery():
     bigquery_service = build('bigquery', 'v2', http=http)
     return bigquery_service
 
-def query_table(query):
+def query_table(query, timeout=1.0):
 
     """ Returns the results of query on the githubarchive
     args:
     ----------------
     query: a BigQuery SQL query
+
+    returns:
+    ---------------------------
+    results_df: a pandas.DataFrame of the results
     """
     
     try:
         bigquery_service = setup_bigquery()
-        query_request = bigquery_service.jobs()
-        query_response = query_request.query(projectId=PROJECT_NUMBER,
-                                             body=query).execute()
-        # need to put code here to check if the job is complete
-        return query_response
+        job_collection = bigquery_service.jobs()
+        query_reply = job_collection.query(projectId=PROJECT_NUMBER,
+                                     body=query).execute()
+
+        # query_reply = query_request.query(projectId=PROJECT_NUMBER,
+                                             # body=query).execute()
+        jobReference = query_reply['jobReference']
+
+        while (not query_reply['jobComplete']):
+            print 'Job not yet complete...'
+            query_reply = job_collection.getQueryResults(
+                              projectId=jobReference['projectId'],
+                              jobId=jobReference['jobId'],
+                              timeoutMs=timeout).execute()
+    
+        results_df = pn.DataFrame()
+
+        if('rows' in query_reply):
+            print 'has a rows attribute'
+            # printTableData(query_reply, 0)
+            currentrow = len(query_reply['rows'])
+            first_page_df = convert_results_to_dataframe(query_reply)
+            results_df = pn.concat([results_df, first_page_df])
+            print currentrow, 'of  ', query_reply['totalRows'], results_df.shape
+
+
+        # Loop through each page of data
+        while('rows' in query_reply and currentrow < query_reply['totalRows']):
+            query_reply = job_collection.getQueryResults(
+                             projectId=jobReference['projectId'],
+                             jobId=jobReference['jobId'],
+                             startIndex=currentrow).execute()
+            if('rows' in query_reply):
+                next_page_df = convert_results_to_dataframe(query_reply)
+                results_df = pn.concat([results_df, next_page_df])            
+                currentrow += len(query_reply['rows'])
+                print 'getting more  data ', currentrow, results_df.shape
+
+
+        return results_df
     except HttpError as err:
         print 'Error:', pprint.pprint(err.content)
     except AccessTokenRefreshError:
