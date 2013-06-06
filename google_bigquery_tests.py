@@ -1,8 +1,9 @@
 """
 Functions to test ease and speed of search, retrieval
 from githubarchive on Google BigQuery.
-
-to get datasets we have access to
+I found https://developers.google.com/bigquery/docs/queries to be useful.
+Some general info:
+--------------------------------------------
 https://www.googleapis.com/bigquery/v2/projects/metacommunities/datasets
 the root url is:    https://www.googleapis.com/bigquery/v2
 
@@ -56,14 +57,13 @@ from oauth2client.tools import run
 
 PROJECT_NUMBER = '237471208995'
 PROJECT_ID = 'metacommunities'
-SERVICE_ACCOUNT_EMAIL = 'rian39@gmail.com'
 
 #not actually using these, but keeping them in case
 api_key_file = file('google_api_key.txt')
 api_key = api_key_file.read()
 api_key_file.close()
 
-#authorization is handled by this; you need one of these to get script to work
+#authorization is handled here; you need one of these to get script to work; 
 FLOW = flow_from_clientsecrets('client_secrets.json',
                  scope='https://www.googleapis.com/auth/bigquery')
 
