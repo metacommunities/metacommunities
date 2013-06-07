@@ -8,7 +8,24 @@ Some general info:
 https://www.googleapis.com/bigquery/v2/projects/metacommunities/datasets
 the root url is:    https://www.googleapis.com/bigquery/v2
 
-NB: got these examples from https://developers.google.com/bigquery/docs/hello_bigquery_api
+NB: got code ideas from:
+ https://developers.google.com/bigquery/docs/hello_bigquery_api
+
+Sample query for number of repositories
+----------------------------
+select count(distinct repository_name) from [githubarchive:github.timeline];
+
+select count(distinct repository_name), 
+    count (distinct repository_owner), 
+    count (distinct repository_organization)
+    from [githubarchive:github.timeline];
+
+Sample query for different event types
+--------------------------------------------------------------
+select  type, count(type)
+
+from [githubarchive:github.timeline] group by type;
+
 
 Sample query for 'sentiment analysis' using emoticons:
 -----------------------------------------------
@@ -63,7 +80,7 @@ FLOW = flow_from_clientsecrets('client_secrets.json',
                  scope='https://www.googleapis.com/auth/bigquery')
 
 #a sample query to use for testing - it 
-QUERY_DATA = {'query': """select actor, repository_language, 
+SAMPLE_QUERY =  """select actor, repository_language, 
                             count(repository_language) 
                             as pushes
                             from [githubarchive:github.timeline]
@@ -71,7 +88,7 @@ QUERY_DATA = {'query': """select actor, repository_language,
                             and repository_language != ''
                             and PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-01-01 00:00:00')
                             and PARSE_UTC_USEC(created_at) < PARSE_UTC_USEC('2013-01-01 00:00:00')
-                            group by actor, repository_language;"""}
+                            group by actor, repository_language;"""
 
 
 def setup_bigquery():
@@ -112,13 +129,12 @@ def query_table(query, max_rows=1000000, timeout=1.0):
     try:
         bigquery_service = setup_bigquery()
         job_collection = bigquery_service.jobs()
+        query_data = {'query':query}
 
-        print 'Executing query:', query['query'].replace('\n', '').replace('    ', ' ')
+        print 'Executing query:', query_data['query'].replace('\n', '').replace('    ', ' ')
         query_reply = job_collection.query(projectId=PROJECT_NUMBER,
-                                     body=query).execute()
+                                     body=query_data).execute()
 
-        # query_reply = query_request.query(projectId=PROJECT_NUMBER,
-                                             # body=query).execute()
         job_reference = query_reply['jobReference']
 
         while (not query_reply['jobComplete']):
