@@ -15,6 +15,8 @@ Sample query for number of repositories
 ----------------------------
 select count(distinct repository_name) from [githubarchive:github.timeline];
 
+Returns: 2403105
+
 select count(distinct repository_name), 
     count (distinct repository_owner), 
     count (distinct repository_organization)
@@ -53,6 +55,12 @@ where type='PushEvent'
         and PARSE_UTC_USEC(created_at) < PARSE_UTC_USEC('2013-01-01 00:00:00')
 group by actor, repository_language;
 
+* Important query - how many repos before Feb 2011?
+---------------------------------
+select count(distinct repository_name) from [githubarchive:github.timeline] 
+WHERE PARSE_UTC_USEC(repository_created_at) < PARSE_UTC_USEC('2011-02-01 00:00:00')
+;
+Result: 97602 
 """
 
 
