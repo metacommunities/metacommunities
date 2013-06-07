@@ -137,9 +137,15 @@ def query_table(query, max_rows=1000000, timeout=1.0):
     try:
         bigquery_service = setup_bigquery()
         job_collection = bigquery_service.jobs()
+
+        # put limit on query if it doesn't have one
+        if query.find('limit') == -1:
+            query = query.replace(';', ' ') + '    LIMIT %d' % max_rows + ';'
+
+        print 'executing query:'
+        print query
         query_data = {'query':query}
 
-        print 'Executing query:', query_data['query'].replace('\n', '').replace('    ', ' ')
         query_reply = job_collection.query(projectId=PROJECT_NUMBER,
                                      body=query_data).execute()
 
@@ -194,10 +200,10 @@ def convert_results_to_dataframe(query_response):
 
     rows = [r['f'] for r in query_response['rows']]
     frames = []
+    column_names = [f['name'] for f in query_response['schema']['fields']]
     for arow in rows:
         frames.append([field['v'] for field in arow])
-    results_df = pn.DataFrame(data=frames, 
-        columns = ['actor', 'language', 'count'])
+    results_df = pn.DataFrame(data=frames, columns = column_names)
     return results_df
 
     
