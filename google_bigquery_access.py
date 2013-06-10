@@ -1,7 +1,7 @@
 """
-Functions to test ease and speed of search, retrieval
-from githubarchive on Google BigQuery.
-I found https://developers.google.com/bigquery/docs/queries to be useful.
+Functions that set up access to bigquery,
+ run queries on githubarchive data on
+Google's bigquery and usually return Pandas dataframes.
 
 Some general info:
 --------------------------------------------
@@ -61,6 +61,18 @@ select count(distinct repository_name) from [githubarchive:github.timeline]
 WHERE PARSE_UTC_USEC(repository_created_at) < PARSE_UTC_USEC('2011-02-01 00:00:00')
 ;
 Result: 97602 
+
+Stu's query on repositories: how often repos are used
+------------------------------------------------
+SELECT RepoEvents, COUNT(*) AS Freq
+FROM
+(
+    SELECT repository_name, COUNT(repository_name) AS RepoEvents
+    FROM [githubarchive:github.timeline]
+    GROUP BY repository_name
+) MyTable
+GROUP BY RepoEvents
+ORDER BY Freq DESC
 """
 
 
@@ -139,7 +151,7 @@ def query_table(query, max_rows=1000000, timeout=1.0):
         job_collection = bigquery_service.jobs()
 
         # put limit on query if it doesn't have one
-        if query.find('limit') == -1:
+        if query.lower().find('limit') == -1:
             query = query.replace(';', ' ') + '    LIMIT %d' % max_rows + ';'
 
         print 'executing query:'
