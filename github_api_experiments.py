@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# <nbformat>2</nbformat>
+# <nbformat>3.0</nbformat>
 
 # <markdowncell>
 
@@ -76,9 +76,10 @@ df_lang.sum().plot(kind='bar',title = 'code size')
 # <markdowncell>
 
 # ## What can we get by looking at the forked repositories. Questions might be:
-#     1. what do they fork from?
-#     2. what kinds of repositories are likely to be forked?
-#     3. do forks have lives of their own, or are they mainly dead ends?
+# 1. what do they fork from? - when a repo is a fork, calling /repos/:owner/:repo also returns "parent" and "source" objects 
+# which direct to the repo it was forked from.
+# 2. what kinds of repositories are likely to be forked?
+# 3. do forks have lives of their own, or are they mainly dead ends?
 #     
 
 # <codecell>

@@ -4,8 +4,11 @@ Functions that generate dataframes from  the github api.
 Authentication with the github api increases the amount of 
 data that can be retrieved. 
 I've set up a github user id that we can use for api calls. 
-In any case, user/pwd needs to be a 'github_api_user.txt' file. 
-The user/pwd are read in when the module loads.
+In any case, user/pwd needs to be in a  2-line 'github_api_user.txt' plain text file.
+e.g:
+    torvalds
+    secretpassword 
+The user/pwd are always read in when the module loads.
 
 """
 
