@@ -14,7 +14,8 @@ The user/pwd are always read in when the module loads.
 
 import requests
 import time
-import pandas as pn
+import pandas as pd
+import json
 
 # read API user/password from your local file'
 USER_FILE = open('github_api_user.txt')
@@ -36,14 +37,14 @@ def get_repos(limit=500, sleep_time=1.0):
     Each request returns 100 repos approximately."""
 
     url = 'https://api.github.com/repositories'
-    repos_df = pn.DataFrame()
+    repos_df = pd.DataFrame()
     url_next = ''
     current_count = 0
     while current_count < limit:
         req = requests.get(url, auth=(USER, PASSWORD))
         if(req.ok):
             repoItem = req.json
-            repos_df = repos_df.append(pn.DataFrame.from_dict(repoItem))
+            repos_df = repos_df.append(pd.DataFrame.from_dict(repoItem))
             current_count = len(repos_df)
             print 'fetched ', current_count, 'rows'
         time.sleep(sleep_time)
@@ -77,13 +78,13 @@ def get_programming_languages(repos_df):
 		print lang
     """
 
-    df_lang = pn.DataFrame()
+    df_lang = pd.DataFrame()
 
     for name, url in repos_df.languages_url.iteritems():
         print 'fetching repository %s from %s'% (name, url)
         req = requests.get(url, auth=(USER, PASSWORD))
         lang = req.json
-        df_temp = pn.DataFrame.from_dict({name:lang}, 'index')
+        df_temp = pd.DataFrame.from_dict({name:lang}, 'index')
         df_lang = df_lang.append(df_temp)
 
     df_lang = df_lang.fillna(0)
@@ -111,7 +112,7 @@ def get_repository_commits(repository, since = '2008-01-01', until = '',  limit 
     if until != '':
         url = url + '&until=' + until
 
-    commit_df = pn.DataFrame()
+    commit_df = pd.DataFrame()
     url_next = ''
     current_count = 0
     while current_count < limit:
@@ -130,7 +131,7 @@ def get_repository_commits(repository, since = '2008-01-01', until = '',  limit 
                     'name': name,
                     'message': message,
                     'sha': sha} 
-            commit_temp  = pn.DataFrame(data_dict, index = sha)
+            commit_temp  = pd.DataFrame(data_dict, index = sha)
             commit_df = commit_df.append(commit_temp)
             current_count = len(commit_df)
             print 'fetched ', current_count, 'rows from ', url
@@ -147,4 +148,40 @@ def get_repository_commits(repository, since = '2008-01-01', until = '',  limit 
             url = url_next
     return commit_df    
 
+def get_repository_event(user, repo, limit=1000):
+    """Returns a list of events as dictionaries
+    from the API using url of the form
+    https://api.github.com/repos/torvalds/linux/events
+    Arguments
+    ----------------------------------
+    user: name of repo owner
+    repo: name of repository
+    limit: number of events to fetch
+    """
+
+    base_url = 'https://api.github.com/repos'
+    suffix = 'events'
+    url = '/'.join([base_url, user, repo, suffix])
+    events = []
+    try:
+        url_next = ''
+        current_count = 0
+        while current_count < limit:
+            events_req = requests.get(url, auth=(USER, PASSWORD))
+            events = events + events_req.json
+            if events_req.links.has_key('next'):
+                url_next = events_req.links['next']['url']
+                print url_next
+            else:
+                break
+            if url == url_next:
+                break
+            else:
+                url = url_next + '&per_page=100'
+            current_count = len(events)
+            time.sleep(1.0)
+
+    except Exception, e:
+        print e
+    return events
 
