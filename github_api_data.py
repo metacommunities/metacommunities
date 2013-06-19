@@ -176,7 +176,7 @@ def get_repository_event(user, repo, limit=1000):
                 break
             if url == url_next:
                 break
-            else:
+            else: appapp
                 url = url_next + '&per_page=100'
             current_count = len(events)
             time.sleep(1.0)
@@ -187,15 +187,27 @@ def get_repository_event(user, repo, limit=1000):
 
 	
 	
-	
 def get_repository_forkdata(repo):
-	#not finished, only gets first 30 forks
+#this function returns a data frame with data on a repo's forks - it currently breaks after around 500
 	url = 'https://api.github.com/repos/'+repo+'/forks'
-
 	repos_df = pn.DataFrame()
 	req = requests.get(url, auth=(USER, PASSWORD))
 	repoItem = req.json
-        
+	repos_df = repos_df.append(unpack_repoItem(repoItem, repos_df))
+	while req.links.has_key('next'):
+		url = req.links['next']['url']
+		req = requests.get(url, auth=(USER, PASSWORD))
+		repoItem = req.json
+		repos_df = repos_df.append(unpack_repoItem(repoItem, repos_df))  
+		time.sleep(1)
+        return repos_df
+
+
+def unpack_repoItem(repoItem, repos_df):
+	'''This does the work of extracting relevant variables from the json item and returning a data frame
+	repoItem is the json item to be unpacked
+	repos_df is the data frame where data from the current item will be appended
+	'''	
 	id = [it['id'] for it in repoItem]
 	full_name = [it['full_name'] for it in repoItem]
 	description = [it['description'] for it in repoItem]
@@ -204,7 +216,6 @@ def get_repository_forkdata(repo):
 	forks = [it['forks'] for it in repoItem]
 	size = [it['size'] for it in repoItem]
 	watchers = [it['watchers'] for it in repoItem]
-	#network_count = [it['network_count'] for it in repoItem]
 	open_issues = [it['open_issues'] for it in repoItem]
 	created_at = [it['created_at'] for it in repoItem]
 	pushed_at = [it['pushed_at'] for it in repoItem]
@@ -239,5 +250,4 @@ def get_repository_forkdata(repo):
 	temp_df  = pn.DataFrame(data_dict, index = id)		
 	repos_df = repos_df.append(temp_df)
 	return repos_df
-	
 
