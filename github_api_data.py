@@ -186,24 +186,25 @@ def get_repository_event(user, repo, limit=1000):
     return events
 
 	
-	
 def get_repository_forkdata(repo):
 #this function returns a data frame with data on a repo's forks - it currently breaks after around 500
 	url = 'https://api.github.com/repos/'+repo+'/forks'
 	repos_df = pn.DataFrame()
 	req = requests.get(url, auth=(USER, PASSWORD))
 	repoItem = req.json
-	repos_df = repos_df.append(unpack_repoItem(repoItem, repos_df))
+	repos_df = unpack_repoItem(repoItem, repos_df, repo)
 	while req.links.has_key('next'):
 		url = req.links['next']['url']
 		req = requests.get(url, auth=(USER, PASSWORD))
 		repoItem = req.json
-		repos_df = repos_df.append(unpack_repoItem(repoItem, repos_df))  
+		repos_df = unpack_repoItem(repoItem, repos_df, repo)  
 		time.sleep(1)
         return repos_df
+	
 
 
-def unpack_repoItem(repoItem, repos_df):
+
+def unpack_repoItem(repoItem, repos_df, parent):
 	'''This does the work of extracting relevant variables from the json item and returning a data frame
 	repoItem is the json item to be unpacked
 	repos_df is the data frame where data from the current item will be appended
@@ -224,8 +225,8 @@ def unpack_repoItem(repoItem, repos_df):
 	has_issues = [it['has_issues'] for it in repoItem]
 	has_wiki = [it['has_wiki'] for it in repoItem]
 	master_branch = [it['master_branch'] for it in repoItem]
-	parent_id = repo_id
-	parent_name = repo
+	parent_id = 1
+	parent_name = parent
 
 	data_dict = {
 			'id': id,
