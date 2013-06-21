@@ -224,7 +224,6 @@ def unpack_repoItem(repoItem, repos_df, parent):
 	has_downloads = [it['has_downloads'] for it in repoItem]
 	has_issues = [it['has_issues'] for it in repoItem]
 	has_wiki = [it['has_wiki'] for it in repoItem]
-	master_branch = [it['master_branch'] for it in repoItem]
 	parent_id = 1
 	parent_name = parent
 
@@ -244,7 +243,6 @@ def unpack_repoItem(repoItem, repos_df, parent):
 			'has_downloads': has_downloads,
 			'has_issues': has_issues,
 			'has_wiki': has_wiki,
-			'master_branch': master_branch,
 			'parent_id': parent_id,
 			'parent_name': parent_name} 
 

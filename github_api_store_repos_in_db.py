@@ -191,7 +191,6 @@ def save_repository_fulldata(repo):
 	has_downloads = repoItem['has_downloads']
 	has_issues = repoItem['has_issues']
 	has_wiki = repoItem['has_wiki']
-	master_branch = repoItem['master_branch']
 	if fork == True:
 		parent_id = repoItem['parent']['id']
 		parent_name = repoItem['parent']['full_name']
@@ -203,8 +202,8 @@ def save_repository_fulldata(repo):
             	USER, PASSWORD, DB_NAME, charset='utf8')
 	cursor = con.cursor()
 	cursor.execute('''INSERT into repo_full 
-                  values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''',
+                  values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''',
                   (id, full_name, description, language, fork, forks, size, watchers, open_issues, created_at, 
-                   pushed_at, updated_at, has_downloads, has_issues, has_wiki, master_branch, parent_id, parent_name))
+                   pushed_at, updated_at, has_downloads, has_issues, has_wiki, parent_id, parent_name))
 	con.commit()
 	con.close()
