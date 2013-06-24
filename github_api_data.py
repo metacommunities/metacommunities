@@ -176,8 +176,8 @@ def get_repository_event(user, repo, limit=1000):
                 break
             if url == url_next:
                 break
-            else: appapp
-                url = url_next + '&per_page=100'
+            else:
+		url = url_next + '&per_page=100'
             current_count = len(events)
             time.sleep(1.0)
 
