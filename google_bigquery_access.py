@@ -79,7 +79,7 @@ ORDER BY Freq DESC
 import httplib2
 import pprint
 import time
-import pandas as pn
+import pandas as pd
 from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.client import AccessTokenRefreshError
@@ -170,14 +170,14 @@ def query_table(query, max_rows=1000000, timeout=1.0):
                               jobId=job_reference['jobId'],
                               timeoutMs=timeout).execute()
     
-        results_df = pn.DataFrame()
+        results_df = pd.DataFrame()
 
         if('rows' in query_reply):
             print 'has a rows attribute'
             # printTableData(query_reply, 0)
             currentrow = len(query_reply['rows'])
             first_page_df = convert_results_to_dataframe(query_reply)
-            results_df = pn.concat([results_df, first_page_df])
+            results_df = pd.concat([results_df, first_page_df])
             print currentrow, 'of  ', query_reply['totalRows'], results_df.shape
 
 
@@ -191,7 +191,7 @@ def query_table(query, max_rows=1000000, timeout=1.0):
                              startIndex=currentrow).execute()
             if('rows' in query_reply):
                 next_page_df = convert_results_to_dataframe(query_reply)
-                results_df = pn.concat([results_df, next_page_df])            
+                results_df = pd.concat([results_df, next_page_df])            
                 currentrow += len(query_reply['rows'])
                 print 'getting more  data ', currentrow, results_df.shape
 
@@ -205,7 +205,9 @@ def query_table(query, max_rows=1000000, timeout=1.0):
 
 def convert_results_to_dataframe(query_response):
 
-    """ Returns pn.DataFrame from query results 
+    """ Returns pd.DataFrame from query results 
+
+    arguments
     -----
     query_response: the object returned by bigquery_service
     """
@@ -215,7 +217,15 @@ def convert_results_to_dataframe(query_response):
     column_names = [f['name'] for f in query_response['schema']['fields']]
     for arow in rows:
         frames.append([field['v'] for field in arow])
-    results_df = pn.DataFrame(data=frames, columns = column_names)
+    results_df = pd.DataFrame(data=frames, columns = column_names)
     return results_df
 
+def load_csv_bq(csv_file) :
+
+    """ Loads csv_file and stores it in a BigQuery table of 
+    of the same name
+    arguments
+    -------------------------------
+    csv_file: filename for csv
+    """
     
