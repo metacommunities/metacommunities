@@ -30,13 +30,14 @@ def github_timeline():
     timeline = req.json
     return timeline
 
-def get_repos(limit=500, sleep_time=1.0):
-
+def get_repos(limit=500, sleep_time=1.0, since=0):
     """Returns a DataFrame of repositories; 
     The count is the number of requests to the API. 
     Each request returns 100 repos approximately."""
-
-    url = 'https://api.github.com/repositories'
+    if since == 0:
+        url = 'https://api.github.com/repositories'
+    else:
+        url = 'https://api.github.com/repositories?since=' + since
     repos_df = pd.DataFrame()
     url_next = ''
     current_count = 0
