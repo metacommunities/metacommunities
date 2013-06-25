@@ -79,7 +79,7 @@ def db_setup(db_name = DB_NAME):
         print 'database set up complete'
     return True
 
-def save_repos(limit = 1000, since = 0):
+def save_repos(limit = 1000):
     
     """ fetches up to the limit repos using the github api 
     and stores all returned fields
@@ -88,11 +88,9 @@ def save_repos(limit = 1000, since = 0):
     Parameters
     ------------------------------
     limit: how many repositories to fetch and save
-    since: if you have already run this and got some repos in your db,
- 	   'since' should be the last repo id you have and data collection will resume from there
     """
 
-    repos_df = gad.get_repos(limit, 1, since)
+    repos_df = gad.get_repos(limit)
     try: 
         con = MySQLdb.connect("localhost", 
             USER, PASSWORD, DB_NAME, charset='utf8')
@@ -177,48 +175,35 @@ def save_repository_fulldata(repo):
 	url = 'https://api.github.com/repos/'+repo
 	req = requests.get(url, auth=(USER, PASSWORD))
 	repoItem = req.json
-	#some repos don't seem to have 'full data' pages, perhaps they were deleted
-	#this part is for repos which do have full data
-	if req.ok:
-		id = repoItem['id']
-		full_name = repoItem['full_name']
-		description = repoItem['description']
-		language = repoItem['language']
-		fork = repoItem['fork']
-		forks = repoItem['forks']
-		size = repoItem['size']
-		watchers = repoItem['watchers']
-		open_issues = repoItem['open_issues']
-		created_at = repoItem['created_at']
-		pushed_at = repoItem['pushed_at']
-		updated_at = repoItem['updated_at']
-		has_downloads = repoItem['has_downloads']
-		has_issues = repoItem['has_issues']
-		has_wiki = repoItem['has_wiki']
-		if fork == True:
-			parent_id = repoItem['parent']['id']
-			parent_name = repoItem['parent']['full_name']
-		else : 
-			parent_id = 0
-			parent_name = ''
-
-		con = MySQLdb.connect("localhost", 
-		    	USER, PASSWORD, DB_NAME, charset='utf8')
-		cursor = con.cursor()
-		cursor.execute('''INSERT into repo_full 
-			  values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''',
-			  (id, full_name, description, language, fork, forks, size, watchers, open_issues, created_at, 
-			   pushed_at, updated_at, has_downloads, has_issues, has_wiki, parent_id, parent_name))
-		con.commit()
-		con.close()
-	else: 
-	#if there is no data for the repository make a note of its name in repo_no_full table
-		con = MySQLdb.connect("localhost", 
-		    	USER, PASSWORD, DB_NAME, charset='utf8')
-		cursor = con.cursor()
-		cursor.execute('''INSERT into repo_no_full 
-			  values (%s)''',
-			  (repo))
-		con.commit()
-		con.close()		
-
+	
+	id = repoItem['id']
+	full_name = repoItem['full_name']
+	description = repoItem['description']
+	language = repoItem['language']
+	fork = repoItem['fork']
+	forks = repoItem['forks']
+	size = repoItem['size']
+	watchers = repoItem['watchers']
+	open_issues = repoItem['open_issues']
+	created_at = repoItem['created_at']
+	pushed_at = repoItem['pushed_at']
+	updated_at = repoItem['updated_at']
+	has_downloads = repoItem['has_downloads']
+	has_issues = repoItem['has_issues']
+	has_wiki = repoItem['has_wiki']
+	if fork == True:
+		parent_id = repoItem['parent']['id']
+		parent_name = repoItem['parent']['full_name']
+	else : 
+		parent_id = 0
+		parent_name = ''
+	
+	con = MySQLdb.connect("localhost", 
+            	USER, PASSWORD, DB_NAME, charset='utf8')
+	cursor = con.cursor()
+	cursor.execute('''INSERT into repo_full 
+                  values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''',
+                  (id, full_name, description, language, fork, forks, size, watchers, open_issues, created_at, 
+                   pushed_at, updated_at, has_downloads, has_issues, has_wiki, parent_id, parent_name))
+	con.commit()
+	con.close()
