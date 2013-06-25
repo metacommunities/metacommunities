@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# extract just Stack Overflow
+7zr e 'Content/stackoverflow.com.7z.001' -o'stackoverflow.com'
+
+# create sqlite database from the extracted XML files
+python create_sqlite_db.py 'stackoverflow.com'
+
+# export tables from sqlite database to CSV
+mkdir 'stackoverflow.com_CSV'
+
+function dump {
+sqlite3 'so-dump.db' <<!
+.headers on
+.mode csv
+.output stackoverflow.com_CSV/$1.csv
+SELECT * FROM $1;
+!
+}
+
+dump 'users'
+dump 'badges'
+dump 'votes'
+
+
+# some data sets need splitting up
+function dumplimit {
+  TOTAL=$2
+  HALF=$(expr $TOTAL / $3)
+
+  for i in $(seq 1 $HALF $TOTAL)
+    do
+    j=$(expr $i + $HALF - 1)
+
+sqlite3 'so-dump.db' <<!
+.headers on
+.mode csv
+.output stackoverflow.com_CSV/$1_$j.csv
+SELECT * FROM $1 LIMIT $i, $j;
+!
+
+  done
+}
+
+CCOUNT=`sqlite3 -line so-dump.db 'select count(*) from comments;'`
+CCOUNT=`echo $CCOUNT | cut -c 12-`
+dumplimit 'comments' $CCOUNT 2
+
+PCOUNT=`sqlite3 -line so-dump.db 'select count(*) from comments;'`
+PCOUNT=`echo $PCOUNT | cut -c 12-`
+dumplimit 'posts' $PCOUNT 10
+
+
+# compress each CSV for uploading
+mkdir 'stackoverflow.com_ZIP'
+
+FILES=`ls stackoverflow.com_CSV`
+for f in $FILES
+  do
+  gzip -c stackoverflow.com_CSV/$f > stackoverflow.com_ZIP/$f.gz
+done
+
