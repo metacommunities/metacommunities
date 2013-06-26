@@ -20,7 +20,6 @@ The current method is:
 
 ## To Do List
 
-- potentially do some denormalising of the SO tables
-- create 'questions' and 'answers' tables from 'posts' table
+- potentially do some denormalising of the 'posts' table
 - automate uploading to big query
 
