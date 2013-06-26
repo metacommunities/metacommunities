@@ -87,7 +87,7 @@ ANATOMY = {
 }
 
 def dump_files(anatomy, input_path, 
-    dump_database_name='so-dump.db',
+    dump_database_name='stack-overflow-dump.sqlite3',
     create_query='CREATE TABLE IF NOT EXISTS [{table}]({fields})',
     insert_query='INSERT INTO {table} ({columns}) VALUES ({values})',
     log_filename='so-parser.log'):
