@@ -9,7 +9,7 @@ import sqlite3
 import sys
 import xml.etree.cElementTree as etree
 
-ANATHOMY = {
+ANATOMY = {
  'Comments': {
   'Id':'INTEGER',
   'PostId':'INTEGER',
@@ -86,8 +86,8 @@ ANATHOMY = {
  }
 }
 
-def dump_files(file_names, anathomy, input_path, 
-    dump_database_name = 'so-dump.db',
+def dump_files(anatomy, input_path, 
+    dump_database_name='so-dump.db',
     create_query='CREATE TABLE IF NOT EXISTS [{table}]({fields})',
     insert_query='INSERT INTO {table} ({columns}) VALUES ({values})',
     log_filename='so-parser.log'):
@@ -95,15 +95,15 @@ def dump_files(file_names, anathomy, input_path,
   logging.basicConfig(filename=log_filename,level=logging.INFO)
   db = sqlite3.connect(dump_database_name)
   
-  for file in file_names:
-    print "Opening %s.xml" % (file)
-    xml_file = os.path.join(input_path, file + '.xml')
+  for filename in anatomy.keys():
+    print "Opening %s.xml" % (filename)
+    xml_file = os.path.join(input_path, filename + '.xml')
     tree = etree.iterparse(xml_file)
-    table_name = file
+    table_name = filename
     
     sql_create = create_query.format(
       table=table_name, 
-      fields=", ".join(['{0} {1}'.format(name, type) for name, type in anathomy[table_name].items()]))
+      fields=", ".join(['{0} {1}'.format(name, type) for name, type in anatomy[table_name].items()]))
     print "Creating table %s" % (table_name)
     
     try:
@@ -122,7 +122,7 @@ def dump_files(file_names, anathomy, input_path,
            columns=', '.join(row.attrib.keys()), 
            values=('?, ' * len(row.attrib.keys()))[:-2]),
            row.attrib.values())
-        sys.stdout.write("  %s records \r" %s (str(i)))
+        sys.stdout.write("  %s records \r" % (str(i)))
         i += 1
       except Exception, e:
         logging.warning(e)
@@ -138,5 +138,5 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('-i', '--input-dir', default='stackoverflow.com')
   args = parser.parse_args()
-  dump_files(ANATHOMY.keys(), ANATHOMY, args.input_dir)
+  dump_files(ANATOMY, args.input_dir)
 
