@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # extract just Stack Overflow
-7zr e 'Content/stackoverflow.com.7z.001' -o'stackoverflow.com'
+7za e 'Content/stackoverflow.com.7z.001' -o'stackoverflow.com'
 
 # create sqlite database from the extracted XML files
-python create_sqlite_db.py 'stackoverflow.com'
+python create_sqlite_db.py -i'stackoverflow.com'
 
 # export tables from sqlite database to CSV
 mkdir 'stackoverflow.com_CSV'
 
+# export the whole table to a CSV
 function dump {
 sqlite3 'so-dump.db' <<!
 .headers on
@@ -23,14 +24,23 @@ dump 'badges'
 dump 'votes'
 
 
-# some data sets need splitting up
+# some tables are too big, the following will cut up a table (by rows) and
+# export each chunk to CSV
 function dumplimit {
-  TOTAL=$2
-  HALF=$(expr $TOTAL / $3)
+  # row count
+  echo "counting ${1}"
+  SQLEXPR="SELECT COUNT(*) FROM ${1};"
+  COUNT=`sqlite3 -line so-dump.db "${SQLEXPR}"`
+  COUNT=`echo $COUNT | cut -c 12-`
 
-  for i in $(seq 1 $HALF $TOTAL)
+  # how rows for one CSV
+  PROP=$(expr $COUNT / $2)
+  
+  # export
+  echo -n "exporting ${1} "
+  for i in $(seq 1 $PROP $COUNT)
     do
-    j=$(expr $i + $HALF - 1)
+    j=$(expr $i + $PROP - 1)
 
 sqlite3 'so-dump.db' <<!
 .headers on
@@ -39,16 +49,51 @@ sqlite3 'so-dump.db' <<!
 SELECT * FROM $1 LIMIT $i, $j;
 !
 
+    echo -n ' .'
   done
+  echo 'done'
 }
 
-CCOUNT=`sqlite3 -line so-dump.db 'select count(*) from comments;'`
-CCOUNT=`echo $CCOUNT | cut -c 12-`
-dumplimit 'comments' $CCOUNT 2
+# comments table needs splitting in half
+dumplimit 'comments' 2
 
-PCOUNT=`sqlite3 -line so-dump.db 'select count(*) from comments;'`
-PCOUNT=`echo $PCOUNT | cut -c 12-`
-dumplimit 'posts' $PCOUNT 10
+
+# 'posts' is very special. it not only needs splitting up because it's too big,
+# but we also need to seperate the post types; 1 (questions) and 2 (answers).
+function postdumplimit {
+  
+  # row count
+  echo "counting posts (type ${1}) "
+  SQLEXPR="SELECT COUNT(*) FROM posts WHERE PostTypeId = ${1};"
+  COUNT=`sqlite3 -line so-dump.db "${SQLEXPR}"`
+  COUNT=`echo $COUNT | cut -c 12-`
+  
+  # how rows for one CSV
+  PROP=$(expr $COUNT / $2)
+  
+  # export
+  echo -n "exporting posts (type ${1}) "
+  for i in $(seq 1 $PROP $COUNT)
+    do
+    j=$(expr $i + $PROP - 1)
+    SQLEXPR="SELECT * FROM posts WHERE PostTypeId = ${1} LIMIT ${i}, ${j};"
+    
+sqlite3 'so-dump.db' <<!
+.headers on
+.mode csv
+.output stackoverflow.com_CSV/posts_type$1_$j.csv
+$SQLEXPR
+!
+
+    echo -n ' .'
+  done
+  echo 'done'
+}
+
+# questions
+postdumplimit 1 10
+# answers
+postdumplimit 2 10 
 
 
 # compress each CSV for uploading
@@ -57,6 +102,6 @@ mkdir 'stackoverflow.com_ZIP'
 FILES=`ls stackoverflow.com_CSV`
 for f in $FILES
   do
-  gzip -c stackoverflow.com_CSV/$f > stackoverflow.com_ZIP/$f.gz
+  gzip -cv stackoverflow.com_CSV/$f > stackoverflow.com_ZIP/$f.gz
 done
 
