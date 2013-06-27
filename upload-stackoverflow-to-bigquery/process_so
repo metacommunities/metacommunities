@@ -1,34 +1,60 @@
 #!/bin/bash
 
+SODIR='stackoverflow.com'
+JSONDIR="${SODIR}_JSON"
+
 # extract just Stack Overflow
-7za e 'Content/stackoverflow.com.7z.001' -o'stackoverflow.com'
+7za e 'Content/stackoverflow.com.7z.001' -o$SODIR
 
 # create sqlite database from the extracted XML files
-python create_sqlite_db.py -i'stackoverflow.com'
+python create_sqlite_db.py -i$SODIR
 
-# export tables from sqlite database to CSV
-./export_so
 
-# compress each CSV for uploading
-mkdir 'stackoverflow.com_ZIP'
+# ==============================================================================
+# convert the XML in to JSON
+# ==============================================================================
+python convert_xml_to_json.py -i$SODIR -t'Users'
+python convert_xml_to_json.py -i$SODIR -t'Badges'
+python convert_xml_to_json.py -i$SODIR -t'Votes'
+python convert_xml_to_json.py -i$SODIR -t'Comments'
+python convert_xml_to_json.py -i$SODIR -t'Posts'
 
-FILES=`ls stackoverflow.com_CSV`
+
+# ==============================================================================
+# compress each JSON for storage (and uploading, if they are less than 1GB)
+# ==============================================================================
+FILES=`ls $JSONDIR/*json`
 for f in $FILES
   do
-  gzip -cv stackoverflow.com_CSV/$f > stackoverflow.com_ZIP/$f.gz
+  gzip -cv $JSONDIR/$f > $JSONDIR/$f.gz
 done
 
+
+# ==============================================================================
 # upload stackoverflow to bigquery
+# ==============================================================================
 # make sure you've ran 'bq init' to setup your credentials
-QST=`ls stackoverflow.com_ZIP/posts_type1*`
-for q in $QST
-  do
-  bq load --source_format=CSV <destination_table> <data_source_uri> <table_schema>
-done
+PROJECT='stack_overflow'
 
-ANS=`ls stackoverflow.com_ZIP/posts_type2*`
-for a in $ANS
-  do
-  bq load --source_format=CSV <destination_table> <data_source_uri> <table_schema>
-done
+bq mk $PROJECT
+
+# Users
+bq load --source_format=NEWLINE_DELIMITED_JSON "${PROJECT}.Users" \
+  "${JSONDIR}/Users.json.gz" 'schema/Users'
+
+# Badges
+bq load --source_format=NEWLINE_DELIMITED_JSON "${PROJECT}.Badges" \
+  "${JSONDIR}/Badges.json.gz" 'schema/Badges'
+
+# Votes
+bq load --source_format=NEWLINE_DELIMITED_JSON "${PROJECT}.Votes" \
+  "${JSONDIR}/Votes.json.gz" 'schema/Votes'
+
+# Comments
+bq load --source_format=NEWLINE_DELIMITED_JSON "${PROJECT}.Comments" \
+  "${JSONDIR}/Comments.json" 'schema/Comments'
+
+# Posts
+bq load --source_format=NEWLINE_DELIMITED_JSON "${PROJECT}.Posts" \
+  "${JSONDIR}/Posts.json" 'schema/Posts'
 

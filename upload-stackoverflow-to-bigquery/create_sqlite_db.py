@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# source http://meta.stackoverflow.com/a/28231
+# original source http://meta.stackoverflow.com/a/28231
 
 import argparse
 import logging

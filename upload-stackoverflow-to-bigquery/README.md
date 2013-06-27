@@ -8,6 +8,7 @@ Once downloaded, take these files and place them in the save directory for the
 torrent i.e. inside 'Stack Exchange Data Dump - mmm yyyy' and then do
 `./process_so`.
 
+
 ## Dependencies
 
 I'm running Ubuntu 12.04 and here's all the packages I think I had to
@@ -22,13 +23,18 @@ You'll also need this but it's not in Ubuntu repo:
 
 The current method is:
 - extract the XML files
-- import them in to SQLite
-- export from SQLite in to CSVs that are under 4GB
-- compress each CSV using gzip
-- upload them to BiqQuery (started)
+- import them in to SQLite (for local use)
+- convert each XML table in to JSON
+- compress each JSON using gzip
+- if a gz archive is less than 1GB then that will be uploaded otherwise the raw
+json will be used
 
+
+## Warnings
+
+The Posts table is big, make sure you've got a constant Internet connection.
 
 ## To Do List
 
-- automate uploading to big query
+- create bigquery schemas for all JSON tables
 
