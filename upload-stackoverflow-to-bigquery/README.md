@@ -10,9 +10,11 @@ torrent i.e. inside 'Stack Exchange Data Dump - mmm yyyy' and then do
 
 ## Dependencies
 
-- 7zip
-- python modules
-- SQLite3
+I'm running Ubuntu 12.04 and here's all the packages I think I had to
+install:
+`p7zip-full python-sqlite sqlite3`
+
+You'll also need this but it's not in Ubuntu repo:
 - [BigQuery command line tool](https://developers.google.com/bigquery/docs/cli_tool)
 
 
