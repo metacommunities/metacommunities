@@ -8,6 +8,14 @@ Once downloaded, take these files and place them in the save directory for the
 torrent i.e. inside 'Stack Exchange Data Dump - mmm yyyy' and then do
 `./process_so`.
 
+## Dependencies
+
+- 7zip
+- python modules
+- SQLite3
+- [BigQuery command line tool](https://developers.google.com/bigquery/docs/cli_tool)
+
+
 ## Method
 
 The current method is:
@@ -15,11 +23,10 @@ The current method is:
 - import them in to SQLite
 - export from SQLite in to CSVs that are under 4GB
 - compress each CSV using gzip
-- upload them to BiqQuery (to do)
+- upload them to BiqQuery (started)
 
 
 ## To Do List
 
-- potentially do some denormalising of the 'posts' table
 - automate uploading to big query
 
