@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # export tables from sqlite database to CSV
+
 mkdir 'stackoverflow.com_CSV'
 
 ## export the whole table to a CSV
