@@ -12,12 +12,15 @@ python create_sqlite_db.py -i$SODIR
 
 # ==============================================================================
 # convert the XML in to JSON
+#   -i    input dir
+#   -t    table to convert
+#   -n    number of records per JSON (default is all the records)
 # ==============================================================================
 python convert_xml_to_json.py -i$SODIR -t'Users'
 python convert_xml_to_json.py -i$SODIR -t'Badges'
 python convert_xml_to_json.py -i$SODIR -t'Votes'
 python convert_xml_to_json.py -i$SODIR -t'Comments'
-python convert_xml_to_json.py -i$SODIR -t'Posts'
+python convert_xml_to_json.py -i$SODIR -t'Posts'    -n1000000 # 1 million
 
 
 # ==============================================================================
