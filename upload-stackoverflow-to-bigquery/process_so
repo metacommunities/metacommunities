@@ -2,6 +2,7 @@
 
 SODIR='stackoverflow.com'
 JSONDIR="${SODIR}_JSON"
+ZIPDIR="${SODIR}_ZIP"
 
 # extract just Stack Overflow
 7za e 'Content/stackoverflow.com.7z.001' -o$SODIR
@@ -14,22 +15,23 @@ python create_sqlite_db.py -i$SODIR
 # convert the XML in to JSON
 #   -i    input dir
 #   -t    table to convert
-#   -n    number of records per JSON (default is all the records)
+#   -s    split size (MB) of JSON file (default is no split)
 # ==============================================================================
-python convert_xml_to_json.py -i$SODIR -t'Users'
-python convert_xml_to_json.py -i$SODIR -t'Badges'
-python convert_xml_to_json.py -i$SODIR -t'Votes'
-python convert_xml_to_json.py -i$SODIR -t'Comments'
-python convert_xml_to_json.py -i$SODIR -t'Posts'    -n1000000 # 1 million
+python convert_xml_to_json.py -i$SODIR -t'Users'    -s1000
+python convert_xml_to_json.py -i$SODIR -t'Badges'   -s1000
+python convert_xml_to_json.py -i$SODIR -t'Votes'    -s1000
+python convert_xml_to_json.py -i$SODIR -t'Comments' -s1000
+python convert_xml_to_json.py -i$SODIR -t'Posts'    -s1000
 
 
 # ==============================================================================
-# compress each JSON for storage (and uploading, if they are less than 1GB)
+# compress each JSON for uploading
+# gz seems to achieve around 70% compression
 # ==============================================================================
-FILES=`ls $JSONDIR/*json`
+FILES=`ls $JSONDIR`
 for f in $FILES
   do
-  gzip -cv $JSONDIR/$f > $JSONDIR/$f.gz
+  gzip -cv $JSONDIR/$f > $ZIPDIR/$f.gz
 done
 
 
@@ -37,27 +39,21 @@ done
 # upload stackoverflow to bigquery
 # ==============================================================================
 # make sure you've ran 'bq init' to setup your credentials
-PROJECT='stack_overflow'
+DATASET='stack_overflow'
 
-bq mk $PROJECT
+bq mk $DATASET
 
-# Users
-bq load --source_format=NEWLINE_DELIMITED_JSON "${PROJECT}.Users" \
-  "${JSONDIR}/Users.json.gz" 'schema/Users'
+function upload2bq {
+  FILES=`ls $ZIPDIR/$1*`
+  for f in $FILES
+    do
+    echo -e "trying to upload ${f} to ${DATASET}.${1}:\n"
+    bq load --source_format=NEWLINE_DELIMITED_JSON "${DATASET}.${1}" $f \
+      "schema/${1}"
+    echo -e '\n\n\n\n'
+  done
+}
 
-# Badges
-bq load --source_format=NEWLINE_DELIMITED_JSON "${PROJECT}.Badges" \
-  "${JSONDIR}/Badges.json.gz" 'schema/Badges'
-
-# Votes
-bq load --source_format=NEWLINE_DELIMITED_JSON "${PROJECT}.Votes" \
-  "${JSONDIR}/Votes.json.gz" 'schema/Votes'
-
-# Comments
-bq load --source_format=NEWLINE_DELIMITED_JSON "${PROJECT}.Comments" \
-  "${JSONDIR}/Comments.json" 'schema/Comments'
-
-# Posts
-bq load --source_format=NEWLINE_DELIMITED_JSON "${PROJECT}.Posts" \
-  "${JSONDIR}/Posts.json" 'schema/Posts'
+upload2bq 'Users'
+upload2bq 'Posts'
 

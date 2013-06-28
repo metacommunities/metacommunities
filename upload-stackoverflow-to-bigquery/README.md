@@ -27,11 +27,9 @@ You'll also need this but it's not in Ubuntu repo:
 The current method is:
 - extract the XML files
 - import them in to SQLite (for local use)
-- convert each XML table in to JSON
+- convert each XML table in to JSON, splitting the JSON files roughly every 1GB
 - compress each JSON using gzip
-- if a gz archive is less than 1GB then that will be uploaded otherwise the raw
-json will be used
-
+- upload using 'bq' tool
 
 ## Warnings
 
