@@ -17,11 +17,11 @@ python create_sqlite_db.py -i$SODIR
 #   -t    table to convert
 #   -s    split size (MB) of JSON file (default is no split)
 # ==============================================================================
-python convert_xml_to_json.py -i$SODIR -t'Users'    -s1000
-python convert_xml_to_json.py -i$SODIR -t'Badges'   -s1000
-python convert_xml_to_json.py -i$SODIR -t'Votes'    -s1000
-python convert_xml_to_json.py -i$SODIR -t'Comments' -s1000
-python convert_xml_to_json.py -i$SODIR -t'Posts'    -s1000
+python convert_xml_to_json.py -i$SODIR -t'Users'    -s2000
+python convert_xml_to_json.py -i$SODIR -t'Badges'   -s2000
+python convert_xml_to_json.py -i$SODIR -t'Votes'    -s2000
+python convert_xml_to_json.py -i$SODIR -t'Comments' -s2000
+python convert_xml_to_json.py -i$SODIR -t'Posts'    -s2000
 
 
 # ==============================================================================
@@ -47,13 +47,15 @@ function upload2bq {
   FILES=`ls $ZIPDIR/$1*`
   for f in $FILES
     do
-    echo -e "trying to upload ${f} to ${DATASET}.${1}:\n"
+    echo -e "\n\n\ntrying to upload ${f} to ${DATASET}.${1}:\n"
     bq load --source_format=NEWLINE_DELIMITED_JSON "${DATASET}.${1}" $f \
       "schema/${1}"
-    echo -e '\n\n\n\n'
   done
 }
 
 upload2bq 'Users'
+upload2bq 'Badges'
+upload2bq 'Votes'
+upload2bq 'Comments'
 upload2bq 'Posts'
 
