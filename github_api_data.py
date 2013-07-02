@@ -177,11 +177,76 @@ def get_repository_event(user, repo, limit=1000):
             if url == url_next:
                 break
             else:
-                url = url_next + '&per_page=100'
+		url = url_next + '&per_page=100'
             current_count = len(events)
             time.sleep(1.0)
 
     except Exception, e:
         print e
     return events
+
+	
+def get_repository_forkdata(repo):
+#this function returns a data frame with data on a repo's forks - it currently breaks after around 500
+	url = 'https://api.github.com/repos/'+repo+'/forks'
+	repos_df = pn.DataFrame()
+	req = requests.get(url, auth=(USER, PASSWORD))
+	repoItem = req.json
+	repos_df = unpack_repoItem(repoItem, repos_df, repo)
+	while req.links.has_key('next'):
+		url = req.links['next']['url']
+		req = requests.get(url, auth=(USER, PASSWORD))
+		repoItem = req.json
+		repos_df = unpack_repoItem(repoItem, repos_df, repo)  
+		time.sleep(1)
+        return repos_df
+	
+
+
+
+def unpack_repoItem(repoItem, repos_df, parent):
+	'''This does the work of extracting relevant variables from the json item and returning a data frame
+	repoItem is the json item to be unpacked
+	repos_df is the data frame where data from the current item will be appended
+	'''	
+	id = [it['id'] for it in repoItem]
+	full_name = [it['full_name'] for it in repoItem]
+	description = [it['description'] for it in repoItem]
+	language = [it['language'] for it in repoItem]
+	fork = [it['fork'] for it in repoItem]
+	forks = [it['forks'] for it in repoItem]
+	size = [it['size'] for it in repoItem]
+	watchers = [it['watchers'] for it in repoItem]
+	open_issues = [it['open_issues'] for it in repoItem]
+	created_at = [it['created_at'] for it in repoItem]
+	pushed_at = [it['pushed_at'] for it in repoItem]
+	updated_at = [it['updated_at'] for it in repoItem]
+	has_downloads = [it['has_downloads'] for it in repoItem]
+	has_issues = [it['has_issues'] for it in repoItem]
+	has_wiki = [it['has_wiki'] for it in repoItem]
+	parent_id = 1
+	parent_name = parent
+
+	data_dict = {
+			'id': id,
+			'full_name': full_name,
+			'description': description,
+			'language': language,
+			'fork': fork,
+			'forks': forks,
+			'size': size,
+			'watchers': watchers,
+			'open_issues': open_issues,
+			'created_at': created_at,
+			'pushed_at': pushed_at,
+			'updated_at': updated_at,
+			'has_downloads': has_downloads,
+			'has_issues': has_issues,
+			'has_wiki': has_wiki,
+			'parent_id': parent_id,
+			'parent_name': parent_name} 
+
+	temp_df  = pn.DataFrame(data_dict, index = id)		
+	repos_df = repos_df.append(temp_df)
+	return repos_df
 
