@@ -1,0 +1,61 @@
+#!/bin/bash
+
+SODIR='stackoverflow.com'
+JSONDIR="${SODIR}_JSON"
+ZIPDIR="${SODIR}_ZIP"
+
+# extract just Stack Overflow
+7za e 'Content/stackoverflow.com.7z.001' -o$SODIR
+
+# create sqlite database from the extracted XML files
+python create_sqlite_db.py -i$SODIR
+
+
+# ==============================================================================
+# convert the XML in to JSON
+#   -i    input dir
+#   -t    table to convert
+#   -s    split size (MB) of JSON file (default is no split)
+# ==============================================================================
+python convert_xml_to_json.py -i$SODIR -t'Users'    -s2000
+python convert_xml_to_json.py -i$SODIR -t'Badges'   -s2000
+python convert_xml_to_json.py -i$SODIR -t'Votes'    -s2000
+python convert_xml_to_json.py -i$SODIR -t'Comments' -s2000
+python convert_xml_to_json.py -i$SODIR -t'Posts'    -s2000
+
+
+# ==============================================================================
+# compress each JSON for uploading
+# gz seems to achieve around 70% compression
+# ==============================================================================
+FILES=`ls $JSONDIR`
+for f in $FILES
+  do
+  gzip -cv $JSONDIR/$f > $ZIPDIR/$f.gz
+done
+
+
+# ==============================================================================
+# upload stackoverflow to bigquery
+# ==============================================================================
+# make sure you've ran 'bq init' to setup your credentials
+DATASET='stack_overflow'
+
+bq mk $DATASET
+
+function upload2bq {
+  FILES=`ls $ZIPDIR/$1*`
+  for f in $FILES
+    do
+    echo -e "\n\n\ntrying to upload ${f} to ${DATASET}.${1}:\n"
+    bq load --source_format=NEWLINE_DELIMITED_JSON "${DATASET}.${1}" $f \
+      "schema/${1}"
+  done
+}
+
+upload2bq 'Users'
+upload2bq 'Badges'
+upload2bq 'Votes'
+upload2bq 'Comments'
+upload2bq 'Posts'
+
