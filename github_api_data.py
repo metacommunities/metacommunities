@@ -188,7 +188,6 @@ def get_repository_event(user, repo, limit=1000):
 
 	
 def get_repository_forkdata(repo):
-#this function returns a data frame with data on a repo's forks - it currently breaks after around 500
 	url = 'https://api.github.com/repos/'+repo+'/forks'
 	repos_df = pn.DataFrame()
 	req = requests.get(url, auth=(USER, PASSWORD))
@@ -251,3 +250,76 @@ def unpack_repoItem(repoItem, repos_df, parent):
 	repos_df = repos_df.append(temp_df)
 	return repos_df
 
+
+#this function retrieves data on all of the pull requests for a repo
+#It has 2 components because you must specify whether you want open of closed pull requests
+def get_repository_pulldata(repo):
+	url = 'https://api.github.com/repos/'+repo+'/pulls?state=open'
+	repos_df = pn.DataFrame()
+	req = requests.get(url, auth=(USER, PASSWORD))
+	repoItem = req.json
+	fullrepoItem = repoItem
+	#get rid of rows where there is no head repo
+	repoItem[:] = [d for d in repoItem if d['head'].get('repo') != None]
+	repos_df = unpack_repoItem_pulls(repoItem, repos_df, repo)
+	while req.links.has_key('next'):
+		url = req.links['next']['url']
+		req = requests.get(url, auth=(USER, PASSWORD))
+		repoItem = req.json
+		repoItem[:] = [d for d in repoItem if d['head'].get('repo') != None]
+		repos_df = unpack_repoItem_pulls(repoItem, repos_df, repo)  
+		time.sleep(1)
+	url = 'https://api.github.com/repos/'+repo+'/pulls?state=closed'
+	req = requests.get(url, auth=(USER, PASSWORD))
+	repoItem = req.json
+	fullrepoItem = repoItem
+	#get rid of rows where there is no head repo
+	repoItem[:] = [d for d in repoItem if d['head'].get('repo') != None]
+	repos_df = unpack_repoItem_pulls(repoItem, repos_df, repo)
+	while req.links.has_key('next'):
+		url = req.links['next']['url']
+		req = requests.get(url, auth=(USER, PASSWORD))
+		repoItem = req.json
+		repoItem[:] = [d for d in repoItem if d['head'].get('repo') != None]
+		repos_df = unpack_repoItem_pulls(repoItem, repos_df, repo)  
+		time.sleep(1)
+        return repos_df
+	
+def unpack_repoItem_pulls(repoItem, repos_df, parent):
+	'''This does the work of extracting relevant variables from the json item and returning a data frame
+	repoItem is the json item to be unpacked
+	repos_df is the data frame where data from the current item will be appended
+	'''
+	id = [it['id'] for it in repoItem]
+	state = [it['state'] for it in repoItem]
+	title = [it['title'] for it in repoItem]
+	body = [it['body'] for it in repoItem]
+	number = [it['number'] for it in repoItem]
+	merged_at = [it['merged_at'] for it in repoItem]
+	closed_at = [it['closed_at'] for it in repoItem]
+	created_at = [it['created_at'] for it in repoItem]
+	head_created_at = [it['head']['repo']['created_at'] for it in repoItem]
+	head_full_name = [it['head']['repo']['full_name'] for it in repoItem]
+	head_fork = [it['head']['repo']['fork'] for it in repoItem]
+	head_forks = [it['head']['repo']['forks'] for it in repoItem]
+	base_full_name = [it['base']['repo']['full_name'] for it in repoItem]
+	pull_user = [it['user']['login'] for it in repoItem]
+	data_dict = {
+			'id': id,
+			'state': state,
+			'title': title,
+			'body': body,
+			'number': number,
+			'merged_at': merged_at,
+			'closed_at': closed_at,
+			'created_at': created_at,
+			'head_created_at': head_created_at,
+			'head_full_name': head_full_name,
+			'head_fork': head_fork,
+			'head_forks': head_forks,
+			'base_full_name': base_full_name,
+			'pull_user': pull_user} 
+
+	temp_df  = pn.DataFrame(data_dict, index = id)		
+	repos_df = repos_df.append(temp_df)
+	return repos_df
