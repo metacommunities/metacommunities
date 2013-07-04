@@ -67,3 +67,17 @@ GROUP BY
 ForkTable.repository_url
 ORDER BY
 f2p_number DESC
+
+
+/* Pull request events, discrete pull requests, and merged pull requests - per repo
+*/
+
+SELECT payload_pull_request_base_repo_url, 
+count(payload_pull_request_base_repo_url) as PullRequestEvents, 
+count(distinct(payload_pull_request_id)) as PullRequests,
+sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
+FROM [publicdata:samples.github_timeline]
+WHERE type = 'PullRequestEvent' 
+GROUP BY payload_pull_request_base_repo_url
+ORDER BY PullRequests DESC
+limit 1000;
