@@ -84,7 +84,8 @@ ORDER BY PullRequests DESC
 limit 1000;
 
 
-/* attempting to construct the fork-pull request table*/
+/* attempting to construct the fork-pull request table*
+the join method is clunky/
 
 SELECT pulltable.repository_url,forktable.fork as forks, count(type) as pullrequests
 FROM
@@ -118,6 +119,39 @@ where (type='ForkEvent') or (type='PullRequestEvent')
 group by repository_url
 order by fork desc
 limit 100;
+
+/* trying to version of the Pull requests, merged pull request per repo with the fork events
+Why doesn't it seem to work properly?*/
+
+SELECT repository_url, payload_pull_request_base_repo_url, 
+sum(if(type='ForkEvent', 1,0)) as ForkEvents,
+count(payload_pull_request_base_repo_url) as PullRequestEvents, 
+count(distinct(payload_pull_request_id)) as PullRequests,
+sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
+FROM [githubarchive:github.timeline]
+WHERE (type = 'PullRequestEvent') or
+(type = 'ForkEvent')
+GROUP EACH BY repository_url, payload_pull_request_base_repo_url
+ORDER BY PullRequests DESC, ForkEvents DESC
+limit 100;
+
+/* Richard's latest wide pull request table
+Really good one!
+*/
+
+SELECT payload_pull_request_base_repo_url, 
+count(payload_pull_request_base_repo_url) as PullRequestEvents, 
+count(distinct(payload_pull_request_id)) as DistinctPullRequests,
+sum(IF(payload_action = 'opened', 1, 0)) AS PullRequestOpenEvents,
+sum(IF(payload_pull_request_head_repo_url == payload_pull_request_base_repo_url AND payload_action = 'opened', 1, 0)) AS IntraRepoPullRequestOpenEvents,
+sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
+count(distinct(payload_pull_request_merged_by_login)) AS UsersWhoMerge,
+sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0)) AS PullRequestMergedBySameUser,
+FROM [github_explore.timeline]
+WHERE type = 'PullRequestEvent' 
+GROUP BY payload_pull_request_base_repo_url
+ORDER BY PullRequestEvents DESC
+limit 1000;
 
 
 
