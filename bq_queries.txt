@@ -107,6 +107,16 @@ GROUP BY pulltable.repository_url, forks
 order by forks
 limit 100;
 
-/* To just check forks
+
+/* much simpler way to do fork-pullrequest table
+using the sum(if ...) approach*/
+
+select repository_url, SUM(IF(type='ForkEvent', 1,0)) as fork,
+SUM(IF(type='PullRequestEvent', 1,0)) as pullrequest
+from [githubarchive:github.timeline]
+where (type='ForkEvent') or (type='PullRequestEvent')
+group by repository_url
+order by fork desc
+limit 100;
 
 
