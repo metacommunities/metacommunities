@@ -69,25 +69,44 @@ ORDER BY
 f2p_number DESC
 
 
+
+/* Pull request events, discrete pull requests, and merged pull requests - per repo
+*/
+
+SELECT payload_pull_request_base_repo_url, 
+count(payload_pull_request_base_repo_url) as PullRequestEvents, 
+count(distinct(payload_pull_request_id)) as PullRequests,
+sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
+FROM [publicdata:samples.github_timeline]
+WHERE type = 'PullRequestEvent' 
+GROUP BY payload_pull_request_base_repo_url
+ORDER BY PullRequests DESC
+limit 1000;
+
+
 /* attempting to construct the fork-pull request table*/
 
-select pulltable.repository_url,forktable.fork as forks, count(type) as pullrequests
-from
+SELECT pulltable.repository_url,forktable.fork as forks, count(type) as pullrequests
+FROM
 //left join is all the pullrequest events
-    (select repository_url, type from
+    (SELECT repository_url, type FROM
     [githubarchive:github.timeline]
-    where type='PullRequestEvent') as pulltable
-join
+    WHERE type='PullRequestEvent') as pulltable
+JOIN
 //right join is just the repos with > 1000 forks
 //this limit can be changed by using JOIN EACH
-    (select repository_url, count(type) as fork
-    from [githubarchive:github.timeline]
-    where (type='ForkEvent')
-    group by repository_url
+    (SELECT repository_url, count(type) as fork
+    FROM [githubarchive:github.timeline]
+    WHERE (type='ForkEvent')
+    GROUP BY repository_url
     having fork > 1000
     order by fork desc) as forktable
 //the inner join is just repository_url
 on pulltable.repository_url = forktable.repository_url
-group by pulltable.repository_url, forks
+GROUP BY pulltable.repository_url, forks
 order by forks
 limit 100;
+
+/* To just check forks
+
+
