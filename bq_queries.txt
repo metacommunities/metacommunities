@@ -67,3 +67,27 @@ GROUP BY
 ForkTable.repository_url
 ORDER BY
 f2p_number DESC
+
+
+/* attempting to construct the fork-pull request table*/
+
+select pulltable.repository_url,forktable.fork as forks, count(type) as pullrequests
+from
+//left join is all the pullrequest events
+    (select repository_url, type from
+    [githubarchive:github.timeline]
+    where type='PullRequestEvent') as pulltable
+join
+//right join is just the repos with > 1000 forks
+//this limit can be changed by using JOIN EACH
+    (select repository_url, count(type) as fork
+    from [githubarchive:github.timeline]
+    where (type='ForkEvent')
+    group by repository_url
+    having fork > 1000
+    order by fork desc) as forktable
+//the inner join is just repository_url
+on pulltable.repository_url = forktable.repository_url
+group by pulltable.repository_url, forks
+order by forks
+limit 100;
