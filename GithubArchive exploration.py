@@ -138,6 +138,29 @@ dotfiles_df
 # It might also be worth looking at the 'forkiness' of these generically named repos. 
 # Are they more commonly forked than more specific repositories?
 
+# <markdowncell>
+
+# # Repositories by forks and pull requests
+# 
+
 # <codecell>
 
+query5 = """SELECT payload_pull_request_base_repo_url, repository_name,
+count(payload_pull_request_base_repo_url) as PullRequestEvents, 
+count(distinct(payload_pull_request_id)) as DistinctPullRequests,
+sum(IF(payload_action = 'opened', 1, 0)) AS PullRequestOpenEvents,
+sum(IF(payload_pull_request_head_repo_url == payload_pull_request_base_repo_url AND payload_action = 'opened', 1, 0)) AS IntraRepoPullRequestOpenEvents,
+sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
+count(distinct(payload_pull_request_merged_by_login)) AS UsersWhoMerge,
+sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0)) AS PullRequestMergedBySameUser,
+FROM [github_explore.timeline]
+WHERE type = 'PullRequestEvent' 
+GROUP BY payload_pull_request_base_repo_url, repository_name
+ORDER BY PullRequestEvents DESC"""
+
+fork_pull_df = gbq.query_table(query5, 400)
+
+# <codecell>
+
+fork_pull_df.repository_name
 
