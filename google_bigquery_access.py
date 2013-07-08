@@ -201,11 +201,12 @@ def query_table(query, max_rows=1000000, timeout=1.0):
         print 'Error:', pprint.pprint(err.content)
     except AccessTokenRefreshError:
         print ("Credentials have been revoked or expired,"
-            "please re-run the application to re-authorize")   
+                "please re-run the application to re-authorize")   
+
 
 def convert_results_to_dataframe(query_response):
 
-    """ Returns pn.DataFrame from query results 
+    """ Returns pn.DataFrame from query results
     -----
     query_response: the object returned by bigquery_service
     """
@@ -217,5 +218,3 @@ def convert_results_to_dataframe(query_response):
         frames.append([field['v'] for field in arow])
     results_df = pn.DataFrame(data=frames, columns = column_names)
     return results_df
-
-    

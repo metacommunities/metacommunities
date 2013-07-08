@@ -1,0 +1,23 @@
+[
+  {"name": "AcceptedAnswerId", "type": "integer", "mode": "nullable"},
+  {"name": "AnswerCount", "type": "integer", "mode": "nullable"},
+  {"name": "Body", "type": "string", "mode": "nullable"},
+  {"name": "ClosedDate", "type": "string", "mode": "nullable"},
+  {"name": "CommentCount", "type": "integer", "mode": "nullable"},
+  {"name": "CommunityOwnedDate", "type": "string", "mode": "nullable"},
+  {"name": "CreationDate", "type": "string", "mode": "nullable"},
+  {"name": "FavoriteCount", "type": "integer", "mode": "nullable"}, 
+  {"name": "Id", "type": "integer", "mode": "nullable"},
+  {"name": "LastActivityDate", "type": "string", "mode": "nullable"},
+  {"name": "LastEditDate", "type": "string", "mode": "nullable"},
+  {"name": "LastEditorDisplayName", "type": "string", "mode": "nullable"},
+  {"name": "LastEditorUserId", "type": "integer", "mode": "nullable"},
+  {"name": "OwnerDisplayName", "type": "string", "mode": "nullable"},
+  {"name": "OwnerUserId", "type": "integer", "mode": "nullable"},
+  {"name": "ParentId", "type": "integer", "mode": "nullable"},
+  {"name": "PostTypeId", "type": "integer", "mode": "nullable"},
+  {"name": "Score", "type": "integer", "mode": "nullable"},
+  {"name": "Tags", "type": "string", "mode": "nullable"},
+  {"name": "Title", "type": "string", "mode": "nullable"},
+  {"name": "ViewCount", "type": "integer", "mode": "nullable"}
+]

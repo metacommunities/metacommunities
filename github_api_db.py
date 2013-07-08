@@ -12,6 +12,7 @@ global variabel DB_NAME
 import MySQLdb
 from pandas.io import sql
 import github_api_data as gad
+import pandas as pn
 
 
 USER_FILE = open('github_api_user.txt')
@@ -167,3 +168,42 @@ def read_repo_commits(repository):
 
 
 
+def save_repository_fulldata(repo):
+	'''This function saves some extra variables for a repo in the repo_full table
+		Argument repo requires full name i.e. 'torvalds/linux'
+		Not using Pandas for this because of difficulty with single-row Data Frame'''
+	url = 'https://api.github.com/repos/'+repo
+	req = requests.get(url, auth=(USER, PASSWORD))
+	repoItem = req.json
+	
+	id = repoItem['id']
+	full_name = repoItem['full_name']
+	description = repoItem['description']
+	language = repoItem['language']
+	fork = repoItem['fork']
+	forks = repoItem['forks']
+	size = repoItem['size']
+	watchers = repoItem['watchers']
+	open_issues = repoItem['open_issues']
+	created_at = repoItem['created_at']
+	pushed_at = repoItem['pushed_at']
+	updated_at = repoItem['updated_at']
+	has_downloads = repoItem['has_downloads']
+	has_issues = repoItem['has_issues']
+	has_wiki = repoItem['has_wiki']
+	if fork == True:
+		parent_id = repoItem['parent']['id']
+		parent_name = repoItem['parent']['full_name']
+	else : 
+		parent_id = 0
+		parent_name = ''
+	
+	con = MySQLdb.connect("localhost", 
+            	USER, PASSWORD, DB_NAME, charset='utf8')
+	cursor = con.cursor()
+	cursor.execute('''INSERT into repo_full 
+                  values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''',
+                  (id, full_name, description, language, fork, forks, size, watchers, open_issues, created_at, 
+                   pushed_at, updated_at, has_downloads, has_issues, has_wiki, parent_id, parent_name))
+	con.commit()
+	con.close()
