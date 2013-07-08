@@ -1,0 +1,24 @@
+#  Agenda Workshop 9-10 July 2013
+
+## Review
+1. introduction and agenda planning
+2. review of project proposal/plans/timetable for orientation and planning purposes
+
+## Work so far
+3. discussion of related academic work
+4. update on work to date:
+	- data so far, including demos of datasets we've loaded on BigQuery
+	- our github repository
+	- blog postings
+	- ipython notebooks
+5. closer look at datasets for github and stackoverflow
+6. discussion of main 'metacommunity' and 'practice' leads so far;
+7. discussion of the problem of 'software topics' and how to address it;
+8. discussion of the stackoverflow data
+
+## Planning further work
+9. next steps in work
+10. possible industry or commons-related conferences
+11. publication plans
+12. bids for further funding
+13. plans for next meeting

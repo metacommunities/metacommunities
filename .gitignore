@@ -3,3 +3,4 @@
 *.pyc
 *.pyd
 *.h5
+*_api_key.txt
