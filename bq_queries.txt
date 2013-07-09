@@ -69,6 +69,7 @@ ORDER BY
 f2p_number DESC
 
 
+
 /* Pull request events, discrete pull requests, and merged pull requests - per repo
 */
 
@@ -81,3 +82,77 @@ WHERE type = 'PullRequestEvent'
 GROUP BY payload_pull_request_base_repo_url
 ORDER BY PullRequests DESC
 limit 1000;
+
+
+/* attempting to construct the fork-pull request table*
+the join method is clunky/
+
+SELECT pulltable.repository_url,forktable.fork as forks, count(type) as pullrequests
+FROM
+//left join is all the pullrequest events
+    (SELECT repository_url, type FROM
+    [githubarchive:github.timeline]
+    WHERE type='PullRequestEvent') as pulltable
+JOIN
+//right join is just the repos with > 1000 forks
+//this limit can be changed by using JOIN EACH
+    (SELECT repository_url, count(type) as fork
+    FROM [githubarchive:github.timeline]
+    WHERE (type='ForkEvent')
+    GROUP BY repository_url
+    having fork > 1000
+    order by fork desc) as forktable
+//the inner join is just repository_url
+on pulltable.repository_url = forktable.repository_url
+GROUP BY pulltable.repository_url, forks
+order by forks
+limit 100;
+
+
+/* much simpler way to do fork-pullrequest table
+using the sum(if ...) approach*/
+
+select repository_url, SUM(IF(type='ForkEvent', 1,0)) as fork,
+SUM(IF(type='PullRequestEvent', 1,0)) as pullrequest
+from [githubarchive:github.timeline]
+where (type='ForkEvent') or (type='PullRequestEvent')
+group by repository_url
+order by fork desc
+limit 100;
+
+/* trying to version of the Pull requests, merged pull request per repo with the fork events
+Why doesn't it seem to work properly?*/
+
+SELECT repository_url, payload_pull_request_base_repo_url, 
+sum(if(type='ForkEvent', 1,0)) as ForkEvents,
+count(payload_pull_request_base_repo_url) as PullRequestEvents, 
+count(distinct(payload_pull_request_id)) as PullRequests,
+sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
+FROM [githubarchive:github.timeline]
+WHERE (type = 'PullRequestEvent') or
+(type = 'ForkEvent')
+GROUP EACH BY repository_url, payload_pull_request_base_repo_url
+ORDER BY PullRequests DESC, ForkEvents DESC
+limit 100;
+
+/* Richard's latest wide pull request table
+Really good one!
+*/
+
+SELECT payload_pull_request_base_repo_url, 
+count(payload_pull_request_base_repo_url) as PullRequestEvents, 
+count(distinct(payload_pull_request_id)) as DistinctPullRequests,
+sum(IF(payload_action = 'opened', 1, 0)) AS PullRequestOpenEvents,
+sum(IF(payload_pull_request_head_repo_url == payload_pull_request_base_repo_url AND payload_action = 'opened', 1, 0)) AS IntraRepoPullRequestOpenEvents,
+sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
+count(distinct(payload_pull_request_merged_by_login)) AS UsersWhoMerge,
+sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0)) AS PullRequestMergedBySameUser,
+FROM [github_explore.timeline]
+WHERE type = 'PullRequestEvent' 
+GROUP BY payload_pull_request_base_repo_url
+ORDER BY PullRequestEvents DESC
+limit 1000;
+
+
+
+
