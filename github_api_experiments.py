@@ -13,6 +13,7 @@
 
 # functions to fetch from github api
 import github_api_data as gh
+import requests
 
 # <markdowncell>
 
