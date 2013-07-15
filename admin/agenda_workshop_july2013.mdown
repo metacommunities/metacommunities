@@ -15,6 +15,7 @@
 6. discussion of main 'metacommunity' and 'practice' leads so far;
 7. discussion of the problem of 'software topics' and how to address it;
 8. discussion of the stackoverflow data
+9. analysis of fork events
 
 ## Planning further work
 9. next steps in work
