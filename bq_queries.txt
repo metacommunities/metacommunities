@@ -178,7 +178,7 @@ WHERE type = 'PushEvent' AND repository_fork = 'true'
 AND PARSE_UTC_USEC(repository_created_at) >= PARSE_UTC_USEC('2012-03-12 00:00:00') 
 GROUP EACH BY repository_url
 ORDER BY PushEvents Desc
-LIMIT 1000
+LIMIT 10000
 
 /*
 This creates a table linking the active fork repos to their parent repos
