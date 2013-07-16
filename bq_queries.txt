@@ -209,6 +209,7 @@ FROM
 
 /* This one uses the table linking forks to their parents
 and produces a table of values for the parent repos
+Saved as 10k_active_forks_parentdata
 */
 SELECT Parent.repo AS parent_repo,
 Parent.PushEvents,
@@ -246,3 +247,12 @@ INNER JOIN EACH
 AS parentstable
 ON Parent.repo = parentstable.parent
 
+
+/*GHTorrent query - looking at name duplications and whether they are forks
+*/
+SELECT name, 
+count(name) AS numprojects, 
+sum(IF(forked_from > 0, 1, 0)) AS forks
+FROM projects 
+GROUP BY name 
+ORDER BY numprojects desc
