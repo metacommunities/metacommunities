@@ -142,6 +142,7 @@ Really good one!
 SELECT payload_pull_request_base_repo_url, 
 count(payload_pull_request_base_repo_url) as PullRequestEvents, 
 count(distinct(payload_pull_request_id)) as DistinctPullRequests,
+count(distinct(payload_pull_request_head_repo_url)) as DistinctHeadRepos,
 sum(IF(payload_action = 'opened', 1, 0)) AS PullRequestOpenEvents,
 sum(IF(payload_pull_request_head_repo_url == payload_pull_request_base_repo_url AND payload_action = 'opened', 1, 0)) AS IntraRepoPullRequestOpenEvents,
 sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
@@ -149,10 +150,99 @@ count(distinct(payload_pull_request_merged_by_login)) AS UsersWhoMerge,
 sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0)) AS PullRequestMergedBySameUser,
 FROM [github_explore.timeline]
 WHERE type = 'PullRequestEvent' 
-GROUP BY payload_pull_request_base_repo_url
+GROUP EACH BY payload_pull_request_base_repo_url
 ORDER BY PullRequestEvents DESC
 limit 1000;
 
+/* Looking for forks which have supplanted their parents
+Start with finding the 10000 fork repos which have the most PushEvents
+This query excludes those created before 2012-03-12 
+because we need their ForkEvent to be included in the data or we can't ascertain their parent.
+Results have been saved as 100k_active_forks
+*/
 
+SELECT repository_url,
+count(repository_url) AS PushEvents,
+count(distinct(actor_attributes_login)) AS Pushers,
+sum(IF(actor_attributes_login = repository_owner, 1, 0)) AS PushesByOwner,
+min(repository_watchers) AS minWatchers,
+max(repository_watchers) as maxWatchers,
+min(repository_size) AS minSize,
+max(repository_size) AS maxSize,
+min(repository_forks) AS minForks,
+max(repository_forks) AS maxForks,
+min(repository_created_at) AS created_at,
+max(created_at) AS last_push,
+FROM [github_explore.timeline]
+WHERE type = 'PushEvent' AND repository_fork = 'true' 
+AND PARSE_UTC_USEC(repository_created_at) >= PARSE_UTC_USEC('2012-03-12 00:00:00') 
+GROUP EACH BY repository_url
+ORDER BY PushEvents Desc
+LIMIT 10000
 
+/*
+This creates a table linking the active fork repos to their parent repos
+Saved as active_forks_parents
+*/
+
+SELECT
+ForkTable.fork_url, ParentTable.repository_url
+FROM
+ (SELECT
+   repository_url AS fork_url,
+  FROM [github_explore.10k_active_forks]
+  GROUP EACH BY
+   fork_url
+   )
+ AS ForkTable
+ INNER JOIN EACH
+ (SELECT
+   repository_url, url
+  FROM
+   [githubarchive:github.timeline]
+  WHERE type='ForkEvent'
+  GROUP EACH BY
+   repository_url, url)
+ AS ParentTable
+ ON
+  ForkTable.fork_url=ParentTable.url 
+
+/* This one uses the table linking forks to their parents
+and produces a table of values for the parent repos
+*/
+SELECT Parent.repo AS parent_repo,
+Parent.PushEvents,
+Parent.Pushers,
+Parent.PushesByOwner,
+Parent.minWatchers,
+Parent.maxWatchers,
+Parent.minSize,
+Parent.maxSize,
+Parent.minForks,
+Parent.maxForks,
+Parent.created_at,
+Parent.last_push,
+FROM
+	(SELECT repository_url AS repo,
+	count(repository_url) AS PushEvents,
+	count(distinct(actor_attributes_login)) AS Pushers,
+	sum(IF(actor_attributes_login = repository_owner, 1, 0)) AS PushesByOwner,
+	min(repository_watchers) AS minWatchers,
+	max(repository_watchers) as maxWatchers,
+	min(repository_size) AS minSize,
+	max(repository_size) AS maxSize,
+	min(repository_forks) AS minForks,
+	max(repository_forks) AS maxForks,
+	min(repository_created_at) AS created_at,
+	max(created_at) AS last_push,
+	FROM [github_explore.timeline]
+	WHERE type = 'PushEvent'
+	GROUP EACH BY repo)
+AS Parent
+INNER JOIN EACH 
+	(SELECT ParentTable_repository_url AS parent
+	FROM [github_explore.active_forks_parents]
+	GROUP EACH BY parent)
+AS parentstable
+ON Parent.repo = parentstable.parent
 

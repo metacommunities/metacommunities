@@ -18,7 +18,7 @@ import pandas as pd
 import json
 
 # read API user/password from your local file'
-USER_FILE = open('github_api_user.txt')
+USER_FILE = open('github_api_key.txt')
 USER = USER_FILE.readline().rstrip('\n')
 PASSWORD = USER_FILE.readline().rstrip('\n')
 USER_FILE.close()

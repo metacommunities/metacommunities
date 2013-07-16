@@ -13,6 +13,8 @@
 
 # functions to fetch from github api
 import github_api_data as gh
+import requests
+import numpy as np
 
 # <markdowncell>
 
