@@ -26,7 +26,7 @@ repo_df = gbq.query_table(query, 5000)
 # <codecell>
 
 repo_df.repository_description = repo_df.repository_description.fillna(' ')
-stoplist = set('for is or that a of the and to in'.split())
+stoplist = set('for is or that a of the and to in with this that'.split())
 texts = [[word for word in document.lower().split() if word not in stoplist] for document in repo_df.repository_description.tolist()]
 # remove words that appear only once
 all_tokens = sum(texts, [])
