@@ -28,7 +28,7 @@ USER_FILE.close()
 def github_timeline():
     """Returns dictionary with recent events -- not sure how many"""
     req = requests.get('https://github.com/timeline.json')
-    timeline = req.json()
+    timeline = req.json
     return timeline
 
 def get_repos(limit=500, sleep_time=1.0, since=0):
@@ -51,7 +51,7 @@ def get_repos(limit=500, sleep_time=1.0, since=0):
     while current_count < limit:
         req = requests.get(url, auth=(USER, PASSWORD))
         if(req.ok):
-            repoItem = req.json()
+            repoItem = req.json
             name =  [it['name'] for it in repoItem]
             url = [it['url'] for it in repoItem]
             temp_df = pd.DataFrame({'name':name, 'url':url})
@@ -94,7 +94,7 @@ def get_programming_languages(repos_df):
     for name, url in repos_df.languages_url.iteritems():
         print 'fetching repository %s from %s'% (name, url)
         req = requests.get(url, auth=(USER, PASSWORD))
-        lang = req.json()
+        lang = req.json
         df_temp = pd.DataFrame.from_dict({name:lang}, 'index')
         df_lang = df_lang.append(df_temp)
 
@@ -124,8 +124,8 @@ def get_readme_files(repos):
         print(url)
         try:
             req = requests.get(url, auth=(USER, PASSWORD))
-            if (req.json().has_key('content')):
-                readme = base64.b64decode(req.json()['content'])
+            if (req.json.has_key('content')):
+                readme = base64.b64decode(req.json['content'])
             else:
                 readme = 'NA'
             readmes.append(readme)
@@ -165,7 +165,7 @@ def get_repository_commits(repository, since = '2008-01-01',
     while current_count < limit:
         req = requests.get(url, auth=(USER, PASSWORD))
         if(req.ok):
-            repoItem = req.json()
+            repoItem = req.json
             #may need to get more fields from json object
             commits = [it['commit'] for it in repoItem]
             date = [it['author']['date'] for it in commits]
@@ -216,7 +216,7 @@ def get_repository_event(user, repo, limit=1000):
         current_count = 0
         while current_count < limit:
             events_req = requests.get(url, auth=(USER, PASSWORD))
-            events = events + events_req.json()
+            events = events + events_req.json
             if events_req.links.has_key('next'):
                 url_next = events_req.links['next']['url']
                 print url_next
@@ -238,12 +238,12 @@ def get_repository_forkdata(repo):
     url = 'https://api.github.com/repos/'+repo+'/forks'
     repos_df = pd.DataFrame()
     req = requests.get(url, auth=(USER, PASSWORD))
-    repoItem = req.json()
+    repoItem = req.json
     repos_df = unpack_repoItem(repoItem, repos_df, repo)
     while req.links.has_key('next'):
         url = req.links['next']['url']
         req = requests.get(url, auth=(USER, PASSWORD))
-        repoItem = req.json()
+        repoItem = req.json
         repos_df = unpack_repoItem(repoItem, repos_df, repo)  
         time.sleep(1)
         return repos_df
@@ -314,7 +314,7 @@ def get_repository_pulldata(repo):
     url = 'https://api.github.com/repos/'+repo+'/pulls?state=open'
     repos_df = pd.DataFrame()
     req = requests.get(url, auth=(USER, PASSWORD))
-    repoItem = req.json()
+    repoItem = req.json
     fullrepoItem = repoItem
     #get rid of rows where there is no head repo
     repoItem[:] = [d for d in repoItem if d['head'].get('repo') != None]
@@ -322,13 +322,13 @@ def get_repository_pulldata(repo):
     while req.links.has_key('next'):
         url = req.links['next']['url']
         req = requests.get(url, auth=(USER, PASSWORD))
-        repoItem = req.json()
+        repoItem = req.json
         repoItem[:] = [d for d in repoItem if d['head'].get('repo') != None]
         repos_df = unpack_repoItem_pulls(repoItem, repos_df, repo)  
         time.sleep(1)
     url = 'https://api.github.com/repos/'+repo+'/pulls?state=closed'
     req = requests.get(url, auth=(USER, PASSWORD))
-    repoItem = req.json()
+    repoItem = req.json
     fullrepoItem = repoItem
     #get rid of rows where there is no head repo
     repoItem[:] = [d for d in repoItem if d['head'].get('repo') != None]
@@ -336,7 +336,7 @@ def get_repository_pulldata(repo):
     while req.links.has_key('next'):
         url = req.links['next']['url']
         req = requests.get(url, auth=(USER, PASSWORD))
-        repoItem = req.json()
+        repoItem = req.json
         repoItem[:] = [d for d in repoItem if d['head'].get('repo') != None]
         repos_df = unpack_repoItem_pulls(repoItem, repos_df, repo)  
         time.sleep(1)
