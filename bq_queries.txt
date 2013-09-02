@@ -287,6 +287,130 @@ GROUP EACH BY repository_url
 ORDER BY Events Desc
 
 
+/* The following queries are for looking at ongoing relationships between base and head repos through pull requests
+I've saved most or all of the results as tables, because getting at the data I wanted involved layers of custom-made tables
+The first one gets base/head pairs which are not intra-repo - cutting it off at 200k and ordering by pull request events 
+means that we are left with pairs that have a minimum 4 events 
+Saved as: PR_Base_Head_Pairs_NoIntra
+*/
+SELECT payload_pull_request_base_repo_url, payload_pull_request_head_repo_url, count(payload_pull_request_head_repo_url) AS pullrequestevents, min(created_at) AS firstPR, max(created_at) as lastPR, count(distinct(payload_pull_request_id)) AS DistinctPullRequests, 
+FROM [githubarchive:github.timeline]
+WHERE type = "PullRequestEvent"  AND payload_pull_request_head_repo_url != payload_pull_request_base_repo_url
+GROUP EACH BY  payload_pull_request_head_repo_url, payload_pull_request_base_repo_url
+ORDER BY pullrequestevents DESC
+LIMIT 200000
+
+/* table of users who pushed to base repo of pair
+saved as: PR_Base_repo_Push_By_User
+*/
+SELECT Base.baseurl AS BaseURL,
+Base.actor AS BasePusher,
+Base.PushEvents,
+Base.first_push,
+Base.last_push,
+FROM
+	(SELECT REGEXP_REPLACE(repository_url, 'https://github.com/', 'https://api.github.com/repos/' ) AS baseurl,
+	actor, 
+	count(repository_url) AS PushEvents,
+	max(created_at) AS last_push,
+	min(created_at) AS first_push,
+	FROM [github_explore.timeline]
+	WHERE type = 'PushEvent'
+	GROUP EACH BY baseurl, actor)
+AS Base
+INNER JOIN EACH 
+	(SELECT payload_pull_request_base_repo_url AS base
+	FROM [github_explore.Base_Head_Pairs_NoIntra]
+	GROUP EACH BY base)
+AS basetable
+ON Base.baseurl = basetable.base
+ORDER BY BaseURL
+
+/* table of users who pushed to head repo of pair
+saved as: PR_Head_repo_Push_By_User
+*/
+SELECT Head.headurl AS HeadURL,
+Head.actor AS HeadPusher,
+Head.PushEvents,
+Head.first_push,
+Head.last_push,
+FROM
+	(SELECT REGEXP_REPLACE(repository_url, 'https://github.com/', 'https://api.github.com/repos/' ) AS headurl,
+	actor, 
+	count(repository_url) AS PushEvents,
+	max(created_at) AS last_push,
+	min(created_at) AS first_push,
+	FROM [github_explore.timeline]
+	WHERE type = 'PushEvent'
+	GROUP EACH BY headurl, actor)
+AS Head
+INNER JOIN EACH 
+	(SELECT payload_pull_request_head_repo_url AS head
+	FROM [github_explore.Base_Head_Pairs_NoIntra]
+	GROUP EACH BY head)
+AS headtable
+ON Head.headurl = headtable.head
+ORDER BY HeadURL
+
+/* table of pull requests (opens, closes, distincts) grouped by user and repo and whether they were merged plus more counts (self-merges) and times 
+saved as: PR_Users_NoIntra
+*/
+SELECT PR.headurl AS HeadURL,
+PR.baseurl AS BaseURL,
+PR.PRUser AS PRUser,
+PR.Events,
+PR.OpenEvents,
+PR.CloseEvents,
+PR.DistinctPullRequests,
+PR.Merged,
+PR.SelfMerges,
+PR.first_pr,
+PR.last_pr,
+FROM
+	(SELECT payload_pull_request_head_repo_url AS headurl,
+	payload_pull_request_base_repo_url AS baseurl,
+	payload_pull_request_user_login AS PRUser, 
+	count(payload_pull_request_head_repo_url) AS Events,
+	sum(IF(payload_action = 'opened', 1, 0)) AS OpenEvents,
+	sum(IF(payload_action = 'closed', 1, 0)) AS CloseEvents,
+	count(DISTINCT(payload_pull_request_id)) AS DistinctPullRequests,
+	sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS Merged,
+	sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0 )) AS SelfMerges,
+	max(created_at) AS last_PR,
+	min(created_at) AS first_PR,
+	FROM [github_explore.timeline]
+	WHERE type = 'PullRequestEvent'
+	GROUP EACH BY headurl, baseurl, PRUser)
+AS PR
+INNER JOIN EACH 
+	(SELECT payload_pull_request_head_repo_url AS head
+	FROM [github_explore.Base_Head_Pairs_NoIntra]
+	GROUP EACH BY head)
+AS headtable
+ON PR.headurl = headtable.head
+ORDER BY HeadURL
+
+/*Looking at table of memberevents to see if users were added to base repo and when
+saved as: PR_AddedUsers_NoIntra
+*/
+SELECT Base.baseurl AS BaseURL,
+Base.AddedUser AS AddedUser,
+Base.AddedAt AS AddedAt
+FROM
+	(SELECT REGEXP_REPLACE(repository_url, 'https://github.com/', 'https://api.github.com/repos/' ) AS baseurl,
+	payload_member_login AS AddedUser, 
+	min(created_at) AS AddedAt,
+	FROM [github_explore.timeline]
+	WHERE type = 'MemberEvent'
+	GROUP EACH BY baseurl, AddedUser)
+AS Base
+INNER JOIN EACH 
+	(SELECT payload_pull_request_base_repo_url AS base
+	FROM [github_explore.Base_Head_Pairs_NoIntra]
+	GROUP EACH BY base)
+AS basetable
+ON Base.baseurl = basetable.base
+ORDER BY BaseURL
 
 /*GHTorrent query - looking at name duplications and whether they are forks
 */
