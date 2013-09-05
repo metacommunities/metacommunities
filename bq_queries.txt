@@ -156,10 +156,10 @@ ORDER BY PullRequestEvents DESC
 limit 1000;
 
 /* Looking for forks which have supplanted their parents
-Start with finding the 10000 fork repos which have the most PushEvents
+Start with finding the 200k fork repos which have the most PushEvents
 This query excludes those created before 2012-03-12 
 because we need their ForkEvent to be included in the data or we can't ascertain their parent.
-Results have been saved as 100k_active_forks
+Results have been saved as 200k_active_forks
 */
 
 SELECT repository_url,
@@ -179,7 +179,7 @@ WHERE type = 'PushEvent' AND repository_fork = 'true'
 AND PARSE_UTC_USEC(repository_created_at) >= PARSE_UTC_USEC('2012-03-12 00:00:00') 
 GROUP EACH BY repository_url
 ORDER BY PushEvents Desc
-LIMIT 10000
+LIMIT 200000
 
 /*
 This creates a table linking the active fork repos to their parent repos
@@ -191,7 +191,7 @@ ForkTable.fork_url, ParentTable.repository_url
 FROM
  (SELECT
    repository_url AS fork_url,
-  FROM [github_explore.10k_active_forks]
+  FROM [github_explore.200k_active_forks]
   GROUP EACH BY
    fork_url
    )
@@ -210,7 +210,7 @@ FROM
 
 /* This one uses the table linking forks to their parents
 and produces a table of values for the parent repos
-Saved as 10k_active_forks_parentdata
+Saved as 200k_active_forks_parentdata
 */
 SELECT Parent.repo AS parent_repo,
 Parent.PushEvents,
@@ -243,10 +243,161 @@ FROM
 AS Parent
 INNER JOIN EACH 
 	(SELECT ParentTable_repository_url AS parent
-	FROM [github_explore.active_forks_parents]
+	FROM [github_explore.200k_fork_parent_relations]
 	GROUP EACH BY parent)
 AS parentstable
 ON Parent.repo = parentstable.parent
+
+/* This query is to add information on pull requests made/received in relation to the forked repos (with the forked repo as head)
+*/ 
+SELECT PR.headurl AS HeadURL,
+PR.baseurl AS BaseURL,
+PR.PRUser AS PRUser,
+PR.Events,
+PR.OpenEvents,
+PR.CloseEvents,
+PR.DistinctPullRequests,
+PR.Merged,
+PR.SelfMerges,
+PR.first_pr,
+PR.last_pr,
+FROM
+	(SELECT payload_pull_request_head_repo_url AS headurl,
+	payload_pull_request_base_repo_url AS baseurl,
+	payload_pull_request_user_login AS PRUser, 
+	count(payload_pull_request_head_repo_url) AS Events,
+	sum(IF(payload_action = 'opened', 1, 0)) AS OpenEvents,
+	sum(IF(payload_action = 'closed', 1, 0)) AS CloseEvents,
+	count(DISTINCT(payload_pull_request_id)) AS DistinctPullRequests,
+	sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS Merged,
+	sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0 )) AS SelfMerges,
+	max(created_at) AS last_PR,
+	min(created_at) AS first_PR,
+	FROM [github_explore.timeline]
+	WHERE type = 'PullRequestEvent'
+	GROUP EACH BY headurl, baseurl, PRUser)
+AS PR
+INNER JOIN EACH 
+	(SELECT REGEXP_REPLACE(ForkTable_fork_url, 'https://github.com/', 'https://api.github.com/repos/') AS head
+	FROM [github_explore.200k_fork_parent_relations]
+	GROUP EACH BY head)
+AS headtable
+ON PR.headurl = headtable.head
+ORDER BY HeadURL
+
+/* This query is to add information on pull requests made/received in relation to the forked repos (with the forked repo as base)
+saved as: 200k_active_forks_PRbase 
+*/ 
+SELECT PR.baseurl AS BaseURL,
+PR.headurl AS HeadURL,
+PR.PRUser AS PRUser,
+PR.Events,
+PR.OpenEvents,
+PR.CloseEvents,
+PR.DistinctPullRequests,
+PR.Merged,
+PR.SelfMerges,
+PR.first_pr,
+PR.last_pr,
+FROM
+	(SELECT payload_pull_request_head_repo_url AS headurl,
+	payload_pull_request_base_repo_url AS baseurl,
+	payload_pull_request_user_login AS PRUser, 
+	count(payload_pull_request_head_repo_url) AS Events,
+	sum(IF(payload_action = 'opened', 1, 0)) AS OpenEvents,
+	sum(IF(payload_action = 'closed', 1, 0)) AS CloseEvents,
+	count(DISTINCT(payload_pull_request_id)) AS DistinctPullRequests,
+	sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS Merged,
+	sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0 )) AS SelfMerges,
+	max(created_at) AS last_PR,
+	min(created_at) AS first_PR,
+	FROM [github_explore.timeline]
+	WHERE type = 'PullRequestEvent'
+	GROUP EACH BY baseurl, headurl, PRUser)
+AS PR
+INNER JOIN EACH 
+	(SELECT REGEXP_REPLACE(ForkTable_fork_url, 'https://github.com/', 'https://api.github.com/repos/') AS fork
+	FROM [github_explore.200k_fork_parent_relations]
+	GROUP EACH BY fork)
+AS forktable
+ON PR.baseurl = forktable.fork
+ORDER BY BaseURL
+
+/* This query is to add information on pull requests made/received in relation to the parent repos (with the parent repo as base)
+saved as: 200k_active_parents_PRbase 
+*/ 
+SELECT PR.baseurl AS BaseURL,
+PR.headurl AS HeadURL,
+PR.PRUser AS PRUser,
+PR.Events,
+PR.OpenEvents,
+PR.CloseEvents,
+PR.DistinctPullRequests,
+PR.Merged,
+PR.SelfMerges,
+PR.first_pr,
+PR.last_pr,
+FROM
+	(SELECT payload_pull_request_head_repo_url AS headurl,
+	payload_pull_request_base_repo_url AS baseurl,
+	payload_pull_request_user_login AS PRUser, 
+	count(payload_pull_request_head_repo_url) AS Events,
+	sum(IF(payload_action = 'opened', 1, 0)) AS OpenEvents,
+	sum(IF(payload_action = 'closed', 1, 0)) AS CloseEvents,
+	count(DISTINCT(payload_pull_request_id)) AS DistinctPullRequests,
+	sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS Merged,
+	sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0 )) AS SelfMerges,
+	max(created_at) AS last_PR,
+	min(created_at) AS first_PR,
+	FROM [github_explore.timeline]
+	WHERE type = 'PullRequestEvent'
+	GROUP EACH BY baseurl, headurl, PRUser)
+AS PR
+INNER JOIN EACH 
+	(SELECT REGEXP_REPLACE(ParentTable_repository_url, 'https://github.com/', 'https://api.github.com/repos/') AS parent
+	FROM [github_explore.200k_fork_parent_relations]
+	GROUP EACH BY parent)
+AS parenttable
+ON PR.baseurl = parenttable.parent
+ORDER BY BaseURL
+
+/* This query is to add information on pull requests made/received in relation to the parent repos (with the parent repo as head)
+saved as: 200k_active_parents_PRheads
+*/ 
+SELECT PR.headurl AS HeadURL,
+PR.baseurl AS BaseURL,
+PR.PRUser AS PRUser,
+PR.Events,
+PR.OpenEvents,
+PR.CloseEvents,
+PR.DistinctPullRequests,
+PR.Merged,
+PR.SelfMerges,
+PR.first_pr,
+PR.last_pr,
+FROM
+	(SELECT payload_pull_request_base_repo_url AS baseurl,
+	payload_pull_request_head_repo_url AS headurl,
+	payload_pull_request_user_login AS PRUser, 
+	count(payload_pull_request_head_repo_url) AS Events,
+	sum(IF(payload_action = 'opened', 1, 0)) AS OpenEvents,
+	sum(IF(payload_action = 'closed', 1, 0)) AS CloseEvents,
+	count(DISTINCT(payload_pull_request_id)) AS DistinctPullRequests,
+	sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS Merged,
+	sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0 )) AS SelfMerges,
+	max(created_at) AS last_PR,
+	min(created_at) AS first_PR,
+	FROM [github_explore.timeline]
+	WHERE type = 'PullRequestEvent'
+	GROUP EACH BY headurl, baseurl, PRUser)
+AS PR
+INNER JOIN EACH 
+	(SELECT REGEXP_REPLACE(ParentTable_repository_url, 'https://github.com/', 'https://api.github.com/repos/') AS parent
+	FROM [github_explore.200k_fork_parent_relations]
+	GROUP EACH BY parent)
+AS parenttable
+ON PR.headurl = parenttable.parent
+ORDER BY BaseURL
 
 /* This query is for the repo census and produces mostly counts of the number of events
 Because there are so many repos it needs to be done in stages through the python API, which is slow...
