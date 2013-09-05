@@ -571,3 +571,27 @@ sum(IF(forked_from > 0, 1, 0)) AS forks
 FROM projects 
 GROUP BY name 
 ORDER BY numprojects desc
+
+/*The $1800 query*/
+
+    SELECT payload_pull_request_head_repo_url, 
+    count(payload_pull_request_head_repo_url) as PullRequestEvents, 
+    count(distinct(payload_pull_request_id)) as DistinctPullRequests,
+    count(distinct(payload_pull_request_head_repo_url)) as DistinctHeadRepos,
+    sum(IF(payload_action = 'opened', 1, 0)) AS PullRequestOpenEvents,
+    sum(IF(payload_action = 'closed', 1, 0)) AS PullRequestCloseEvents,
+    sum(IF(payload_pull_request_head_repo_url == payload_pull_request_base_repo_url AND payload_action = 'opened', 1, 0)) AS IntraRepoPullRequestOpenEvents,
+    sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
+    count(distinct(payload_pull_request_merged_by_login)) AS UsersWhoMerge,
+    sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0)) AS PullRequestMergedBySameUser,
+    min(created_at) AS FirstPullRequest,
+    max(created_at) AS LastPullRequest,
+    min(payload_pull_request_head_repo_created_at) AS HeadRepoCreated,
+    max(payload_pull_request_head_repo_fork) AS Fork,
+    max(payload_pull_request_base_repo_url) AS payload_pull_request_base_repo_url,
+    FROM [github_explore.timeline]
+    WHERE type = 'PullRequestEvent' AND payload_pull_request_base_repo_url = 'https://api.github.com/repos/zznate/intravert-ug'
+    GROUP EACH BY payload_pull_request_head_repo_url
+    ORDER BY PullRequestEvents DESC 
+        LIMIT 5000000;
+
