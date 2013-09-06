@@ -248,6 +248,32 @@ INNER JOIN EACH
 AS parentstable
 ON Parent.repo = parentstable.parent
 
+/* Same as above but just want names of pushers
+Extracted to ipython
+*/
+SELECT Parent.repo AS parent_repo,
+Parent.PushEvents,
+Parent.Pusher,
+Parent.first_push,
+Parent.last_push,
+FROM
+	(SELECT repository_url AS repo,
+	actor_attributes_login AS pusher,
+	count(repository_url) AS PushEvents,
+	min(created_at) AS first_push,
+	max(created_at) AS last_push,
+	FROM [github_explore.timeline]
+	WHERE type = 'PushEvent'
+	GROUP EACH BY repo, pusher)
+AS Parent
+INNER JOIN EACH 
+	(SELECT ParentTable_repository_url AS parent
+	FROM [github_explore.200k_fork_parent_relations]
+	GROUP EACH BY parent)
+AS parentstable
+ON Parent.repo = parentstable.parent
+
+
 /* This query is to add information on pull requests made/received in relation to the forked repos (with the forked repo as head)
 */ 
 SELECT PR.headurl AS HeadURL,
@@ -398,6 +424,12 @@ INNER JOIN EACH
 AS parenttable
 ON PR.headurl = parenttable.parent
 ORDER BY BaseURL
+
+
+
+
+
+
 
 /* This query is for the repo census and produces mostly counts of the number of events
 Because there are so many repos it needs to be done in stages through the python API, which is slow...
