@@ -182,6 +182,23 @@ ORDER BY PushEvents Desc
 LIMIT 200000
 
 /*
+Get table of pushers for fork repos
+*/
+SELECT repository_url AS fork_url,
+actor_attributes_login AS pusher,
+count(repository_url) AS PushEvents,
+min(created_at) AS first_push,
+max(created_at) AS last_push,
+FROM [github_explore.timeline]
+WHERE type = 'PushEvent' AND repository_fork = 'true' 
+AND PARSE_UTC_USEC(repository_created_at) >= PARSE_UTC_USEC('2012-03-12 00:00:00') 
+GROUP EACH BY fork_url, pusher
+ORDER BY PushEvents Desc
+LIMIT 200000
+
+
+
+/*
 This creates a table linking the active fork repos to their parent repos
 Saved as active_forks_parents
 */
