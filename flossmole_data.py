@@ -5,7 +5,7 @@
 
 # # Repository datasets archived at [flossmole](http://code.google.com/p/flossmole/downloads/list) and also SourceForge
 # 
-# Flossmole could be a way to help fill out data before February 2011 for github (the github data seems to only go back to 2010. And flossmole has data on many other sites, such as sourceforge, google code, and launchpad. Both the data and the scripts they used could be helpful for us. The url for the download page is http://code.google.com/p/flossmole/downloads/list
+# Flossmole could be a way to help fill out data before February 2011 for github (the github data seems to only go back to 2010). And flossmole has data on many other sites, such as sourceforge, google code, and launchpad. Both the data and the scripts they used could be helpful for us. The url for the download page is http://code.google.com/p/flossmole/downloads/list
 
 # <codecell>
 
