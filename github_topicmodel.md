@@ -26,7 +26,7 @@ dtm = create_matrix(readme_df$readme, removeNumbers = TRUE, maxWordLength = 20,
 
 This is a really messy term set. Here is a sample:
 
-> construtor, sammyapplication, pace, diaspora, vdrsc, hereevents, tunnels, channel, onvideoinitialized, pplistconnected, robbyrussell, pathtorossetupsh, chalmers, servicesetobject, mes, vimunitegiti, ndp, emulating, bsemaphoredata, containerrenderpost, valuea, decoupe, backer, buildmd, resnextresult, bkrservertools, httpwwwclictvtv, admobs, dyldcache, masochism, addontests, connecterror, httpsgithubcomniw, guideupgradeguidemd, forceupdate, configkallsyms, glaucoma, indexasynchtml, thwarts, classify, hpage, bthis, codemap, shiftcmdspace, ipiht, bugged, withthreads, contextsettransform, phillips, radu, fades, opery, startedat, rhide, connectionqueue, skyrock, readmepdf, activedirectoryldap, worldstring, lineargradientfff, ggv, aklo, apiname, infiniterecursion, pif, workertask, respond, enabledebugkernel, testupcase, ewing, idehttpscio, httpraygrassocom, sparkman, documenttoprivate, addingremoving, firefoxchromium, hidesitewide, dimple, dbsavedesignlaws, yadrvimafter, muln, recurrences, nforce, datepickera, chapmanb, mongoidminitest, htmlstyle, megadni, sufficieseach, balra, twoline, mongoimport, carol, sortingphp, appended, alignleft, antigen, squeeky, treeview, httpflexgetcom
+> quotient, intensively, brantbrantsteencom, viewable, vehilce, zivilgesellschaft, ormlitesqlserver, wheres, controlstatus, bigscreenonenter, testsresultscsv, mmkcompilerulesiopt, altflightcontrol, bfindorcreatebypath, linkhttpdisqusnppyi, historyofrock, pathtocertorcert, jbide, fetchtable, pacerneojneojdbgraph, psuicollectionview, flamejsspecific, treesort, httpbossaberkeleyedu, titlebarkeep, rrwrww, httpgetmoaicomforums, rdynamic, featurescode, tdsource, httpweeklygolangorg, animbr, rootgnupggpgconf, itemrelated, taxonomycategoryid, simplenotifier, syscfg, jquerymathquill, princedpios, compositeurl, examplemaxpacketsize, nodeuvrunx, ndrivewexe, bitmask, beforeperform, httprobhirschfeldcom, domelementcq, localhostpy, mediumint, pythonyenc, gpromptsh, multiblog, fpre, bidireordervisually, unsetenv, branchmaster, htop, mycustomparser, applicationkey, little, janu, ejected, ohomenamebuildkernel, configcreateparser, parseropt, versioncontrolgit, initiph, campbellhgooglecom, usrlib, fixstalesocket, nodehelper, joncarlos, ontagexists, sqlitestandupappdb, phppostgresql, inputclass, chcurrpregistercache, summarizes, unlimitedfs, functionab, blown, tray, chupp, knifetemplatefile, beginningofline, viewdidappear, wikigettingaprinter, slice, rti, valueblakeform, hyphenation, hateoas, emremovecategory, whichcommand, articlesjson, lms, hasznelva, iseeindatabasepages, arnhem, phash
 
 Lovely to work with. Does cutting out more sparse (infrequent) terms help?
 
@@ -34,7 +34,7 @@ Lovely to work with. Does cutting out more sparse (infrequent) terms help?
 
 This does help a  lot. A sample of the remaining terms looks more sensible: 
 
-> good, street, manage, minimum, batch, please, details, subsequent, serve, standards, reproduce, quickly, finish, allmodconfig, worked, dealings, read, json, goals, staging, proper, exit, models, receive, legal, authorization, restrictions, special, forget, anyone.
+> person, color, clients, compiler, hitachi, repos, sometimes, fields, received, compatibility, remember, whether, though, analytics, extremely, entirely, installer, share, attribute, others, commands, upload, ebp, failures, actually, regarding, reuse, kernel, fail, features, day, next, automate, staging, field, higher, aims, dev, microsoft, namelist, algorithms, along, animation, four, clicking, close, random, learning, thread, page.
 
 ## Running the  Topic Models
 
@@ -58,20 +58,20 @@ print(tab1)
 ```
 
 % latex table generated in R 3.0.1 by xtable 1.7-1 package
-% Thu Sep 12 20:24:48 2013
+% Fri Sep 13 14:38:40 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rllllllllll}
   \hline
  & Topic 1 & Topic 2 & Topic 3 & Topic 4 & Topic 5 & Topic 6 & Topic 7 & Topic 8 & Topic 9 & Topic 10 \\ 
   \hline
-1 & can & kernel & added & install & version & will & html & ruby & please & software \\ 
-  2 & support & make & bug & run & build & can & javascript & server & repository & license \\ 
-  3 & code & will & new & git & directory & function & can & can & branch & copyright \\ 
-  4 & data & can & fix & can & make & value & use & will & liferay & without \\ 
-  5 & use & new & now & will & windows & use & page & rails & project & use \\ 
-  6 & project & config & support & file & files & object & css & database & pull & copy \\ 
-  7 & see & use & fixed & tests & library & example & php & application & build & including \\ 
+1 & kernel & install & added & software & version & project & will & server & ruby & can \\ 
+  2 & make & run & html & license & can & license & can & can & can & use \\ 
+  3 & will & build & new & copyright & game & please & function & client & user & code \\ 
+  4 & can & git & page & without & bug & documentation & value & will & use & will \\ 
+  5 & linux & directory & support & use & will & repository & class & use & create & also \\ 
+  6 & new & file & add & copy & application & build & name & default & database & see \\ 
+  7 & use & make & now & including & files & code & object & data & gem & like \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -86,7 +86,6 @@ print(tab1)
 #fit on a subset to check consistency of topics
 sreadme_df = readme_df[1:4000,]
 corpus <- Corpus(VectorSource(sreadme_df$readme))
-Sys.setlocale("LC_COLLATE", "C")
 sdtm <- DocumentTermMatrix(corpus,
 	control = list(stemming = TRUE, stopwords = TRUE, wordLengths = c(1, 20),
 	removeNumbers = TRUE, removePunctuation = TRUE))
@@ -121,8 +120,6 @@ ldafull = LDA(dtm2, 20)
 setwd("C:\\Dropbox\\rmills\\Postdoc\\LDA2")
 sreadme_df = readme_df[1:2000,]
 corpus <- Corpus(VectorSource(sreadme_df$readme))
-#does this help?
-Sys.setlocale("LC_COLLATE", "C")
 
 sdtm <- DocumentTermMatrix(corpus,
 	control = list(stemming = TRUE, stopwords = TRUE, wordLengths = c(3, 20),
