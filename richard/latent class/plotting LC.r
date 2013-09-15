@@ -2,8 +2,9 @@ library(RMySQL)
 library(ggplot2)
 library(reshape2)
 
-drv = dbDriver("MySQL")
-con = dbConnect(drv,host="localhost",dbname="git",user="root",pass="moo")
+sqluser = ""
+sqlpass = ""
+con = dbConnect(drv,host="localhost",dbname="git",user=sqluser,pass=sqlpass)
 
 setwd("C:\\Dropbox\\rmills\\Postdoc\\latent class")
 

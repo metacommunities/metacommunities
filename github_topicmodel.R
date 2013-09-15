@@ -8,6 +8,7 @@ library(reshape2)
 library(XML)
 
 
+# Richard: I can't find a version of R where both RMySQL and the top modelling packages work for me, hence the exporting as .csv hack
 # readme_df = read.csv("readmeR.csv", stringsAsFactors = FALSE)
 Sys.setlocale("LC_COLLATE", "C")
 

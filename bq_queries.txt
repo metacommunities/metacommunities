@@ -621,7 +621,7 @@ FROM projects
 GROUP BY name 
 ORDER BY numprojects desc
 
-/*The $1800 query*/
+/*The $1800 query - iterate on payload_pull_request_base_repo_url until bank account is empty*/
 
     SELECT payload_pull_request_head_repo_url, 
     count(payload_pull_request_head_repo_url) as PullRequestEvents, 
@@ -644,3 +644,21 @@ ORDER BY numprojects desc
     ORDER BY PullRequestEvents DESC 
         LIMIT 5000000;
 
+/* Null Language repos */
+SELECT repository_url, count(repository_url) AS PushEvents, count(distinct(actor_attributes_login)) AS Pushers, max(repository_size) AS maxSize
+FROM [githubarchive:github.timeline]
+WHERE repository_language IS NULL AND type = 'PushEvent'
+GROUP EACH BY repository_url
+#HAVING PushEvents > 1 AND maxSize > 0
+ORDER BY PushEvents DESC
+
+
+/* Organisations */
+SELECT repository_organization, count(distinct(repository_name)) AS Repos, count(repository_organization) AS PushEvents
+FROM [githubarchive:github.timeline]
+WHERE type = 'PushEvent'
+GROUP EACH BY repository_organization
+ORDER BY Repos DESC
+
+		
+		
