@@ -11,70 +11,7 @@ the root url is:    https://www.googleapis.com/bigquery/v2
 NB: got code ideas from:
  https://developers.google.com/bigquery/docs/hello_bigquery_api
 
-Sample query for number of repositories
-----------------------------
-select count(distinct repository_name) from [githubarchive:github.timeline];
-
-Returns: 2403105
-
-select count(distinct repository_name), 
-    count (distinct repository_owner), 
-    count (distinct repository_organization)
-    from [githubarchive:github.timeline];
-
-Sample query for different event types
---------------------------------------------------------------
-select  type, count(type)
-
-from [githubarchive:github.timeline] group by type;
-
-
-Sample query for 'sentiment analysis' using emoticons:
------------------------------------------------
-SELECT repository_name,
-    /* Extracts the relevant emoticon from the GitHub commit message    */
-    REGEXP_EXTRACT(payload_commit_msg, r'([\;:]-[\)\(])') AS emoticon,
-    COUNT(*) AS emoticon_count
-FROM [publicdata:samples.github_timeline]
-    /* Matches the following emoticons :-),;-),:-(,;-(    */
-    WHERE REGEXP_MATCH(payload_commit_msg, r'[\;:]-[\)\(]')
-    /* Group by repository name and emoticon */
-GROUP BY
-    repository_name, emoticon
-ORDER BY
-    emoticon_count DESC
-LIMIT 5;
-
-Another sample query
----------------------------------
-select actor, repository_language, count(repository_language) as pushes
-from [githubarchive:github.timeline]
-where type='PushEvent'
-        and repository_language != ''
-        and PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-01-01 00:00:00')
-        and PARSE_UTC_USEC(created_at) < PARSE_UTC_USEC('2013-01-01 00:00:00')
-group by actor, repository_language;
-
-* Important query - how many repos before Feb 2011?
----------------------------------
-select count(distinct repository_name) from [githubarchive:github.timeline] 
-WHERE PARSE_UTC_USEC(repository_created_at) < PARSE_UTC_USEC('2011-02-01 00:00:00')
-;
-Result: 97602 
-
-Stu's query on repositories: how often repos are used
-------------------------------------------------
-SELECT RepoEvents, COUNT(*) AS Freq
-FROM
-(
-    SELECT repository_name, COUNT(repository_name) AS RepoEvents
-    FROM [githubarchive:github.timeline]
-    GROUP BY repository_name
-) MyTable
-GROUP BY RepoEvents
-ORDER BY Freq DESC
 """
-
 
 import httplib2
 import pprint
@@ -91,9 +28,9 @@ PROJECT_NUMBER = '237471208995'
 PROJECT_ID = 'metacommunities'
 
 #not actually using these, but keeping them in case
-api_key_file = file('google_api_key.txt')
-api_key = api_key_file.read()
-api_key_file.close()
+#api_key_file = file('google_api_key.txt')
+#api_key = api_key_file.read()
+#api_key_file.close()
 
 #authorization is handled here; you need one of these to get script to work; 
 FLOW = flow_from_clientsecrets('client_secrets.json',

@@ -68,6 +68,40 @@ This does help a  lot. A sample of the remaining terms looks more sensible:
 	lda10 = LDA(dtm3, 10)
 ```
 
+```{r topicmodels_python, echo=TRUE, cache=TRUE, message=FALSE, warning=FALSE, comment=NA, size='smallsize', results='asis', engine='python'}
+
+	import MySQLdb
+
+	
+
+	repo_df.repository_description = repo_df.repository_description.fillna(' ')
+	stoplist = set('for is or that a of the and to in with this that'.split())
+	texts = [[word for word in document.lower().split() if word not in stoplist] for document in repo_df.repository_description.tolist()]
+	# remove words that appear only once
+	all_tokens = sum(texts, [])
+	tokens_once = set(word for word in set(all_tokens) if all_tokens.count(word) == 1)
+	texts = [[word for word in text if word not in tokens_once]
+	          for text in texts]
+	print(texts[0:10])
+
+	# <codecell>
+
+	dictionary = gs.corpora.Dictionary(texts)
+	print(dictionary)
+	git_corpus = [dictionary.doc2bow(text) for text in texts]
+	gs.corpora.BleiCorpus.serialize('data/github_desc.lda_c', git_corpus)
+
+	# <codecell>
+
+	lda_model = gs.models.ldamodel.LdaModel(corpus=git_corpus, id2word=dictionary, num_topics=10,update_every=0, passes=50)
+
+	# <codecell>
+
+	[[i, lda_model.print_topic(i)] for i in range(10)]
+
+
+```
+
 What do the topic models find?
 
 ```{r topics, echo=TRUE, cache=TRUE, message=FALSE, warning=FALSE, comment=NA, size='smallsize', results='asis' } 
