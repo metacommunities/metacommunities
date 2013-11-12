@@ -83,12 +83,16 @@ org_fork_df = pd.DataFrame.from_csv('data/org_forks.csv')
 g = gt.Graph()
 verts = g.add_vertex(n= len(org_fork_df.organisation.unique()) + len(org_fork_df.parent_repo.unique()))
 v_org = g.new_vertex_property('string')
+v_parent = g.new_vertex_property('boolean')
 #the complete list of nodes includes organisations and parent repos for the moment
 nodes = pd.concat([org_fork_df.organisation,  org_fork_df.parent_repo]).unique().tolist()
 #add nodes as vertices
 for v,o in zip(verts, nodes):
     v_org[v] = o
-g.vertex_properties['org_repo'] = v_org
+    if o in org_fork_df.parent_repo:
+        v_parent[v] = True
+g.vertex_properties['org_repo_name'] = v_org
+g.vertex_properties['is_parent'] = v_parent
 
 # <codecell>
 
@@ -120,4 +124,9 @@ IPython.display.Image('figures/organisation_parent.png')
 # <codecell>
 
 org_fork_df.parent_repo.value_counts().head(50)
+
+# <codecell>
+
+# to try and get a better look at the parent repos
+pos, sel = gt.graph_draw(g, vertex_fill_color=g.vertex_properties('is_parent'))
 
