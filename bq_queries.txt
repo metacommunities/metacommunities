@@ -660,11 +660,57 @@ WHERE type = 'PushEvent'
 GROUP EACH BY repository_organization
 ORDER BY Repos DESC
 
-		
-/* to find who forked organisation's repos		
 
-SELECT repository_organization, repository_url AS parent, url AS fork, created_at AS creation_date
+/* 1% sample of timeline pushevents - to look at organisation prevalence over time */
+SELECT repository_organization, type, created_at 
+FROM [githubarchive:github.timeline]
+WHERE (HASH(created_at)%100 == 0) AND type = 'PushEvent'
+
+
+/* Want a table which shows all forkevents BY repos which have an organisation 
+For a forkevent: repository_url is the repo WHICH WAS FORKED, url is the NEWLY CREATED REPO, repository_organization relates to the base repo
+*/
+/*Events where a fork is created FROM a repository owned by an organisation */
+SELECT repository_organization, repository_url AS parent, url AS fork
 FROM [githubarchive:github.timeline]
 WHERE type = 'ForkEvent' AND repository_organization IS NOT NULL
+
+/* Table of organizations and their repos */
+SELECT repository_organization, repository_url, count(repository_organization) AS Events, sum(if(type = 'PushEvent', 1, 0)) AS Pushes
+FROM [githubarchive:github.timeline]
+WHERE repository_organization IS NOT NULL
+GROUP EACH BY repository_organization, repository_url
 ORDER BY repository_organization ASC
+
+
+/* Joins on above to produce a list of forks MADE BY ORGANISATIONS
+SELECT parenttable.fork AS fork_url,
+parenttable.ParentUrl AS parent_url,
+parenttable.created_at AS creation_date,
+forktable.repository_organization AS fork_organization
+FROM
+	(SELECT url AS fork,
+	repository_url AS ParentUrl,
+	created_at
+	FROM [githubarchive:github.timeline]
+	WHERE type = 'ForkEvent')
+AS parenttable
+INNER JOIN EACH 
+	(SELECT repository_url AS ForkURL,
+	repository_organization
+	FROM [github_explore.orgs_and_their_repos])
+AS forktable
+ON parenttable.fork = forktable.ForkURL
+ORDER BY parent_url ASC
+
+
+
+/* Want a better table which has repo relationships and the number of forks/PRs which they are composed of */
+SELECT repository_name, max(repository_description), count(repository_name) AS events,
+sum(if(type = "PushEvent", 1, 0)) AS Pushes, sum(if(type = "ForkEvent", 1, 0)) AS forks, 
+sum(if(type = "PullRequestEvent", 1, 0)) AS pullrequests
+FROM [githubarchive:github.timeline]
+WHERE repository_organization  = 'guardian' 
+GROUP EACH BY repository_name
+ORDER BY pushes DESC
 
