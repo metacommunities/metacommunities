@@ -92,8 +92,7 @@ def construct_githubarchive_url(year=2012,  month=1, day=1,  hour = 12 ):
     else:
         day = str(day)
 
-    date_url = base_url + str(year) + '-' 
-        + month + '-' + day + '-' + str(hour) + suffix
+    date_url = base_url + str(year) + '-' + month + '-' + day + '-' + str(hour) + suffix
     return date_url
 
 def fetch_archive(url):

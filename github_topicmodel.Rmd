@@ -71,8 +71,20 @@ This does help a  lot. A sample of the remaining terms looks more sensible:
 ```{r topicmodels_python, echo=TRUE, cache=TRUE, message=FALSE, warning=FALSE, comment=NA, size='smallsize', results='asis', engine='python'}
 
 	import MySQLdb
+	#text file with MySQL user on 1st line and password on the 2nd needed!
+	mysql_details = open('mysql_user_login.txt', 'r')
+	credentials = mysql_details.readlines()
+	user = credentials[0].strip()
+	password = credentials[1].strip()
 
-	
+	# mysql database name where the table lives -- could put this into mysql_details.txt?
+	gh_db = 'github_analysis'
+	#the table that Richard made from BQ
+	query = 'select * from readmes'
+
+
+	repos_df = pd.io.sql.read_sql(query, db_conn)
+
 
 	repo_df.repository_description = repo_df.repository_description.fillna(' ')
 	stoplist = set('for is or that a of the and to in with this that'.split())

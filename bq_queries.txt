@@ -661,4 +661,10 @@ GROUP EACH BY repository_organization
 ORDER BY Repos DESC
 
 		
-		
+/* to find who forked organisation's repos		
+
+SELECT repository_organization, repository_url AS parent, url AS fork, created_at AS creation_date
+FROM [githubarchive:github.timeline]
+WHERE type = 'ForkEvent' AND repository_organization IS NOT NULL
+ORDER BY repository_organization ASC
+
