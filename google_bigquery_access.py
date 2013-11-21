@@ -15,7 +15,6 @@ NB: got code ideas from:
 
 import httplib2
 import pprint
-import time
 import pandas as pn
 from apiclient.discovery import build
 from apiclient.errors import HttpError
@@ -26,6 +25,7 @@ from oauth2client.tools import run
 
 PROJECT_NUMBER = '237471208995'
 PROJECT_ID = 'metacommunities'
+DATASET_ID = 'github_explore'
 
 #not actually using these, but keeping them in case
 #api_key_file = file('google_api_key.txt')
@@ -155,3 +155,46 @@ def convert_results_to_dataframe(query_response):
         frames.append([field['v'] for field in arow])
     results_df = pn.DataFrame(data=frames, columns = column_names)
     return results_df
+
+
+def export_table(table_name):
+
+    """  We make lots of tables in bigquery. This
+    function returns them as pandas DataFrame
+
+    Parameters
+    ------------------------------------------
+    table_name: the name of a table in our project
+    """
+
+    datasetId = 'github_explore'
+
+    url = "https://www.googleapis.com/bigquery/v2/projects/" + projectId + "/jobs"
+
+    jobCollection = service.jobs()
+    jobData = {
+      'projectId': PROJECT_ID,
+      'configuration': {
+        'extract': {
+          'sourceTable': {
+             'projectId': PROJECT_ID,
+             'datasetId': datasetId,
+             'tableId': table_name
+           },
+          'destinationUri': 'gs://<bucket>/<file>',
+         }
+       }
+     }
+    insertJob = jobCollection.insert(projectId=projectId, body=jobData).execute()
+    import time
+    while True:
+        status =jobCollection.get(projectId=projectId, jobId=insertJob['jobReference']['jobId']).execute()
+        print status
+        if 'DONE' == status['status']['state']:
+            print "Done exporting!"
+            return
+        print 'Waiting for export to complete..'
+        time.sleep(10)
+
+
+
