@@ -669,10 +669,16 @@ WHERE (HASH(created_at)%100 == 0) AND type = 'PushEvent'
 /* Want a table which shows all forkevents BY repos which have an organisation 
 For a forkevent: repository_url is the repo WHICH WAS FORKED, url is the NEWLY CREATED REPO, repository_organization relates to the base repo
 */
-/*Events where a fork is created FROM a repository owned by an organisation */
-SELECT repository_organization, repository_url AS parent, url AS fork
+/*Events where a fork is created FROM a repository owned by an organisation 
+forks_made_from_orgs*/
+SELECT repository_organization AS parent_organization, 
+min(repository_url) AS parent_url, 
+url AS fork_url, 
+min(created_at) AS creation_date
 FROM [githubarchive:github.timeline]
 WHERE type = 'ForkEvent' AND repository_organization IS NOT NULL
+GROUP BY parent_organization, fork_url
+ORDER BY parent_organization ASC
 
 /* Table of organizations and their repos */
 SELECT repository_organization, repository_url, count(repository_organization) AS Events, sum(if(type = 'PushEvent', 1, 0)) AS Pushes
@@ -689,10 +695,11 @@ parenttable.created_at AS creation_date,
 forktable.repository_organization AS fork_organization
 FROM
 	(SELECT url AS fork,
-	repository_url AS ParentUrl,
-	created_at
+	min(repository_url) AS ParentUrl,
+	min(created_at) AS created_at
 	FROM [githubarchive:github.timeline]
-	WHERE type = 'ForkEvent')
+	WHERE type = 'ForkEvent'
+	GROUP EACH BY fork)
 AS parenttable
 INNER JOIN EACH 
 	(SELECT repository_url AS ForkURL,
@@ -712,3 +719,242 @@ FROM [githubarchive:github.timeline]
 WHERE repository_organization  = 'guardian' 
 GROUP EACH BY repository_name
 ORDER BY pushes DESC
+
+
+/* How many repos have a repository_homepage */
+SELECT repository_url, count(repository_url) AS pushes, max(repository_homepage) AS website
+FROM [githubarchive:github.timeline] 
+WHERE repository_homepage IS NOT NULL AND repository_homepage != '' AND type = 'PushEvent'
+GROUP EACH BY repository_url
+ORDER BY Pushes Desc
+
+/* Add variables to the forks_made_by_orgs (and opposite) table: number of pull requests each way, number accepted, etc.
+First table has rows only where the "fork_made_by_org" made a pull request as the head repo 
+forks_made_by_orgs_with_pullrequests_forkashead
+*/
+SELECT forktable.fork_organization AS fork_organization,
+forktable.fork_url AS fork_url,
+forktable.parent_url AS parent_url,
+forktable.creation_date AS fork_creation,
+PR.headurl AS HeadURL,
+PR.baseurl AS BaseURL,
+PR.DistinctPRUsers AS DistinctPRUsers,
+PR.Events,
+PR.OpenEvents,
+PR.CloseEvents,
+PR.DistinctPullRequests,
+PR.Merged,
+PR.SelfMerges,
+PR.first_pr,
+PR.last_pr
+FROM
+	(SELECT payload_pull_request_head_repo_html_url AS headurl,
+	payload_pull_request_base_repo_html_url AS baseurl,
+	count(distinct(payload_pull_request_user_login)) AS DistinctPRUsers, 
+	count(payload_pull_request_head_repo_url) AS Events,
+	sum(IF(payload_action = 'opened', 1, 0)) AS OpenEvents,
+	sum(IF(payload_action = 'closed', 1, 0)) AS CloseEvents,
+	count(DISTINCT(payload_pull_request_id)) AS DistinctPullRequests,
+	sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS Merged,
+	sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0 )) AS SelfMerges,
+	max(created_at) AS last_PR,
+	min(created_at) AS first_PR,
+	FROM [github_explore.timeline]
+	WHERE type = 'PullRequestEvent' AND payload_pull_request_head_repo_html_url != payload_pull_request_base_repo_html_url
+	GROUP EACH BY headurl, baseurl)
+AS PR
+INNER JOIN EACH 
+	(SELECT fork_organization,
+	fork_url,
+	parent_url,
+	creation_date
+	FROM [github_explore.forks_made_by_orgs])
+AS forktable
+ON PR.headurl = forktable.fork_url
+ORDER BY parent_url ASC
+
+/* This one is the reverse, looking for pull requests with the org-forks as BASE 
+forks_made_by_orgs_with_pullrequests_forkasbase
+*/
+SELECT forktable.fork_organization AS fork_organization,
+forktable.fork_url AS fork_url,
+forktable.parent_url AS parent_url,
+forktable.creation_date AS fork_creation,
+PR.headurl AS HeadURL,
+PR.baseurl AS BaseURL,
+PR.DistinctPRUsers AS DistinctPRUsers,
+PR.Events,
+PR.OpenEvents,
+PR.CloseEvents,
+PR.DistinctPullRequests,
+PR.Merged,
+PR.SelfMerges,
+PR.first_pr,
+PR.last_pr
+FROM
+	(SELECT payload_pull_request_head_repo_html_url AS headurl,
+	payload_pull_request_base_repo_html_url AS baseurl,
+	count(distinct(payload_pull_request_user_login)) AS DistinctPRUsers, 
+	count(payload_pull_request_head_repo_url) AS Events,
+	sum(IF(payload_action = 'opened', 1, 0)) AS OpenEvents,
+	sum(IF(payload_action = 'closed', 1, 0)) AS CloseEvents,
+	count(DISTINCT(payload_pull_request_id)) AS DistinctPullRequests,
+	sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS Merged,
+	sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0 )) AS SelfMerges,
+	max(created_at) AS last_PR,
+	min(created_at) AS first_PR,
+	FROM [github_explore.timeline]
+	WHERE type = 'PullRequestEvent' AND payload_pull_request_head_repo_html_url != payload_pull_request_base_repo_html_url
+	GROUP EACH BY headurl, baseurl)
+AS PR
+INNER JOIN EACH 
+	(SELECT fork_organization,
+	fork_url,
+	parent_url,
+	creation_date
+	FROM [github_explore.forks_made_by_orgs])
+AS forktable
+ON PR.baseurl = forktable.fork_url
+ORDER BY parent_url ASC
+
+
+/* When others fork an organisation's repo do they tend to pull request back?
+Table has rows only where the "fork_made_from_org" made a pull request as the head repo 
+forks_made_from_orgs_with_pullrequests_forkashead
+To analyse this a key filter is whether BaseURL == parent_url
+*/
+SELECT forktable.parent_organization AS parent_organization,
+forktable.fork_url AS fork_url,
+forktable.parent_url AS parent_url,
+forktable.creation_date AS fork_creation,
+PR.headurl AS HeadURL,
+PR.baseurl AS BaseURL,
+PR.DistinctPRUsers AS DistinctPRUsers,
+PR.Events,
+PR.OpenEvents,
+PR.CloseEvents,
+PR.DistinctPullRequests,
+PR.Merged,
+PR.SelfMerges,
+PR.first_pr,
+PR.last_pr
+FROM
+	(SELECT payload_pull_request_head_repo_html_url AS headurl,
+	payload_pull_request_base_repo_html_url AS baseurl,
+	count(distinct(payload_pull_request_user_login)) AS DistinctPRUsers, 
+	count(payload_pull_request_head_repo_url) AS Events,
+	sum(IF(payload_action = 'opened', 1, 0)) AS OpenEvents,
+	sum(IF(payload_action = 'closed', 1, 0)) AS CloseEvents,
+	count(DISTINCT(payload_pull_request_id)) AS DistinctPullRequests,
+	sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS Merged,
+	sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0 )) AS SelfMerges,
+	max(created_at) AS last_PR,
+	min(created_at) AS first_PR,
+	FROM [github_explore.timeline]
+	WHERE type = 'PullRequestEvent' AND payload_pull_request_head_repo_html_url != payload_pull_request_base_repo_html_url
+	GROUP EACH BY headurl, baseurl)
+AS PR
+INNER JOIN EACH 
+	(SELECT parent_organization,
+	fork_url,
+	parent_url,
+	creation_date
+	FROM [github_explore.forks_made_from_orgs])
+AS forktable
+ON PR.headurl = forktable.fork_url
+ORDER BY parent_url ASC
+
+/* When others fork an organisation's repo does that organisation ever pull request to the fork?
+Table has rows only where the "fork_made_from_org" received a pull request as the base repo 
+forks_made_from_orgs_with_pullrequests_forkasbase
+To analyse this a key filter is whether BaseURL == parent_url
+*/
+SELECT forktable.parent_organization AS parent_organization,
+forktable.fork_url AS fork_url,
+forktable.parent_url AS parent_url,
+forktable.creation_date AS fork_creation,
+PR.headurl AS HeadURL,
+PR.baseurl AS BaseURL,
+PR.DistinctPRUsers AS DistinctPRUsers,
+PR.Events,
+PR.OpenEvents,
+PR.CloseEvents,
+PR.DistinctPullRequests,
+PR.Merged,
+PR.SelfMerges,
+PR.first_pr,
+PR.last_pr
+FROM
+	(SELECT payload_pull_request_head_repo_html_url AS headurl,
+	payload_pull_request_base_repo_html_url AS baseurl,
+	count(distinct(payload_pull_request_user_login)) AS DistinctPRUsers, 
+	count(payload_pull_request_head_repo_url) AS Events,
+	sum(IF(payload_action = 'opened', 1, 0)) AS OpenEvents,
+	sum(IF(payload_action = 'closed', 1, 0)) AS CloseEvents,
+	count(DISTINCT(payload_pull_request_id)) AS DistinctPullRequests,
+	sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS Merged,
+	sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0 )) AS SelfMerges,
+	max(created_at) AS last_PR,
+	min(created_at) AS first_PR,
+	FROM [github_explore.timeline]
+	WHERE type = 'PullRequestEvent' AND payload_pull_request_head_repo_html_url != payload_pull_request_base_repo_html_url
+	GROUP EACH BY headurl, baseurl)
+AS PR
+INNER JOIN EACH 
+	(SELECT parent_organization,
+	fork_url,
+	parent_url,
+	creation_date
+	FROM [github_explore.forks_made_from_orgs])
+AS forktable
+ON PR.baseurl = forktable.fork_url
+ORDER BY parent_url ASC
+
+/* want to tack number of pushevents onto the forks in the above tables - to filter out no-activity repos*/
+SELECT PR.parent_organization AS parent_organization,
+PR.fork_url AS fork_url,
+PR.parent_url AS parent_url,
+PR.fork_creation AS fork_creation,
+PR.HeadURL AS HeadURL,
+PR.BaseURL AS BaseURL,
+PR.DistinctPRUsers AS DistinctPRUsers,
+PR.PR_Events AS PR_Events,
+PR.PR_OpenEvents,
+PR.PR_CloseEvents,
+PR.PR_DistinctPullRequests,
+PR.PR_Merged,
+PR.PR_SelfMerges,
+PR.PR_first_pr,
+PR.PR_last_pr,
+push
+FROM
+	(SELECT parent_organization,
+	fork_url,
+	parent_url,
+	fork_creation,
+	HeadURL,
+	BaseURL,
+	DistinctPRUsers,
+	PR_Events,
+	PR_OpenEvents,
+	PR_CloseEvents,
+	PR_DistinctPullRequests,
+	PR_Merged,
+	PR_SelfMerges,
+	PR_first_pr,
+	PR_last_pr
+	FROM [metacommunities:github_explore.forks_made_from_orgs_with_pullrequests_forkashead]
+	)
+AS PR
+INNER JOIN EACH 
+	(SELECT repository_url,
+	count(repository_url) AS PushEvents,
+	count(distinct(actor)) AS Pushers
+	FROM [github_explore.timeline]
+	WHERE type = 'PushEvent'
+	GROUP EACH BY repository_url)
+AS pushtable
+ON PR.HeadURL = pushtable.repository_url
+
+
+
