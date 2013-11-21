@@ -21,6 +21,7 @@ import re
 import IPython.display
 import pickle
 import github_api_data as gad
+import seaborn
 
 # <markdowncell>
 
@@ -183,7 +184,10 @@ org_fork_df.organisation.value_counts()
 
 # <codecell>
 
-org_fork_df.organisation.value_counts().hist(bins=200)
+
+plt.figure(figsize=(10,4))
+res=plt.hist(org_fork_df.organisation.value_counts(), bins=400)
+plt.title('How often organisations fork other repos')
 
 # <markdowncell>
 
