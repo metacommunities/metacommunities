@@ -12,12 +12,19 @@
 
 # <codecell>
 
+import matplotlib.pyplot as plt
 import google_bigquery_access as gba
 import pandas as pd
 import graph_tool.all as gt
 import numpy as np
 import re
 import IPython.display
+import pickle
+import github_api_data as gad
+
+# <markdowncell>
+
+# ## Setup code to get data from our bigquery tables
 
 # <codecell>
 
@@ -77,6 +84,10 @@ org_fork_df.head()
 #org_fork_df.to_csv('data/org_forks.csv')
 org_fork_df = pd.DataFrame.from_csv('data/org_forks.csv')
 
+# <markdowncell>
+
+# ## The graph of organisations who fork repos
+
 # <codecell>
 
 ## graph
@@ -103,7 +114,8 @@ for s,t in zip(org_fork_df.organisation, org_fork_df.parent_repo):
 # <codecell>
 
 #this takes ages!
-pos, sel = gt.graph_draw(g)
+pos = gt.sfdp_layout(g)
+gt.graph_draw(g, pos = pos)
 #to save
 gt.graph_draw(g, pos=pos, output='figures/organisation_parent.png')
 
@@ -114,6 +126,12 @@ IPython.display.Image('figures/organisation_parent.png')
 # <markdowncell>
 
 # This kind of supernova suggests there are some highly reactive/attractive repositories that attract organisations in github. What are they?
+
+# <markdowncell>
+
+# ## The repos that are forked and who forks them
+# 
+# ### Repos that are forked
 # 
 # CyanogenMod is very big here (Android open source). Has it appeared before on our lists? Interesting also see  AOKP - Android Open Kang Project. Is Android software actually really important in github?
 # 
@@ -128,5 +146,78 @@ org_fork_df.parent_repo.value_counts().head(50)
 # <codecell>
 
 # to try and get a better look at the parent repos
-pos, sel = gt.graph_draw(g, vertex_fill_color=g.vertex_properties('is_parent'))
+pos, sel = gt.graph_draw(g, vertex_shape=v_parent)
+
+# <codecell>
+
+# community structure is Mark Newman's
+community = gt.community_structure(g, 1000, 5)
+gt.graph_draw(g, pos=pos, vertex_fill_color=community,  output='figures/organisation_parent_community.png')
+
+# <codecell>
+
+IPython.display.Image('figures/organisation_parent_community.png')
+
+# <markdowncell>
+
+# ## The organisations are forking
+# 
+# The problem of formal vs informal organisations -- what is a proper organization? Presumably it needs more than one member ...
+# Which organisations are doing the most forking?
+
+# <codecell>
+
+org_fork_df.organisation.value_counts()
+
+# <codecell>
+
+org_fork_df.organisation.value_counts().hist(bins=100)
+
+# <markdowncell>
+
+# The histogram shows that most organisations only fork one or two repositories, but some fork many more. It's possible that the many-fork organisations are not very substantial organisations, but just github-organisations. Compare the organization 'mozilla' with 'ChameleonOS'
+
+# <codecell>
+
+mozilla_members = gad.get_organisation_members('mozilla')
+
+# <codecell>
+
+print('Mozilla organisation has %d members' % mozilla_members.shape[0])
+mozilla_members[['id', 'login']].head(30)
+
+# <codecell>
+
+chameleon_members = gad.get_organisation_members('ChameleonOS')
+
+# <codecell>
+
+print('ChameleonOS organisation has %d members' % chameleon_members.shape[0])
+chameleon_members[['id', 'login']].head()
+
+# <markdowncell>
+
+# To check whether these heavy-forking organisations are substantial organisations, we need the membership numbers for them
+
+# <codecell>
+
+top_forking_orgs = org_fork_df.organisation.value_counts()
+top_fork_names  = top_forking_orgs.index[0:50]
+org_member_df = pd.DataFrame()
+for o in top_fork_names:
+    
+    o_memb = gad.get_organisation_members(o)
+    o_memb['organisation'] = o
+    print ('%s:\t\t%d'%(o, o_memb.shape[0]))
+    if o_memb.shape[0] >0:
+        org_member_df = org_member_df.append(o_memb)
+
+
+# <markdowncell>
+
+# The higher numbers are good indicators. The organisation called 'collective' is a good example, as is 'CyanogenMod.'  I'd call them 'organisations.' Then the question is why they are forking so much. 
+# 
+# Others are doing something very different. There are loads of Android related organisation who fork a lot. Is this something specific to Android software or modding? A mushrooming of high-forking organisations?
+# 
+# Some of these results are strange. The last one -- WindowsAzure-Preview is a Microsoft organisation and repos. Microsoft is an organisation it seems, but it has no members. 
 

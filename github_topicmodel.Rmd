@@ -79,6 +79,7 @@ This does help a  lot. A sample of the remaining terms looks more sensible:
 
 	# mysql database name where the table lives -- could put this into mysql_details.txt?
 	gh_db = 'github_analysis'
+	db_conn = MySQLdb.connect(db =gh_db, user=user, passwd=password)
 	#the table that Richard made from BQ
 	query = 'select * from readmes'
 

@@ -2,13 +2,20 @@
 	"folders":
 	[
 		{
+			"follow_symlinks": true,
 			"path": "/home/mackenza/R/github"
 		},
 		{
+			"follow_symlinks": true,
 			"path": "/home/mackenza/R/stackoverflow"
 		},
 		{
+			"follow_symlinks": true,
 			"path": "/home/mackenza/R/metacommunities"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/mackenza/Documents/google_analytics_spet2012/publications"
 		}
 	]
 }
