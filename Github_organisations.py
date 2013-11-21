@@ -25,6 +25,8 @@ import github_api_data as gad
 # <markdowncell>
 
 # ## Setup code to get data from our bigquery tables
+# 
+# Only run this section code if there is no local copy of the organisation data. See next section to load the local copy of the data.
 
 # <codecell>
 
@@ -81,7 +83,15 @@ org_fork_df.head()
 # <codecell>
 
 #save/load local copy
-#org_fork_df.to_csv('data/org_forks.csv')
+org_fork_df.to_csv('data/org_forks.csv')
+
+# <markdowncell>
+
+# ## Load local copy of the data if available
+
+# <codecell>
+
+#load local copy
 org_fork_df = pd.DataFrame.from_csv('data/org_forks.csv')
 
 # <markdowncell>
@@ -141,6 +151,8 @@ IPython.display.Image('figures/organisation_parent.png')
 
 # <codecell>
 
+print('\tThe repos that organisations are forking')
+print('______________________________________________________')
 org_fork_df.parent_repo.value_counts().head(50)
 
 # <codecell>
@@ -171,7 +183,7 @@ org_fork_df.organisation.value_counts()
 
 # <codecell>
 
-org_fork_df.organisation.value_counts().hist(bins=100)
+org_fork_df.organisation.value_counts().hist(bins=200)
 
 # <markdowncell>
 
@@ -220,4 +232,8 @@ for o in top_fork_names:
 # Others are doing something very different. There are loads of Android related organisation who fork a lot. Is this something specific to Android software or modding? A mushrooming of high-forking organisations?
 # 
 # Some of these results are strange. The last one -- WindowsAzure-Preview is a Microsoft organisation and repos. Microsoft is an organisation it seems, but it has no members. 
+
+# <codecell>
+
+org_member_df.head()
 
