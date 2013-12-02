@@ -654,7 +654,7 @@ ORDER BY PushEvents DESC
 
 
 /* Organisations */
-SELECT repository_organization, count(distinct(repository_name)) AS Repos, count(repository_organization) AS PushEvents
+SELECT repository_organization, count(distinct(repository_name)) AS Repos, count(repository_organization) AS PushEvents, count(distinct(actor)) AS Pushers
 FROM [githubarchive:github.timeline]
 WHERE type = 'PushEvent'
 GROUP EACH BY repository_organization
@@ -681,8 +681,17 @@ WHERE type = 'ForkEvent' AND repository_organization IS NOT NULL
 GROUP BY parent_organization, fork_url
 ORDER BY parent_organization ASC
 
-/* Table of organizations and their repos */
-SELECT repository_organization, repository_url, count(repository_organization) AS Events, sum(if(type = 'PushEvent', 1, 0)) AS Pushes
+/* Table of organizations and their repos 
+orgs_and_their_repos
+*/
+
+SELECT repository_organization, 
+	repository_url, 
+	max(SUBSTR(repository_url, 19, 500)) AS repo,
+	count(repository_organization) AS Events, 
+	sum(if(type = 'PushEvent', 1, 0)) AS Pushes,
+	max(repository_homepage) AS repository_homepage,
+	max(domain(repository_homepage)) AS repository_homepage_domain
 FROM [githubarchive:github.timeline]
 WHERE repository_organization IS NOT NULL
 GROUP EACH BY repository_organization, repository_url
@@ -1004,3 +1013,449 @@ LEFT JOIN EACH
 	GROUP EACH BY repository_url)
 AS pushtable
 ON tab.fork_url = pushtable.repository_url
+
+
+/*Table which groups pushevents by user/repo/organisation */
+SELECT actor, repository_url, repository_organization, count(actor) as Pushes, min(created_at) AS FirstPush, max(created_at) AS LastPush
+FROM [github_explore.timeline]
+WHERE repository_organization IS NOT NULL AND type = 'PushEvent'
+GROUP EACH BY repository_organization, repository_url, actor
+ORDER BY repository_organization
+
+
+/* Summary of actors involvement (number of orgs, repos)  */
+SELECT actor, count(distinct(repository_organization)) AS number_of_orgs, count(distinct(repository_url)) AS number_of_repos
+FROM [metacommunities:github_explore.organizations_repos_pushers]
+GROUP EACH BY actor
+ORDER BY number_of_orgs DESC
+
+
+/* Organisations mega-table
+Base table*/
+SELECT repository_organization, 
+count(distinct(repository_name)) AS Repos, 
+count(repository_organization) AS PushEvents, 
+count(distinct(actor)) AS Pushers,
+min(created_at) AS FirstPush,
+max(created_at) AS LastPush,
+count(distinct(repository_homepage)) AS repository_homepages,
+count(distinct(repository_owner)) AS repository_owners,
+count(distinct(repository_language)) AS repository_languages
+FROM [githubarchive:github.timeline]
+WHERE type = 'PushEvent'
+GROUP EACH BY repository_organization
+ORDER BY Repos DESC
+
+
+/* Add WatchEvents */
+SELECT old.repository_organization AS repository_organization,
+old.Repos AS Repos,
+old.PushEvents AS PushEvents,
+old.Pushers AS Pushers,
+old.FirstPush AS FirstPush,
+old.LastPush AS LastPush,
+old.repository_homepages AS repository_homepages,
+old.repository_owners AS repository_owners,
+old.repository_languages AS repository_languages,
+new.WatchEvents AS WatchEvents
+FROM
+	(SELECT repository_organization,
+	Repos,
+	PushEvents,
+	Pushers,
+	FirstPush,
+	LastPush,
+	repository_homepages,
+	repository_owners,
+	repository_languages
+	FROM [github_explore.organizations_1])
+AS old
+LEFT JOIN EACH 
+	(SELECT repository_organization, 
+	count(repository_organization) AS WatchEvents 
+	FROM [github_explore.timeline]
+	WHERE type = 'WatchEvent' 
+	GROUP EACH BY repository_organization)
+AS new
+ON new.repository_organization = old.repository_organization
+ORDER BY Repos DESC
+
+/* Add ForkEvents */
+SELECT old.repository_organization AS repository_organization,
+old.Repos AS Repos,
+old.PushEvents AS PushEvents,
+old.Pushers AS Pushers,
+old.FirstPush AS FirstPush,
+old.LastPush AS LastPush,
+old.repository_homepages AS repository_homepages,
+old.repository_owners AS repository_owners,
+old.repository_languages AS repository_languages,
+old.WatchEvents AS WatchEvents,
+new.ForkEvents AS ForkEvents
+FROM
+	(SELECT repository_organization,
+	Repos,
+	PushEvents,
+	Pushers,
+	FirstPush,
+	LastPush,
+	repository_homepages,
+	repository_owners,
+	repository_languages,
+	WatchEvents
+	FROM [github_explore.organizations_2])
+AS old
+LEFT JOIN EACH 
+	(SELECT repository_organization, 
+	count(repository_organization) AS ForkEvents
+	FROM [github_explore.timeline]
+	WHERE type = 'ForkEvent' 
+	GROUP EACH BY repository_organization)
+AS new
+ON new.repository_organization = old.repository_organization
+ORDER BY Repos DESC
+
+
+/* Add IssuesEvents */
+SELECT old.repository_organization AS repository_organization,
+old.Repos AS Repos,
+old.PushEvents AS PushEvents,
+old.Pushers AS Pushers,
+old.FirstPush AS FirstPush,
+old.LastPush AS LastPush,
+old.repository_homepages AS repository_homepages,
+old.repository_owners AS repository_owners,
+old.repository_languages AS repository_languages,
+old.WatchEvents AS WatchEvents,
+old.ForkEvents AS ForkEvents,
+new.IssuesEvents AS IssuesEvents
+FROM
+	(SELECT repository_organization,
+	Repos,
+	PushEvents,
+	Pushers,
+	FirstPush,
+	LastPush,
+	repository_homepages,
+	repository_owners,
+	repository_languages,
+	WatchEvents,
+	ForkEvents
+	FROM [github_explore.organizations_3])
+AS old
+LEFT JOIN EACH 
+	(SELECT repository_organization, 
+	count(repository_organization) AS IssuesEvents
+	FROM [github_explore.timeline]
+	WHERE type = 'IssuesEvent' 
+	GROUP EACH BY repository_organization)
+AS new
+ON new.repository_organization = old.repository_organization
+ORDER BY Repos DESC
+
+/* Add DownloadEvents */
+SELECT old.repository_organization AS repository_organization,
+old.Repos AS Repos,
+old.PushEvents AS PushEvents,
+old.Pushers AS Pushers,
+old.FirstPush AS FirstPush,
+old.LastPush AS LastPush,
+old.repository_homepages AS repository_homepages,
+old.repository_owners AS repository_owners,
+old.repository_languages AS repository_languages,
+old.WatchEvents AS WatchEvents,
+old.ForkEvents AS ForkEvents,
+old.IssuesEvents AS IssuesEvents,
+new.DownloadEvents AS DownloadEvents
+FROM
+	(SELECT repository_organization,
+	Repos,
+	PushEvents,
+	Pushers,
+	FirstPush,
+	LastPush,
+	repository_homepages,
+	repository_owners,
+	repository_languages,
+	WatchEvents,
+	ForkEvents,
+	IssuesEvents
+	FROM [github_explore.organizations_4])
+AS old
+LEFT JOIN EACH 
+	(SELECT repository_organization, 
+	count(repository_organization) AS DownloadEvents
+	FROM [github_explore.timeline]
+	WHERE type = 'DownloadEvent' 
+	GROUP EACH BY repository_organization)
+AS new
+ON new.repository_organization = old.repository_organization
+ORDER BY Repos DESC
+
+/* Add IssueCommentevents */
+SELECT old.repository_organization AS repository_organization,
+old.Repos AS Repos,
+old.PushEvents AS PushEvents,
+old.Pushers AS Pushers,
+old.FirstPush AS FirstPush,
+old.LastPush AS LastPush,
+old.repository_homepages AS repository_homepages,
+old.repository_owners AS repository_owners,
+old.repository_languages AS repository_languages,
+old.WatchEvents AS WatchEvents,
+old.ForkEvents AS ForkEvents,
+old.IssuesEvents AS IssuesEvents,
+new.IssueCommentEvents AS IssueCommentEvents,
+old.DownloadEvents AS DownloadEvents
+FROM
+	(SELECT repository_organization,
+	Repos,
+	PushEvents,
+	Pushers,
+	FirstPush,
+	LastPush,
+	repository_homepages,
+	repository_owners,
+	repository_languages,
+	WatchEvents,
+	ForkEvents,
+	IssuesEvents,
+	DownloadEvents
+	FROM [github_explore.organizations_5])
+AS old
+LEFT JOIN EACH 
+	(SELECT repository_organization, 
+	count(repository_organization) AS IssueCommentEvents
+	FROM [github_explore.timeline]
+	WHERE type = 'IssueCommentEvent' 
+	GROUP EACH BY repository_organization)
+AS new
+ON new.repository_organization = old.repository_organization
+ORDER BY Repos DESC
+
+/*Add PullRequests */
+SELECT old.repository_organization AS repository_organization,
+old.Repos AS Repos,
+old.PushEvents AS PushEvents,
+old.Pushers AS Pushers,
+old.FirstPush AS FirstPush,
+old.LastPush AS LastPush,
+old.repository_homepages AS repository_homepages,
+old.repository_owners AS repository_owners,
+old.repository_languages AS repository_languages,
+old.WatchEvents AS WatchEvents,
+old.ForkEvents AS ForkEvents,
+old.IssuesEvents AS IssuesEvents,
+old.IssueCommentEvents AS IssueCommentEvents,
+old.DownloadEvents AS DownloadEvents,
+new.PullRequestsClosed AS PullRequestsClosed
+FROM
+	(SELECT repository_organization,
+	Repos,
+	PushEvents,
+	Pushers,
+	FirstPush,
+	LastPush,
+	repository_homepages,
+	repository_owners,
+	repository_languages,
+	WatchEvents,
+	ForkEvents,
+	IssuesEvents,
+	IssueCommentEvents,
+	DownloadEvents
+	FROM [github_explore.organizations_6])
+AS old
+LEFT JOIN EACH 
+	(SELECT repository_organization, 
+	count(repository_organization) AS PullRequestsClosed
+	FROM [github_explore.timeline]
+	WHERE type = 'PullRequestEvent' AND payload_pull_request_state = 'closed'
+	GROUP EACH BY repository_organization)
+AS new
+ON new.repository_organization = old.repository_organization
+ORDER BY Repos DESC
+
+
+/*Add duration */
+SELECT repository_organization,
+	Repos, 
+	PushEvents, 
+	Pushers, 
+	FirstPush, 
+	LastPush, 
+	ceil((PARSE_UTC_USEC(LastPush) - PARSE_UTC_USEC(FirstPush))/86400000000) AS PushDurationDays, 
+	repository_homepages, 
+	repository_owners, 
+	repository_languages, 
+	WatchEvents, 
+	ForkEvents, 
+	IssuesEvents, 
+	IssueCommentEvents, 
+	DownloadEvents, 
+	PullRequestsClosed 
+	FROM [github_explore.organizations_megatable]
+
+/*Add variables related to the organisation's repos being linked to from SO posts 
+organizations_megatable3*/
+SELECT old.repository_organization AS repository_organization,
+old.Repos AS Repos,
+old.PushEvents AS PushEvents,
+old.Pushers AS Pushers,
+old.FirstPush AS FirstPush,
+old.LastPush AS LastPush,
+old.PushDurationDays AS PushDurationDays,
+old.repository_homepages AS repository_homepages,
+old.repository_owners AS repository_owners,
+old.repository_languages AS repository_languages,
+old.WatchEvents AS WatchEvents,
+old.ForkEvents AS ForkEvents,
+old.IssuesEvents AS IssuesEvents,
+old.IssueCommentEvents AS IssueCommentEvents,
+old.DownloadEvents AS DownloadEvents,
+old.PullRequestsClosed AS PullRequestsClosed,
+new.ReposLinkedTo AS repos_linked_to,
+new.posts_linking_to_orgs_repos AS posts_linking_to_orgs_repos,
+new.answers_linking_to_orgs_repos AS answers_linking_to_orgs_repos
+FROM
+	(SELECT repository_organization,
+	Repos,
+	PushEvents,
+	Pushers,
+	FirstPush,
+	LastPush,
+	PushDurationDays,
+	repository_homepages,
+	repository_owners,
+	repository_languages,
+	WatchEvents,
+	ForkEvents,
+	IssuesEvents,
+	IssueCommentEvents,
+	DownloadEvents,
+	PullRequestsClosed
+	FROM [github_explore.organizations_megatable2])
+AS old
+OUTER LEFT JOIN EACH 
+	(SELECT repository_organization, 
+	sum(if(repolink_Posts IS NOT NULL, 1, 0)) AS ReposLinkedTo,
+	sum(repolink_Posts) AS posts_linking_to_orgs_repos,
+	sum(repolink_answers) AS answers_linking_to_orgs_repos
+	FROM [github_explore.orgs_repos_links_from_SO]
+	GROUP EACH BY repository_organization)
+AS new
+ON new.repository_organization = old.repository_organization
+ORDER BY Repos DESC
+	
+	
+/* Add a single repository_homepage_domain for each org
+Problematic because it just picks the longest domain, and some orgs have several */
+SELECT old.repository_organization AS repository_organization,
+old.Repos AS Repos,
+old.PushEvents AS PushEvents,
+old.Pushers AS Pushers,
+old.FirstPush AS FirstPush,
+old.LastPush AS LastPush,
+old.PushDurationDays AS PushDurationDays,
+old.repository_homepages AS repository_homepages,
+new.org_domain AS org_domain,
+old.repository_owners AS repository_owners,
+old.repository_languages AS repository_languages,
+old.WatchEvents AS WatchEvents,
+old.ForkEvents AS ForkEvents,
+old.IssuesEvents AS IssuesEvents,
+old.IssueCommentEvents AS IssueCommentEvents,
+old.DownloadEvents AS DownloadEvents,
+old.PullRequestsClosed AS PullRequestsClosed
+FROM
+	(SELECT repository_organization,
+	Repos,
+	PushEvents,
+	Pushers,
+	FirstPush,
+	LastPush,
+	PushDurationDays,
+	repository_homepages,
+	repository_owners,
+	repository_languages,
+	WatchEvents,
+	ForkEvents,
+	IssuesEvents,
+	IssueCommentEvents,
+	DownloadEvents,
+	PullRequestsClosed
+	FROM [github_explore.organizations_megatable2])
+AS old
+LEFT JOIN EACH 
+	(SELECT repository_organization, 
+	max(domain(repository_homepage)) AS org_domain
+	FROM [github_explore.timeline]
+	GROUP EACH BY repository_organization)
+AS new
+ON new.repository_organization = old.repository_organization
+ORDER BY Repos DESC
+
+
+
+
+/* Add a column which joins on org domain and gets the number of post referencing it on Stackoverflow */
+#this is on hold because "domains" are problematic
+
+
+
+/* Add a column which sums the references to an organisation's repos on Stackoverflow and counts the number of distinct repos which are referenced */
+#joins orgs_and_their_repos and github_repo_links, THEN join on the organisations megatable
+#orgs_repos_links_from_SO
+SELECT old.repository_organization AS repository_organization,
+old.repo AS repo,
+old.Events AS Events,
+old.Pushes AS Pushes,
+new.Pushers AS Pushers,
+old.repository_homepage AS repository_homepage,
+old.repository_homepage_domain AS repository_homepage_domain,
+new.MaxWatchers AS MaxWatchers,
+new.MaxForks AS MaxForks,
+new.repolinkPosts AS repolink_Posts,
+new.repolinkPosters AS repolink_Posters,
+new.repolinkAnswers AS repolink_answers,
+new.repolinkDistinctQuestions AS repolink_DistinctQuestions
+FROM
+	(SELECT repository_organization,
+	repository_url,
+	repo,
+	Events,
+	Pushes,
+	repository_homepage,
+	repository_homepage_domain
+	FROM [github_explore.orgs_and_their_repos])
+AS old
+LEFT JOIN EACH 
+	(SELECT repo,
+	Pushers,
+	MaxWatchers,
+	MaxForks,
+	repolinkPosts,
+	repolinkPosters,
+	repolinkAnswers,
+	repolinkDistinctQuestions
+	FROM [github_explore.repos_linked_to_from_SO])
+AS new
+ON new.repo = old.repo
+ORDER BY repolink_Posts DESC
+
+
+
+
+
+
+
+	
+	
+	
+	
+/*Attempt at a query which only returns "proper" organizations */
+SELECT repository_organization, PARSE_UTC_USEC(LastPush) - PARSE_UTC_USEC(FirstPush) AS duration FROM [github_explore.organizations_megatable] WHERE PARSE_UTC_USEC(LastPush) - PARSE_UTC_USEC(FirstPush) > 24000000
+
+
+
+
