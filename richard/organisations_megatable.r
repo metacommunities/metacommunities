@@ -1,10 +1,7 @@
 library(RMySQL)
-library(ggplot2)
-library(splines)
-#library(reshape)
 
 drv = dbDriver("MySQL")
-con = dbConnect(drv,host="localhost",dbname="git",user="root",pass="moo")
+con = dbConnect(drv,host="localhost",dbname="git",user=USER,pass=PASSWORD)
 
 orgs = dbGetQuery(con, "SELECT * FROM organizations_megatable3;")
 
