@@ -691,6 +691,8 @@ SELECT repository_organization,
 	count(repository_organization) AS Events, 
 	sum(if(type = 'PushEvent', 1, 0)) AS Pushes,
 	max(repository_homepage) AS repository_homepage,
+	max(repository_fork) AS is_fork,
+	max(repository_description) AS repository_description,
 	max(domain(repository_homepage)) AS repository_homepage_domain
 FROM [githubarchive:github.timeline]
 WHERE repository_organization IS NOT NULL
@@ -1350,50 +1352,6 @@ ORDER BY Repos DESC
 	
 /* Add a single repository_homepage_domain for each org
 Problematic because it just picks the longest domain, and some orgs have several */
-SELECT old.repository_organization AS repository_organization,
-old.Repos AS Repos,
-old.PushEvents AS PushEvents,
-old.Pushers AS Pushers,
-old.FirstPush AS FirstPush,
-old.LastPush AS LastPush,
-old.PushDurationDays AS PushDurationDays,
-old.repository_homepages AS repository_homepages,
-new.org_domain AS org_domain,
-old.repository_owners AS repository_owners,
-old.repository_languages AS repository_languages,
-old.WatchEvents AS WatchEvents,
-old.ForkEvents AS ForkEvents,
-old.IssuesEvents AS IssuesEvents,
-old.IssueCommentEvents AS IssueCommentEvents,
-old.DownloadEvents AS DownloadEvents,
-old.PullRequestsClosed AS PullRequestsClosed
-FROM
-	(SELECT repository_organization,
-	Repos,
-	PushEvents,
-	Pushers,
-	FirstPush,
-	LastPush,
-	PushDurationDays,
-	repository_homepages,
-	repository_owners,
-	repository_languages,
-	WatchEvents,
-	ForkEvents,
-	IssuesEvents,
-	IssueCommentEvents,
-	DownloadEvents,
-	PullRequestsClosed
-	FROM [github_explore.organizations_megatable2])
-AS old
-LEFT JOIN EACH 
-	(SELECT repository_organization, 
-	max(domain(repository_homepage)) AS org_domain
-	FROM [github_explore.timeline]
-	GROUP EACH BY repository_organization)
-AS new
-ON new.repository_organization = old.repository_organization
-ORDER BY Repos DESC
 
 
 
@@ -1446,11 +1404,123 @@ ORDER BY repolink_Posts DESC
 
 
 
-
-
-
+/* Add number of repos owned which are forks 
+organizations_megatable4*/
+SELECT old.repository_organization AS repository_organization,
+old.Repos AS Repos,
+new.ReposWhichAreForks AS ReposWhichAreForks,
+old.PushEvents AS PushEvents,
+old.Pushers AS Pushers,
+old.FirstPush AS FirstPush,
+old.LastPush AS LastPush,
+old.PushDurationDays AS PushDurationDays,
+old.repository_homepages AS repository_homepages,
+old.repository_owners AS repository_owners,
+old.repository_languages AS repository_languages,
+old.WatchEvents AS WatchEvents,
+old.ForkEvents AS ForkEvents,
+old.IssuesEvents AS IssuesEvents,
+old.IssueCommentEvents AS IssueCommentEvents,
+old.DownloadEvents AS DownloadEvents,
+old.PullRequestsClosed AS PullRequestsClosed,
+old.repos_linked_to AS repos_linked_to,
+old.posts_linking_to_orgs_repos AS posts_linking_to_orgs_repos,
+old.answers_linking_to_orgs_repos AS answers_linking_to_orgs_repos
+FROM
+	(SELECT repository_organization,
+	Repos,
+	PushEvents,
+	Pushers,
+	FirstPush,
+	LastPush,
+	PushDurationDays,
+	repository_homepages,
+	repository_owners,
+	repository_languages,
+	WatchEvents,
+	ForkEvents,
+	IssuesEvents,
+	IssueCommentEvents,
+	DownloadEvents,
+	PullRequestsClosed,
+	repos_linked_to,
+	posts_linking_to_orgs_repos,
+	answers_linking_to_orgs_repos
+	FROM [github_explore.organizations_megatable3])
+AS old
+OUTER LEFT JOIN EACH 
+	(SELECT repository_organization, 
+	sum(if(is_fork = 'true', 1, 0)) AS ReposWhichAreForks,
+	FROM [github_explore.orgs_and_their_repos]
+	GROUP EACH BY repository_organization)
+AS new
+ON new.repository_organization = old.repository_organization
+ORDER BY Repos DESC
 	
 	
+/* Add Pullrequests merged 
+organizations_megatable5 */	
+SELECT old.repository_organization AS repository_organization,
+old.Repos AS Repos,
+old.ReposWhichAreForks AS ReposWhichAreForks,
+old.PushEvents AS PushEvents,
+old.Pushers AS Pushers,
+old.FirstPush AS FirstPush,
+old.LastPush AS LastPush,
+old.PushDurationDays AS PushDurationDays,
+old.repository_homepages AS repository_homepages,
+old.repository_owners AS repository_owners,
+old.repository_languages AS repository_languages,
+old.WatchEvents AS WatchEvents,
+old.ForkEvents AS ForkEvents,
+old.IssuesEvents AS IssuesEvents,
+old.IssueCommentEvents AS IssueCommentEvents,
+old.DownloadEvents AS DownloadEvents,
+old.PullRequestsClosed AS PullRequestsClosed,
+new.pullrequestsmerged AS PullRequestsMerged,
+old.repos_linked_to AS repos_linked_to,
+old.posts_linking_to_orgs_repos AS posts_linking_to_orgs_repos,
+old.answers_linking_to_orgs_repos AS answers_linking_to_orgs_repos
+FROM
+	(SELECT repository_organization,
+	Repos,
+	ReposWhichAreForks,
+	PushEvents,
+	Pushers,
+	FirstPush,
+	LastPush,
+	PushDurationDays,
+	repository_homepages,
+	repository_owners,
+	repository_languages,
+	WatchEvents,
+	ForkEvents,
+	IssuesEvents,
+	IssueCommentEvents,
+	DownloadEvents,
+	PullRequestsClosed,
+	repos_linked_to,
+	posts_linking_to_orgs_repos,
+	answers_linking_to_orgs_repos
+	FROM [github_explore.organizations_megatable4])
+AS old
+OUTER LEFT JOIN EACH 
+	(SELECT repository_organization, 
+	count(repository_organization) AS PullRequestsMerged
+	FROM [github_explore.timeline]
+	WHERE type = 'PullRequestEvent' AND payload_pull_request_state = 'closed' AND payload_pull_request_merged = 'true'
+	GROUP EACH BY repository_organization)
+AS new
+ON new.repository_organization = old.repository_organization
+ORDER BY Repos DESC
+	
+
+	
+/* Query which generates the orgs sample for manual coding */
+SELECT repository_organization, CONCAT('http://www.github.com/', repository_organization) FROM [github_explore.organizations_megatable4] WHERE (Pushers > 1 OR PushDurationDays > 30 OR WatchEvents > 0 OR ForkEvents > 0 OR PullRequestsClosed > 0 OR repos_linked_to > 0) AND PushDurationDays > 5 AND (HASH(repository_organization)%100 == 0) ORDER BY repository_organization ASC
+
+
+orgs$type4[orgs$Pushers == 1 & orgs$PushDurationDays <= 30 & orgs$repos_linked_to == 0 & orgs$WatchEvents == 0 & orgs$ForkEvents == 0] = 1	
 	
 	
 /*Attempt at a query which only returns "proper" organizations */
