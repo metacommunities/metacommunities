@@ -16,6 +16,10 @@
 		{
 			"follow_symlinks": true,
 			"path": "/home/mackenza/Documents/google_analytics_spet2012/publications"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/mackenza/Documents/funding/esrc_transformative_2014"
 		}
 	]
 }
