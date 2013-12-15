@@ -195,7 +195,7 @@ def get_repository_commits(repository, since = '2008-01-01',
             url = url_next
     return commit_df    
 
-def get_repository_event(user, repo, limit=1000):
+def get_repository_event(user = '', repo = '', url = '', limit=1000):
     
     """Returns a list of events as dictionaries
     from the API using url of the form
@@ -204,12 +204,16 @@ def get_repository_event(user, repo, limit=1000):
     ----------------------------------
     user: name of repo owner
     repo: name of repository
+    url: full api url of repo
     limit: number of events to fetch
     """
 
-    base_url = 'https://api.github.com/repos'
     suffix = 'events'
-    url = '/'.join([base_url, user, repo, suffix])
+    if url is not  None:
+        url = '/'.join([url, suffix])
+    else:
+        base_url = 'https://api.github.com/repos'
+        url = '/'.join([base_url, user, repo, suffix])
     events = []
     try:
         url_next = ''
