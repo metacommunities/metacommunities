@@ -1513,18 +1513,52 @@ OUTER LEFT JOIN EACH
 AS new
 ON new.repository_organization = old.repository_organization
 ORDER BY Repos DESC
-	
 
 	
 /* Query which generates the orgs sample for manual coding */
 SELECT repository_organization, CONCAT('http://www.github.com/', repository_organization) FROM [github_explore.organizations_megatable4] WHERE (Pushers > 1 OR PushDurationDays > 30 OR WatchEvents > 0 OR ForkEvents > 0 OR PullRequestsClosed > 0 OR repos_linked_to > 0) AND PushDurationDays > 5 AND (HASH(repository_organization)%100 == 0) ORDER BY repository_organization ASC
 
 
-orgs$type4[orgs$Pushers == 1 & orgs$PushDurationDays <= 30 & orgs$repos_linked_to == 0 & orgs$WatchEvents == 0 & orgs$ForkEvents == 0] = 1	
-	
-	
-/*Attempt at a query which only returns "proper" organizations */
-SELECT repository_organization, PARSE_UTC_USEC(LastPush) - PARSE_UTC_USEC(FirstPush) AS duration FROM [github_explore.organizations_megatable] WHERE PARSE_UTC_USEC(LastPush) - PARSE_UTC_USEC(FirstPush) > 24000000
+
+/* Query which builds a table of events for the repos which have been featured in STackoverflow posts at least 100 times
+stacked_repos_events
+*/
+SELECT repos.repo AS repo,
+events.type as type,
+events.created_at as created_at
+FROM
+	(SELECT SUBSTR(repository_url, 19, 500) AS repo,
+	created_at,
+	type
+	FROM [github_explore.timeline])
+AS events
+INNER JOIN EACH 
+	(SELECT repo
+	FROM [github_explore.repos_linked_to_from_SO]
+	WHERE repolinkPosts > 100)
+AS repos
+ON repos.repo = events.repo
+ORDER BY created_at DESC
+
+
+/*Similar table which picks out the relevant STackoverflow posts and their timestamps
+stacked_repos_posts */
+SELECT repos.repo AS repo,
+events.CreationDate as created_at,
+events.PostTypeId as PostType
+FROM
+	(SELECT REGEXP_EXTRACT(Body, "://github.com(/[^/\"]*/[^/^\"^\'^#^ ^<^)]*)") as repo,
+	CreationDate,
+	PostTypeId
+	FROM [stack_overflow.Posts])
+AS events
+INNER JOIN EACH 
+	(SELECT repo
+	FROM [github_explore.repos_linked_to_from_SO]
+	WHERE repolinkPosts > 100)
+AS repos
+ON repos.repo = events.repo
+ORDER BY created_at DESC
 
 
 
