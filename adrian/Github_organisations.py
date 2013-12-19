@@ -42,10 +42,6 @@ gh_tables = res.execute()
 
 # <codecell>
 
-tables.list_next(tables, res )
-
-# <codecell>
-
 # these are all the tables we have made using queries, as well as the github timeline itself
 [t['id'] for t in gh_tables['tables']]
 
@@ -415,7 +411,4 @@ scores = cv.cross_val_score(
 # <codecell>
 
 scores
-
-# <codecell>
-
 
