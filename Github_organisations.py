@@ -34,7 +34,12 @@ import seaborn
 # get list of tables in our dataset
 bq = gba.setup_bigquery()
 tables = bq.tables()
-gh_tables = tables.list(projectId=gba.PROJECT_ID,  datasetId='github_explore').execute()
+res = tables.list(projectId=gba.PROJECT_ID,  datasetId='github_explore', maxResults = 200)
+gh_tables = res.execute()
+
+# <codecell>
+
+tables.list_next(tables, res )
 
 # <codecell>
 
@@ -79,7 +84,7 @@ org_fork_df['parent_repo'] = org_fork_df.parent_url.map(lambda x: '_'.join(re.sp
 
 print('There are %s unique organisations and they fork %s unique repositories' 
       % (len(org_fork_df.organisation.unique()), len(org_fork_df.parent_url.unique())))
-org_fork_df.head()
+org_fork_df.head
 
 # <codecell>
 
@@ -184,7 +189,6 @@ org_fork_df.organisation.value_counts()
 
 # <codecell>
 
-
 plt.figure(figsize=(10,4))
 res=plt.hist(org_fork_df.organisation.value_counts(), bins=400)
 plt.title('How often organisations fork other repos')
@@ -240,4 +244,175 @@ for o in top_fork_names:
 # <codecell>
 
 org_member_df.head()
+
+# <markdowncell>
+
+# # Classifying organisations
+# 
+# We classified a random sample of ~ 500 non-junk orgnisations acrroding to the following types:
+# 
+# 0. junk 
+# 1. totally internal to github, almost fictional organisation that individual or group make for some benighted reason (e.g ours -- we have a research project) 
+# 2. internal but substantial organisations that make something that goes out into the world -- e.g. a software project/product. Github is the main place they exist. Some of the repos should be forked by others 
+# 3. external organisation who move into github as a way of revamping/expanding etc what they do. e.g. BBC. Github is not the main place they exist
+# 4. Dead somehow
+
+# <codecell>
+
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning,
+                        module="pandas", lineno=570)
+
+# <codecell>
+
+org = pd.ExcelFile('data/orgs_manual_coding_sample_reconciled.xlsx')
+odf = org.parse(sheetname = 'Sheet1', header=6, skiprows=[0,1,2,3,4,5], index_col=0)
+
+#bit of cleaning to make sure that all that have been reconciled, etc are present
+odf['Richard type'].replace('dead', 4,  inplace=True)
+odf['Richard type'].replace('Dead', 4, inplace=True)
+odf['reconciled'][odf.reconciled.isnull()] = odf['Richard type'][odf.reconciled.isnull()]
+
+# <codecell>
+
+# changing the coding to reflect numbering of types listed above
+odf.reconciled = odf.reconciled + 1
+orgs_labelled = odf.index
+
+# <codecell>
+
+odf.reconciled = odf.reconciled.astype(int)
+
+# <codecell>
+
+h = odf.reconciled.astype(int).hist(figsize=(3,3), bins=5)
+
+# <markdowncell>
+
+# Get the relevant organization table from BigQuery -- this is called 'organization_megatable5' at the moment. This table has all the variables we think might affect organization type. 
+
+# <codecell>
+
+#for organisations and their forks, this is the main table to work
+table_name = 'organizations_megatable5'
+tdata = bq.tabledata()
+
+# <codecell>
+
+td = tdata.list(projectId = gba.PROJECT_ID, datasetId = gba.DATASET_ID, tableId=table_name, maxResults=200000)
+org_full = td.execute()
+
+# <codecell>
+
+r = org_full['rows']
+
+# <codecell>
+
+vals =[i.values() for f in r for i in f['f']]
+# better way to do this in pandas?
+vala =np.array(vals).reshape([len(r), 21])
+cols = [
+"repository_organization",
+"Repos",
+"ReposWhichAreForks",
+"PushEvents",
+"Pushers",
+"FirstPush",
+"LastPush",
+"PushDurationDays",
+"repository_homepages",
+"repository_owners",
+"repository_languages",
+"WatchEvents",
+"ForkEvents",
+"IssuesEvents",
+"IssueCommentEvents",
+"DownloadEvents",
+"PullRequestsClosed",
+"PullRequestsMerged",
+"repos_linked_to",
+"posts_linking_to_orgs_repos",
+"answers_linking_to_orgs_repos"]
+org_full_df = pd.DataFrame(vala, columns = cols).drop_duplicates()
+
+# <codecell>
+
+org_full_df.shape
+
+# <codecell>
+
+plt.figure(figsize=(10,4))
+plt.subplot(1,3,1)
+v = plt.hist(org_full_df.PushDurationDays.astype(float), bins=200)
+plt.subplot(1,3,2)
+x = plt.hist(org_full_df.Repos.astype(int), bins=200)
+plt.subplot(1,3,3)
+y = plt.hist(org_full_df.PushEvents.astype(int), bins=200)
+
+# <codecell>
+
+# get the labelled orgs
+orgs_labelled_df = org_full_df.ix[orgs_labelled]
+
+# <codecell>
+
+cols = orgs_labelled_df.columns
+cols
+
+# <codecell>
+
+# select the colums that will be features in the classifier
+features = list(cols[1:5]+ cols[8:])
+orgs_labelled_features = orgs_labelled_df[features]
+
+# <codecell>
+
+# fill null values with 0; not sure this is the right thing to do? Richard?
+orgs_labelled_features.fillna(0,inplace=True)
+
+# <markdowncell>
+
+# # Trying various classifiers, with cross-validation, etc
+
+# <codecell>
+
+# decision tree worth trying as off-the-shelf classifier, and handles mixed data (categorical, count, etc)
+# might be good to make some of our features more categorical, but CART algorithm will discretise continuous values
+# anyway
+from sklearn import tree
+from sklearn import cross_validation as cv
+
+# <codecell>
+
+X_train, X_test, y_train, y_test = cv.train_test_split(
+...     orgs_labelled_features, odf.reconciled, test_size=0.4, random_state=0)
+
+# <codecell>
+
+X_train.shape, y_train.shape, X_test.shape, y_test.shape
+
+# <codecell>
+
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(X_train, y_train)
+
+# <codecell>
+
+clf.score(X_test, y_test) 
+
+# <markdowncell>
+
+# Great score - mean accuracy less than 50%. Try cross-validation more times just to check that this split was not the problem
+
+# <codecell>
+
+scores = cv.cross_val_score(
+...    clf, orgs_labelled_features, odf.reconciled, cv=5)
+
+# <codecell>
+
+scores
+
+# <codecell>
+
 
