@@ -1569,25 +1569,81 @@ Getting the first X events is not easy with group by... http://www.xaprb.com/blo
 But its possible to do it by time maybe...
 What about an OVER clause? Don't want to aggregate, but could use the DENSE_RANK
 Can i do this in 2 steps... label all org events with an order variable, then select the relevant rows from that table? The first step exceeds resource limit on full timeline, but works on public sample
-Can i trim the timeline down enough to make this manageable?
+Can i trim the timeline down enough to make this manageable? 
 */
-SELECT repository_organization, repository_url, type, created_at
+
+/* This is an attempt to build a smaller table to work with, but the smaller table is itself too large to return
+
+It would work in chunks, can chunk by repository_created_at, save several tables, apply dense-rank to those tables then chop them down, then download everything locally and figure out which chunk to look at for each org
+
+orgevents_temp1
+*/
+SELECT repository_organization, repository_url, type, created_at, repository_size, repository_created_at,
+DENSE_RANK() OVER (PARTITION BY repository_organization ORDER BY created_at ASC) dense_rank,
 FROM
    [github_explore.timeline]
 WHERE
-   repository_organization IS NOT NULL  
+   repository_organization IS NOT NULL  AND repository_created_at > '2013-07-01 00:00:01'
+   
+   
+/*orgevents_temp2 */
+SELECT repository_organization, repository_url, type, created_at, repository_size, repository_created_at,
+DENSE_RANK() OVER (PARTITION BY repository_organization ORDER BY created_at ASC) dense_rank,
+FROM
+   [github_explore.timeline]
+WHERE
+   repository_organization IS NOT NULL  AND repository_created_at <= '2013-07-01 00:00:01' AND repository_created_at > '2013-04-01 00:00:01' AND created_at <= '2013-08-01 00:00:01'
+   
+  /*orgevents_temp3 */
+SELECT repository_organization, repository_url, type, created_at, repository_size, repository_created_at,
+DENSE_RANK() OVER (PARTITION BY repository_organization ORDER BY created_at ASC) dense_rank,
+FROM
+   [github_explore.timeline]
+WHERE
+   repository_organization IS NOT NULL  AND repository_created_at <= '2013-04-01 00:00:01' AND repository_created_at > '2013-01-01 00:00:01' AND created_at <= '2013-05-01 00:00:01' 
+   
+  /*orgevents_temp4 */
+SELECT repository_organization, repository_url, type, created_at, repository_size, repository_created_at,
+DENSE_RANK() OVER (PARTITION BY repository_organization ORDER BY created_at ASC) dense_rank,
+FROM
+   [github_explore.timeline]
+WHERE
+   repository_organization IS NOT NULL  AND repository_created_at <= '2013-01-01 00:00:01' AND repository_created_at > '2012-08-01 00:00:01' AND created_at <= '2013-01-01 00:00:01'    
+   
+  /*orgevents_temp5 */
+SELECT repository_organization, repository_url, type, created_at, repository_size, repository_created_at,
+DENSE_RANK() OVER (PARTITION BY repository_organization ORDER BY created_at ASC) dense_rank,
+FROM
+   [github_explore.timeline]
+WHERE
+   repository_organization IS NOT NULL  AND repository_created_at <= '2012-08-01 00:00:01' AND repository_created_at > '2012-04-01 00:00:01' AND created_at <= '2012-09-01 00:00:01'   
 
+/*orgevents_temp1_20 */
+SELECT * from [github_explore.orgevents_temp1] WHERE dense_rank <= 20   
+
+/*above misses out forks which were made BY the org - so when a repo's creation was a fork event this is excluded - can do all of the above tables in 1 for this, cut it off wherever the other tables are cut off
+refer to url as repository_url because this will make it compatible with other tables
+
+orgforkevents_temp  */  
+ SELECT repository_organization, url AS repository_url, type, created_at, repository_size, repository_created_at,
+DENSE_RANK() OVER (PARTITION BY repository_organization ORDER BY created_at ASC) dense_rank,
+FROM
+   [github_explore.timeline]
+WHERE
+   repository_organization IS NOT NULL AND type = 'ForkEvent' AND repository_created_at > '2012-04-01 00:00:01'
+   
+   
+ 
+  /*orgevents_temp2ranks */
 SELECT
    repository_organization,
    repository_url,
    type,
-   payload_size,
+   repository_size,
    created_at,
    DENSE_RANK() OVER (PARTITION BY repository_organization ORDER BY created_at ASC) dense_rank,
 FROM
-   [github_explore.timeline]
-WHERE
-   repository_organization IS NOT NULL AND created_at > '2013-09-11 13:41:30'
+   [github_explore.orgevents_temp2] 
    
  
 /*this works on the sample table but exceeds resource limit on proper table */ 
