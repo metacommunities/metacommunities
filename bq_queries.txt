@@ -1513,7 +1513,6 @@ OUTER LEFT JOIN EACH
 AS new
 ON new.repository_organization = old.repository_organization
 ORDER BY Repos DESC
-
 	
 /* Query which generates the orgs sample for manual coding */
 SELECT repository_organization, CONCAT('http://www.github.com/', repository_organization) FROM [github_explore.organizations_megatable4] WHERE (Pushers > 1 OR PushDurationDays > 30 OR WatchEvents > 0 OR ForkEvents > 0 OR PullRequestsClosed > 0 OR repos_linked_to > 0) AND PushDurationDays > 5 AND (HASH(repository_organization)%100 == 0) ORDER BY repository_organization ASC
@@ -1560,6 +1559,137 @@ AS repos
 ON repos.repo = events.repo
 ORDER BY created_at DESC
 
+
+/* The following is all work in progress, that doesn't work.
+It concerns trying to pick out early events for organisations */
+
+/* Add creation date for org to megatable - how?
+No - get events for all orgs and sort out the creation dates locally with API data
+Getting the first X events is not easy with group by... http://www.xaprb.com/blog/2006/12/07/how-to-select-the-firstleastmax-row-per-group-in-sql/
+But its possible to do it by time maybe...
+What about an OVER clause? Don't want to aggregate, but could use the DENSE_RANK
+Can i do this in 2 steps... label all org events with an order variable, then select the relevant rows from that table? The first step exceeds resource limit on full timeline, but works on public sample
+Can i trim the timeline down enough to make this manageable?
+*/
+SELECT repository_organization, repository_url, type, created_at
+FROM
+   [github_explore.timeline]
+WHERE
+   repository_organization IS NOT NULL  
+
+SELECT
+   repository_organization,
+   repository_url,
+   type,
+   payload_size,
+   created_at,
+   DENSE_RANK() OVER (PARTITION BY repository_organization ORDER BY created_at ASC) dense_rank,
+FROM
+   [github_explore.timeline]
+WHERE
+   repository_organization IS NOT NULL AND created_at > '2013-09-11 13:41:30'
+   
+ 
+/*this works on the sample table but exceeds resource limit on proper table */ 
+SELECT
+   repository_organization,
+   repository_url,
+   type,
+   payload_id,
+   created_at,
+   DENSE_RANK() OVER (PARTITION BY repository_organization ORDER BY created_at ASC) dense_rank,
+FROM
+   [publicdata:samples.github_timeline]
+WHERE
+   repository_organization IS NOT NULL  
+
+
+
+
+
+/*this doesnt work because the limit applies too broadly */
+SELECT old.repository_organization AS repository_organization,
+new.created_at AS created_at,
+new.type AS type
+FROM
+	(SELECT repository_organization
+	FROM [github_explore.organizations_megatable5])
+AS old
+INNER JOIN EACH 
+	(SELECT repository_organization, 
+	created_at,
+	type
+	FROM [github_explore.timeline]
+/*	ORDER BY repository_organization ASC, created_at DESC */
+	LIMIT 20
+)
+AS new
+ON new.repository_organization = old.repository_organization
+
+
+
+SELECT repository_organization, 
+	created_at,
+	type
+	FROM [github_explore.timeline]
+	WHERE created_at > min(created_at)  
+	GROUP EACH BY repository_organization
+
+
+SELECT old.repository_organization AS repository_organization,
+old.Repos AS Repos,
+old.ReposWhichAreForks AS ReposWhichAreForks,
+old.PushEvents AS PushEvents,
+old.Pushers AS Pushers,
+old.FirstPush AS FirstPush,
+old.LastPush AS LastPush,
+old.PushDurationDays AS PushDurationDays,
+old.repository_homepages AS repository_homepages,
+old.repository_owners AS repository_owners,
+old.repository_languages AS repository_languages,
+old.WatchEvents AS WatchEvents,
+old.ForkEvents AS ForkEvents,
+old.IssuesEvents AS IssuesEvents,
+old.IssueCommentEvents AS IssueCommentEvents,
+old.DownloadEvents AS DownloadEvents,
+old.PullRequestsClosed AS PullRequestsClosed,
+old.pullrequestsmerged AS PullRequestsMerged,
+old.repos_linked_to AS repos_linked_to,
+old.posts_linking_to_orgs_repos AS posts_linking_to_orgs_repos,
+old.answers_linking_to_orgs_repos AS answers_linking_to_orgs_repos
+FROM
+	(SELECT repository_organization,
+	Repos,
+	ReposWhichAreForks,
+	PushEvents,
+	Pushers,
+	FirstPush,
+	LastPush,
+	PushDurationDays,
+	repository_homepages,
+	repository_owners,
+	repository_languages,
+	WatchEvents,
+	ForkEvents,
+	IssuesEvents,
+	IssueCommentEvents,
+	DownloadEvents,
+	PullRequestsClosed,
+	PullRequestsMerged,
+	repos_linked_to,
+	posts_linking_to_orgs_repos,
+	answers_linking_to_orgs_repos
+	FROM [github_explore.organizations_megatable5])
+AS old
+INNER JOIN EACH 
+	(SELECT repository_organization, 
+	count(repository_organization) AS Events24hr,
+	min(created_at) AS FirstEvent,
+	FROM [github_explore.timeline]
+	WHERE (DENSE_RANK() OVER (PARTITION BY repository_organization ORDER BY created_at ASC)) <= 20 )
+AS new
+ON new.repository_organization = old.repository_organization
+ORDER BY Repos DESC
 
 
 
