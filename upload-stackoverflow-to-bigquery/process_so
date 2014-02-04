@@ -47,7 +47,7 @@ function upload2bq {
   FILES=`ls $ZIPDIR/$1*`
   for f in $FILES
     do
-    echo -e "\n\n\ntrying to upload ${f} to ${DATASET}.${1}:\n"
+    echo -e "\n\n\nUploading '${f}' to '${DATASET}.${1}':"
     bq load --source_format=NEWLINE_DELIMITED_JSON "${DATASET}.${1}" $f \
       "schema/${1}"
   done
