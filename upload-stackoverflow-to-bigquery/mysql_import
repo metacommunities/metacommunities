@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# load post table
+mysql -u so_import -p -h localhost --local_infile=1 so < import_post.sql
+
+# create tag tables
+python create_tag_files.py
+
+# load tag tables
+mysql -u so_import -p -h localhost --local_infile=1 so < import_tag.sql
+
