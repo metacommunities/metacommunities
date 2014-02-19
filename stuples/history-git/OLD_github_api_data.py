@@ -165,27 +165,3 @@ def unpack_repoItem_pulls(repoItem, repos_df, parent):
     repos_df = repos_df.append(temp_df)
     return repos_df
 
-def get_organisation_members(org):
-    """  Retrieve listing of members of an organisation
-    from https://api.github.com/orgs/mozilla/public_members
-    Parameters
-    -----------------------------
-    org: the name of it
-    """
-    url = 'https://api.github.com/orgs/' + org + '/public_members'
-    members_df = pd.DataFrame()
-    try:
-        req = requests.get(url, auth=(USER, PASSWORD))
-        org_item = req.json()
-
-        members_df = pd.DataFrame.from_dict(org_item)
-        while req.links.has_key('next'):
-            url = req.links['next']['url']
-            req = requests.get(url, auth=(USER, PASSWORD))
-            repoItem = req.json()
-            members_df = pd.concat(pd.DataFrame.from_dict(org_item), members_df)
-            time.sleep(1)
-    except Exception, e:
-        print('\t\tCould not find members for %s' % org)
-    return members_df      
-

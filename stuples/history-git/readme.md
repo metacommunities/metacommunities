@@ -2,7 +2,7 @@
 
 Install dependencies:
 
-    sudo apt-get install python-MySQLdb python-pandas python-requests
+    sudo pip install MySQLdb pandas requests
 
 Copy `settings.conf` to `~\.history-git\settings.conf` and fill in the details.
 
