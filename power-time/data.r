@@ -51,6 +51,8 @@ dat.query <- lapply(1:4, function(x) {
 
     dat <- query_exec("metacommunities", "github_explore", sql,
       billing=billing_project)
+    cat(".")
+    return(dat)
   }
 )
 
