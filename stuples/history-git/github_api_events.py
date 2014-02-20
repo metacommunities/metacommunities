@@ -34,10 +34,38 @@ def create_db(config):
         type          TINYTEXT,
         created_at    DATETIME,
         actor         TINYTEXT,
-        push_id       INT NULL,
-        size          INT NULL,
-        distinct_size INT NULL
-      );
+        
+        push_id               INT NULL,
+        push_size             INT NULL,
+        push_distinct_size    INT NULL,
+        
+        fork_forkee_fullname  TINYTEXT,
+        
+        watch_action          TINYTEXT,
+        
+        pull_request_action
+        pull_request_number
+        pull_request_state
+        pull_request_title
+        pull_request_body
+        pull_request_head_sha
+        pull_request_head_user_login
+        pull_request_base_label
+        pull_request_base_ref
+        pull_request_base_sha
+        pull_request_base_user_login
+        pull_request_user_login
+        pull_request_merge_commit_sha
+        pull_request_merged
+        pull_request_mergeable
+        pull_request_merged_by_login
+        pull_request_comments
+        pull_request_commits
+        pull_request_additions
+        pull_request_deletions
+        pull_request_changed_files
+        
+      ) DEFAULT CHARACTER SET=utf8;
   """
   cur.execute(sql)
 
@@ -48,7 +76,7 @@ def create_db(config):
         author      TINYTEXT,
         message     TEXT NULL,
         is_distinct TINYINT
-      );
+      ) DEFAULT CHARACTER SET=utf8;
   """
   cur.execute(sql)
 
@@ -100,10 +128,6 @@ class RequestLimiter():
   """
   
   def __init__(self, auth):
-    # track number of requests made
-    # quickly than calling across the API every time
-    self.n = 0 
-    
     # details for acessing GH rate info
     self.usr = auth['usr']
     self.pwd = auth['pwd']
@@ -139,7 +163,7 @@ class RequestLimiter():
     
     # if the number of remaining requests are above 1% of the limit then
     # we're good to keep going
-    self.ok = self.remaining > 50
+    self.ok = self.remaining > 0.01 * self.limit
     
     self.reset_time = dt.datetime.fromtimestamp(self.reset).strftime('%H:%M')
     msg = "Rate limit status: %i limit, %i remaining, reset at %s" % \
@@ -149,13 +173,11 @@ class RequestLimiter():
   def update(self):
     """
     dont need to refresh() just to keep track of progress
-    refresh after 990 requests, this gives us 5 refreshes before entering into
-    the final 50 requests for the hour
+    refresh after we hit 1% of our request limit
     """
-    self.n += 1
-    if self.n % 990 == 0:
+    self.remaining -= 1
+    if self.remaining < 0.01 * self.limit
       self.refresh()
-      self.n = 0
   
 
 #class RepoEventPage:
