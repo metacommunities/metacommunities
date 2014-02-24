@@ -1,98 +1,10 @@
-"""
-TODO:
- - payload extraction for all event types
-"""
-
 import datetime as dt
 import logging
 import MySQLdb
 import pandas as pd
 import requests
 import textwrap
-
-
-def create_db(config):
-  con = MySQLdb.connect(host=config['host'], user=config['usr'],
-    passwd=config['pwd'])
-  cur = con.cursor()
-
-  # create db
-  sql = "CREATE DATABASE IF NOT EXISTS %s;" % (config['db'])
-  cur.execute(sql)
-
-  # use db
-  sql = "USE %s;" % (config['db'])
-  cur.execute(sql)
-
-  # create tables
-  sql = """
-      CREATE TABLE IF NOT EXISTS event (
-        id            BIGINT NOT NULL PRIMARY KEY,
-        repo          TINYTEXT,
-        owner         TINYTEXT,
-        owner_repo    TINYTEXT,
-        type          TINYTEXT,
-        created_at    DATETIME,
-        actor         TINYTEXT,
-        push_id       INT NULL,
-        size          INT NULL,
-        distinct_size INT NULL
-      );
-  """
-  cur.execute(sql)
-
-  sql = """
-      CREATE TABLE IF NOT EXISTS commit (
-        eid         BIGINT,
-        sha         TINYTEXT,
-        author      TINYTEXT,
-        message     TEXT NULL,
-        is_distinct TINYINT
-      );
-  """
-  cur.execute(sql)
-
-  cur.close()
-  con.close()
-
-def extract_event_info(event):
-  eve = {}
-  commits = []
-  
-  # all event types have the following info
-  eve['id']         = event['id']
-  eve['type']       = event['type']
-  eve['created_at'] = event['created_at']
-  eve['actor']      = event['actor']['login']
-  
-  # process payload based on type
-  if event['type'] == 'PushEvent':
-    payload = { 'payload_' + keep_key: event['payload'][keep_key] for keep_key in
-      ('push_id', 'size', 'distinct_size') }
-    
-    for commit in event['payload']['commits']:
-      cmmt = {}
-      cmmt['sha'] = commit['sha']
-      cmmt['author'] = commit['author']['name']
-      cmmt['message'] = commit['message']
-      cmmt['distinct'] = commit['distinct']
-      commits.append(cmmt)
-  
-  # TODO payloads for the following
-  
-  # ForkEvent
-  
-  # WatchEvent
-  
-  # PullRequestEvent
-  
-  eve.update(payload)
-  
-  return {'event': eve, 'commits':commits}
-
-
-
-
+import time
 
 class RequestLimiter():
   """
@@ -118,7 +30,8 @@ class RequestLimiter():
     """
     
     # initiate the measures
-    r = requests.get(self.url, auth=(self.usr, self.pwd))
+    r = requests.get(self.url, auth=(self.usr, self.pwd),
+      headers={"Accept":"application/vnd.github.v3+json"})
     
     if r.status_code != requests.codes.ok:
       logging.error('HTTP ERROR %s occured' % (r.status_code))
@@ -158,157 +71,240 @@ class RequestLimiter():
       self.n = 0
   
 
-#class RepoEventPage:
-#  """
-#  This class requests a page of event history for a given repo over the GitHub
-#  API and formats it so it can be stored.
-#  """
-#  def __init__(self):
-#    
-#  
-#  def get(self, user, repo):
-#    
-#  
+class HistoryGit():
+  """
+  History Git is this really grumpy guy who knows exactly how to get all the
+  events for a given repo. Just pass him the 'owner/repo' string using .get()
+  and he'll get to work, begrudingly.
+  """
+  
+  def __init__(self, config, drop_db=False):
+    self.github = dict(config.items('github'))
+    self.mysql  = dict(config.items('mysql'))
+    
+    self.limiter = RequestLimiter(auth=self.github)
+    
+    self.create_db(drop_db)
+  
+  def create_db(self, drop_db):
+    con = MySQLdb.connect(host=self.mysql['host'], user=self.mysql['usr'],
+      passwd=self.mysql['pwd'])
+    cur = con.cursor()
+    
+    # wipe those tables
+    if drop_db:
+      drop_sql = "DROP DATABASE %s;" % (self.mysql['db'])
+      cur.execute(drop_sql)
+    
+    # create db
+    create_sql = "CREATE DATABASE IF NOT EXISTS %s;" % (self.mysql['db'])
+    cur.execute(create_sql)
 
+    # use db
+    use_sql = "USE %s;" % (self.mysql['db'])
+    cur.execute(use_sql)
 
-#def get_repository_event(user, repo):
-#    """
-#    Returns a list of events as dictionaries
-#    from the API using url of the form
-#    https://api.github.com/repos/torvalds/linux/events
-#    Arguments
-#    ----------------------------------
-#    user: name of repo owner
-#    repo: name of repository
-#    url: full api url of repo
-#    limit: number of events to fetch
-#    """
+    # create tables
+    event_sql = """
+        CREATE TABLE IF NOT EXISTS event (
+          id                  BIGINT NOT NULL PRIMARY KEY,
+          repo                TINYTEXT NULL,
+          owner               TINYTEXT NULL,
+          owner_repo          TINYTEXT,
+          type                TINYTEXT,
+          created_at          DATETIME,
+          actor               TINYTEXT,
+          api_page            INT,
+          push_push_id        INT NULL,
+          push_size           INT NULL,
+          push_distinct_size  INT NULL,
+          fork_forkee_full_name TINYTEXT NULL,
+          watch_action          TINYTEXT NULL
+        );
+    """
+    cur.execute(event_sql)
 
-#    suffix = 'events'
-#    if url is not  None:
-#        url = '/'.join([url, suffix])
-#    else:
-#        base_url = 'https://api.github.com/repos'
-#        url = '/'.join([base_url, user, repo, suffix])
-#    events = []
-#    try:
-#        url_next = ''
-#        current_count = 0
-#        while current_count < limit:
-#            events_req = requests.get(url, auth=(USER, PASSWORD))
-#            events = events + events_req.json()
-#            if events_req.links.has_key('next'):
-#                url_next = events_req.links['next']['url']
-#                print url_next
-#            else:
-#                break
-#            if url == url_next:
-#                break
-#            else:
-#                url = url_next + '&per_page=100'
-#            current_count = len(events)
-#            time.sleep(0.72)
+    commit_sql = """
+        CREATE TABLE IF NOT EXISTS commit (
+          eid         BIGINT,
+          sha         TINYTEXT,
+          author      TINYTEXT,
+          message     TEXT NULL,
+          is_distinct TINYINT
+        );
+    """
+    cur.execute(commit_sql)
 
-#    except Exception, e:
-#        print e
-#    return events
-
-#    
-#def unpack_repoItem(repoItem, repos_df, parent):
-#    '''
-#    This does the work of extracting relevant variables from the json item
-#    and returning a data frame
-
-#    Parameters
-#    -------------------------------------
-#    repoItem is the json item to be unpacked
-#    repos_df is the data frame where data from the current item will be appended
-#    '''
-
-#    id = [it['id'] for it in repoItem]
-#    full_name = [it['full_name'] for it in repoItem]
-#    description = [it['description'] for it in repoItem]
-#    language = [it['language'] for it in repoItem]
-#    fork = [it['fork'] for it in repoItem]
-#    forks = [it['forks'] for it in repoItem]
-#    size = [it['size'] for it in repoItem]
-#    watchers = [it['watchers'] for it in repoItem]
-#    open_issues = [it['open_issues'] for it in repoItem]
-#    created_at = [it['created_at'] for it in repoItem]
-#    pushed_at = [it['pushed_at'] for it in repoItem]
-#    updated_at = [it['updated_at'] for it in repoItem]
-#    has_downloads = [it['has_downloads'] for it in repoItem]
-#    has_issues = [it['has_issues'] for it in repoItem]
-#    has_wiki = [it['has_wiki'] for it in repoItem]
-#    parent_id = 1
-#    parent_name = parent
-
-#    data_dict = {
-#            'id': id,
-#            'full_name': full_name,
-#            'description': description,
-#            'language': language,
-#            'fork': fork,
-#            'forks': forks,
-#            'size': size,
-#            'watchers': watchers,
-#            'open_issues': open_issues,
-#            'created_at': created_at,
-#            'pushed_at': pushed_at,
-#            'updated_at': updated_at,
-#            'has_downloads': has_downloads,
-#            'has_issues': has_issues,
-#            'has_wiki': has_wiki,
-#            'parent_id': parent_id,
-#            'parent_name': parent_name} 
-
-#    temp_df  = pd.DataFrame(data_dict, index = id)      
-#    repos_df = repos_df.append(temp_df)
-#    return repos_df
-
-
-
-#    
-#def unpack_repoItem_pulls(repoItem, repos_df, parent):
-#    '''
-#    This does the work of extracting relevant variables from the json item
-#    and returning a data frame
-#    Parameters
-#    ------------------------------
-#    repoItem:the json item to be unpacked
-#    repos_df: the data frame where data from the current item will be appended
-#    '''
-#    id = [it['id'] for it in repoItem]
-#    state = [it['state'] for it in repoItem]
-#    title = [it['title'] for it in repoItem]
-#    body = [it['body'] for it in repoItem]
-#    number = [it['number'] for it in repoItem]
-#    merged_at = [it['merged_at'] for it in repoItem]
-#    closed_at = [it['closed_at'] for it in repoItem]
-#    created_at = [it['created_at'] for it in repoItem]
-#    head_created_at = [it['head']['repo']['created_at'] for it in repoItem]
-#    head_full_name = [it['head']['repo']['full_name'] for it in repoItem]
-#    head_fork = [it['head']['repo']['fork'] for it in repoItem]
-#    head_forks = [it['head']['repo']['forks'] for it in repoItem]
-#    base_full_name = [it['base']['repo']['full_name'] for it in repoItem]
-#    pull_user = [it['user']['login'] for it in repoItem]
-#    data_dict = {
-#            'id': id,
-#            'state': state,
-#            'title': title,
-#            'body': body,
-#            'number': number,
-#            'merged_at': merged_at,
-#            'closed_at': closed_at,
-#            'created_at': created_at,
-#            'head_created_at': head_created_at,
-#            'head_full_name': head_full_name,
-#            'head_fork': head_fork,
-#            'head_forks': head_forks,
-#            'base_full_name': base_full_name,
-#            'pull_user': pull_user} 
-
-#    temp_df  = pd.DataFrame(data_dict, index = id)      
-#    repos_df = repos_df.append(temp_df)
-#    return repos_df
+    cur.close()
+    con.close()
+  
+  
+  def get(self, owner_repo):
+    """
+    this starts the whole retrieval process
+    """
+    self.owner_repo = owner_repo
+    
+    # premable
+    self.con = MySQLdb.connect(host=self.mysql['host'], user=self.mysql['usr'],
+      passwd=self.mysql['pwd'], db=self.mysql['db'])
+    self.cur = self.con.cursor()
+    
+    url_base = 'https://api.github.com/repos/%s/events?page=%i'
+    cutoff_ts = self.get_cutoff_timestamp()
+    
+    self.limiter.refresh()
+    
+    page_history = []
+    page = 0
+    power = 0
+    n = 0
+    
+    # start getting pages
+    while True:
+      page += 1
+      page_history.append(page)
+      url = url_base % (owner_repo, page)
+      pg = requests.get(url, auth=(self.github['usr'], self.github['pwd']),
+        headers={"Accept":"application/vnd.github.v3+json"})
+      
+      # is page good?
+      pg.raise_for_status()
+      pg = pg.json()
+      
+      # is the page empty? we should never run out of requests because of the limiter
+      # so an empty page is because we've reached the end of the history
+      if pg:
+        # any events with a date before start_ts?
+        event_ts = [ time.mktime(time.strptime(event['created_at'], '%Y-%m-%dT%H:%M:%SZ'))
+          for event in pg ]
+        keepers = [ i for i, ets in enumerate(event_ts) if ets < cutoff_ts]
+        
+        if keepers:
+          print("process page %i" % (page_history[-1]))
+          for k in keepers:
+            n += 1
+            #self.save_event(pg[k])
+        
+        # we've successfully made and, potentially, processed a single whole
+        # request, so we can now sleep if we have to
+        self.limiter.update()
+      else:
+        break
+        #print("break")
+    
+    # the end
+    self.cur.close()
+    self.con.close()
+    logging.info("Added %i events from %i pages for repo: %s" % (n, page, owner_repo))
+  
+  
+  def save_event(self, event):
+    """
+    extracts the 'useful' event info which depends on the event type and then
+    uploads this info to the mysql database
+    """
+    eve = {}
+    commits = []
+    
+    # all event types have the following info
+    eve['id']         = event['id']
+    eve['type']       = event['type']
+    eve['created_at'] = event['created_at']
+    eve['actor']      = event['actor']['login']
+    
+    # process payload based on type:
+    if event['type'] == 'PushEvent':
+      # PushEvent payload:
+      #   push_id
+      #   size
+      #   distinct_size
+      payload = { 'push_' + keep_key: event['payload'][keep_key] for keep_key in
+        ('push_id', 'size', 'distinct_size') }
+      
+      for commit in event['payload']['commits']:
+        cmmt = {}
+        cmmt['sha']      = commit['sha']
+        cmmt['author']   = commit['author']['name']
+        cmmt['message']  = commit['message']
+        cmmt['distinct'] = commit['distinct']
+        commits.append(cmmt)
+    
+    elif event['type'] == 'ForkEvent':
+      # ForkEvent payload:
+      #   forkee:
+      #     full_name
+      payload['fork_'] = event['payload']['forkee']['full_name']
+    
+    elif event['type'] == 'WatchEvent':
+      # WatchEvent payload:
+      #   action
+      payload['watch_action'] = event['payload']['action']
+    
+    #elif event['type'] == 'PullRequestEvent':
+    #  # PullRequestEvent payload:
+    #  #   
+    #  payload = { 'pullrequest_' + keep_key: event['payload'][keep_key] for keep_key in
+    #    ('push_id', 'size', 'distinct_size') }
+    #
+    #    elif event['type'] == 'IssueEvent':
+    #      # IssueEvent payload:
+    #      #   action
+    #      #   issue:
+    #      #     
+    #      
+    #      
+    #      
+    #    
+    #    elif event['type'] == 'IssueCommentEvent':
+    #      # IssueCommentEvent payload:
+    #      #   action
+    #      #   issue:
+    #      #     
+    #      #   comment
+    
+    # add payload to event object    
+    eve.update(payload)
+    
+    # if event was a push event then we need to also save the commits
+    if not info['commits']:
+      self.upload_commit(info['commits'])
+  
+  
+  def upload_event(self, event):
+    """
+    construct an INSERT statement based on the event dictionary
+    """
+    event_sql = "INSERT INTO event (a,b,c) VALUES (%(qwe)s, %(asd)s, %(zxc)s);"
+    self.cur.execute(event_sql, info['event'])
+  
+  
+  def upload_commit(self, commit):
+    """
+    construct an INSERT statement based on the commit dictionary
+    """
+    commmits_sql = "INSERT INTO commit (a,b,c) VALUES (%(qwe)s, %(asd)s, %(zxc)s);"
+    self.cur.execute(commits_sql, info['commits'])  
+  
+  
+  def get_cutoff_timestamp(self):
+    """
+    if we've collected data before on this repo then it'll be in the database,
+    if so then we use the earliest timestamp as our starting point, else
+    we just use current time
+    """
+    sql_prev_hist = """
+      SELECT min(created_at)
+      FROM event 
+      WHERE owner_repo = '%s'
+    """ % (self.owner_repo)
+    
+    self.cur.execute(sql_prev_hist)
+    
+    cutoff_ts = self.cur.fetchone()[0]
+    
+    if not cutoff_ts:
+      cutoff_ts = time.time()
+    
+    return cutoff_ts
 
