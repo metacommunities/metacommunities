@@ -4,6 +4,7 @@ library(tools)
 library(brew)
 library(rjson)
 library(ggplot2)
+library(scales)
 
 billing_project <- "237471208995"
 
@@ -69,9 +70,9 @@ p.plot1 = ggplot(sdat1, aes(x = repo_created, y = log(DurationDays), size = log(
 #scale_area(range = c(0.5, 1))
 scale_area(range = c(min(log(sdat1$Events)), max(log(sdat1$Events))))
 
-
+sdat1 = dat1[sample(1:nrow(dat1), 10000),]
 sdat1$logevents = log(sdat1$Events)
-sdat1$logevents[sdat1$logevents == 0] = 0.001
+sdat1$logevents[sdat1$logevents == 0] = 0.3
 
 p.plot1 = ggplot(sdat1, aes(x = repo_created, y = log(DurationDays), size = log(Events))) + geom_point(stat = "identity", alpha = 0.4) +
 scale_area(range = c(min(sdat1$logevents), max(sdat1$logevents)))
@@ -88,7 +89,11 @@ dat1$type[dat1$PR_Received > 1] = "PR Receiver"
 dat1$type[dat1$Watchers > 10] = "Watched Repo"
 dat1$type[dat1$Forks > 10] = "Repo which is Forked"
 dat1$type[dat1$Watchers > 10 | dat1$Forks > 10] = "Social Repo"
-dat1$type[dat1$PR_Received > dat1$Watchers] = "Social PR Receiver"
+dat1$type[(dat1$Watchers > 10 | dat1$Forks > 10) & dat1$PR_Received > dat1$Watchers] = "Social PR Receiver"
+dat1$type = factor(dat1$type, levels = c("Isolate", "Isolate Fork", "Collaborative Pushing", "Collaborative Fork", "PR Issuer", "PR Receiver", "Social Repo", "Social PR Receiver"))
+
+
+
 
 sdat1 = dat1[sample(1:nrow(dat1), 10000),]
 sdat1$logevents = log(sdat1$Events)
@@ -237,3 +242,186 @@ dat3$type[dat3$PR_Received > dat3$Watchers] = "Social PR Receiver"
 p.plot3 = ggplot(dat3, aes(x = repo_created, y = log(DurationDays), size = log(Events), colour = factor(type))) + geom_point(stat = "identity", alpha = 0.4) +
 scale_area(range = c(min(log(dat3$Events)), max(log(dat3$Events))))
 
+
+
+#merge sub-sets to produce a single panelled graph
+sdat1$graph = 1
+sdat2$graph = 2
+sdat2$logevents = log(sdat2$Events)
+
+dat3$graph = 3
+dat3$logevents = log(dat3$Events)
+
+cdat = rbind(sdat1, sdat2)
+cdat = rbind(cdat, dat3)
+
+p.cplot = ggplot(cdat, aes(x = repo_created, y = log(DurationDays), size = logevents, colour = factor(type))) + geom_point(stat = "identity", alpha = 0.4) +
+scale_area(range = c(min(log(cdat$Events)), max(log(cdat$Events)))) +
+facet_grid(. ~ graph, scales = "free")
+
+p.cplot = ggplot(cdat, aes(x = repo_created, y = log(DurationDays), size = logevents, colour = factor(type))) + geom_point(stat = "identity", alpha = 0.4) +
+scale_area(range = c(min(cdat$logevents, max(cdat$logevents))) +
+facet_wrap(~ graph, scales = "free")
+
+
+p.cplot = ggplot(cdat, aes(x = repo_created, y = log(DurationDays), size = logevents, colour = factor(type))) + geom_point(stat = "identity", alpha = 0.4) +
+scale_size_area() +
+facet_wrap(~ graph, scales = "free")
+
+setwd("C:\\git\\power-time")
+ggsave(filename = "powertime.png", plot = p.cplot, scale = 1, width = 75, height = 25, units = "cm", dpi = 300)
+
+#fine-tuning the combined plot
+cdat$type = "Isolate"
+cdat$type[cdat$Fork == 'true'] = "Isolate Fork"
+cdat$type[cdat$Pushers > 1] = "Collaborative Pushing"
+cdat$type[cdat$Fork == 'true' & cdat$Pushers > 1] = "Collaborative Fork"
+cdat$type[cdat$PR_Issued > 1] = "PR Issuer"
+cdat$type[cdat$PR_Received > 1] = "PR Receiver"
+cdat$type[cdat$Watchers > 10] = "Watched Repo"
+cdat$type[cdat$Forks > 10] = "Repo which is Forked"
+cdat$type[cdat$Watchers > 10 | cdat$Forks > 10] = "Social Repo"
+cdat$type[(cdat$Watchers > 10 | cdat$Forks > 10) & cdat$PR_Received > cdat$Watchers] = "Social PR Receiver"
+cdat$type = factor(cdat$type, levels = c("Isolate", "Isolate Fork", "Collaborative Pushing", "Collaborative Fork", "PR Issuer", "PR Receiver", "Social Repo", "Social PR Receiver"))
+
+cdat$fgraph[cdat$graph == 1] = "1-5 Event Repos"
+cdat$fgraph[cdat$graph == 2] = "50-100 Event Repos"
+cdat$fgraph[cdat$graph == 3] = "1000+ Event Repos"
+cdat$fgraph = factor(cdat$fgraph, levels = c("1-5 Event Repos", "50-100 Event Repos", "1000+ Event Repos"))
+
+cdat$Type = cdat$type
+
+p.cplot = 
+ggplot(cdat, aes(x = repo_created, y = DurationDays, size = logevents, colour = Type)) + geom_point(stat = "identity", alpha = 0.7) +
+scale_size_area() +
+scale_colour_brewer(type = "qual", palette = 6) +
+scale_y_log10() +
+facet_wrap(~ fgraph, scales = "free") +
+labs(y = "Repository Duration (Days)", x = "Repository Created") +
+theme_bw(base_size = 23) 
+
+
+setwd("C:\\git\\power-time")
+ggsave(filename = "powertime-wide.png", plot = p.cplot, scale = 1, width = 85, height = 25, units = "cm", dpi = 300)
+
+
+
+#generate absolute values to put on graphs
+sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_1_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) <= 5   
+  "
+v1.1 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)
+  
+sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_2_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) <= 5   
+  "
+v2.1 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)  
+  
+  sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_3_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) <= 5   
+  "
+v3.1 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)
+  
+sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_4_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) <= 5   
+  "
+v4.1 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)  
+  
+sp1events = sum(v1.1$Events, v2.1$Events, v3.1$Events, v4.1$Events)  
+sp1repos = sum(v1.1$Repos, v2.1$Repos, v3.1$Repos, v4.1$Repos)    
+
+sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_1_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) >= 50 AND (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) <=100   
+  "
+v1.2 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)
+  
+sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_2_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) >= 50 AND (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) <=100   
+  "
+v2.2 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)  
+  
+sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_3_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) >= 50 AND (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) <=100   
+  "
+v3.2 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)  
+
+ sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_4_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) >= 50 AND (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) <=100   
+  "
+v4.2 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project) 
+  
+sp2events = sum(v1.2$Events, v2.2$Events, v3.2$Events, v4.2$Events)  
+sp2repos = sum(v1.2$Repos, v2.2$Repos, v3.2$Repos, v4.2$Repos)    
+
+
+sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_1_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) >= 1000 
+  "
+v1.3 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)
+  
+sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_2_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) >= 1000 
+  "
+v2.3 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)  
+
+  sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_3_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) >= 1000 
+  "
+v3.3 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)
+  
+sql <-
+  "
+SELECT count(*) AS Repos, sum(ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) AS Events
+FROM [github_explore.all_repos_4_3] 
+WHERE (ifnull(Pushes, 0) + Forks + Watchers + ifnull(PR_Received,0) + ifnull(PR_Issued, 0) + ifnull(PR_intra, 0)) >= 1000 
+  "
+v4.3 <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)  
+  
+sp3events = sum(v1.3$Events, v2.3$Events, v3.3$Events, v4.3$Events)  
+sp3repos = sum(v1.3$Repos, v2.3$Repos, v3.3$Repos, v4.3$Repos) 
+  

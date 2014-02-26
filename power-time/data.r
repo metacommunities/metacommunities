@@ -73,3 +73,9 @@ p <-
     geom_smooth(colour="blue", size=2, se=FALSE) +
     theme_bw()
 
+#to illustrate the outcome without logarithmic axes
+p.angular <-
+  ggplot(sdat, aes(x=x, y=y)) +
+    labs(x = "Number of events", y = "Number of repos") +
+    geom_line(colour="blue", size=2) +
+    theme_bw()
