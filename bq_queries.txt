@@ -2643,3 +2643,13 @@ ORDER BY repository_url DESC
 
 
 
+/*going back to pull requests 
+PR_relationships_all*/
+SELECT payload_pull_request_base_repo_url, payload_pull_request_head_repo_url, count(payload_pull_request_head_repo_url) AS pullrequestevents, 
+min(created_at) AS firstPR, max(created_at) as lastPR, count(distinct(payload_pull_request_id)) AS DistinctPullRequests, 
+sum(if(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
+(max(PARSE_UTC_USEC(created_at)) - min(PARSE_UTC_USEC(created_at)))/86400000000 AS PRDurationDays,
+FROM [githubarchive:github.timeline]
+WHERE type = "PullRequestEvent"  AND payload_pull_request_head_repo_url != payload_pull_request_base_repo_url
+GROUP EACH BY  payload_pull_request_head_repo_url, payload_pull_request_base_repo_url
+ORDER BY pullrequestevents DESC
