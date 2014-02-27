@@ -2,7 +2,7 @@
 
 Install dependencies:
 
-    sudo pip install MySQLdb pandas requests
+    sudo pip install MySQLdb pandas requests PyGithub
 
 Copy `settings.conf` to `~\.history-git\settings.conf` and fill in the details.
 

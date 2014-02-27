@@ -5,70 +5,71 @@ import pandas as pd
 import requests
 import textwrap
 import time
+import github
 
-class RequestLimiter():
-  """
-  This class keeps track of the request limits imposed by GitHub.
-  """
-  
-  def __init__(self, auth):
-    # track number of requests made
-    # quickly than calling across the API every time
-    self.n = 0 
-    
-    # details for acessing GH rate info
-    self.usr = auth['usr']
-    self.pwd = auth['pwd']
-    self.url = 'https://api.github.com/rate_limit'
-    
-    self.refresh()
-  
-  def refresh(self):
-    """
-    Refresh the limit, remaining and reset measures and reassess if we're
-    still OK to carry on.
-    """
-    
-    # initiate the measures
-    r = requests.get(self.url, auth=(self.usr, self.pwd),
-      headers={"Accept":"application/vnd.github.v3+json"})
-    
-    if r.status_code != requests.codes.ok:
-      logging.error('HTTP ERROR %s occured' % (r.status_code))
-    
-    r.raise_for_status()
-    
-    r = r.json()
-    self.limit      = r['resources']['core']['limit']
-    self.remaining  = r['resources']['core']['remaining']
-    self.reset      = r['resources']['core']['reset']
-    
-    if self.limit < 5000:
-      err_msg = textwrap.dedent("""\
-        Limit is too small (%i). Check username and password for GitHub
-        in 'settings.conf'.""" % (self.limit))
-      logging.error(err_msg)
-      raise StandardError(err_msg)
-    
-    # if the number of remaining requests are above 1% of the limit then
-    # we're good to keep going
-    self.ok = self.remaining > 50
-    
-    self.reset_time = dt.datetime.fromtimestamp(self.reset).strftime('%H:%M')
-    msg = "Rate limit status: %i limit, %i remaining, reset at %s" % \
-      (self.limit, self.remaining, self.reset_time)
-    logging.info(msg)
-  
-  def update(self):
-    """
-    dont need to refresh() just to keep track of progress
-    refresh after 990 requests, this gives us 5 refreshes before entering into
-    the final 50 requests for the hour
-    """
-    self.n += 1
-    if self.n % 990 == 0:
-      self.refresh()
-      self.n = 0
+#class RequestLimiter():
+#  """
+#  This class keeps track of the request limits imposed by GitHub.
+#  """
+#  
+#  def __init__(self, auth):
+#    # track number of requests made
+#    # quickly than calling across the API every time
+#    self.n = 0 
+#    
+#    # details for acessing GH rate info
+#    self.usr = auth['usr']
+#    self.pwd = auth['pwd']
+#    self.url = 'https://api.github.com/rate_limit'
+#    
+#    self.refresh()
+#  
+#  def refresh(self):
+#    """
+#    Refresh the limit, remaining and reset measures and reassess if we're
+#    still OK to carry on.
+#    """
+#    
+#    # initiate the measures
+#    r = requests.get(self.url, auth=(self.usr, self.pwd),
+#      headers={"Accept":"application/vnd.github.v3+json"})
+#    
+#    if r.status_code != requests.codes.ok:
+#      logging.error('HTTP ERROR %s occured' % (r.status_code))
+#    
+#    r.raise_for_status()
+#    
+#    r = r.json()
+#    self.limit      = r['resources']['core']['limit']
+#    self.remaining  = r['resources']['core']['remaining']
+#    self.reset      = r['resources']['core']['reset']
+#    
+#    if self.limit < 5000:
+#      err_msg = textwrap.dedent("""\
+#        Limit is too small (%i). Check username and password for GitHub
+#        in 'settings.conf'.""" % (self.limit))
+#      logging.error(err_msg)
+#      raise StandardError(err_msg)
+#    
+#    # if the number of remaining requests are above 1% of the limit then
+#    # we're good to keep going
+#    self.ok = self.remaining > 50
+#    
+#    self.reset_time = dt.datetime.fromtimestamp(self.reset).strftime('%H:%M')
+#    msg = "Rate limit status: %i limit, %i remaining, reset at %s" % \
+#      (self.limit, self.remaining, self.reset_time)
+#    logging.info(msg)
+#  
+#  def update(self):
+#    """
+#    dont need to refresh() just to keep track of progress
+#    refresh after 990 requests, this gives us 5 refreshes before entering into
+#    the final 50 requests for the hour
+#    """
+#    self.n += 1
+#    if self.n % 990 == 0:
+#      self.refresh()
+#      self.n = 0
   
 
 class HistoryGit():
@@ -81,8 +82,6 @@ class HistoryGit():
   def __init__(self, config, drop_db=False):
     self.github = dict(config.items('github'))
     self.mysql  = dict(config.items('mysql'))
-    
-    self.limiter = RequestLimiter(auth=self.github)
     
     self.create_db(drop_db)
   
@@ -105,6 +104,26 @@ class HistoryGit():
     cur.execute(use_sql)
 
     # create tables
+    commit_sql = """
+        CREATE TABLE IF NOT EXISTS commit (
+          repo                TINYTEXT NULL,
+          owner               TINYTEXT NULL,
+          owner_repo          TINYTEXT,
+          type                TINYTEXT,
+          created_at          DATETIME,
+          actor               TINYTEXT
+        );
+    """
+    cur.execute(commit_sql)
+
+sha             = event.sha
+author_login    = event.author.login
+committer_login = event.committer.login
+files_n         = len(event.files)  
+stats_additions = event.stats.additions
+stats_deletions = event.stats.deletions
+stats_total     = event.stats.total
+
     event_sql = """
         CREATE TABLE IF NOT EXISTS event (
           id                  BIGINT NOT NULL PRIMARY KEY,
@@ -137,6 +156,46 @@ class HistoryGit():
 
     cur.close()
     con.close()
+  
+  
+  def get(self, owner_repo):
+    """
+    this starts the whole retrieval process
+    """
+    self.owner_repo = owner_repo
+    
+    # premable
+    self.con = MySQLdb.connect(host=self.mysql['host'], user=self.mysql['usr'],
+      passwd=self.mysql['pwd'], db=self.mysql['db'])
+    self.cur = self.con.cursor()
+    
+    self.get_commits()
+    
+  def get_commits(self):
+    
+    cutoff_ts = self.get_cutoff_timestamp("commit")
+    
+    
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   def get(self, owner_repo):
