@@ -1,11 +1,17 @@
-import datetime as dt
+import ConfigParser
+import github
 import logging
 import MySQLdb
-import pandas as pd
+import numpy as np
+import os
 import requests
+import sys
 import textwrap
 import time
-import github
+import warnings
+
+# supress MySQL Warnings
+warnings.filterwarnings('ignore', category=MySQLdb.Warning)
 
 #class RequestLimiter():
 #  """
@@ -55,7 +61,7 @@ import github
 #    # we're good to keep going
 #    self.ok = self.remaining > 50
 #    
-#    self.reset_time = dt.datetime.fromtimestamp(self.reset).strftime('%H:%M')
+#    self.reset_time = datetime.datetime.fromtimestamp(self.reset).strftime('%H:%M')
 #    msg = "Rate limit status: %i limit, %i remaining, reset at %s" % \
 #      (self.limit, self.remaining, self.reset_time)
 #    logging.info(msg)
@@ -79,271 +85,164 @@ class HistoryGit():
   and he'll get to work, begrudingly.
   """
   
-  def __init__(self, config, drop_db=False):
-    self.github = dict(config.items('github'))
-    self.mysql  = dict(config.items('mysql'))
+  def __init__(self, path, drop_db=False):
+    # load settings
+    self.conf = ConfigParser.ConfigParser()
+    self.conf.read(os.path.join(path, 'settings.conf'))
     
+    # tables!
     self.create_db(drop_db)
+    
+    # github
+    self.gh = github.Github(login_or_token = self.conf.get('github', 'usr'),
+                            password = self.conf.get('github', 'pwd'))
+
+  def open_con(self):
+    self.con = MySQLdb.connect(host=self.conf.get('mysql', 'host'),
+                               user=self.conf.get('mysql', 'usr'),
+                               passwd=self.conf.get('mysql', 'pwd'),
+                               db=self.conf.get('mysql', 'db'))
+    self.cur = self.con.cursor()
   
+  def close_con(self):
+    self.cur.close()
+    self.con.commit()
+    self.con.close()
+
   def create_db(self, drop_db):
-    con = MySQLdb.connect(host=self.mysql['host'], user=self.mysql['usr'],
-      passwd=self.mysql['pwd'])
+    con = MySQLdb.connect(host=self.conf.get('mysql', 'host'),
+                          user=self.conf.get('mysql', 'usr'),
+                          passwd=self.conf.get('mysql', 'pwd'))
     cur = con.cursor()
     
     # wipe those tables
     if drop_db:
-      drop_sql = "DROP DATABASE %s;" % (self.mysql['db'])
+      drop_sql = "DROP DATABASE IF EXISTS %s;" % (self.conf.get('mysql', 'db'))
       cur.execute(drop_sql)
+      #logging.info("Dropped database %s" % (self.conf.get('mysql', 'db')))
     
     # create db
-    create_sql = "CREATE DATABASE IF NOT EXISTS %s;" % (self.mysql['db'])
+    create_sql = "CREATE DATABASE IF NOT EXISTS %s;" % (self.conf.get('mysql', 'db'))
     cur.execute(create_sql)
-
+    
     # use db
-    use_sql = "USE %s;" % (self.mysql['db'])
+    use_sql = "USE %s;" % (self.conf.get('mysql', 'db'))
     cur.execute(use_sql)
-
+    
     # create tables
     commit_sql = """
         CREATE TABLE IF NOT EXISTS commit (
           repo                TINYTEXT NULL,
           owner               TINYTEXT NULL,
           owner_repo          TINYTEXT,
-          type                TINYTEXT,
-          created_at          DATETIME,
-          actor               TINYTEXT
+          sha                 CHAR(40),
+          author_login        TINYTEXT,
+          author_date         DATETIME,
+          committer_login     TINYTEXT,
+          committer_date      DATETIME,
+          files_n             SMALLINT,
+          stats_additions     INTEGER,
+          stats_deletions     INTEGER,
+          stats_total         INTEGER
         );
     """
     cur.execute(commit_sql)
-
-sha             = event.sha
-author_login    = event.author.login
-committer_login = event.committer.login
-files_n         = len(event.files)  
-stats_additions = event.stats.additions
-stats_deletions = event.stats.deletions
-stats_total     = event.stats.total
-
-    event_sql = """
-        CREATE TABLE IF NOT EXISTS event (
-          id                  BIGINT NOT NULL PRIMARY KEY,
-          repo                TINYTEXT NULL,
-          owner               TINYTEXT NULL,
-          owner_repo          TINYTEXT,
-          type                TINYTEXT,
-          created_at          DATETIME,
-          actor               TINYTEXT,
-          api_page            INT,
-          push_push_id        INT NULL,
-          push_size           INT NULL,
-          push_distinct_size  INT NULL,
-          fork_forkee_full_name TINYTEXT NULL,
-          watch_action          TINYTEXT NULL
-        );
-    """
-    cur.execute(event_sql)
-
-    commit_sql = """
-        CREATE TABLE IF NOT EXISTS commit (
-          eid         BIGINT,
-          sha         TINYTEXT,
-          author      TINYTEXT,
-          message     TEXT NULL,
-          is_distinct TINYINT
-        );
-    """
-    cur.execute(commit_sql)
-
+    
+    #logging.info("Created tables in db %s" % (self.conf.get('mysql', 'db')))
+    
     cur.close()
     con.close()
   
-  
   def get(self, owner_repo):
     """
     this starts the whole retrieval process
     """
-    self.owner_repo = owner_repo
-    
     # premable
-    self.con = MySQLdb.connect(host=self.mysql['host'], user=self.mysql['usr'],
-      passwd=self.mysql['pwd'], db=self.mysql['db'])
-    self.cur = self.con.cursor()
+    self.owner_repo = owner_repo
+    self.owner, self.repo = owner_repo.split('/')
     
+    # get connection
+    self.open_con()
+    
+    # go
     self.get_commits()
     
-  def get_commits(self):
-    
-    cutoff_ts = self.get_cutoff_timestamp("commit")
-    
-    
+    # goodbye
+    self.close_con()
+  
 
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  def get(self, owner_repo):
-    """
-    this starts the whole retrieval process
-    """
-    self.owner_repo = owner_repo
+  def get_commits(self):
+    # any existing commits in the database?
+    select_sql = """
+      SELECT min(committer_date)
+      FROM commit
+      WHERE owner_repo = '%s';
+    """ % (self.owner_repo)
+    self.cur.execute(select_sql)
+    until = self.cur.fetchone()[0]
+
+    if until is None:
+      until = github.GithubObject.NotSet
+    else:
+      until -= datetime.timedelta(0,1)
     
-    # premable
-    self.con = MySQLdb.connect(host=self.mysql['host'], user=self.mysql['usr'],
-      passwd=self.mysql['pwd'], db=self.mysql['db'])
-    self.cur = self.con.cursor()
-    
-    url_base = 'https://api.github.com/repos/%s/events?page=%i'
-    cutoff_ts = self.get_cutoff_timestamp()
-    
-    self.limiter.refresh()
-    
-    page_history = []
-    page = 0
-    power = 0
+    # start
+    logging.info("Getting commits for %s." % (self.owner_repo))
+    repo = self.gh.get_user(self.owner).get_repo(self.repo)
     n = 0
+    N = 0
+
+    insert_sql = """
+      INSERT INTO commit (owner, repo, owner_repo, sha, author_login,
+        author_date, committer_login, committer_date, files_n, stats_additions,
+        stats_deletions, stats_total)
+      VALUES (%(owner)s, %(repo)s, %(owner_repo)s, %(sha)s, %(author_login)s,
+        %(author_date)s, %(committer_login)s, %(committer_date)s, %(files_n)s,
+        %(stats_additions)s, %(stats_deletions)s, %(stats_total)s);
+    """
     
-    # start getting pages
-    while True:
-      page += 1
-      page_history.append(page)
-      url = url_base % (owner_repo, page)
-      pg = requests.get(url, auth=(self.github['usr'], self.github['pwd']),
-        headers={"Accept":"application/vnd.github.v3+json"})
+    # start processing the commits
+    start_time = time.time()
+    for cm in repo.get_commits(until=until):
+      commit = {
+        'owner': self.owner,
+        'repo': self.repo,
+        'owner_repo': self.owner_repo
+      }
       
-      # is page good?
-      pg.raise_for_status()
-      pg = pg.json()
-      
-      # is the page empty? we should never run out of requests because of the limiter
-      # so an empty page is because we've reached the end of the history
-      if pg:
-        # any events with a date before start_ts?
-        event_ts = [ time.mktime(time.strptime(event['created_at'], '%Y-%m-%dT%H:%M:%SZ'))
-          for event in pg ]
-        keepers = [ i for i, ets in enumerate(event_ts) if ets < cutoff_ts]
-        
-        if keepers:
-          print("process page %i" % (page_history[-1]))
-          for k in keepers:
-            n += 1
-            #self.save_event(pg[k])
-        
-        # we've successfully made and, potentially, processed a single whole
-        # request, so we can now sleep if we have to
-        self.limiter.update()
+      commit['sha'] = cm.sha
+
+      if cm.author is None:
+        commit['author_login'] = cm.commit.author.name
       else:
-        break
-        #print("break")
-    
-    # the end
-    self.cur.close()
-    self.con.close()
-    logging.info("Added %i events from %i pages for repo: %s" % (n, page, owner_repo))
-  
-  
-  def save_event(self, event):
-    """
-    extracts the 'useful' event info which depends on the event type and then
-    uploads this info to the mysql database
-    """
-    eve = {}
-    commits = []
-    
-    # all event types have the following info
-    eve['id']         = event['id']
-    eve['type']       = event['type']
-    eve['created_at'] = event['created_at']
-    eve['actor']      = event['actor']['login']
-    
-    # process payload based on type:
-    if event['type'] == 'PushEvent':
-      # PushEvent payload:
-      #   push_id
-      #   size
-      #   distinct_size
-      payload = { 'push_' + keep_key: event['payload'][keep_key] for keep_key in
-        ('push_id', 'size', 'distinct_size') }
+        commit['author_login'] = cm.author.login
+
+      commit['author_date'] = cm.commit.author.date
+
+      if cm.committer is None:
+        commit['committer_login'] = cm.commit.committer.name
+      else:
+        commit['committer_login'] = cm.committer.login
+
+      commit['committer_date']  = cm.commit.committer.date
+      commit['files_n']         = len(cm.files)  
+      commit['stats_additions'] = cm.stats.additions
+      commit['stats_deletions'] = cm.stats.deletions
+      commit['stats_total']     = cm.stats.total
       
-      for commit in event['payload']['commits']:
-        cmmt = {}
-        cmmt['sha']      = commit['sha']
-        cmmt['author']   = commit['author']['name']
-        cmmt['message']  = commit['message']
-        cmmt['distinct'] = commit['distinct']
-        commits.append(cmmt)
+      #self.cur.execute(insert_sql, commit)
+
+      # shall we commit? -- Oh the irony...
+      if n >= 100:
+        self.con.commit()
+        n = 0
+      n += 1
+      N += 1
     
-    elif event['type'] == 'ForkEvent':
-      # ForkEvent payload:
-      #   forkee:
-      #     full_name
-      payload['fork_'] = event['payload']['forkee']['full_name']
-    
-    elif event['type'] == 'WatchEvent':
-      # WatchEvent payload:
-      #   action
-      payload['watch_action'] = event['payload']['action']
-    
-    #elif event['type'] == 'PullRequestEvent':
-    #  # PullRequestEvent payload:
-    #  #   
-    #  payload = { 'pullrequest_' + keep_key: event['payload'][keep_key] for keep_key in
-    #    ('push_id', 'size', 'distinct_size') }
-    #
-    #    elif event['type'] == 'IssueEvent':
-    #      # IssueEvent payload:
-    #      #   action
-    #      #   issue:
-    #      #     
-    #      
-    #      
-    #      
-    #    
-    #    elif event['type'] == 'IssueCommentEvent':
-    #      # IssueCommentEvent payload:
-    #      #   action
-    #      #   issue:
-    #      #     
-    #      #   comment
-    
-    # add payload to event object    
-    eve.update(payload)
-    
-    # if event was a push event then we need to also save the commits
-    if not info['commits']:
-      self.upload_commit(info['commits'])
-  
-  
-  def upload_event(self, event):
-    """
-    construct an INSERT statement based on the event dictionary
-    """
-    event_sql = "INSERT INTO event (a,b,c) VALUES (%(qwe)s, %(asd)s, %(zxc)s);"
-    self.cur.execute(event_sql, info['event'])
-  
-  
-  def upload_commit(self, commit):
-    """
-    construct an INSERT statement based on the commit dictionary
-    """
-    commmits_sql = "INSERT INTO commit (a,b,c) VALUES (%(qwe)s, %(asd)s, %(zxc)s);"
-    self.cur.execute(commits_sql, info['commits'])  
+    # results
+    time_taken = time.time() - start_time
+    sys.stdout.write("\nProcessed %i commits in %.2fs.\n" % (N, time_taken))
   
   
   def get_cutoff_timestamp(self):
