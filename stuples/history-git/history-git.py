@@ -8,26 +8,44 @@ import os
 hg_path = os.path.expanduser('~/.history-git')
 
 # initiate logger
-logging.basicConfig(filename=os.path.join(hg_path, 'loggy.log'),
-  level=logging.INFO)
-logging.info("Starting...")
+log_file = os.path.join(hg_path, 'history_git.log')
+logger = logging.getLogger('history_git')
+logger.setLevel(logging.INFO)
+# create file handler which logs even debug messages
+fh = logging.FileHandler(log_file)
+fh.setLevel(logging.INFO)
+# create console handler with a higher log level
+ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
+# create formatter and add it to the handlers
+formatter = logging.Formatter('%(asctime)s  %(levelname)s  %(message)s',
+                              '%Y-%m-%d %H:%M:%S')
+fh.setFormatter(formatter)
+ch.setFormatter(formatter)
+# add the handlers to the logger
+logger.addHandler(fh)
+logger.addHandler(ch)
 
-# load list of repos to get history for
-repo_file = 'repo_list'
-repo = [line.rstrip('\n') for line in open(repo_file)]
+# Start
+logger.info("Starting...")
+history_git = ge.HistoryGit(hg_path) # drop_db=True
 
-logging.info("Collecting backlog for %i repos" % (len(repo)))
+# Add any new repos to the repo table
+history_git.populate_repo()
 
-# start the retrieval run using the History Git
-history_git = ge.HistoryGit(hg_path, drop_db=True)
 
-# testing
-# 1
-owner_repo = 'metacommunities/metacommunities'
-history_git.get(owner_repo)
-# 2
-#owner_repo = 'hadley/ggplot2'
-#history_git.get(owner_repo)
-# 3
-#owner_repo = 'torvalds/linux'
-#history_git.get(owner_repo)
+
+
+
+# Are there any specific repos that we need to collect info for?
+owner_repo_file = 'owner_repo_list'
+owner_repo = [line.rstrip('\n') for line in open(owner_repo_file)]
+
+logger.info("Collecting backlog for %i repos" % (len(owner_repo)))
+
+try:
+  for rp in owner_repo:
+    history_git.get(rp)
+except:
+  logger.error("Lol, your code is the worst.")
+  raise
