@@ -69,3 +69,29 @@ plotwatches = function(repo)
 
 	}
 	
+	
+#custom bigquery
+
+repo = "https://github.com/balanced/balanced-dashboard"	
+#repo = "https://github.com/amanuel/JS-HTML5-QRCode-Generator"
+
+sql = paste("SELECT repository_url, 
+	date(created_at) AS date,
+	count(repository_url) AS Watches
+	FROM [githubarchive:github.timeline]
+	WHERE type = 'WatchEvent' AND repository_url = '", repo, "'
+	GROUP EACH BY repository_url, date", sep = "")
+	
+sdat <- query_exec("metacommunities", "github_explore", sql,
+  billing=billing_project)	
+
+
+sdat$date <- as.POSIXct(sdat$date, format="%Y-%m-%d", tz="GMT") 
+
+sdat = sdat[order(sdat$date),]
+sdat$cumwatchers = cumsum(sdat$Watches)
+
+p.watches =
+	ggplot(sdat, aes(x=date, y=Watches)) +
+    geom_line() +
+    labs(x="", y="Number of Watches per day") 
