@@ -275,7 +275,7 @@ class HistoryGit():
         try:
           self.save_repo(rp)
         except:
-          print("\nError with repo ID: %s\n" % (rp._rawData['id']))
+          print("\nError with repo: %s\n" % (rp._rawData['full_name']))
           raise
         
         # after 50k repos memory starts to get close to full, so break the
@@ -311,7 +311,13 @@ class HistoryGit():
     dat = { key: data[key] for key in keys }
     
     # owner level
-    dat['owner'] = data['owner']['login']
+    try:
+      dat['owner'] = data['owner']['login']
+    except TypeError:
+      logger.warning("        Repo without an owner.")
+      pass
+
+    # stats last checked
     dat['last_updated'] = datetime.datetime.fromtimestamp(time.time()) # Now
     
     self.insert(dat, "repo")
