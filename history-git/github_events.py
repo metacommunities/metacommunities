@@ -25,12 +25,15 @@ class HistoryGitException(Exception):
 
 
 def pretty(d, indent=0):
-   for key, value in d.iteritems():
-      print '\t' * indent + str(key)
-      if isinstance(value, dict):
-         pretty(value, indent+1)
-      else:
-         print '\t' * (indent+1) + str(value)
+  """
+  pretty print a json object -- used to print the data when HistoryGit errors
+  """
+  for key, value in d.iteritems():
+    print '\t' * indent + str(key)
+    if isinstance(value, dict):
+       pretty(value, indent+1)
+    else:
+       print '\t' * (indent+1) + str(value)
 
 
 
@@ -250,7 +253,7 @@ class HistoryGit():
     self.open_con()
     logger.info("    Opened database connection.")
     
-    # set since
+    # 'since' SQL
     select_sql = """
       SELECT max(id)
       FROM repo;
@@ -276,6 +279,7 @@ class HistoryGit():
           self.save_repo(rp)
         except:
           print("\nError with repo ID: %s\n" % (rp._rawData['id']))
+          pretty(rp._rawData)
           raise
         
         # after 50k repos memory starts to get close to full, so break the
@@ -311,7 +315,12 @@ class HistoryGit():
     dat = { key: data[key] for key in keys }
     
     # owner level
-    dat['owner'] = data['owner']['login']
+    try:
+      dat['owner'] = data['owner']['login']
+    except TypeError:
+      logger.warning("  Found a repo without an owner.")
+      pass
+    
     dat['last_updated'] = datetime.datetime.fromtimestamp(time.time()) # Now
     
     self.insert(dat, "repo")
