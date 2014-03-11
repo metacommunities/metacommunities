@@ -1,5 +1,5 @@
 # ==============================================================================
-# explore tag frequency
+# separate from the other scripts, this explores tag frequency
 # ==============================================================================
 
 library(RMySQL)
