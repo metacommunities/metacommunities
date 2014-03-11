@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 # <nbformat>3.0</nbformat>
 
+# <headingcell level=1>
+
+# Classifying Organizations
+
 # <codecell>
 
 %load_ext autoreload
@@ -96,15 +100,35 @@ org_full.shape
 # choose the matching organisation
 org_full_training_df = org_full_df.ix[org_training['repository_organization']]
 
-# add a column for the organisation type
-org_full_training_df['type'] = org_training.type
+# <codecell>
+
+# if already saved, load local copy
+org_full_training_df = pd.read_csv('../data/organisation_classification_data.csv')
+print org_full_training_df.shape
 
 # <codecell>
 
-# making a local copy for easy of playing around
+# otherwise, add the 'type' column, set the index to organization, and save local copy
+org_full_training_df.set_index(keys = 'repository_organization', inplace=True)
+org_training.set_index(keys = 'repository_organization', inplace=True)
+
+org_full_training_df['type'] = org_training.type
+org_full_training_df.to_csv('../data/organisation_classification_data.csv')
+org_full_training_df.shape
+
+# <codecell>
+
+# making a local copy for ease of playing around
 org_full_training_df.to_csv('../data/organisation_classification_data.csv')
 
-org_full_training_df
+# <codecell>
+
+org_full_training_df.columns
+
+# <codecell>
+
+org_full_training_df.type
+org_full_training_df.type.hist(figsize=(4,4), bins=4)
 
 # <markdowncell>
 
