@@ -1,8 +1,12 @@
 # ==============================================================================
-# create a CSV listing all connections (edges) between tags with the
-# 'edge list' format as shown here:
+# output a CSV and a graphml file which lists all connections (edges)
+# between stackoverflow tags with the 'edge list' format as shown here:
 # https://gephi.org/users/supported-graph-formats/csv-format/
 # note that there will be no 'weight' corresponding to the edges
+#
+# current settings mean that only tags that have been used at least 50 times
+# are chosen and have a link stregnth of two with at least one other tag which
+# also has 50 uses.
 # ==============================================================================
 
 library(RMySQL)
