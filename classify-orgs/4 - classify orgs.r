@@ -16,16 +16,26 @@ ev <- c("repos",
 
 # need to split out the test and train sets
 xtest <- merge(org_train, org, all.x=TRUE)
-ytest <- xtest$is_software
+
+ytest <- factor(xtest$is_software)
+
+x <- org
+x <- x[!(x$repository_organization %in% xtest$repository_organization), ]
 
 xtest <- xtest[, ev]
+xtest <- sapply(xtest, as.numeric)
 
+x <- x[, ev]
+x <- sapply(x, as.numeric)
 
-
-x <- org[, ev]
-
-
-
-rf <- randomForest(dat, ntree=1, nodesize=10) # run as an unsupervised classifier
+rf <- randomForest(x=x, xtest=xtest, ytest=ytest, ntree=50, nodesize=25)
 # Error: cannot allocate vector of size 48.0 Gb
 
+# ------------------------------------------------------------------------------
+# try 'bigrf': "Big Random Forests: Classification and Regression Forests for
+# Large Data Sets"
+# ------------------------------------------------------------------------------
+
+library(bigrf)
+
+bigrfc()

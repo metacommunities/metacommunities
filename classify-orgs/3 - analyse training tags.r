@@ -49,50 +49,43 @@ ev <- c("repos",
         "push_events",
         "pushers",
         "push_duration_days",
-        "mins_to_20_events",
         "repository_homepages",
         "repository_owners",
         "repository_languages",
         "watch_events",
         "fork_events",
         "issue_events",
+        "issue_comment_events",
+        "f0_",
+        "download_events",
+        "pull_requests_merged",
         "so_repos_linked_to",
-        "has_blog")
-
-sat.frml <- function(x) {
-  rhs <- paste(ev, collapse = " + ")
-  frml <- paste(x, "~", rhs)
-  as.formula(frml)
-}
+        "mins_to_20_events",
+        "has_blog",
+        "is_software",
+        "is_technical",
+        "is_education",
+        "is_business",
+        "is_games",
+        "is_social")
 
 
 # ------------------------------------------------------------------------------
-# model if an org has the tag X
+# model if an org has a particular type
 # ------------------------------------------------------------------------------
 
-tags <- grep("^is_", names(dat), value=TRUE)
+x <- dat[, ev]
+y <- factor(dat$type)
 
-tag.imp <- list()
+rf <- randomForest(x, y, data=dat, importance=TRUE, proximity=TRUE)
 
-for (tag in tags) {
-  dat[[tag]] <- factor(dat[[tag]])
-  
-  sft_frml <- sat.frml(tag)
-  
-  # fit random forest
-  rf <- randomForest(sft_frml, data=dat, importance=TRUE, proximity=TRUE)
-
-  # variable importance
-  imp <- as.data.frame(importance(rf))
-  imp <- imp[, c("MeanDecreaseAccuracy", "MeanDecreaseGini")]
-  imp$var <- rownames(imp)
-  rownames(imp) <- NULL
-  imp <- melt(imp, id="var")
-  names(imp)[names(imp) == "variable"] <- "measure"
-  
-  # save
-  tag.imp[[tag]] <- imp
-}
+# variable importance
+imp <- as.data.frame(importance(rf))
+imp <- imp[, c("MeanDecreaseAccuracy", "MeanDecreaseGini")]
+imp$var <- rownames(imp)
+rownames(imp) <- NULL
+imp <- melt(imp, id="var")
+names(imp)[names(imp) == "variable"] <- "measure"
 
 tag.imp.bk <- melt(tag.imp, id=names(tag.imp[[1]]))
 
@@ -119,4 +112,36 @@ p.imp
 
 ggsave(p.imp, file="img/p_forest_regression_importance.png",
   width=15, height=5)
+
+# ------------------------------------------------------------------------------
+# been reading up on random forests, trying some more things
+# ------------------------------------------------------------------------------
+
+tag = "is_software"
+
+MDSplot(rf[[tag]], dat[[tag]])
+
+
+# http://stats.stackexchange.com/a/30701/16290
+library(ROCR)
+
+OOB.votes <- predict(rf[[tag]], dat, type="prob")
+OOB.pred <- OOB.votes[,2]
+
+pred.obj <- prediction(OOB.pred, dat[[tag]])
+
+RP.perf <- performance(pred.obj, "rec", "prec")
+plot(RP.perf)
+
+ROC.perf <- performance(pred.obj, "fpr", "tpr")
+plot(ROC.perf)
+
+plot(RP.perf@alpha.values[[1]], RP.perf@x.values[[1]])
+lines(RP.perf@alpha.values[[1]], RP.perf@y.values[[1]])
+lines(ROC.perf@alpha.values[[1]], ROC.perf@x.values[[1]])
+
+
+
+
+
 
