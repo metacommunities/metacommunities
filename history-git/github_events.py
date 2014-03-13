@@ -396,7 +396,7 @@ class HistoryGit():
     # shall we commit to the db? -- Oh the irony...
     if self.n >= 1000:
       self.con.commit()
-      logger.info("        added %s records to '%s' table..." % (format(self.n, ",d"), table))
+      #logger.info("        added %s records to '%s' table..." % (format(self.n, ",d"), table))
       self.n = 0
     self.n += 1
     self.N += 1

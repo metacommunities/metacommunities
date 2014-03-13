@@ -3,6 +3,7 @@
 import github_events as ge
 import logging
 import os
+import urllib
 
 # dot folder for settings and log files
 hg_path = os.path.expanduser('~/.history-git')
@@ -31,10 +32,16 @@ logger.info("Starting...")
 history_git = ge.HistoryGit(hg_path) # drop_db=True
 
 # Add any new repos to the repo table
-history_git.populate_repo()
-
-
-
+while True:
+  try:
+    history_git.populate_repo()
+    break
+  except urllib.error.URLError, e:
+    logger.error(e.reason)
+    logger.info("Sleep for 10 minutes.")
+    time.sleep(600) # 10 mins
+    logger.info("Trying again.")
+    pass
 
 
 # Are there any specific repos that we need to collect info for?
