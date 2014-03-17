@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 # <nbformat>3.0</nbformat>
 
+# <markdowncell>
+
+# # A series of attempts to map what repos contain
+
 # <codecell>
 
 %load_ext autoreload
@@ -10,6 +14,7 @@
 
 import sys
 sys.path.append('..')
+import bq
 import github_api_data as gad
 import google_bigquery_access as gba
 
@@ -22,6 +27,86 @@ import gensim as gs
 import MySQLdb
 import nltk
 import lsh
+from ggplot import *
+
+# <markdowncell>
+
+# ## Popular repo names and what they say
+
+# <codecell>
+
+client = bq.Client.Get()
+
+query = "select * from metacommunities:github_explore.Repo_Names_Popular order by frequency desc"
+
+# <codecell>
+
+fields, data = client.ReadSchemaAndRows(client.Query(query)['configuration']['query']['destinationTable'], max_rows = 1000000)
+colnames = [f['name'] for f in fields]
+
+# <codecell>
+
+top_names = pd.DataFrame(data, columns = colnames)
+# top_names.drop_duplicates(inplace=True)
+top_names['frequency'] = top_names.frequency.astype('int')
+
+# <codecell>
+
+top_names.to_csv('../data/top_repo_names_100k.csv')
+
+# <codecell>
+
+# load local copy
+top_names = pd.DataFrame.from_csv('../data/top_repo_names_100k.csv')
+
+# <codecell>
+
+# normalise repo names
+
+top_names['repos_normed'] = top_names.repository_name.str.lower().str.strip()
+# top_names.repos_normed.value_counts()
+
+# <codecell>
+
+repo_words = [i for l in top_names.repos_normed.astype('string').str.strip().str.split(pat = '[-._]').tolist() for i in  l]
+
+# <codecell>
+
+repo_words = pd.Series(repo_words)
+repo_words.value_counts()[:100]
+
+# <markdowncell>
+
+# Oh right, look at the repo names -- hundreds of them consist of hyphens.
+
+# <markdowncell>
+
+# # Github repos that  use github to serve content
+
+# <codecell>
+
+client = bq.Client.Get()
+
+query = "select * from metacommunities:github_explore.repos_with_github_names"
+
+# <codecell>
+
+fields, data = client.ReadSchemaAndRows(client.Query(query)['configuration']['query']['destinationTable'], max_rows = 1000000)
+colnames = [f['name'] for f in fields]
+
+# <codecell>
+
+gh_repos = pd.DataFrame(data, columns = colnames)
+gh_repos.drop_duplicates(inplace=True)
+
+# <codecell>
+
+gh_repos
+
+# <codecell>
+
+gh_repos.set_index('repository_n', inplace=True)
+gh_repos
 
 # <markdowncell>
 

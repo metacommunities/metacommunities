@@ -5,13 +5,13 @@
 
 # # Classifying Organizations
 # 
-# We are attempting to build a classifier for Github organisations. We want to see if organisations organise github (that is, are they a major metacommunity process?). Is the 'organisation' construct something that deeply shapes what happens on the platform? If so, in what ways?
+# We are attempting to build a classifier for Github organisations. We want to see if organisations organise github. That is, are they a major metacommunity process? Do they significantly affect resource use in the code commons? Is the 'organisation' construct something that deeply shapes what happens on the platform? If so, in what ways?
 # 
 # Our original motivation for this was a kind of despair in looking at repositories. Although we could characterise them in terms of the categories of sociability (fork-pull requests, pushes, releases, etc), we found it difficult to say anything about why they all existed, what they were doing. Many of them seem to be doing more or less the same thing, but how would we know that? Many of them seemed to be doing nothing. So everything seems too homogeneous. 
 # 
 # Organisations offer a bit more hope. Some of them exist outside Github and prior to github. Identifying them might give a handle on what is happening  to repos. Conversely, organisations that start on Github and then start to extend beyond it might also be important. Identifying them might tell us about how Github is 
 # 
-# The major question here is whether organisations generate any signal on github. 
+# The first major question here is whether organisations generate any signal on github. That's what the classifier modelling tries to explore.
 
 # <codecell>
 
@@ -52,6 +52,10 @@ from sklearn.ensemble import RandomForestClassifier
 # 
 # B. The table of ~ 80k organisations with as many features as we could find -- how many repos, do they fork, do they receive pull requests, do they have an external website, etc
 
+# <markdowncell>
+
+# ### Cleaning up the training data
+
 # <codecell>
 
 ## the training/test data
@@ -78,7 +82,9 @@ org_training['type'].hist(bins=4,figsize=(4,4))
 
 # <markdowncell>
 
-# ## Construct the full training/testing data set using the organization ultimate table on bigquery
+# ### Construct the full training/testing data set using the organization ultimate table on bigquery
+# 
+# Begin to generate the full training data by getting most of what we know about organizations
 
 # <codecell>
 
@@ -124,7 +130,7 @@ org_full_training_df.shape
 
 # <markdowncell>
 
-# #### Load local cache of data (if saved previously)
+# ### Load local cache of dataset (if saved previously)
 
 # <codecell>
 
@@ -136,18 +142,19 @@ print org_full_training_df.shape
 
 # <codecell>
 
-org_type = pd.Categorical(org_full_training_df.type,['junk', 'internal_only', 'internal_ext', 'external'])
+org_full_training_df['org_type'] = pd.cut(org_full_training_df.type,bins=4, labels=['junk', 'internal_only', 'internal_ext', 'external'])
 
 # <codecell>
 
 # but the categorical variable has a different shape - not sure why that is.
-print org_full_training_df.type.value_counts()
+print org_full_training_df.org_type.value_counts()
+org_full_training_df.org_type.value_counts().plot(kind='bar',color='green')
 
 # <markdowncell>
 
 # ## Feature selection
 # 
-# Only some variables are likely to be directly useful in classifying organisations. 
+# Which variables/features are likely to be directly useful in classifying organisations?
 
 # <codecell>
 
@@ -164,7 +171,7 @@ print '[%s]' % '\n '.join(map(str, org_full_training_df.columns.tolist()))
 # ## Variables I don't fully understand
 # 
 # 1. Event20Time -- is this when an organisation first reaches 20 events? But there is already MinsTO20Events
-# 2. repository_homepages
+# 2. repository_homepages -- are these offsite homepages for repos
 
 # <codecell>
 
@@ -194,9 +201,11 @@ res=org_full_training_df.icol([1,2,3,4,5, 6,7,8,9,10,11,12,13, 14, 15, 16, 18, 1
 
 # <codecell>
 
-
-p = ggplot(data = org_full_training_df, aesthetics=aes(x='Pushers', y='PushEvents', size='ForkEvents', color='type'))
-print(p+geom_point() + facet_wrap(x='type') + ggtitle('Types of organisation'))
+org_plot = org_full_training_df.ix[org_full_training_df.org_type.dropna()]
+print org_plot.org_type
+# p = ggplot(data = org_full_training_df.ix[org_full_training_df.org_type.dropna()],
+#                                           aesthetics=aes(x='Pushers', y='PushEvents', size='ForkEvents', color='org_type'))
+# print(p+geom_point() + labs('Pushers', 'PushEvents', 'Organization Pushing'))
 
 # <codecell>
 
