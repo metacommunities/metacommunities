@@ -30,21 +30,53 @@ db  = 'so'
 chrst = 'utf8'
 
 
+# connections
+
+global con_tag
+con_tag = MySQLdb.connect(host=hst, user=usr, passwd=pwd, db=db, charset=chrst)
+
+global cur_tag
+cur_tag = con_tag.cursor()
+
+con_post = MySQLdb.connect(host=hst, user=usr, passwd=pwd, db=db, charset=chrst)
+cur_post = con_post.cursor(MySQLdb.cursors.SSCursor) # NOT fetch all
 
 # functions
 
 def process(pid, post):
   # find github URL(s)
-  pattern = r'http[s]?://(www\.)?github.com/([\S]*/[\S]*)'
+  # \w    word character: [A-Za-z0-9_]
+  # \d    digit: [0-9]
+  pattern = r'http[s]?://(www\.)?github.com/([\w\d-]*/[\w\d-]*)'
   regex = re.compile(pattern, re.IGNORECASE)
-  for match in regex.finditer(body):
-      repo_url = match.group(2) # group=2, second brackets i.e. "owner/repo"
-      save_url_with_tags(pid, repo_url)
+  
+  # make sure URLs are unique
+  # group=0, all of the URL i.e. "http://..."
+  # group=2, second brackets i.e. "owner/repo"
+  if body is not None:
+    urls = [ match.group(2) for match in regex.finditer(body) ]
+    urls = list(set(urls))
+    
+    # for each github url in the post, do the following:
+    for url in urls:
+        tags = get_tags(pid)
+        save_url_with_tags(pid, url, tags)
+        con_tag.commit()
 
-def save_url_with_tags(pid, url):
-  # 2nd connection to MySQL
-  con_tag = MySQLdb.connect(host=hst, user=usr, passwd=pwd, db=db, charset=chrst)
-  cur_tag = con_tag.cursor()
+def get_tags(pid):
+  """
+  Get tags for the post (or for the parent Question post if post is an answer)
+  """
+
+  # determine if post is a question or an answer by grabbing the ParentID for
+  # the post. NULL if post is THE parent.
+  
+  cur_tag.execute("SELECT parentid FROM post WHERE id = %s;", pid)
+  
+  parent = cur_tag.fetchone()[0]
+  
+  if parent:
+    pid = parent
   
   # get tags
   tag_sql = """
@@ -55,7 +87,12 @@ def save_url_with_tags(pid, url):
   cur_tag.execute(tag_sql, (pid))
   tags = cur_tag.fetchall()
   
+  return tags
+
+
+def save_url_with_tags(pid, url, tags):
   # pair-off the tags with the url
+  
   pair_sql = """
     INSERT INTO url_tag (pid, url, tag)
     VALUES (%s, %s, %s);
@@ -64,20 +101,12 @@ def save_url_with_tags(pid, url):
   for tag in tags:
     cur_tag.execute(pair_sql, (pid, url, tag[0]))
   
+  # one dot is one post that contained at least one github URL
   sys.stdout.write('.')
   sys.stdout.flush()
-  # goodbye mysql
-  cur_tag.close()
-  con_tag.commit()
-  con_tag.close()
 
 
-
-## main
-
-# connection for aquiring post body
-con_post = MySQLdb.connect(host=hst, user=usr, passwd=pwd, db=db, charset=chrst)
-cur_post = con_post.cursor(MySQLdb.cursors.SSCursor) # NOT fetch all
+## main logic
 
 # create the table for the URL-tag pairs 
 url_tag_sql = """
@@ -99,3 +128,9 @@ for pid, body in cur_post:
 sys.stdout.write('\n')
 sys.stdout.flush()
 
+# goodby mysql
+cur_post.close()
+con_post.close()
+
+cur_tag.close()
+con_tag.close()
