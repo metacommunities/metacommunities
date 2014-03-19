@@ -3,6 +3,7 @@
 import github_events as ge
 import logging
 import os
+import sys
 
 # dot folder for settings and log files
 hg_path = os.path.expanduser('~/.history-git')
@@ -31,7 +32,7 @@ logger.info("Starting...")
 history_git = ge.HistoryGit(hg_path) # drop_db=True
 
 # Add any new repos to the repo table
-history_git.populate_repo()
+# history_git.populate_repo()
 
 
 
@@ -41,11 +42,20 @@ history_git.populate_repo()
 owner_repo_file = 'owner_repo_list'
 owner_repo = [line.rstrip('\n') for line in open(owner_repo_file)]
 
-logger.info("Collecting backlog for %i repos" % (len(owner_repo)))
+# Have any owner/repos been given on the command line?
+specific_repos = sys.argv[1:]
+# print specific_repos
+
+
+logger.info("Collecting backlog for %i repos" % (len(owner_repo) + len(specific_repos)))
 
 try:
-  for rp in owner_repo:
-    history_git.get(rp)
+  if len(specific_repos) > 0:
+	  for rp in specific_repos:
+	  	history_git.get(rp)
+  if len(owner_repo) >0: 
+	  for rp in owner_repo:
+	    history_git.get(rp)
 except:
   logger.error("Lol, your code is the worst.")
   raise
