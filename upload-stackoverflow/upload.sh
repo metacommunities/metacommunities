@@ -33,7 +33,21 @@ mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so posts > $SQLDIR/posts.sql
 mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so users > $SQLDIR/users.sql
 #mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so votes > $SQLDIR/votes.sql
 
+
+# ------------------------------------------------------------------------------
+# create a 'tag' table from the 'tags' field in 'post' table
+# ------------------------------------------------------------------------------
+# create
+python create_tag_files.py -u$MYSQL_USER -p$MYSQL_PASSWD -h$MYSQL_HOST
+# import
+mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_tags.sql
+# dump
+mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so tags > $SQLDIR/tags.sql
+mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so posttags > $SQLDIR/posttags.sql
+
+# ------------------------------------------------------------------------------
 # upload to google storage
+# ------------------------------------------------------------------------------
 gsutil md gs://$GSDIR
 FILES=`ls $SQLDIR`
 for f in $FILES
@@ -84,14 +98,13 @@ function upload2bq {
   done
 }
 
-upload2bq 'Users'
-upload2bq 'Badges'
-upload2bq 'Votes'
-upload2bq 'Comments'
-upload2bq 'Posts'
 
-# ==============================================================================
-# create a 'tag' table from the 'tags' field in 'post' table
-# ==============================================================================
-python create_tag_files.py -u$MYSQL_USER -p$MYSQL_PASSWD -h$MYSQL_HOST 
+#upload2bq 'Badges'
+#upload2bq 'Comments'
+upload2bq 'Posts'
+upload2bq 'Users'
+#upload2bq 'Votes'
+
+
+
 

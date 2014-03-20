@@ -15,8 +15,8 @@ def concatenate_tags(mysql_user, mysql_password, mysql_host):
 
   # create two CSV files; 'tag.csv' and 'posttag.csv' from the data in the Tags
   # field in the 'post' table 
-  tag_file     = 'stackoverflow.com/tag.csv'
-  posttag_file = 'stackoverflow.com/posttag.csv'
+  tag_file     = 'stackoverflow.com/tags.csv'
+  posttag_file = 'stackoverflow.com/posttags.csv'
 
   con = MySQLdb.connect(host=mysql_host,
     user=mysql_user, passwd=mysql_password, db="so")
