@@ -14,37 +14,35 @@ GSDIR="sandboxx"
 # extract just stackoverflow
 7za e 'stackoverflow.com-*.7z' -o$SODIR
 
+# interesting tables 
+declare -a TBL=("posts" "users") # "badges" "comments" "votes"
+
+
 # ==============================================================================
 # load into local mysql instance
 # ==============================================================================
 mysql -u $MYSQL_USER -p$MYSQL_PASSWD -e 'CREATE DATABASE IF NOT EXISTS so;'
+mkdir $SQLDIR
 
-#mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_badges.sql
-#mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_comments.sql
-mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_posts.sql
-mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_users.sql
-#mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_votes.sql
+for i in "${TBL[@]}"
+do
+    echo "$i table."
+    echo "  Importing."
+    mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_$i.sql
+    echo "  Dumping."
+    mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so $i | gzip > $SQLDIR/$i.sql.gz
+done
 
 # ------------------------------------------------------------------------------
 # create a 'tag' table from the 'tags' field in 'post' table
 # ------------------------------------------------------------------------------
 # create
-python create_tag_files.py -u $MYSQL_USER -p $MYSQL_PASSWD --host $MYSQL_HOST
+python create_tag_files.py -u $MYSQL_USER -p $MYSQL_PASSWD --host localhost
 # import
 mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_tags.sql
-
-# ------------------------------------------------------------------------------
-# dump tables
-# ------------------------------------------------------------------------------
-mkdir $SQLDIR
-
-declare -a TBL=("posts" "users") # "tags" "posttags") # "badges" "comments" "votes"
-
-for i in "${TBL[@]}"
-do
-   echo "Dumping and zipping $i table."
-   mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so $i | gzip > $SQLDIR/$i.sql.gz
-done
+# dump
+mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so tags | gzip > $SQLDIR/tags.sql.gz
+mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so posttags | gzip > $SQLDIR/posttags.sql.gz
 
 # ------------------------------------------------------------------------------
 # upload to google storage
@@ -56,7 +54,8 @@ for f in $FILES
   gsutil cp $SQLDIR/$f  gs://$GSDIR/$f
 done
 
-echo -e '\nAll done. Now go manually import the tables via google console.\n'
+echo -e '\nAll done. Now go manually import the tables into Cloud SQL via google console.\n'
+
 
 # ==============================================================================
 # iterate over the XML and convert to JSON
@@ -64,6 +63,7 @@ echo -e '\nAll done. Now go manually import the tables via google console.\n'
 #   -t    table to convert
 #   -s    split size (MB) of JSON file (default is no split)
 # ==============================================================================
+echo -e '\n\nConverting XML to JSON for BigQuery.\n'
 #python convert_xml_to_json.py -i$SODIR -t'Badges'   -s2000 
 #python convert_xml_to_json.py -i$SODIR -t'Comments' -s2000 
 python convert_xml_to_json.py -i$SODIR -t'Posts'    -s2000 
@@ -80,6 +80,7 @@ for f in $FILES
   do
   gzip -cv $JSONDIR/$f > $ZIPDIR/$f.gz
 done
+
 
 # ==============================================================================
 # upload stackoverflow to bigquery
@@ -99,13 +100,9 @@ function upload2bq {
   done
 }
 
-
 #upload2bq 'Badges'
 #upload2bq 'Comments'
 upload2bq 'Posts'
 upload2bq 'Users'
 #upload2bq 'Votes'
-
-
-
 

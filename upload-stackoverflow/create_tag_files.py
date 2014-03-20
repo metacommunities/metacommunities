@@ -25,12 +25,12 @@ def concatenate_tags(mysql_user, mysql_password, mysql_host):
 
   sys.stdout.write(" Prepping")
   # get n so we can monitor progress
-  cur.execute('SELECT count(*) FROM post WHERE postTypeId = 1;')
+  cur.execute('SELECT count(*) FROM posts WHERE postTypeId = 1;')
   n = cur.fetchone()
   n = n[0]
   sys.stdout.write(" .")
   # iterate over the Tags from the Posts table
-  cur.execute('SELECT id, tags FROM post WHERE postTypeId = 1;')
+  cur.execute('SELECT id, tags FROM posts WHERE postTypeId = 1;')
   sys.stdout.write(" .\n")
 
   # process the tags
@@ -83,6 +83,6 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('-u', '--user')
   parser.add_argument('-p', '--passwd')
-  parser.add_argument('-h', '--host')
+  parser.add_argument('-l', '--host')
   args = parser.parse_args()
-  concatenate_tags(args.user, ars.password, args.host)
+  concatenate_tags(args.user, args.passwd, args.host)
