@@ -9,6 +9,7 @@ import requests
 import sys
 import textwrap
 import time
+import urllib
 import warnings
 
 # supress MySQL Warnings
@@ -17,11 +18,34 @@ warnings.filterwarnings('ignore', category=MySQLdb.Warning)
 logger = logging.getLogger('history_git')
 logger.info("Module loaded")
 
-
-
 class HistoryGitException(Exception):
     pass
 
+
+def create_logger(hg_path):
+  log_file = os.path.join(hg_path, 'history_git.log')
+  logger = logging.getLogger('history_git')
+  logger.setLevel(logging.INFO)
+  
+  # create file handler which logs even debug messages
+  fh = logging.FileHandler(log_file)
+  fh.setLevel(logging.INFO)
+  
+  # create console handler with a higher log level
+  ch = logging.StreamHandler()
+  ch.setLevel(logging.INFO)
+  
+  # create formatter and add it to the handlers
+  formatter = logging.Formatter('%(asctime)s  %(levelname)s  %(message)s',
+                                '%Y-%m-%d %H:%M:%S')
+  fh.setFormatter(formatter)
+  ch.setFormatter(formatter)
+  
+  # add the handlers to the logger
+  logger.addHandler(fh)
+  logger.addHandler(ch)
+  
+  return logger
 
 
 def pretty(d, indent=0):
@@ -48,6 +72,7 @@ def query_yes_no(question, default="yes"):
     """
     valid = {"yes":True,   "y":True,  "ye":True,
              "no":False,     "n":False}
+    
     if default == None:
         prompt = " [y/n] "
     elif default == "yes":
@@ -56,10 +81,11 @@ def query_yes_no(question, default="yes"):
         prompt = " [y/N] "
     else:
         raise ValueError("invalid default answer: '%s'" % default)
-
+    
     while True:
         sys.stdout.write(question + prompt)
         choice = raw_input().lower()
+        sys.stdout.write("\n")
         if default is not None and choice == '':
             return valid[default]
         elif choice in valid:
@@ -67,8 +93,7 @@ def query_yes_no(question, default="yes"):
         else:
             sys.stdout.write("Please respond with 'yes' or 'no' "\
                              "(or 'y' or 'n').\n")
-
-
+    
 class HistoryGit():
   """
   History Git is this really grumpy guy who knows exactly how to get all the
@@ -76,19 +101,21 @@ class HistoryGit():
   and he'll get to work, begrudingly.
   """
   
-  def __init__(self, path, drop_db=False, commit_stats=False):
-    self.commit_stats = commit_stats
-    
+  def __init__(self, path, drop_db=False):
     # load settings
     self.conf = ConfigParser.ConfigParser()
     self.conf.read(os.path.join(path, 'settings.conf'))
+    
+    # history git settings
+    self.commit_stats = self.conf.get('history_git', 'commit_stats')
+    self.update_repo_names = self.conf.get('history_git', 'get_repo_names')
     
     # tables!
     self.create_db(drop_db)
     
     # github
-    self.gh = github.Github(login_or_token = self.conf.get('github', 'usr'),
-                            password = self.conf.get('github', 'pwd'))
+    self.gh = github.Github(login_or_token = self.conf.get('github', 'user'),
+                            password = self.conf.get('github', 'passwd'))
   
   def open_con(self):
     """
@@ -96,8 +123,8 @@ class HistoryGit():
     """
     
     self.con = MySQLdb.connect(host=self.conf.get('mysql', 'host'),
-                               user=self.conf.get('mysql', 'usr'),
-                               passwd=self.conf.get('mysql', 'pwd'),
+                               user=self.conf.get('mysql', 'user'),
+                               passwd=self.conf.get('mysql', 'passwd'),
                                db=self.conf.get('mysql', 'db'),
                                charset='utf8')
     self.cur = self.con.cursor()
@@ -122,8 +149,8 @@ class HistoryGit():
     logger.info("Checking '%s' database..." % (self.conf.get('mysql', 'db')))
     
     con = MySQLdb.connect(host=self.conf.get('mysql', 'host'),
-                          user=self.conf.get('mysql', 'usr'),
-                          passwd=self.conf.get('mysql', 'pwd'))
+                          user=self.conf.get('mysql', 'user'),
+                          passwd=self.conf.get('mysql', 'passwd'))
     cur = con.cursor()
     
     # wipe those tables
@@ -272,6 +299,23 @@ class HistoryGit():
     con.close()
     logger.info("Done.")
   
+  def get_repo_names(self):
+    if self.update_repo_names:
+      question = textwrap.dedent("""
+        Should I collect names of new repos? If this is
+        the first time it will take at least 5 days.""")
+      ans = query_yes_no(question)
+      if ans == True:
+        while True:
+          try:
+            self.populate_repo()
+            break
+          except urllib.error.URLError as e:
+            logger.error(e.reason)
+            logger.info("Sleep for 10 minutes.")
+            time.sleep(600) # 10 mins
+            logger.info("Trying again.")
+            pass
   
   def populate_repo(self):
     """
