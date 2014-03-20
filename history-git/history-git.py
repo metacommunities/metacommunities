@@ -4,6 +4,7 @@ import github_events as ge
 import logging
 import os
 import sys
+import urllib
 
 # dot folder for settings and log files
 hg_path = os.path.expanduser('~/.history-git')
@@ -31,31 +32,35 @@ logger.addHandler(ch)
 logger.info("Starting...")
 history_git = ge.HistoryGit(hg_path) # drop_db=True
 
-# Add any new repos to the repo table
-# history_git.populate_repo()
-
-
-
-
+# Add names of new repos to the repo table
+q = """Should I collect names of new repos? If this is
+the first time it will take at least 5 days."""
+collect_new_repos = ge.query_yes_no(q)
+if q:
+  while True:
+    try:
+      history_git.populate_repo()
+      break
+    except urllib.error.URLError, e:
+      logger.error(e.reason)
+      logger.info("Sleep for 10 minutes.")
+      time.sleep(600) # 10 mins
+      logger.info("Trying again.")
+      pass
 
 # Are there any specific repos that we need to collect info for?
 owner_repo_file = 'owner_repo_list'
 owner_repo = [line.rstrip('\n') for line in open(owner_repo_file)]
 
 # Have any owner/repos been given on the command line?
-specific_repos = sys.argv[1:]
-# print specific_repos
+owner_repo.extend(sys.argv[1:])
 
-
-logger.info("Collecting backlog for %i repos" % (len(owner_repo) + len(specific_repos)))
+# Start backlog for specific repos
+logger.info("Collecting backlog for %i repos" % (len(owner_repo))
 
 try:
-  if len(specific_repos) > 0:
-	  for rp in specific_repos:
-	  	history_git.get(rp)
-  if len(owner_repo) >0: 
-	  for rp in owner_repo:
-	    history_git.get(rp)
+  for rp in owner_repo:
+    history_git.get(rp)
 except:
   logger.error("Lol, your code is the worst.")
   raise
