@@ -1,8 +1,5 @@
--- run this file by using something like:
--- mysql -u so_import -p -h localhost --local_infile=1 so < import_into_mysql.sql
-
--- define post table
-CREATE TABLE post (
+-- post
+CREATE TABLE IF NOT EXISTS posts (
   AcceptedAnswerId      INTEGER NULL,
   AnswerCount           INTEGER NULL,
   Body                  LONGTEXT NULL,
@@ -23,15 +20,13 @@ CREATE TABLE post (
   Score                 INTEGER NULL,
   Tags                  TEXT NULL,
   Title                 TEXT NULL,
-  ViewCount             INTEGER NULL
+  ViewCount             INTEGER NULL,
+  INDEX Id (Id),
+  INDEX PostType (PostTypeId)
 )
 CHARACTER SET utf8
-COLLATE utf8_general_ci;
+COLLATE utf8_general_ci
+ENGINE = InnoDB;
 
--- load post data
-LOAD XML LOCAL INFILE 'stackoverflow.com/Posts.xml' INTO TABLE post
+LOAD XML LOCAL INFILE 'stackoverflow.com/stackoverflow.com-Posts' INTO TABLE posts
 ROWS IDENTIFIED BY '<row>';
-
-ALTER TABLE post ADD UNIQUE INDEX Id (Id)
-ALTER TABLE post ADD INDEX PostTypeId (PostTypeId)
-
