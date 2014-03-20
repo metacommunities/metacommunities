@@ -25,25 +25,26 @@ mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_posts.sql
 mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_users.sql
 #mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_votes.sql
 
-# dump tables
-mkdir stackoverflow.com_SQL
-#mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so badges > $SQLDIR/badges.sql
-#mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so comments > $SQLDIR/comments.sql
-mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so posts > $SQLDIR/posts.sql
-mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so users > $SQLDIR/users.sql
-#mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so votes > $SQLDIR/votes.sql
-
-
 # ------------------------------------------------------------------------------
 # create a 'tag' table from the 'tags' field in 'post' table
 # ------------------------------------------------------------------------------
 # create
-python create_tag_files.py -u$MYSQL_USER -p$MYSQL_PASSWD -h$MYSQL_HOST
+python create_tag_files.py -u $MYSQL_USER -p $MYSQL_PASSWD --host $MYSQL_HOST
 # import
 mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_tags.sql
-# dump
-mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so tags > $SQLDIR/tags.sql
-mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so posttags > $SQLDIR/posttags.sql
+
+# ------------------------------------------------------------------------------
+# dump tables
+# ------------------------------------------------------------------------------
+mkdir $SQLDIR
+
+declare -a TBL=("posts" "users") # "tags" "posttags") # "badges" "comments" "votes"
+
+for i in "${TBL[@]}"
+do
+   echo "Dumping and zipping $i table."
+   mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so $i | gzip > $SQLDIR/$i.sql.gz
+done
 
 # ------------------------------------------------------------------------------
 # upload to google storage

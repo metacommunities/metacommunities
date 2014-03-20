@@ -82,7 +82,7 @@ def concatenate_tags(mysql_user, mysql_password, mysql_host):
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('-u', '--user')
-  parser.add_argument('-p', '--password')
+  parser.add_argument('-p', '--passwd')
   parser.add_argument('-h', '--host')
   args = parser.parse_args()
   concatenate_tags(args.user, ars.password, args.host)
