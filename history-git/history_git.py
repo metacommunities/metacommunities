@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import github_events as ge
+import github_api as ga
 import os
 import sys
 import urllib
@@ -9,11 +9,11 @@ import urllib
 hg_path = os.path.expanduser('~/.history_git')
 
 # initiate logger
-logger = ge.create_logger(hg_path)
+logger = ga.create_logger(hg_path)
 
 # Start
 logger.info("Starting...")
-history_git = ge.HistoryGit(hg_path) # drop_db=True
+history_git = ga.HistoryGit(hg_path) # drop_db=True
 
 # Try to add names of any new repos to the repo table
 history_git.get_repo_names()
@@ -34,4 +34,8 @@ try:
 except:
   logger.error("Lol, your code is the worst.")
   raise
+
+# history_git.create_repo_summary(owner_repo)
+
+# history_git.upload_wide_activity()
 
