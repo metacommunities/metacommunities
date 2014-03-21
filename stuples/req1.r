@@ -34,7 +34,7 @@ sql <-
     count(*) AS count
   FROM timeline
   GROUP BY date, type, ref
-  ORDER BY date
+  ORDER BY date;
   "
 
 dat.query <- query_exec("metacommunities", "github_explore", sql,
@@ -53,8 +53,8 @@ dat$date <- as.POSIXct(dat$date, format="%Y-%m-%d", tz="GMT")
 #start.date <- as.POSIXct("2012-09-17", tz="GMT")
 #dat <- dat[dat$date > start.date, ]
 # and chop off the last week in the data as it will not be complete
-max.date <- floor_date(max(dat$date), "week") # 2013/11/24
-dat <- dat[dat$date < as.POSIXct("2013-11-24", tz="GMT"), ]
+#max.date <- floor_date(max(dat$date), "week") # 2013/11/24
+#dat <- dat[dat$date < as.POSIXct("2013-11-24", tz="GMT"), ]
 
 # week of year
 dat$yearweek <- paste(year(dat$date), week(dat$date), sep="-")
@@ -88,7 +88,7 @@ p.agg <-
 
 p.agg
 
-ggsave(p.agg, file="~/p_all_events_per_week.png", width=9, height=4)
+ggsave(p.agg, file="~/p_all_events_per_week.png", width=9, height=6)
 
 # ------------------------------------------------------------------------------
 # colour in for different events
