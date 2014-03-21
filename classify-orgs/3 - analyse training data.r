@@ -40,6 +40,9 @@ table(rowSums(org_train[, grep("^is_", names(org_train))]))
 
 dat <- merge(org_train, org, all.x=TRUE)
 
+sapply(dat, function(x) sum(is.na(x)))
+
+
 # ------------------------------------------------------------------------------
 # formula builder
 # ------------------------------------------------------------------------------
@@ -61,23 +64,20 @@ ev <- c("repos",
         "pull_requests_merged",
         "so_repos_linked_to",
         "mins_to_20_events",
-        "has_blog",
-        "is_software",
-        "is_technical",
-        "is_education",
-        "is_business",
-        "is_games",
-        "is_social")
+        "has_blog")
 
 
 # ------------------------------------------------------------------------------
 # model if an org has a particular type
 # ------------------------------------------------------------------------------
 
-x <- dat[, ev]
-y <- factor(dat$type)
+s.dat <- dat[, c(ev, 'type')]
+s.dat <- na.omit(s.dat)
 
-rf <- randomForest(x, y, data=dat, importance=TRUE, proximity=TRUE)
+x <- s.dat[, ev]
+y <- factor(s.dat$type)
+
+rf <- randomForest(x, y, importance=TRUE, proximity=TRUE)
 
 # variable importance
 imp <- as.data.frame(importance(rf))
@@ -87,31 +87,29 @@ rownames(imp) <- NULL
 imp <- melt(imp, id="var")
 names(imp)[names(imp) == "variable"] <- "measure"
 
-tag.imp.bk <- melt(tag.imp, id=names(tag.imp[[1]]))
 
-tag.imp <- tag.imp.bk
 
 # variable order -- play with this to rearrange how the points are ordered
-
-tag.order <- ddply(tag.imp, .(var, measure), summarize, mean=mean(value))
 # pick either;  "MeanDecreaseAccuracy"  "MeanDecreaseGini"
-tag.order <- tag.order[tag.order$measure == "MeanDecreaseGini", ]
-tag.order <- tag.order$var[order(tag.order$mean)]
-
-tag.imp$var <- factor(tag.imp$var, levels=tag.order)
+var.order <- order(imp$value[imp$measure == "MeanDecreaseGini"])
+var.order <- imp$var[imp$measure == "MeanDecreaseGini"][var.order]
+imp$var <- factor(imp$var, levels=var.order)
 
 # produce summary plot of importance of variables across each tag
 
 p.imp <-
-  ggplot(tag.imp, aes(x=value, y=var)) +
+  ggplot(imp, aes(x=value, y=var)) +
     geom_point() +
-    facet_grid(measure ~ L1) +
+    facet_wrap(~measure, nrow=1) +
     labs(x="", y="variable")
 
 p.imp
 
 ggsave(p.imp, file="img/p_forest_regression_importance.png",
-  width=15, height=5)
+  width=16, height=12)
+
+ggsave(p.imp, file="~/Public/p_forest_regression_importance.png",
+  width=8, height=6)
 
 # ------------------------------------------------------------------------------
 # been reading up on random forests, trying some more things
