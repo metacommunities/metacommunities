@@ -12,10 +12,12 @@
 
 # <codecell>
 
+
 import sys
 sys.path.append('..')
 import bq
 import github_api_data as gad
+import github as gh
 import google_bigquery_access as gba
 
 import pandas as pd
@@ -26,8 +28,10 @@ import seaborn
 import gensim as gs
 import MySQLdb
 import nltk
-import lsh
+# import lsh
 from ggplot import *
+import requests
+import json
 
 # <markdowncell>
 
@@ -107,6 +111,58 @@ gh_repos
 
 gh_repos.set_index('repository_n', inplace=True)
 gh_repos
+
+# <markdowncell>
+
+# ## Some major domains in Github
+# 
+# Trying to construct a list of the main domains that happen on Github and then verify it 
+# 
+# 1. Social media platform related - facebook, wikimedia, youtube twitter, instagram, foursquare, linkedin, reddit and blogging platforms
+# 2. dotfile or other config info
+# 3. major games or entertainment -- minecraft, world of warcraft
+# 4. git or github itself, including learning to use it
+# 5. databases and data stores - aws, mysql, mongo, redis
+# 6. web frameworks and platforms, including portals and webservers (apache, etc)
+# 7. programming tools and devices -- compilers, editors, cvs, 
+# 8. webpages and blog pages -- ie. github.io or github.com
+# 9. scientific, statistical and mathematical -- numpy, pandas, ggplot, scikit-learn, etc
+# 10. political or activist -- e.g. anonymous, pirate party, whitehouse, electronic freedom
+# 11. operating systems and suchlike -- android, linux, ios, 
+# 12. emerging technologies - 3d printing, drones, etc
+# 13. markets and shops - ebay, amazon
+
+# <codecell>
+
+# test query on wiki
+def domain_query(q):
+    url = 'https://api.github.com/search/repositories?q='+q
+    req = requests.get(url)
+    return req.json()
+
+# <codecell>
+
+wi = domain_query('wiki')
+print wi['total_count']
+[w['full_name'] for w in wi['items']]
+
+# <codecell>
+
+inst = domain_query('instagram')
+print inst['total_count']
+[w['full_name'] for w in inst['items']]
+
+# <codecell>
+
+yt = domain_query('youtube')
+print yt['total_count']
+[w['full_name'] for w in yt['items']]
+
+# <codecell>
+
+am = domain_query('amazon')
+print am['total_count']
+[w['full_name'] for w in am['items']]
 
 # <markdowncell>
 
