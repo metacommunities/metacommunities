@@ -5,9 +5,9 @@ CREATE TEMPORARY TABLE numbers (
 INSERT INTO numbers VALUES (2),(3),(4),(5),(6);
 
 
-DROP TABLE IF EXISTS tags;
+DROP TABLE IF EXISTS posttags;
 
-CREATE TABLE tags (
+CREATE TABLE posttags (
   pid   INTEGER,
   tag   TINYTEXT
 );
@@ -23,7 +23,7 @@ CREATE PROCEDURE insertTagsPage
   page_limit INT,
   offset_by INT
 ) 
-  INSERT INTO tags (pid, tag)
+  INSERT INTO posttags (pid, tag)
     SELECT
       subposts.id AS pid,
       SUBSTRING_INDEX(SUBSTRING_INDEX(SUBSTRING_INDEX(subposts.tags, '<', numbers.n), '<', -1), '>', 1) AS tag
@@ -69,9 +69,9 @@ CALL insertTags();
 UNLOCK TABLES;
 
 -- create tag_summary - a list of unique tags and how often they are used
-CREATE TABLE tag_summary AS
+CREATE TABLE tags AS
   SELECT tag, count(*) AS count
-  FROM tags
+  FROM posttags
   GROUP BY tag
   ORDER BY count DESC
 ;
