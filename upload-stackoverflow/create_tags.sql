@@ -9,14 +9,15 @@ DROP TABLE IF EXISTS tags;
 
 CREATE TABLE tags (
   pid   INTEGER,
-  tag   TINYTEXT,
-  INDEX tag (tag (5))
+  tag   TINYTEXT
 );
 
 
 -- 'insertTagsPage' procedure
 -- for a certain LIMIT and OFFSET it will process the tags field in the
 -- posts table and output it into the tags table
+DROP PROCEDURE IF EXISTS insertTagsPage;
+
 CREATE PROCEDURE insertTagsPage
 (
   page_limit INT,
@@ -40,12 +41,14 @@ CREATE PROCEDURE insertTagsPage
 
 -- insertTags procedure
 -- process 1 million posts at a time, sending each batch to insertTagsPage
+DROP PROCEDURE IF EXISTS insertTags;
+
 DELIMITER $$
-CREATE PROCEDURE insertTags ()
+CREATE PROCEDURE insertTags()
 BEGIN
   -- parameters for paging insert statement
   SET @i = 0;
-  SET @page_limit = 1000000;
+  SET @page_limit = 1000;
   SELECT count(*) INTO @posts_count FROM posts;  
 
   -- start
@@ -64,5 +67,12 @@ LOCK TABLES posts READ, numbers READ, tags WRITE;
 CALL insertTags();
 
 UNLOCK TABLES;
-UNLOCK TABLES;
+
+-- create tag_summary - a list of unique tags and how often they are used
+CREATE TABLE tag_summary AS
+  SELECT tag, count(*) AS count
+  FROM tags
+  GROUP BY tag
+  ORDER BY count DESC
+;
 
