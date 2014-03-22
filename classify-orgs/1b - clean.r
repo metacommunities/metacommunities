@@ -19,17 +19,17 @@ org_train$type[!is.na(org_train$reconciled)] <- org_train$reconciled[!is.na(org_
 #org_train <- na.omit(org_train)
 
 # create tag indciators
-#tags <- c(
-#  as.character(org_train$tag1),
-#  as.character(org_train$tag2),
-#  as.character(org_train$tag3),
-#  as.character(org_train$tag4)
-#)
+tags <- c(
+  as.character(org_train$tag1),
+  as.character(org_train$tag2),
+  as.character(org_train$tag3),
+  as.character(org_train$tag4)
+)
 
-#tags <- as.data.frame(table(tags))
-#tags <- tags[order(tags$Freq, decreasing=TRUE), ]
+tags <- as.data.frame(table(tags))
+tags <- tags[order(tags$Freq, decreasing=TRUE), ]
 
-# 'software' is the only real tag
+# 'software' is the only "real" tag
 # 
 # though will also create indicators for other tags;
 #   - technical
@@ -38,19 +38,19 @@ org_train$type[!is.na(org_train$reconciled)] <- org_train$reconciled[!is.na(org_
 #   - games
 #   - social
 
-#create_tag_indicator <- function(tag) {
-#  tag_cols <- c('tag1', 'tag2', 'tag3', 'tag4')
-#  dat <- org_train[, tag_cols] == tag
-#  dat <- rowSums(dat)
-#  return(dat)
-#}
+create_tag_indicator <- function(tag) {
+  tag_cols <- c('tag1', 'tag2', 'tag3', 'tag4')
+  dat <- org_train[, tag_cols] == tag
+  dat <- rowSums(dat)
+  return(dat)
+}
 
-#org_train$is_software  <- create_tag_indicator("software")
-#org_train$is_technical <- create_tag_indicator("technical")
-#org_train$is_education <- create_tag_indicator("education")
-#org_train$is_business  <- create_tag_indicator("business")
-#org_train$is_games     <- create_tag_indicator("games")
-#org_train$is_social    <- create_tag_indicator("social")
+org_train$is_software  <- create_tag_indicator("software")
+org_train$is_technical <- create_tag_indicator("technical")
+org_train$is_education <- create_tag_indicator("education")
+org_train$is_business  <- create_tag_indicator("business")
+org_train$is_games     <- create_tag_indicator("games")
+org_train$is_social    <- create_tag_indicator("social")
 
 # ------------------------------------------------------------------------------
 # org - complete data

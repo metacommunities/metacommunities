@@ -1,47 +1,18 @@
 # ==============================================================================
-# explore and analysising the training data set i.e. the org tags from
-# Adrian and Richard
+# fit a random forest to the training data set i.e. determine what information
+# there is in the training sample
 # ==============================================================================
 
 source("2 - load.r")
 
-library(ggplot2)
-library(plyr)
 library(randomForest)
-library(reshape)
+library(ggplot2)
 
 # ------------------------------------------------------------------------------
-# frequency of tags
-# ------------------------------------------------------------------------------
-
-tag <- melt(org_train, id="repository_organization",
-  measure=c("is_software", "is_technical", "is_education", "is_business",
-    "is_games", "is_social"))
-
-tag <- tag[tag$value != 0, ]
-
-p.tag <-
-  ggplot(tag, aes(x=variable)) +
-    geom_bar()
-
-ggsave(p.tag, file="img/p_tag_freq.png")
-
-
-# ------------------------------------------------------------------------------
-# dist of how many tags an org has
-# ------------------------------------------------------------------------------
-
-table(rowSums(org_train[, grep("^is_", names(org_train))]))
-
-
-# ------------------------------------------------------------------------------
-# combine org tags with org fetaures
+# combine org types with org fetaures
 # ------------------------------------------------------------------------------
 
 dat <- merge(org_train, org, all.x=TRUE)
-
-sapply(dat, function(x) sum(is.na(x)))
-
 
 # ------------------------------------------------------------------------------
 # formula builder
@@ -59,25 +30,27 @@ ev <- c("repos",
         "fork_events",
         "issue_events",
         "issue_comment_events",
-        "f0_",
+        "f0_", # what is this variable?
         "download_events",
         "pull_requests_merged",
         "so_repos_linked_to",
         "mins_to_20_events",
         "has_blog")
 
+dat <- dat[, c(ev, 'type')]
+dat <- na.omit(dat)
 
 # ------------------------------------------------------------------------------
 # model if an org has a particular type
 # ------------------------------------------------------------------------------
 
-s.dat <- dat[, c(ev, 'type')]
-s.dat <- na.omit(s.dat)
-
-x <- s.dat[, ev]
-y <- factor(s.dat$type)
+x <- dat[, ev]
+y <- factor(dat$type)
 
 rf <- randomForest(x, y, importance=TRUE, proximity=TRUE)
+
+# save
+save(ev, rf, file='data/rf.rda')
 
 # variable importance
 imp <- as.data.frame(importance(rf))
@@ -106,40 +79,5 @@ p.imp <-
 p.imp
 
 ggsave(p.imp, file="img/p_forest_regression_importance.png",
-  width=16, height=12)
-
-ggsave(p.imp, file="~/Public/p_forest_regression_importance.png",
   width=8, height=6)
-
-# ------------------------------------------------------------------------------
-# been reading up on random forests, trying some more things
-# ------------------------------------------------------------------------------
-
-tag = "is_software"
-
-MDSplot(rf[[tag]], dat[[tag]])
-
-
-# http://stats.stackexchange.com/a/30701/16290
-library(ROCR)
-
-OOB.votes <- predict(rf[[tag]], dat, type="prob")
-OOB.pred <- OOB.votes[,2]
-
-pred.obj <- prediction(OOB.pred, dat[[tag]])
-
-RP.perf <- performance(pred.obj, "rec", "prec")
-plot(RP.perf)
-
-ROC.perf <- performance(pred.obj, "fpr", "tpr")
-plot(ROC.perf)
-
-plot(RP.perf@alpha.values[[1]], RP.perf@x.values[[1]])
-lines(RP.perf@alpha.values[[1]], RP.perf@y.values[[1]])
-lines(ROC.perf@alpha.values[[1]], ROC.perf@x.values[[1]])
-
-
-
-
-
 
