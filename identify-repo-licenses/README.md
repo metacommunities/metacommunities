@@ -20,3 +20,17 @@ https://github.com/search?q="GPL" path:readme&type=Code
 
 https://github.com/search?q="GNU GENERAL PUBLIC LICENSE"&type=repo
 https://github.com/search?q="GPL"&type=repo
+
+
+#### Licenses to be considered
+- Apache License 2.0 (Apache-2.0)
+- BSD
+- Creative Commons -- this maybe a good way to find non-code on github
+- GNU General Public License (GPL)
+- GNU Library or "Lesser" General Public License (LGPL)
+- MIT license
+- Mozilla Public License 2.0 (MPL-2.0)
+- Eclipse Public License
+
+Source: [http://opensource.org/licenses]
+
