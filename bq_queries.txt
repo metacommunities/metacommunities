@@ -2749,6 +2749,7 @@ repo_ownership
 */
 SELECT owner, type, count(type) AS owned FROM [github_proper.repo_type] GROUP BY owner, type ORDER BY owner ASC, type ASC
 
+
 /* table for looking at watcher growth profiles */
 SELECT
 old.repository_url AS repository_url,
@@ -2778,4 +2779,48 @@ SELECT repository_url,
 	WHERE type = 'WatchEvent' AND repository_url = '", r, "' AND created_at > '2012-09-17 00:00:00'
 	GROUP EACH BY repository_url, date", sep = "")
 
+	
+/* facebook_forks */
+SELECT url FROM [github_explore.timeline] WHERE repository_owner = 'facebook' AND type = 'ForkEvent' GROUP BY url
+
+/* link to repo_types */
+
+SELECT
+old.url AS repository_url,
+new.organization AS organization,
+new.repo_created AS repo_created,
+new.Watchers AS Watchers,
+new.Forks AS Forks,
+new.Pushes AS Pushes,
+new.Pushers AS Pushers,
+new.LastPush AS LastPush,
+new.PR_Received AS PR_Received,
+new.PR_Issued AS PR_Issued,
+new.PushDuration AS PushDuration,
+new.type AS type
+FROM
+	(SELECT url
+	FROM [github_explore.facebook_forks] )
+AS old
+OUTER LEFT JOIN EACH 
+	(SELECT repository_url, 
+	organization,
+	repo_created,
+	Watchers,
+	Forks,
+	Pushes,
+	Pushers,
+	LastPush,
+	PR_Received,
+	PR_Issued,
+	PushDuration,
+	type
+	FROM [github_proper.repo_type] 
+	)
+AS new
+ON new.repository_url = old.url
+ORDER BY repo_created ASC
+
+
+	
 
