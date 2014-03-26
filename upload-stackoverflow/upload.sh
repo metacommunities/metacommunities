@@ -5,8 +5,8 @@ MYSQL_HOST="173.194.105.217"
 read -p "Enter password for localhost: " -s MYSQL_PASSWD
 
 SODIR='stackoverflow.com'
+CSVDIR="${SODIR}_CSV"
 JSONDIR="${SODIR}_JSON"
-ZIPDIR="${SODIR}_ZIP"
 SQLDIR="${SODIR}_SQL"
 
 GSDIR="sandboxx"
@@ -70,17 +70,6 @@ python convert_xml_to_json.py -i$SODIR -t'Users'    -s2000
 
 
 # ==============================================================================
-# compress each JSON for uploading
-# gz seems to achieve around 70% compression
-# ==============================================================================
-FILES=`ls $JSONDIR`
-for f in $FILES
-  do
-  gzip -cv $JSONDIR/$f > $ZIPDIR/$f.gz
-done
-
-
-# ==============================================================================
 # upload stackoverflow to bigquery
 # ==============================================================================
 # make sure you've ran 'bq init' to setup your credentials
@@ -89,7 +78,7 @@ DATASET='stack_overflow'
 bq mk $DATASET
 
 function upload2bq {
-  FILES=`ls $ZIPDIR/$1*`
+  FILES=`ls $JSONDIR/$1*`
   for f in $FILES
     do
     echo -e "\n\n\nUploading '${f}' to '${DATASET}.${1}':"
@@ -98,9 +87,37 @@ function upload2bq {
   done
 }
 
-#upload2bq 'Badges'
-#upload2bq 'Comments'
-upload2bq 'Posts'
-upload2bq 'Users'
-#upload2bq 'Votes'
+#upload2bq 'badges'
+#upload2bq 'comments'
+upload2bq 'posts'
+upload2bq 'users'
+#upload2bq 'votes'
 
+
+# ==============================================================================
+# upload 'tags' and 'posttags' to bigquery
+# ==============================================================================
+declare -a CSV_TBL=("tags" "posttags")
+DATASET='stack_overflow'
+
+mkdir $CSVDIR
+
+for i in "${CSV_TBL[@]}"
+do
+    echo "Dumping '$i' table to CSV."
+    
+    mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD \
+        --tab /tmp \
+        --fields-terminated-by=',' \
+        --fields-optionally-enclosed-by='"' \
+        --fields-escaped-by='\\' \
+        --lines-terminated-by='\n' \
+        so $i
+    
+    cp /tmp/$i.txt ./$CSVDIR/$i.csv
+    
+    echo "Uploading '$i' table to BQ."
+    
+    bq load --source_format=CSV "${DATASET}.${i}" $CSVDIR/$i.csv \
+      "schema/${i}"
+done
