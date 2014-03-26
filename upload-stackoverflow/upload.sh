@@ -38,7 +38,7 @@ mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so users > $SQLDIR/users.sql
 # create a 'tag' table from the 'tags' field in 'post' table
 # ------------------------------------------------------------------------------
 # create
-python create_tag_files.py -u$MYSQL_USER -p$MYSQL_PASSWD -h$MYSQL_HOST
+python create_tag_files.py -u $MYSQL_USER -p $MYSQL_PASSWD --host $MYSQL_HOST
 # import
 mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_tags.sql
 # dump
