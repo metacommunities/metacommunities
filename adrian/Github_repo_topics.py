@@ -19,7 +19,6 @@ import bq
 import github_api_data as gad
 import github as gh
 import google_bigquery_access as gba
-
 import pandas as pd
 import numpy as np
 import datetime as dt
@@ -31,7 +30,6 @@ import nltk
 # import lsh
 from ggplot import *
 import requests
-import json
 
 # <markdowncell>
 
@@ -114,11 +112,11 @@ gh_repos
 
 # <markdowncell>
 
-# ## Some major domains in Github
+# # The major domains in Github
 # 
 # Trying to construct a list of the main domains that happen on Github and then verify it 
 # 
-# 1. Social media platform related - facebook, wikimedia, youtube twitter, instagram, foursquare, linkedin, reddit and blogging platforms
+# 1. Social media platform related - facebook, wikimedia, youtube, habbo, bebo, twitter, instagram, foursquare, linkedin, reddit and blogging platforms
 # 2. dotfile or other config info
 # 3. major games or entertainment -- minecraft, world of warcraft
 # 4. git or github itself, including learning to use it
