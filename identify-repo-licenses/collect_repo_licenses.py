@@ -1,40 +1,64 @@
+from bs4 import BeautifulSoup
 import ConfigParser
-import github
+import requests
 import logging
 import MySQLdb
 import os
 import re
 
+path = {
+    'readme':  "+path:readme&type=Code",
+    'license': "+path:license&type=Code",
+    'copying': "+path:copying&type=Code",
+    'meta': "&type=repo"
+}
+
+
+#Dictionary of the main families of open source licenses. Each family
+#contains the regular expressions that will be used to identify if a repo
+#uses a license from that particular family.
 license = {
-    """
-    Dictionary of the main families of open source licenses. Each family
-    contains the regular expressions that will be used to identify if a repo
-    uses a license from that particular family.
-    """
-    
     "apache": [
-        "Apache[- ]License[- ]2.0",
-        "Apache[- ]2.0",
+        "Apache License 2.0",
+        "Apache-License-2.0",
+        "Apache-2.0",
+        "Apache 2.0",
+        "Apache2.0"
     ],
     "bsd": [
-        "BSD[- ]3"
-        "BSD[- ]Simplified",
-        "BSD[- ]New",
-        "BSD[- ]2",
+        "BSD 3"
+        "BSD-3",
+        "BSD3",
+        "BSD Simplified",
+        "BSD-Simplified",
+        "Simplified-BSD",
+        "Simplified BSD",
+        "BSD-New",
+        "BSD New",
+        "BSD 2",
+        "BSD-2",
+        "BSD2",
         "FreeBSD"
     ],
     "cc": [
         "Creative Commons",
         "CC BY",
         "CC BY-SA",
+        "CC BY SA",
         "CC BY-ND",
+        "CC BY ND",
         "CC BY-NC",
+        "CC BY NC",
         "CC BY-NC-SA",
-        "CC BY-NC-ND"
+        "CC BY NC SA",
+        "CC BY-NC-ND",
+        "CC BY NC ND"
     ],
     "epl": [
         "Eclipse Public License",
-        "EPL[- ]1.0"
+        "EPL 1.0",
+        "EPL-1.0",
+        "EPL1.0"
     ],
     "gpl": [
         "General Public License",
@@ -49,7 +73,9 @@ license = {
     ],
     "mpl": [
         "Mozilla Public License",
-        "MPL[- ]2.0"
+        "MPL 2.0",
+        "MPL-2.0",
+        "MPL2.0"
     ]
 }
 
@@ -77,9 +103,6 @@ logger.addHandler(ch)
 conf = ConfigParser.ConfigParser()
 conf.read(os.path.expanduser('~/.history_git/settings.conf'))
 
-gh = github.Github(login_or_token = conf.get('github', 'user'),
-                   password = conf.get('github', 'passwd'))
-
 con = MySQLdb.connect(host=conf.get('mysql', 'host'),
                       user=conf.get('mysql', 'user'),
                       passwd=conf.get('mysql', 'passwd'),
@@ -99,7 +122,30 @@ cur.execute(create_table)
 
 
 ### start searching for licenses!
-for res in gh.search_repositories("GNU GENERAL PUBLIC LICENSE"):
-    print(res)
+repos = []
 
+url_base  = "https://github.com/search?q="
+
+license_keys = license.keys()
+license_keys.sort()
+
+for lk in license_keys:
+    for query in license[lk]:
+        for pth in path:
+            url_main = "%s'%s'%s" % (url_base, query, pth)
+            page=1
+            
+            while True:
+                url = "%s&p=%i" % (url_main, page)
+                r = requests.get(url)
+                r.raise_for_status()
+                soup = BeautifulSoup(r.text)
+                
+                for result in soup.find_all("div", class_="code-list-item public "):
+                    title  = result.find("p", class_="title")
+                    repo = re.search(ur'\n(.*) \u2013', title.text).group(1)
+                    repo = str(repo)
+                    repos.append((repo, lk))
+                
+                page += 1
 
