@@ -37,7 +37,9 @@ done
 # create a 'tag' table from the 'tags' field in 'post' table
 # ------------------------------------------------------------------------------
 # create
-mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < create_tags.sql
+python create_tag_files.py -u $MYSQL_USER -p $MYSQL_PASSWD --host $MYSQL_HOST
+# import
+mysql -u $MYSQL_USER -p$MYSQL_PASSWD so < import_tags.sql
 # dump
 mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so tags     | gzip > $SQLDIR/tags.sql.gz
 mysqldump -u $MYSQL_USER -p$MYSQL_PASSWD so posttags | gzip > $SQLDIR/posttags.sql.gz
