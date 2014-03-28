@@ -1,3 +1,8 @@
+## WARNING
+
+This work has been abandoned, since github removed the ability to do a
+global search of code across all repos.
+
 ### Finding licenses on github
 
 - is there a 'LICENSE' file?
