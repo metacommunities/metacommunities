@@ -1,0 +1,7 @@
+[
+    {"name": "pid",                 "type": "integer",   "mode": "nullable"},
+    {"name": "tag",                 "type": "string",    "mode": "nullable"},
+    {"name": "tid",                 "type": "integer",   "mode": "nullable"},
+    {"name": "post_creation_date",  "type": "timestamp", "mode": "nullable"}
+]
+

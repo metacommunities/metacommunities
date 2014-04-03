@@ -14,16 +14,14 @@ import sys
 def close_file(tmp_file, out_path, table_name, i):
   ext = re.search('tmp\.(sql|json)', tmp_file).group(1)
   count = str(i).zfill(8)
-  out_file = os.path.join(out_path, '%s_%d.%s' % (table_name, i, ext))
+  out_file = os.path.join(out_path, '%s_%d.%s' % (table_name.lower(), i, ext))
   os.rename(tmp_file, out_file)
 
 
-def convert_xml(input_path, table_name, size, user, passwd, host):
+def convert_xml(input_path, table_name, size):
   locale.setlocale(locale.LC_ALL, '')
   
   in_file  = os.path.join(input_path, 'stackoverflow.com-' + table_name)
-  
-  header = get_header(user, passwd, host, table_name)
   
   # export paths
   out_json = input_path + '_JSON'
@@ -31,7 +29,7 @@ def convert_xml(input_path, table_name, size, user, passwd, host):
   if not os.path.exists(out_json):
     os.makedirs(out_json)
 
-  sys.stdout.write("converting %s to JSON and SQL:\n" % (table_name))
+  sys.stdout.write("converting %s to JSON:\n" % (table_name))
   
   # start iterating over the records
   i = 0
@@ -91,6 +89,5 @@ if __name__ == '__main__':
   parser.add_argument('-t', '--table')
   parser.add_argument('-s', '--size', type=int, default=None)
   args = parser.parse_args()
-  convert_xml(args.input_dir, args.table, args.size, args.user, args.passwd,
-    args.host)
+  convert_xml(args.input_dir, args.table, args.size)
 
