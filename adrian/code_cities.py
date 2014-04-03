@@ -19,7 +19,6 @@ sys.path.append('..')
 import github_api_data as gad
 import google_bigquery_access as gba
 import bq
-
 import pandas as pd
 import numpy as np
 import datetime as dt

@@ -8,3 +8,23 @@
 4. junk/nothing
 
 So we don't try to find the topic of the readme, only what kind of read me it is. 
+
+
+## the duplication during 2012
+
+download august-sept 2012 and check number of events against timeline;
+good to use grigorich own repo to look at this
+why can't we detect duplicate rows in bigquery and get rid of them?
+
+## Original work on github as platform
+
+Look at the time series of Github staff:
+
+defunkt
+drnic
+halorgium
+kballard
+maddox
+mojombo
+schacon
+
