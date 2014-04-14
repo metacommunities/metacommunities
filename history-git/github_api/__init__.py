@@ -51,6 +51,15 @@ class HistoryGit():
   events for a given repo. Just pass him the 'owner/repo' string using .get()
   and he'll get to work, begrudingly.
   """
+  from db import open_con, close_con, create_db, insert
+  
+  from get_repo_names import get_repo_names, populate_repo, save_repo
+  
+  from get_activity import get, set_until, get_commits, save_commit,\
+                             get_forks, save_fork, get_issues, save_issue,\
+                             get_pulls, save_pull
+  
+  from upload_activity import upload_wide_activity
   
   def __init__(self, path, drop_db=False):
     self.logger = logging.getLogger('history_git')
@@ -69,12 +78,4 @@ class HistoryGit():
     # github
     self.gh = github.Github(login_or_token = self.conf.get('github', 'user'),
                             password = self.conf.get('github', 'passwd'))
-    
-    from db import open_con, close_con, create_db, insert
-    from get_repo_names import get_repo_names, populate_repo, save_repo
-    from get_activity import get, set_until, get_commits, save_commit,\
-                             get_forks, save_fork, get_issues, save_issue,\
-                             get_pulls, save_pull
-    from upload_activity import upload_wide_activity
-
 

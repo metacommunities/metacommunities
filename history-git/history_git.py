@@ -16,7 +16,7 @@ logger.info("Starting...")
 history_git = ga.HistoryGit(hg_path) # drop_db=True
 
 # Try to add names of any new repos to the repo table
-history_git.get_repo_names()
+#history_git.get_repo_names()
 
 # Are there any specific repos that we need to collect info for?
 owner_repo_file = 'owner_repo.txt'
@@ -24,6 +24,8 @@ owner_repo = [line.rstrip('\n') for line in open(owner_repo_file)]
 
 # Add any 'owner/repo's from the command line
 owner_repo.extend(sys.argv[1:])
+
+history_git.upload_wide_activity()
 
 # Start backlog for specific repos
 logger.info("Collecting backlog for %i repos" % (len(owner_repo)))
@@ -37,5 +39,5 @@ except:
 
 # history_git.create_repo_summary(owner_repo)
 
-# history_git.upload_wide_activity()
+
 
