@@ -2,6 +2,16 @@ import csv
 import subprocess
 import user_prompt
 
+def ask_upload(self):
+    table = "%s.%s" % (self.conf.get('big_query', 'db'), self.conf.get('big_query', 'table'))
+    question = "Should I upload activity to Big Query at '%s'?" % (table)
+    ans = user_prompt.query_yes_no(question)
+    
+    if ans == True:
+        self.upload_wide_activity()
+    else:
+        self.logger.info("Activity not uploaded.")
+
 def upload_wide_activity(self):
     """
     Append rows from the following tables:
@@ -24,8 +34,6 @@ def upload_wide_activity(self):
     then uploaded to bigquery. This is because there is no way to simply
     transfer data from Cloud SQL to BigQuery.
     """
-    
-    self.open_con()
     
     # create wide table of all activity
     drop_tmp = "DROP TABLE IF EXISTS activity_tmp;"
@@ -363,7 +371,8 @@ def upload_wide_activity(self):
     """
     
     # do it
-    self.logger.info(" Merging contents from 'commit', 'fork', 'issue', and 'pull' tables.")
+    self.logger.info("Merging contents from 'commit', 'fork', 'issue', and 'pull' tables.")
+    self.open_con()
     self.cur.execute(drop_tmp)
     self.cur.execute(create_tmp)
     self.cur.execute(drop_activity)
@@ -378,14 +387,14 @@ def upload_wide_activity(self):
     tmp_file = "/tmp/activity.csv"
     with open(tmp_file, 'w') as out:
         csv_out = csv.writer(out, quotechar='"', escapechar='\\',
-                             doublequote=False, quoting=csv.QUOTE_MINIMAL,
+                             doublequote=True, quoting=csv.QUOTE_MINIMAL,
                              lineterminator='\n')
         for row in self.cur:
             csv_out.writerow(row)
     
     # upload to BQ
-    table = "%s.%s" % (self.conf.get('big_query', 'db'), 'activity')
-    question = "\nReady to append activity to Big Query at '%s'? You may want to delete this table if it already exists." % (table)
+    table = "%s.%s" % (self.conf.get('big_query', 'db'), self.conf.get('big_query', 'table'))
+    question = "\nI'm ready to append activity to Big Query at '%s', you may want to delete this table if it already exists. You ready?" % (table)
     ans = user_prompt.query_yes_no(question)
     
     if ans == True:
