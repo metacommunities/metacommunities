@@ -25,8 +25,6 @@ owner_repo = [line.rstrip('\n') for line in open(owner_repo_file)]
 # Add any 'owner/repo's from the command line
 owner_repo.extend(sys.argv[1:])
 
-history_git.upload_wide_activity()
-
 # Start backlog for specific repos
 logger.info("Collecting backlog for %i repos" % (len(owner_repo)))
 
@@ -39,5 +37,5 @@ except:
 
 # history_git.create_repo_summary(owner_repo)
 
-
-
+# after downloading activity, would user like to upload this to BigQuery?
+history_git.ask_upload()
