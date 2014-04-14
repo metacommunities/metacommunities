@@ -1,4 +1,5 @@
 import MySQLdb
+import MySQLdb.cursors
 
 def open_con(self):
   """
@@ -9,7 +10,9 @@ def open_con(self):
                              user=self.conf.get('mysql', 'user'),
                              passwd=self.conf.get('mysql', 'passwd'),
                              db=self.conf.get('mysql', 'db'),
-                             charset='utf8')
+                             charset='utf8',
+                             use_unicode=False,
+                             cursorclass = MySQLdb.cursors.SSCursor)
   self.cur = self.con.cursor()
 
 
