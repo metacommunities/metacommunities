@@ -32,7 +32,7 @@ still around or have been deleted. We have to do it this way as there does not
 exist a delete event.
 
 If you never want History Git to scrape a list of names (which is likely) then
-set `current_repo_names = False` in `settings.conf`.
+set `get_repo_names = False` in `settings.conf`.
 
 ### Schema
 

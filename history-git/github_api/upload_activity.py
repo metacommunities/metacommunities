@@ -2,6 +2,16 @@ import csv
 import subprocess
 import user_prompt
 
+def ask_upload(self):
+    table = "%s.%s" % (self.conf.get('big_query', 'db'), self.conf.get('big_query', 'table'))
+    question = "Should I upload activity to Big Query at '%s'?" % (table)
+    ans = user_prompt.query_yes_no(question)
+    
+    if ans == True:
+        self.upload_wide_activity()
+    else:
+        self.logger.info("Activity not uploaded.")
+
 def upload_wide_activity(self):
     """
     Append rows from the following tables:
@@ -25,10 +35,8 @@ def upload_wide_activity(self):
     transfer data from Cloud SQL to BigQuery.
     """
     
-    self.open_con()
-    
     # create wide table of all activity
-    drop_tmp = "DROP TABLE IF EXISTS activity_tmp;"
+    drop_tmp = "DROP TABLE IF EXISTS activity_tmp"
     
     create_tmp = """
         CREATE TEMPORARY TABLE activity_tmp AS 
@@ -350,20 +358,21 @@ def upload_wide_activity(self):
                     base_owner          AS    pull_base_owner,
                     base_repo           AS    pull_base_repo,
                     base_owner_repo     AS    pull_base_owner_repo
-                FROM pull;
+                FROM pull
     """
     
-    drop_activity = "DROP TABLE IF EXISTS activity;"
+    drop_activity = "DROP TABLE IF EXISTS activity"
     
-    create_activity = "CREATE TABLE activity LIKE activity_tmp;"
+    create_activity = "CREATE TABLE activity LIKE activity_tmp"
     
     insert_activity = """
         INSERT INTO activity
-            SELECT * FROM activity_tmp ORDER BY event_created_at DESC;
+            SELECT * FROM activity_tmp ORDER BY event_created_at DESC
     """
     
     # do it
-    self.logger.info(" Merging contents from 'commit', 'fork', 'issue', and 'pull' tables.")
+    self.logger.info("Merging contents from 'commit', 'fork', 'issue', and 'pull' tables.")
+    self.open_con(fetchall=False)
     self.cur.execute(drop_tmp)
     self.cur.execute(create_tmp)
     self.cur.execute(drop_activity)
@@ -373,19 +382,19 @@ def upload_wide_activity(self):
     
     # download contents table and save to CSV
     self.logger.info("Downloading 'activity' table.")
-    self.cur.execute("SELECT * FROM activity;")
+    self.cur.execute("SELECT * FROM activity")
     
     tmp_file = "/tmp/activity.csv"
     with open(tmp_file, 'w') as out:
         csv_out = csv.writer(out, quotechar='"', escapechar='\\',
-                             doublequote=False, quoting=csv.QUOTE_MINIMAL,
+                             doublequote=True, quoting=csv.QUOTE_MINIMAL,
                              lineterminator='\n')
         for row in self.cur:
             csv_out.writerow(row)
     
     # upload to BQ
-    table = "%s.%s" % (self.conf.get('big_query', 'db'), 'activity')
-    question = "\nReady to append activity to Big Query at '%s'? You may want to delete this table if it already exists." % (table)
+    table = "%s.%s" % (self.conf.get('big_query', 'db'), self.conf.get('big_query', 'table'))
+    question = "\nI'm ready to append activity to Big Query at '%s', you may want to delete this table if it already exists. You ready?" % (table)
     ans = user_prompt.query_yes_no(question)
     
     if ans == True:
