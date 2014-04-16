@@ -221,8 +221,9 @@ def save_issue(self, issue, until):
         except TypeError:
             pass
         
-        if data['pull_request']['html_url'] is None:
-            dat['pull_request'] = 0
+        if data.has_key('pull_request'):
+            if data['pull_request']['html_url'] is None:
+                dat['pull_request'] = 0
         else:
             dat['pull_request'] = 1
         
