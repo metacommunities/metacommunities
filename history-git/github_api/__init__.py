@@ -55,9 +55,21 @@ class HistoryGit():
 
     from get_repo_names import get_repo_names, populate_repo, save_repo
 
-    from get_activity import get, set_until, get_commits, save_commit,\
-                             get_forks, save_fork, get_issues, save_issue,\
-                             get_pulls, save_pull
+    from get_activity import get,\
+                             setup_repo_summary,\
+                             update_repo_summary,\
+                             set_until,\
+                             set_since,\
+                             get_commits,\
+                             save_commit,\
+                             get_forks,\
+                             save_fork,\
+                             get_issues,\
+                             save_issue,\
+                             update_open_issues,\
+                             get_pulls,\
+                             save_pull
+                             
 
     from upload_activity import ask_upload, upload_wide_activity
   

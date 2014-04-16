@@ -64,8 +64,8 @@ def create_db(self, drop_db):
   
     # create tables
     repo_list_sql = """
-        CREATE TABLE IF NOT EXISTS repo (
-            id                  INTEGER PRIMARY KEY,
+        CREATE TABLE IF NOT EXISTS repo_list (
+            id                  INTEGER AUTO_INCREMENT PRIMARY KEY,
             name                TINYTEXT,
             full_name           TINYTEXT,
             owner               TINYTEXT,
@@ -77,22 +77,26 @@ def create_db(self, drop_db):
 
     repo_sql = """
         CREATE TABLE IF NOT EXISTS repo (
-            id                  INTEGER PRIMARY KEY,
-            name                TINYTEXT,
-            full_name           TINYTEXT,
-            owner               TINYTEXT,
-            created_at          DATETIME,
-            description         TEXT,
-            fork                TINYINT(1) NOT NULL DEFAULT 0,
-            commits             MEDIUMINT NOT NULL DEFAULT 0,
-            forks               MEDIUMINT NOT NULL DEFAULT 0,
-            pull_requests       MEDIUMINT NOT NULL DEFAULT 0,
-            last_commit         DATETIME NULL,
-            last_fork           DATETIME NULL,
-            last_pull_request   DATETIME NULL,
-            collaborators       MEDIUMINT NOT NULL DEFAULT 0,
-            contributors        MEDIUMINT NOT NULL DEFAULT 0,
-            last_updated        DATETIME NOT NULL
+            id                      INTEGER AUTO_INCREMENT PRIMARY KEY,
+            name                    TINYTEXT,
+            full_name               TINYTEXT,
+            owner                   TINYTEXT,
+            created_at              DATETIME,
+            description             TEXT,
+            is_fork                 TINYINT(1),
+            commits                 MEDIUMINT NOT NULL DEFAULT 0,
+            forks                   MEDIUMINT NOT NULL DEFAULT 0,
+            issues                  MEDIUMINT NOT NULL DEFAULT 0,
+            pull_requests           MEDIUMINT NOT NULL DEFAULT 0,
+            pushed_at               DATETIME NULL,
+            language                TINYTEXT,
+            last_commit             DATETIME NULL,
+            last_fork               DATETIME NULL,
+            last_pull_request       DATETIME NULL,
+            collaborators           MEDIUMINT NOT NULL DEFAULT 0,
+            contributors            MEDIUMINT NOT NULL DEFAULT 0,
+            last_summary_updated    DATETIME NOT NULL,
+            backlog_complete        TINYINT(1) NOT NULL DEFAULT 0
         )
     """
     cur.execute(repo_sql)
@@ -201,7 +205,8 @@ def create_db(self, drop_db):
         )
     """
     cur.execute(language_sql)
-  
+    
+    con.commit()
     cur.close()
     con.close()
     self.logger.info("Done.")
