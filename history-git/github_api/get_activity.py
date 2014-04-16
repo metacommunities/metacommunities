@@ -182,7 +182,6 @@ def get_issues(self):
     except github.GithubException as e:
         if e.data['message'] == "Issues are disabled for this repo":
             self.issues_enabled = False
-            pass
         else:
             raise
     
@@ -216,16 +215,19 @@ def save_issue(self, issue, until):
         # user level
         dat['user_login'] = data['user']['login']
         
+        # duration of the issue
         try:
             dat['duration'] = (dat['closed_at'] - dat['created_at']).total_seconds
         except TypeError:
             pass
         
-        if data['pull_request']['html_url'] is None:
+        # is the issue associated with a pull request
+        if 'pull_request' in data:
             dat['pull_request'] = 0
         else:
             dat['pull_request'] = 1
         
+        # try to insert this issue in to the database
         try:
             self.insert(dat, "issue")
         except:
