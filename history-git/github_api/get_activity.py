@@ -80,7 +80,12 @@ def update_repo_summary(self):
     
     self.logger.info("    Updating summary.")
     
-    now = datetime.datetime.fromtimestamp(time.time())
+    data = {
+        'now':       datetime.datetime.fromtimestamp(time.time()),
+        'full_name': self.owner_repo,
+        'pushed_at': self.github_repo.pushed_at,
+        'language':  self.github_repo.language
+    }
     
     # when was repo created?
     if self.backlog == 0:
@@ -96,8 +101,8 @@ def update_repo_summary(self):
         """
         self.cur.execute(update_repo, self.github_repo._rawData)
     
-    # save all this stuff
-    update_last = """
+    # start of the update query
+    update_start = """
         UPDATE repo_summary
         SET
             commits = (
@@ -137,19 +142,36 @@ def update_repo_summary(self):
                 FROM pull
                 WHERE base_owner_repo = %(full_name)s                
             ),
-            last_summary_updated = %(now)s
+            last_summary_updated = %(now)s"""
+    
+    # count collaborators and contributors
+    if self.conf.get('history_git', 'count_devs') == "True":
+        self.logger.info("        Counting collaborators...")
+        data['collaborators'] = 0
+        for coll in self.github_repo.get_collaborators():
+            data['collaborators'] += 1
+        
+        self.logger.info("        Counting contributors...")
+        data['contributors'] = 0
+        for contrib in self.github_repo.get_contributors():
+            data['contributors'] += 1
+        
+        update_middle = """,
+            collaborators = %(collaborators)s,
+            contributors = %(contributors)s
+        """
+    else:
+        update_middle = ""
+    
+    
+    # save all this stuff
+    update_end = """
         WHERE
             full_name = %(full_name)s
     """
     
-    data = {
-        'now': now,
-        'full_name': self.owner_repo,
-        'pushed_at': self.github_repo.pushed_at,
-        'language': self.github_repo.language
-    }
-    
-    self.cur.execute(update_last, data)
+    update = update_start + update_middle + update_end
+    self.cur.execute(update, data)
 
 
 def set_until(self, table, dt, owner_repo="owner_repo", until_type="NotSet"):
@@ -268,10 +290,10 @@ def save_commit(self, cm):
     dat['committer_date']    = data['commit']['committer']['date']
     
     if self.commit_stats:
-        dat['files_n']                 = len(cm.files)    
+        dat['files_n']         = len(cm.files)    
         dat['stats_additions'] = cm.stats.additions
         dat['stats_deletions'] = cm.stats.deletions
-        dat['stats_total']         = cm.stats.total
+        dat['stats_total']     = cm.stats.total
     
     self.insert(dat, "commit")
 
