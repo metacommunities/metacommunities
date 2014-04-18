@@ -52,9 +52,9 @@ class HistoryGit():
     and he'll get to work, begrudingly.
     """
     from db import open_con, close_con, create_db, insert
-
+    
     from get_repo_names import get_repo_names, populate_repo, save_repo
-
+    
     from get_activity import get,\
                              setup_repo_summary,\
                              update_repo_summary,\
@@ -67,12 +67,16 @@ class HistoryGit():
                              get_issues,\
                              save_issue,\
                              update_open_issues,\
+                             update_closed_issues,\
                              get_pulls,\
-                             save_pull
-                             
-
-    from upload_activity import ask_upload, upload_wide_activity
-  
+                             save_pull,\
+                             update_open_pulls,\
+                             update_closed_pulls
+    
+    from upload_activity import ask_upload,\
+                                upload_table,\
+                                create_wide_activity
+    
     def __init__(self, path, drop_db=False):
         self.logger = logging.getLogger('history_git')
 
@@ -86,7 +90,7 @@ class HistoryGit():
 
         # tables!
         self.create_db(drop_db)
-
+        
         # github
         self.gh = github.Github(login_or_token = self.conf.get('github', 'user'),
                                 password = self.conf.get('github', 'passwd'))

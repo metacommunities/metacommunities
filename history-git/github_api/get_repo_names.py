@@ -48,9 +48,12 @@ def populate_repo(self):
 
         if since is None:
             since = github.GithubObject.NotSet
-            self.logger.info("        No records in repo table. Getting all...")
+            msg = "        No records in repo table. Getting all..."
+            self.logger.info(msg)
         else:
-            self.logger.info("        Collecting repos with ID greater than %i..." % (since))
+            msg = "        Collecting repos with ID greater than %i..."\
+                  % (since)
+            self.logger.info(msg)
         
         start_time = time.time()
         self.n = 0
@@ -72,10 +75,12 @@ def populate_repo(self):
         self.con.commit()
         # results
         time_taken = time.time() - start_time
-        self.logger.info("        Processed %i repos in %.2fs." % (self.N, time_taken))
+        msg = "        Processed %i repos in %.2fs." % (self.N, time_taken)
+        self.logger.info(msg)
 
-        # if tried to get repos and N is still 0, then there were no repos to get
-        # so break the while loop, otherwise we should "restart" the for loop
+        # if tried to get repos and N is still 0, then there were no repos to
+        # get so break the while loop, otherwise we should "restart" the for
+        # loop
         if self.N == 0:
             break
     

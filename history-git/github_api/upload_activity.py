@@ -1,18 +1,62 @@
 import csv
+import os
 import subprocess
 import user_prompt
 
 def ask_upload(self):
-    table = "%s.%s" % (self.conf.get('big_query', 'db'), self.conf.get('big_query', 'table'))
-    question = "Should I upload activity to Big Query at '%s'?" % (table)
-    ans = user_prompt.query_yes_no(question)
+    question = ("\nShould I upload 'activity' and 'repo_summary' to Big Query?"
+                "\nThis will replace the rows that are already in these "
+                "tables if they exist. \nAre you ready?")
+    ans = user_prompt.query_yes_no(question, "no")
     
     if ans == True:
-        self.upload_wide_activity()
+        self.create_wide_activity()
+        self.upload_table("activity")
+        self.upload_table("repo_summary")
     else:
         self.logger.info("Activity not uploaded.")
 
-def upload_wide_activity(self):
+
+def upload_table(self, table):
+    """
+    Generic function to download table from MySQL, dump to a CSV, and upload to
+    Big Query.
+    """
+    self.open_con(fetchall=False)
+    
+    # download and save to temporary CSV
+    self.cur.execute("SELECT * FROM %s" % (table))
+    tmp_file = "/tmp/%s.csv" % (table)
+    with open(tmp_file, 'w') as out:
+        csv_out = csv.writer(out, quotechar='"', escapechar='\\',
+                             doublequote=True, quoting=csv.QUOTE_MINIMAL,
+                             lineterminator='\n')
+        for row in self.cur:
+            csv_out.writerow(row)
+    
+    # upload to BQ
+    file_size = os.stat(tmp_file).st_size
+    file_size = float(file_size) / 1000000 # MB
+    
+    bq_table = "%s.%s" % (self.conf.get('big_query', 'db'),
+                          self.conf.get('big_query', table + '_table'))
+    
+    msg = "Uploading  %.1f MB to table '%s' on Big Query..." \
+          % (file_size, bq_table)
+    self.logger.info(msg)
+    
+    bq_cmd = ("bq load --replace --source_format=CSV "
+              "%s %s bigquery_schema/%s")
+    bq_cmd = bq_cmd % (bq_table, tmp_file, table)
+    
+    process = subprocess.Popen(bq_cmd.split(), stdout=subprocess.PIPE)
+    
+    self.logger.info("    Done.")
+    
+    self.close_con()
+
+
+def create_wide_activity(self):
     """
     Append rows from the following tables:
         - commit
@@ -371,43 +415,16 @@ def upload_wide_activity(self):
     """
     
     # do it
-    self.logger.info("Merging contents from 'commit', 'fork', 'issue', and 'pull' tables.")
-    self.open_con(fetchall=False)
+    msg = ("Creating wide 'activity' table by merging contents of tables; "
+           "'commit', 'fork', 'issue', and 'pull'.")
+    self.logger.info(msg)
+    self.open_con()
     self.cur.execute(drop_tmp)
     self.cur.execute(create_tmp)
     self.cur.execute(drop_activity)
     self.cur.execute(create_activity)
     self.cur.execute(insert_activity)
     self.cur.execute(drop_tmp)
-    
-    # download contents table and save to CSV
-    self.logger.info("Downloading 'activity' table.")
-    self.cur.execute("SELECT * FROM activity")
-    
-    tmp_file = "/tmp/activity.csv"
-    with open(tmp_file, 'w') as out:
-        csv_out = csv.writer(out, quotechar='"', escapechar='\\',
-                             doublequote=True, quoting=csv.QUOTE_MINIMAL,
-                             lineterminator='\n')
-        for row in self.cur:
-            csv_out.writerow(row)
-    
-    # upload to BQ
-    table = "%s.%s" % (self.conf.get('big_query', 'db'), self.conf.get('big_query', 'table'))
-    question = "\nI'm ready to append activity to Big Query at '%s', you may want to delete this table if it already exists. You ready?" % (table)
-    ans = user_prompt.query_yes_no(question)
-    
-    if ans == True:
-        self.logger.info("Uploading to table '%s' in bigquery." % (table)) 
-        
-        bq_cmd = "bq load --source_format=CSV %s %s bigquery_schema/activity" % (table, tmp_file)
-        process = subprocess.Popen(bq_cmd.split(), stdout=subprocess.PIPE)
-        output = process.communicate()[0]
-        print output
-        
-        self.logger.info("Done.")
-    else:
-        self.logger.info("Upload aborted.")
-    
     self.close_con()
+
 

@@ -5,7 +5,7 @@ def open_con(self, fetchall=True):
     """
     Open connection to mysql db.
     """
-
+    
     if fetchall == True:
         self.con = MySQLdb.connect(host=self.conf.get('mysql', 'host'),
                                    user=self.conf.get('mysql', 'user'),
@@ -21,7 +21,7 @@ def open_con(self, fetchall=True):
                                    charset='utf8',
                                    cursorclass = MySQLdb.cursors.SSCursor,
                                    use_unicode=False)
-
+    
     self.cur = self.con.cursor()
 
 
@@ -29,7 +29,7 @@ def close_con(self):
     """
     Commit inserts and close db connection.
     """
-
+    
     self.cur.close()
     self.con.commit()
     self.con.close()
@@ -40,28 +40,28 @@ def create_db(self, drop_db):
     Maybe drop the database. Create database and tables in the db specific in
     the config, if any don't exists.
     """
-
+    
     self.logger.info("Checking '%s' database..." % (self.conf.get('mysql', 'db')))
-
+    
     con = MySQLdb.connect(host=self.conf.get('mysql', 'host'),
                           user=self.conf.get('mysql', 'user'),
                           passwd=self.conf.get('mysql', 'passwd'))
     cur = con.cursor()
-
+    
     # wipe those tables
     if drop_db:
         drop_sql = "DROP DATABASE IF EXISTS %s;" % (self.conf.get('mysql', 'db'))
         cur.execute(drop_sql)
         self.logger.info("Dropped database %s" % (self.conf.get('mysql', 'db')))
-  
+    
     # create db
     create_sql = "CREATE DATABASE IF NOT EXISTS %s" % (self.conf.get('mysql', 'db'))
     cur.execute(create_sql)
-  
+    
     # use db
     use_sql = "USE %s;" % (self.conf.get('mysql', 'db'))
     cur.execute(use_sql)
-  
+    
     # create tables
     repo_list_sql = """
         CREATE TABLE IF NOT EXISTS repo_list (
@@ -74,9 +74,9 @@ def create_db(self, drop_db):
         )
     """
     cur.execute(repo_list_sql)
-
+    
     repo_sql = """
-        CREATE TABLE IF NOT EXISTS repo (
+        CREATE TABLE IF NOT EXISTS repo_summary (
             id                      INTEGER AUTO_INCREMENT PRIMARY KEY,
             name                    TINYTEXT,
             full_name               TINYTEXT,
@@ -100,7 +100,7 @@ def create_db(self, drop_db):
         )
     """
     cur.execute(repo_sql)
-  
+    
     commit_sql = """
         CREATE TABLE IF NOT EXISTS commit (
             rid                 INTEGER,
@@ -119,7 +119,7 @@ def create_db(self, drop_db):
         )
     """
     cur.execute(commit_sql)
-
+    
     fork_sql = """
         CREATE TABLE IF NOT EXISTS fork (
             parent_rid          INTEGER,
@@ -137,7 +137,7 @@ def create_db(self, drop_db):
         )
     """
     cur.execute(fork_sql)
-  
+    
     issue_sql = """
         CREATE TABLE IF NOT EXISTS issue (
             rid                 INTEGER,
@@ -152,6 +152,7 @@ def create_db(self, drop_db):
             created_at          DATETIME,
             updated_at          DATETIME,
             closed_at           DATETIME,
+            duration_s          INTEGER,
             title               TEXT,
             body                MEDIUMTEXT,
             pull_request        TINYINT(1),
@@ -159,7 +160,7 @@ def create_db(self, drop_db):
         )
     """
     cur.execute(issue_sql)
-  
+    
     pull_sql = """
         CREATE TABLE IF NOT EXISTS pull (
             id                    INTEGER,
@@ -176,6 +177,7 @@ def create_db(self, drop_db):
             assignee_login        TINYTEXT,
             commits               TINYINT,
             comments              TINYINT,
+            duration_s            INTEGER,
             head_label            TINYTEXT,
             head_ref              TINYTEXT,
             head_sha              CHAR(40),
@@ -195,7 +197,7 @@ def create_db(self, drop_db):
         )
     """
     cur.execute(pull_sql)
-  
+    
     language_sql = """
         CREATE TABLE IF NOT EXISTS language (
             rid           INTEGER NOT NULL,
@@ -217,13 +219,13 @@ def insert(self, dat, table):
     Generate an INSERT statement off of the keys of the dat dict. Determine
     if records are commited to the db.
     """
-
+    
     fields = ', '.join(dat.viewkeys())
     values = ')s, %('.join(dat.viewkeys())
     insert_sql = "INSERT INTO " + table + " (" + fields + ") VALUES (%(" + values + ")s)"
-
+    
     self.cur.execute(insert_sql, dat)
-
+    
     # shall we commit to the db? -- Oh the irony...
     if self.n >= 1000:
         self.con.commit()

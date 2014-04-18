@@ -25,17 +25,19 @@ owner_repo = [line.rstrip('\n') for line in open(owner_repo_file)]
 # Add any 'owner/repo's from the command line
 owner_repo.extend(sys.argv[1:])
 
-# Start backlog for specific repos
-logger.info("Collecting backlog for %i repos" % (len(owner_repo)))
+# Collect events for specific repos
+logger.info("Collecting events for %i repos" % (len(owner_repo)))
 
 try:
     for rp in owner_repo:
         history_git.get(rp)
 except:
-    logger.error("Lol, your code is the worst.")
+    msg = ('"Life finds a way" - Ian Malcolm, Jurassic Park')
+    logger.error(msg)
     raise
 
-# history_git.create_repo_summary(owner_repo)
+history_git.update_closed_issues()
+history_git.update_closed_pulls()
 
 # after downloading activity, would user like to upload this to BigQuery?
 history_git.ask_upload()
