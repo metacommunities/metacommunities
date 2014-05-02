@@ -2822,5 +2822,60 @@ ON new.repository_url = old.url
 ORDER BY repo_created ASC
 
 
+
+/* twitter_forks */
+SELECT url FROM [github_explore.timeline] WHERE repository_owner = 'twitter' AND type = 'ForkEvent' GROUP BY url;
+
+
+SELECT
+old.url AS repository_url,
+new.organization AS organization,
+new.repo_created AS repo_created,
+new.Watchers AS Watchers,
+new.Forks AS Forks,
+new.Pushes AS Pushes,
+new.Pushers AS Pushers,
+new.LastPush AS LastPush,
+new.PR_Received AS PR_Received,
+new.PR_Issued AS PR_Issued,
+new.PushDuration AS PushDuration,
+new.type AS type
+FROM
+	(SELECT url
+	FROM [github.twitter_forks] )
+AS old
+OUTER LEFT JOIN EACH 
+	(SELECT repository_url, 
+	organization,
+	repo_created,
+	Watchers,
+	Forks,
+	Pushes,
+	Pushers,
+	LastPush,
+	PR_Received,
+	PR_Issued,
+	PushDuration,
+	type
+	FROM [github_proper.repo_type] 
+	)
+AS new
+ON new.repository_url = old.url
+ORDER BY repo_created ASC
 	
 
+/* how many repos are owned by orgsnisations */
+SELECT
+count(new.owner)
+FROM
+	(SELECT repository_organization
+	FROM [github_proper.org_ultimate_1] )
+AS old
+INNER JOIN EACH 
+	(SELECT owner
+	FROM [github_proper.repo_list] 
+	)
+AS new
+ON new.owner = old.repository_organization
+
+	
