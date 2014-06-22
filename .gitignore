@@ -8,3 +8,4 @@ mysql_*
 *.log
 client*json
 bigquery_credentials.dat
+adrian/repo-topics/data/*

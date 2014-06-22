@@ -32,6 +32,10 @@
 		{
 			"follow_symlinks": true,
 			"path": "/home/mackenza/.history_git"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/mackenza/Documents/ref_bibs"
 		}
 	]
 }

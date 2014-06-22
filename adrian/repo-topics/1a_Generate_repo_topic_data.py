@@ -7,6 +7,99 @@ import redis
 import pandas as pd
 import re
 
+# <codecell>
+
+repo_table = 'metacommunities:github_proper.repo_list'
+red = redis.Redis(db='1')
+
+# this loads around 10 million repo names, so its a bit slow
+%timeit -r 1 repo_list = pd.read_pickle('data/repo_list.pyd')
+
+# <codecell>
+
+# only run this if the repo_list has been updated
+pipe = red.pipeline()
+step = 100000
+for i in range(0, len(repo_list), step):
+    pipe.sadd('repos:list', *repo_list[i:i+step])
+    pipe.execute()
+
+# <codecell>
+
+def construct_repo_df_using_local(query):
+    """ For a given query, return all the repo full names from the local
+    copy of all the repo names.
+    It uses regular expression   on a list to do this.
+    
+    @param: regular expression query
+    """
+    if repo_list is not None:
+        full_df = pd.DataFrame(repo_list[repo_list.str.contains(query)], columns = ['full_name'])
+        print(full_df.shape)
+        return full_df
+    else:
+        return None
+
+# <codecell>
+
+
+def repo_query(query):
+    """ Runs simple GLOB-style queries against the list of all repo fullnames
+    in the Redis database"""
+    
+    query_formatted  = '*{}*'.format(query)
+    more_results = True
+    results = []
+    c=0
+    while more_results:
+        c, res =  red.sscan('repos:list', cursor=c, match = query_formatted, count = 10000000)
+        results.extend(res)
+        if c is '0':
+            more_results=False
+    print ('Found {0} repositories for query {1}'.format(len(results), query))
+    return results
+
+# <codecell>
+
+def construct_repo_df(query, description = False, local =True):
+    """ For a given query, return all the repo names, full names and fork
+    from the master list of reponames held on the githubarchive timeline.
+    It uses regular expression to do this and queries the table: metacommunities:github_proper.repo_list.
+    
+    @param: description - if True, will use the 'description' field too
+    @param: local - if True, will use the local copy of the repo names"""
+    
+    query = query.lower()
+    #to deal with the way people name repositories, try various separator characters
+    query = re.subn('[-_\s+]', '.?', query)[0]
+    query = re.subn('[,\(\):]', '', query)[0]
+    print query
+    
+    if local:
+        return construct_repo_df_using_local(query)
+    else:
+        print('starting bigquery ... ')
+    
+        if description:
+            full_query = 'SELECT name, full_name, fork FROM [github_proper.repo_list] where regexp_match(lower(name),"' + query +'") or regexp_match(description,"'+ query +'")'
+
+        else:
+            full_query = 'SELECT name, full_name, fork FROM [github_proper.repo_list] where regexp_match(lower(name),"' + query +'")'
+
+        full_df = pd.io.gbq.read_gbq(full_query)
+        print(full_df.shape)
+        return full_df
+
+# <codecell>
+
+query = 'facebook'
+%timeit repo_query(query)
+
+# <codecell>
+
+query = 'facebook|twitter'
+%timeit construct_repo_df_using_local(query)
+
 # <markdowncell>
 
 # # Topics of github repos 
@@ -49,10 +142,10 @@ import re
 # 16. code cleaning: -- linters
 # 17. policies: -- legal, political, data, 
 # 18. books: -- mainly technical, but probably others too; tons of these, but many are code-based. Used manual query.  -- DONE
-# 19. games: -- use 'game' in the reponames -- again, many just with this simple query, but also 'xbox, ps3, wii', '['game', 'xbox', 'playstation', 'wii', 'kinect', 'nintendo', 'minecraft', 'warcraft'].
+# 19. games: -- use 'game' in the reponames -- again, many just with this simple query, but also 'xbox, ps3, wii', '['game', 'xbox', 'playstation', 'wii', 'kinect', 'nintendo', 'minecraft', 'warcraft']. -- DONE
 # 20. programming languages: -- development of the languages, but also as programming platforms against on which things are made
 # 21. computational architectures and operating systems: -- linux, openwrt  -- DONE?
-# 22. science and modelling: -- of what? molecules, populations, dynamic systems, etc -- huge list of disciplines http://en.wikipedia.org/wiki/List_of_academic_disciplines_and_sub-disciplines that I've downloaded and cleaned a bit. 
+# 22. science and modelling: -- of what? molecules, populations, dynamic systems, etc -- huge list of disciplines http://en.wikipedia.org/wiki/List_of_academic_disciplines_and_sub-disciplines that I've downloaded and cleaned a bit.  -- DONE
 # 23. hardware devices: -- arduino, raspberry pi, android, ios, blackberry - they bring many libraries to them; --'arduino|raspberry|android|ios|blackberry|armv|symbian'  DONE
 # 24. data manipulation, statistics and calculation: -- pandas, numpy, but also spreadsheets -- hard to define this list -- I started with this http://en.wikipedia.org/wiki/List_of_statistical_packages  and then appended this http://en.wikipedia.org/wiki/List_of_numerical_analysis_software -- DONE
 # 25. build and build management tools: -- compilers, but also continuous systems like Jenkins -- http://en.wikipedia.org/wiki/List_of_compilers; http://en.wikipedia.org/wiki/Continuous_integration#Software -- DONE
@@ -60,11 +153,13 @@ import re
 # 27. business software: -- accounting, finance, personal or business including spreadsheets (xls) 
 # 28. data processing architectures: -- Hadoop
 # 30. Social media platforms: -- how could I forget -- http://en.wikipedia.org/wiki/List_of_social_networking_websites -- DONE
-# 31. internet protocols and services: - ftp, smtp, etc, etc -- used http://en.wikipedia.org/wiki/Lists_of_network_protocols  DONE -- might need to add more to the list of 18 -- 
-# 32. document processing -- wordprocessing, desktop publishing, presentations, docx, markdown, latex, etc; then just 'document|presentation|' 
-# 32. Github as a blog or webpage -- search for 'github.com|github.io' -- DONE
-# 33. cracks and downloads -- 'crack|download' -- DONE
-# 34. filehandling tools -- archives, compression, etc -- use fileformats?
+# 31. internet protocols and services: - ftp, smtp, etc, etc -- used http://en.wikipedia.org/wiki/Lists_of_network_protocols  DONE -- might need to add more to the list of 18 -- DONE
+# 32. document processing: -- wordprocessing, desktop publishing, presentations, docx, markdown, latex, etc; then just 'document|presentation|' -- DONE
+# 32. Github as a blog or webpage: -- search for 'github.com|github.io' -- DONE
+# 33. cracks and downloads: -- 'crack|download' -- DONE
+# 34. filehandling tools: -- archives, compression, etc -- use fileformats? -- no, put them into packages -- DONE
+# 35. educational platforms: -- list form wikipedia@ -  DONE
+# 36. apis and sdks: -- this a really wide ranging query -- DONE
 
 # <markdowncell>
 
@@ -78,46 +173,23 @@ import re
 # 
 # This is a huge list. They provide pointers to different domains and connect between them (e.g. xml, json vs svg, etc). See http://en.wikipedia.org/wiki/List_of_file_formats; could be interesting to use this as a lens overall; or as a way to augment any of the list givens above all.  
 
+# <markdowncell>
+
+# # Repo domains
+
 # <codecell>
 
 file_formats = pd.read_csv('topic_lists/file_formats.csv', sep='\t', header=None, names = ['domain', 'filetype', 'description'])
 file_formats = file_formats.apply(lambda x: x.str.strip().str.lower())
 file_formats['domain'].value_counts()
-# file_formats.head()
+
+# <codecell>
+
+file_formats.ix[file_formats['domain'] == 'graphics']
 
 # <markdowncell>
 
 # This list of file types suggests some things I haven't looked at properly. 
-
-# <codecell>
-
-repo_table = 'metacommunities:github_proper.repo_list'
-
-def construct_repo_df(query, description = True):
-    """ For a given query, return all the repo names, full names and fork
-    from the master list of reponames held on the githubarchive timeline.
-    It uses regular expression to do this.
-    
-    @param: description - if True, will use the 'description' field too"""
-    
-    print('starting bigquery ... ')
-    #to deal with the way people name repositories, try various separator characters
-    query = re.subn('[-_\s+]', '.?', query)[0]
-    query = re.subn('[,\(\):]', '', query)[0]
-    print query
-    if description:
-        full_query = 'SELECT name, full_name, fork FROM [github_proper.repo_list] where regexp_match(name,"' + query +'") or regexp_match(description,"'+ query +'")'
-                          
-    else:
-        full_query = 'SELECT name, full_name, fork FROM [github_proper.repo_list] where regexp_match(name,"' + query +'")'
-            
-    full_df = pd.io.gbq.read_gbq(full_query)
-    print(full_df.shape)
-    return full_df
-
-# <markdowncell>
-
-# # Repo domains
 
 # <markdowncell>
 
@@ -127,7 +199,7 @@ def construct_repo_df(query, description = True):
 
 # <codecell>
 
-spam_query = 'crack|download'
+spam_query = 'crack|download|free.*mp3'
 spam_df = construct_repo_df(spam_query, description = False)
 
 # <codecell>
@@ -146,7 +218,8 @@ long_title_df.shape
 
 spam_df = pd.concat([spam_df, long_title_df])
 spam_df = spam_df.drop_duplicates()
-spam_df.shape
+print spam_df.shape
+red.sadd('spam', *spam_df.full_name)
 
 # <markdowncell>
 
@@ -156,16 +229,20 @@ spam_df.shape
 
 # <codecell>
 
-test_query = 'test|try|demo|hello'
-test_df = construct_repo_df(test_query, description=False)
+test_query = 'test|try|demo|hello|getting started|starting|beginning|train|learn|sample|spoon-knife'
+test_df = construct_repo_df(test_query, description=False,local=True)
 
 # <codecell>
 
 test_df.head()
 
+# <codecell>
+
+red.sadd('tests', *test_df.full_name)
+
 # <markdowncell>
 
-# As expected, this is quite a big number of repos -- 0.4M. 
+# As expected, this is quite a big number of repos -- 0.8M. 
 
 # <markdowncell>
 
@@ -178,9 +255,8 @@ test_df.head()
 # <codecell>
 
 editors = pd.read_csv('topic_lists/editors.csv', header = None, names = ['name'])
-print(editors.shape)
+
 ides = pd.read_csv('topic_lists/ide_list.csv', header=None, names = ['name']).drop_duplicates()
-print(ides.shape)
 
 # <codecell>
 
@@ -192,7 +268,7 @@ print(editors['name'].head())
 
 # <codecell>
 
-ed_query_1 = '|'.join(editors['name'][:50].str.strip()).lower().replace('++', '\\\+\\\+')
+ed_query_1 = 'editor|' + '|'.join(editors['name'][:50].str.strip()).lower().replace('++', '\\\+\\\+')
 
 ed_query_2 = '|'.join(editors['name'][50:].str.strip()).lower().replace('++', '\\\+\\\+')
 
@@ -200,7 +276,11 @@ ide_query = '|'.join(ides['name'].str.strip()).lower().replace('++', '\\\+\\\+')
 
 # <codecell>
 
-ide_df = construct_repo_df(ide_query, description=False)
+ide_df = construct_repo_df(ide_query, description=False,local=True)
+
+# <codecell>
+
+red.sadd('ides', *ide_df.full_name)
 
 # <codecell>
 
@@ -208,11 +288,11 @@ ide_df.head()
 
 # <codecell>
 
-editor_df = construct_repo_df(ed_query_1)
+editor_df = construct_repo_df(ed_query_1,local=True, description=False)
 
 # <codecell>
 
-editor_df2 = construct_repo_df(ed_query_2)
+editor_df2 = construct_repo_df(ed_query_2, local=True)
 
 # <markdowncell>
 
@@ -225,7 +305,23 @@ editor_df.head()
 # <codecell>
 
 editor_df = editor_df.append(editor_df2)
+editor_df.drop_duplicates(inplace=True)
 editor_df.shape
+
+# <codecell>
+
+delete = False
+
+# <codecell>
+
+pipe = red.pipeline()
+
+if delete:
+    pipe.delete('editors')
+
+for i in range(0, editor_df.shape[0], 100000):
+    pipe.sadd('editors', *editor_df.full_name[i: i+100000])
+res =pipe.execute()
 
 # <markdowncell>
 
@@ -242,16 +338,15 @@ compiler_query = '|'.join(compilers.name.str.strip()).lower().replace('++', '\\\
 
 # <codecell>
 
-compiler_df2 = construct_repo_df(compiler_query, description=False)
+compiler_df = construct_repo_df(compiler_query, description=False)
+
+# <codecell>
+
+red.sadd('compilers', *compiler_df.full_name)
 
 # <markdowncell>
 
 # This is pretty huge. 0.5M Possible the biggest category I've seen. Is this really noise? 
-
-# <codecell>
-
-compiler_df = compiler_df2
-compiler_df.head()
 
 # <markdowncell>
 
@@ -268,7 +363,33 @@ integration_df = construct_repo_df(integration_query, description = True)
 
 # <codecell>
 
+red.sadd('integration', *integration_df.full_name)
+
+# <codecell>
+
 integration_df.head()
+
+# <markdowncell>
+
+# ## Programming languages
+
+# <codecell>
+
+programming_query = '\\bC\\b|java|php|javascript|perl|ruby|python|scala|pig'
+programming_df = construct_repo_df(programming_query, description=True)
+
+# <codecell>
+
+programming_query2 = 'clojure|fortran|lisp|actionscript|objective-c|\\bSQL\\b|lua|visual basic'
+programming_df2 = construct_repo_df(programming_query2, description=True)
+
+# <codecell>
+
+programming_df = pd.concat([programming_df, programming_df2])
+
+# <codecell>
+
+red.sadd('programming_language', *programming_df.full_name)
 
 # <markdowncell>
 
@@ -280,7 +401,7 @@ integration_df.head()
 
 packagelist = pd.read_csv('topic_lists/package_manager.csv', header=None, names = ['name'])
 packagelist.shape
-package_query = '|'.join(packagelist['name'].str.strip()).lower()
+package_query = 'zip|tar|gz|'+ '|'.join(packagelist['name'].str.strip()).lower()
 
 # <codecell>
 
@@ -289,6 +410,7 @@ package_df = construct_repo_df(package_query)
 # <codecell>
 
 package_df.head()
+red.sadd('packages', *package_df.full_name)
 
 # <markdowncell>
 
@@ -325,9 +447,9 @@ db_df = construct_repo_df(dbquery, description=False)
 
 # <codecell>
 
-
 print(db_df.shape)
-db_df.head()
+print db_df.head()
+red.sadd('databases', *db_df.full_name)
 
 # <markdowncell>
 
@@ -359,6 +481,10 @@ wfquery
 
 wf_df = construct_repo_df(wfquery)
 
+# <codecell>
+
+red.sadd('webframeworks', *wf_df.full_name)
+
 # <markdowncell>
 
 # 0.1M Are there really that many projects working on webframeworks. Or is that these frameworks are widely used, but not actually under development. 
@@ -372,16 +498,23 @@ wf_df = construct_repo_df(wfquery)
 # <codecell>
 
 javascript_list = pd.read_csv('topic_lists/javascript_front.csv', header=None, names=['name'])
-javascript_query = '|'.join(javascript_list.name.str.strip()).lower()
-print javascript_list.shape
+javascript_query = 'widget|'+'|'.join(javascript_list.name.str.strip()).lower()
+
+# <codecell>
+
+javascript_query
 
 # <codecell>
 
 javascript_df = construct_repo_df(javascript_query)
 
+# <codecell>
+
+red.sadd('web_frontend_javascript', *javascript_df.full_name)
+
 # <markdowncell>
 
-# A small list of libraries, but a lot of repos -- 0.1M
+# A small list of libraries, but a lot of repos -- 0.2M
 
 # <markdowncell>
 
@@ -392,14 +525,20 @@ javascript_df = construct_repo_df(javascript_query)
 # <codecell>
 
 csslist = pd.read_csv('topic_lists/css_list.csv', header=None, names = ['name'])
-print(csslist.shape)
 csslist.head()
 
 # <codecell>
 
-cssquery = '|'.join(csslist['name'][:30]).lower()
+cssquery = 'css|'+'|'.join(csslist['name'][:30]).lower()
+cssquery
+
+# <codecell>
 
 css_df = construct_repo_df(cssquery)
+
+# <codecell>
+
+red.sadd('css', *css_df.full_name)
 
 # <codecell>
 
@@ -421,6 +560,7 @@ git_df = construct_repo_df(git_query, description=False)
 # <codecell>
 
 git_df.head(20)
+red.sadd('git', *git_df.full_name)
 
 # <markdowncell>
 
@@ -436,6 +576,7 @@ git_df.head(20)
 
 dotquery = 'bash|zsh|tmux|csh|vim|emacs|dot?file'
 dot_df = construct_repo_df(dotquery)
+red.sadd('dot_files', *dot_df.full_name)
 
 # <markdowncell>
 
@@ -461,18 +602,19 @@ serverquery
 
 # <codecell>
 
-server_df = construct_repo_df(serverquery)
+server_df = construct_repo_df(serverquery, description=False)
 
 # <codecell>
 
-server_df.head()
+server_df.head(20)
 
 # <codecell>
 
+red.sadd('servers', *server_df.full_name)
 
 # <markdowncell>
 
-# Around 0.4 M repos here
+# Around 0.3 M repos here
 
 # <markdowncell>
 
@@ -488,11 +630,15 @@ devices_df = construct_repo_df(device_query)
 
 # <codecell>
 
+red.sadd('devices', *devices_df.name)
+
+# <codecell>
+
 devices_df.head()
 
 # <markdowncell>
 
-# Ok, around 0.25M repos again -- this starting to sound familiar! Quite interesting to look more at ARM architectures, and perhaps follow up the very notion of architecture through code. 
+# Ok, around 0.35M repos again -- this starting to sound familiar! Quite interesting to look more at ARM architectures, and perhaps follow up the very notion of architecture through code. 
 
 # <markdowncell>
 
@@ -502,26 +648,26 @@ devices_df.head()
 
 # <codecell>
 
-socialmedia = pd.read_csv('social_media.csv', header=0)
+socialmedia = pd.read_csv('topic_lists/social_media.csv', header=0)
 socialmedia.shape
 socialmedia.head()
 
 # <codecell>
 
-socialmediaquery = '|'.join(socialmedia['name'].str.strip()).lower()
+socialmediaquery = 'wikipedia|'+'|'.join(socialmedia['name'].str.strip()).lower()
 print socialmediaquery
 
 # <codecell>
 
-socialmedia_df = construct_repo_df(socialmediaquery)
+socialmedia_df = construct_repo_df(socialmediaquery, description = False)
 
 # <codecell>
 
-socialmedia_df2 = construct_repo_df(socialmediaquery, description=False)
+red.sadd('social_media', *socialmedia_df.full_name)
 
 # <markdowncell>
 
-# Almost 0.35M repositories here. Is that mostly noise?
+# Almost 157k repositories here. Is that mostly noise?
 
 # <codecell>
 
@@ -535,7 +681,7 @@ socialmedia_df.head(30)
 
 # <codecell>
 
-iplist  = pd.read_csv('internet_protocols.csv', header=None, names = ['name'])
+iplist  = pd.read_csv('topic_lists/internet_protocols.csv', header=None, names = ['name'])
 iplist.shape
 
 # <codecell>
@@ -546,6 +692,10 @@ print ipquery
 # <codecell>
 
 ip_df = construct_repo_df(ipquery)
+
+# <codecell>
+
+red.sadd('internet_protocols', *ip_df.full_name)
 
 # <codecell>
 
@@ -563,11 +713,15 @@ ip_df.head(10)
 
 ml_list = pd.read_csv('topic_lists/ml.csv', header=None, names = ['name'])
 ml_list.shape
-ml_query  = '|'.join(ml_list['name'].str.strip()).lower()
+ml_query  = 'data mining|machine learning|feature selection|prediction|' + '|'.join(ml_list['name'].str.strip()).lower()
 
 # <codecell>
 
-ml_df = construct_repo_df(ml_query)
+ml_df = construct_repo_df(ml_query, description=False, local=True)
+
+# <codecell>
+
+red.sadd('machine_learning', *ml_df.full_name)
 
 # <codecell>
 
@@ -606,6 +760,10 @@ for df in sci_dfs:
 print sci_df.shape
 sci_df.head()
 
+# <codecell>
+
+red.sadd('science', *sci_df.full_name)
+
 # <markdowncell>
 
 # Ok, 0.17M -- not a huge amount but worth tracking a bit more
@@ -635,6 +793,7 @@ geo_df = construct_repo_df(geoquery)
 
 # <codecell>
 
+red.sadd('geo_gis', *geo_df.full_name)
 geo_df.full_name[:30]
 
 # <markdowncell>
@@ -654,7 +813,7 @@ datasoftware.shape
 
 # <codecell>
 
-data_query1 = '|'.join(datasoftware['name'][:50].str.strip()).lower()
+data_query1 = 'statistic|data scien|'+'|'.join(datasoftware['name'][:50].str.strip()).lower()
 print data_query1
 data_query2 = '|'.join(datasoftware['name'][50:100].str.strip()).lower()
 print data_query2
@@ -663,25 +822,42 @@ print data_query3
 
 # <codecell>
 
-datastat_df = construct_repo_df(data_query1)
+datastat_df = construct_repo_df(data_query1, description=False, local=True)
 
 # <codecell>
 
-datastat_df = construct_repo_df(data_query1)
+datastat_df.head()
 
 # <codecell>
 
-datastat_df2 = construct_repo_df(data_query2)
 
 # <codecell>
 
-datastat_df3 = construct_repo_df(data_query3)
+
+# <codecell>
+
+datastat_df2 = construct_repo_df(data_query2, description=False, local=True)
+
+# <codecell>
+
+datastat_df3 = construct_repo_df(data_query3, description=False, local=True)
+
+# <codecell>
+
+delete = False
 
 # <codecell>
 
 datastat_df = pd.concat([datastat_df, datastat_df2, datastat_df3])
-print datastat_df_all.shape
+datastat_df.drop_duplicates(inplace=True)
+print datastat_df.shape
 datastat_df.head()
+
+# <codecell>
+
+if delete:
+    red.delete('data_statistics')
+red.sadd('data_statistics', *datastat_df.full_name)
 
 # <markdowncell>
 
@@ -718,6 +894,10 @@ doc_df = construct_repo_df(doc_query, description=False)
 
 # <codecell>
 
+red.sadd('documents', *doc_df.full_name)
+
+# <codecell>
+
 doc_df.ix[60:100]
 
 # <markdowncell>
@@ -730,6 +910,7 @@ doc_df.ix[60:100]
 
 page_query  = 'github.com|github.io'
 page_df = construct_repo_df(page_query, description = False)
+red.sadd('github_webpages', *page_df.full_name)
 
 # <markdowncell>
 
@@ -749,6 +930,10 @@ policy_df = construct_repo_df(policy_query)
 
 # <codecell>
 
+red.sadd('policy_law', *policy_df.full_name)
+
+# <codecell>
+
 policy_df.head()
 
 # <markdowncell>
@@ -762,6 +947,10 @@ policy_df.head()
 bookquery = '|'.join(['book', 'article', 'guide', 'how to', 'manual'])
 print bookquery
 book_df = construct_repo_df(bookquery)
+
+# <codecell>
+
+red.sadd('books_manuals', *book_df.full_name)
 
 # <codecell>
 
@@ -786,9 +975,13 @@ image_query = '|'.join(image_terms)
 
 image_df = construct_repo_df(image_query)
 
+# <codecell>
+
+red.sadd('images', *image_df.full_name)
+
 # <markdowncell>
 
-# Ok, _160k_ is not so many. Perhaps need to add more terms here. 
+# Ok, _195k_ is not so many. Perhaps need to add more terms here. 
 
 # <codecell>
 
@@ -800,12 +993,13 @@ image_df.head(10)
 
 # <codecell>
 
-game_list  = ['game', 'xbox', 'playstation', 'wii', 'kinect', 'nintendo', 'minecraft', 'warcraft']
+game_list  = ['game', 'xbox', 'playstation', 'wii', 'kinect', 'nintendo', 'minecraft', 'warcraft', 'multiplayer']
 game_query = '|'.join(game_list)
 
 # <codecell>
 
 game_df = construct_repo_df(game_query)
+red.sadd('gaming', *game_df.full_name)
 
 # <codecell>
 
@@ -834,11 +1028,44 @@ icon_df = construct_repo_df(iconquery)
 
 # <codecell>
 
+red.sadd('icons_fonts', *icon_df.full_name)
+
+# <codecell>
+
 icon_df.head()
 
 # <markdowncell>
 
 # Around 100k repos on this, which is a lot, given that they don't that much ... 
+
+# <markdowncell>
+
+# ## Education platforms and moocs
+
+# <codecell>
+
+education = 'mooc|coursera|EdX|khan academy|opencourseware|P2PU|Udacity|Udemy'
+edu_query = education.lower()
+edu_df = construct_repo_df(edu_query)
+red.sadd('education', *edu_df.full_name)
+
+# <codecell>
+
+red.sadd('moocs', *edu_df.full_name)
+edu_df.head()
+
+# <markdowncell>
+
+# ## APIS and SDKs
+
+# <codecell>
+
+api_query = 'api|sdk'
+api_df = construct_repo_df(api_query, description=False)
+
+# <codecell>
+
+red.sadd('api_sdk', *api_df.full_name)
 
 # <markdowncell>
 
@@ -850,22 +1077,29 @@ red = redis.Redis(db='1')
 
 # <codecell>
 
-red.sadd('server', *server_df.full_name)
-red.sadd('ide', *ide_df.full_name)
-red.sadd('editor', *editor_df.full_name)
-red.sadd('game', *game_df.full_name)
-red.sadd('icon', *icon_df.full_name)
-red.sadd('image', *image_df.full_name)
-red.sadd('books', *book_df.full_name)
-red.sadd('datastat', *datastat_df.full_name)
-red.sadd('geo', *geo_df.full_name)
-red.sadd('machinelearning', *ml_df.full_name)
-red.sadd('internetprotocol', *ip_df.full_name)
-red.sadd('socialmedia', *socialmedia_df.name)
-red.sadd('devices', *devices_df.name)
-red.sadd('package', *package_df.full_name)
-red.sadd('database', *db_df.full_name)
-red.sadd('webframework', *wf_df.full_name)
+pipe = red.pipeline()
+
+for i in range(0, editor_df.shape[0], 100000):
+    pipe.sadd('editors', *editor_df.full_name[i:i + 100000])
+res = pipe.execute()
+
+# <codecell>
+
+red.sadd('servers', *server_df.full_name)
+red.sadd('ides', *ide_df.full_name)
+red.sadd('gaming', *game_df.full_name)
+red.sadd('icons_fonts', *icon_df.full_name)
+red.sadd('images', *image_df.full_name)
+red.sadd('books_manuals', *book_df.full_name)
+red.sadd('data_statistics', *datastat_df.full_name)
+red.sadd('geo_gis', *geo_df.full_name)
+red.sadd('machine_learning', *ml_df.full_name)
+red.sadd('internet_protocols', *ip_df.full_name)
+red.sadd('social_media', *socialmedia_df.full_name)
+red.sadd('devices', *devices_df.full_name)
+red.sadd('packages', *package_df.full_name)
+red.sadd('databases', *db_df.full_name)
+red.sadd('webframeworks', *wf_df.full_name)
 red.sadd('css', *css_df.full_name)
 red.sadd('dotfiles', *dot_df.full_name)
 red.sadd('webpages', *page_df.full_name)
@@ -873,10 +1107,17 @@ red.sadd('tests', *test_df.full_name)
 red.sadd('git', *git_df.full_name)
 red.sadd('web_frontend_javascript', *javascript_df.full_name)
 red.sadd('compilers', *compiler_df.full_name)
-red.sadd('machinelearning', *ml_df.full_name)
 red.sadd('integration', *integration_df.full_name)
-red.sadd('policy', *policy_df.full_name)
+red.sadd('policy_law', *policy_df.full_name)
 red.sadd('science', *sci_df.full_name)
 red.sadd('documents', *doc_df.full_name)
 red.sadd('spam', *spam_df.full_name)
+
+# <codecell>
+
+red.sadd('moocs', *edu_df.full_name)
+red.sadd('spam', *spam_df.full_name)
+
+# <codecell>
+
 
