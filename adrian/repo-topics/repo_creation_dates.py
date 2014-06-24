@@ -11,11 +11,13 @@ import ConfigParser
 
 path = '/home/mackenza/.history_git/'
 conf = ConfigParser.ConfigParser()
+
+data_path = '/git_data/githubarchive/'
 conf.read(os.path.join(path, 'settings.conf'))
 # github
 git = gh.Github(login_or_token = conf.get('github', 'user'),
                         password = conf.get('github', 'password'))
-red = redis.Redis(db ='1')
+red = redis.Redis(db ='2')
 
 
 def generate_repo_data_from_local_archive(start = '2013-03-01', days = 1):
@@ -24,10 +26,9 @@ def generate_repo_data_from_local_archive(start = '2013-03-01', days = 1):
     """
 
     print start
-    data_path = '/media/mackenza/overflow/data'
     start_hour = 0
     evs = {}
-    current_date =  datetime.datetime.strptime(start, '%Y-%M-%d')
+    current_date =  datetime.datetime.strptime(start, '%Y-%m-%d')
 
     # process days
     for d in range(0, days):
@@ -50,7 +51,7 @@ def generate_repo_data_from_local_archive(start = '2013-03-01', days = 1):
 def read_one_github_hour(filename, save_to_redis = True):
     """ Read all events in one hour of archive data. The field name 'repo' changes to 'repository'
     in March 2012. But the 'repo' field had no creation date. Is this part of the repackaging of the API 
-    for purposes of publication
+    for purposes of publication?
     """
     if save_to_redis:
         pipe = red.pipeline()
@@ -77,12 +78,13 @@ def read_one_github_hour(filename, save_to_redis = True):
         # Parse the JSON of this event.
         try:
             event = json.loads(line)
-            # print event
+            #print event
             if event.has_key('repository'):
                 repository = event['repository']
                 date = repository['created_at']
                 repo = '{}/{}'.format(repository['owner'], repository['name'])
                 creation_date = dateutil.parser.parse(date)
+	#	print creation_date
                 evs[repo] = time.mktime(creation_date.timetuple())
                 repo_attr = {}
                 repo_attr['fork'] = repository['fork']
@@ -92,17 +94,15 @@ def read_one_github_hour(filename, save_to_redis = True):
                 pipe.hmset('repo:'+repo, repo_attr)
         except Exception, ex:
             print( 'exception: {}'.format(ex))
-            return event
     print 'Found {} repository creation dates'.format(len(evs))
     ## store in redis db
     #@TODO: change the db and key name -- this is for testing only
     # red.hmset('test:repos:created_at', evs)
-    if save_to_redis:
+    if save_to_redis and len(evs.items()) > 0:
         red.zadd('repos:created_at', **evs)
         pipe.execute()
     return evs
 
-red.de
 def get_creation_dates_from_API(query, number):
     repos = red.srandmember(query,number)
 
@@ -113,7 +113,7 @@ def get_creation_dates_from_API(query, number):
             #store datetime as milliseconds since epoch
             # to reverse: time.gmtime(t)
             repo_dates[r] = time.mktime(res.created_at.timetuple())
-            red.zadd('repos:creation', r, mktime(res.created_at.timetuple()))
+            red.zadd('repos:created_at', r, mktime(res.created_at.timetuple()))
         except Exception, e:
             print e
     return repo_dates
