@@ -20,6 +20,21 @@ git = gh.Github(login_or_token = conf.get('github', 'user'),
 red = redis.Redis(db ='2')
 
 
+def retrieve_repos_by_date_created(start_date = '2008-01-01', end_date = '2009-01-01'):
+    """ return repo names sorted by date"""
+    st = time.mktime(time.strptime(start_date, '%Y-%m-%d'))
+    fin = time.mktime(time.strptime(end_date, '%Y-%m-%d'))
+    res= red.zrangebyscore('repos:created_at', st,fin, withscores = True)
+    ts = pd.Series({time.ctime(r[1]):r[0] for r in res})
+    ts.index = pd.to_datetime(ts.index)
+    return ts
+
+
+def retrieve_repos_by_date_order(start = 0, end = 100):
+    """ return repo names sorted by date"""
+    res = red.zrange('repos:created_at', start, end, withscores=True)
+    return {time.ctime(r[1]):r[0] for r in res}
+
 def generate_repo_data_from_local_archive(start = '2013-03-01', days = 1):
     """read created_at dates for repositories. These dates are only included in the archive date 
     as a field beginning at '2012-03-10-22' hrs. All repos before that, don't have it in the github data. 
@@ -41,7 +56,10 @@ def generate_repo_data_from_local_archive(start = '2013-03-01', days = 1):
         # read one day
         for i in range(start_hour,23):
             fpi = fp  + str(i) + '.json.gz'
-            evs.update(read_one_github_hour(fpi))
+            res = read_one_github_hour(fpi)
+            if res is not None:
+                evs.update(res)
+
         # increment date
         current_date +=  datetime.timedelta(1)
     # evs_df = pd.DataFrame.from_dict(evs, orient = 'index')
@@ -55,10 +73,13 @@ def read_one_github_hour(filename, save_to_redis = True):
     """
     if save_to_redis:
         pipe = red.pipeline()
-    # the one hour of github archive
-    f =  gzip.GzipFile(filename)
-    # One event per line.
+    #one hour of github archive
+    if os.path.isfile(filename) is False:
+	print 'Could not find file {}'.format(filename)	
+	return
     try:
+    	f =  gzip.GzipFile(filename)
+    	# One event per line.
         events = [line.decode("utf-8", errors="ignore") for line in f]
     except Exception, e:
         # print(e)
