@@ -9,3 +9,4 @@ mysql_*
 client*json
 bigquery_credentials.dat
 adrian/repo-topics/data/*
+*login*
