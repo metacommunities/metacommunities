@@ -31,9 +31,9 @@ red = redis.Redis(db='1', host=REDIS_HOST)
 # <codecell>
 
 #get all keys
-keys_all = set(red.keys('*'))
+keys_all = set(red.keys('repos:*'))
 #get the intersection keys
-keys_int = set(red.keys('*:*'))
+keys_int = set(red.keys('repos:*:*'))
 #isolate the topic keys
 keys = keys_all.difference(keys_int)
 keys = list(keys)
@@ -45,7 +45,8 @@ sort(keys)
 # <codecell>
 
 #only run if there is fresh data in the redis db
-un =red.sunionstore('repos:union', *keys)
+# un =red.sunionstore('repos:union', *keys)
+red.bitop('AND', 'repo:union', *keys)
 
 # <codecell>
 
