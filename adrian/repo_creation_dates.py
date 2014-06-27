@@ -21,7 +21,10 @@ red = redis.Redis(db ='2')
 
 
 def retrieve_repos_by_date_created(start_date = '2008-01-01', end_date = '2009-01-01'):
-    """ return repo names sorted by date"""
+    """ return repo names sorted by date as a Pandas timeseries
+    arguments:
+    start_date: in '2008-02-02' format
+    start_date: in '2008-02-02' format"""
     st = time.mktime(time.strptime(start_date, '%Y-%m-%d'))
     fin = time.mktime(time.strptime(end_date, '%Y-%m-%d'))
     res= red.zrangebyscore('repos:created_at', st,fin, withscores = True)
@@ -29,15 +32,28 @@ def retrieve_repos_by_date_created(start_date = '2008-01-01', end_date = '2009-0
     ts.index = pd.to_datetime(ts.index)
     return ts
 
+def get_repo_creation_date(repo):
+    """ Look up repo creation date from redis store and if its 
+    not there, get it from the Github API"""
+    try:
+        cdate = red.zscore('repos:created_at', repo)
+        if cdate is None:
+            load_repo_creation_dates_from_API([repo])
+            cdate = red.zscore('repos:created_at', repo)
+        return time.ctime(cdate)
+    except Exception, e:
+        print e
+
 
 def retrieve_repos_by_date_order(start = 0, end = 100):
-    """ return repo names sorted by date"""
+    """ return a dictionary of repo names keyed by date"""
     res = red.zrange('repos:created_at', start, end, withscores=True)
     return {time.ctime(r[1]):r[0] for r in res}
 
 def generate_repo_data_from_local_archive(start = '2013-03-01', days = 1):
     """read created_at dates for repositories. These dates are only included in the archive date 
     as a field beginning at '2012-03-10-22' hrs. All repos before that, don't have it in the github data. 
+    These need to be retrieved from the Github API
     """
     print start
     start_hour = 0
@@ -66,7 +82,7 @@ def generate_repo_data_from_local_archive(start = '2013-03-01', days = 1):
     # return evs_df
 
 def read_one_github_hour(filename, save_to_redis = True):
-    """ Read all events in one hour of archive data. The field name 'repo' changes to 'repository'
+    """ Read all events in one hour of githubarchive data. The field name 'repo' changes to 'repository'
     in March 2012. But the 'repo' field had no creation date. Is this part of the repackaging of the API 
     for purposes of publication?
     """
@@ -123,27 +139,28 @@ def read_one_github_hour(filename, save_to_redis = True):
         pipe.execute()
     return evs
 
-def get_creation_dates_from_API(query, number):
-    repos = red.srandmember(query,number)
-
+def load_repo_creation_dates_from_API(repos):
+    """ looks up creation dates for repos in the list
+    and stores them in Redis zset"""
+    repo_dates = {}
     for r in repos:
         try:
             res = git.get_repo(r)
-            # print res.created_at
             #store datetime as milliseconds since epoch
             # to reverse: time.gmtime(t)
             repo_dates[r] = time.mktime(res.created_at.timetuple())
-            red.zadd('repos:created_at', r, mktime(res.created_at.timetuple()))
+            print res.created_at
+            red.zadd('repos:created_at', r, time.mktime(res.created_at.timetuple()))
         except Exception, e:
             print e
     return repo_dates
 
-if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(description="Monitor GitHub activity.")
-    parser.add_argument("--since", default=None, help="The starting date.")
-    # parser.add_argument("--until", default=None, help="The end date.")
-    parser.add_argument("--days", default=1, help="The number of days.")
+# if __name__ == "__main__":
+#     import argparse
+#     parser = argparse.ArgumentParser(description="Monitor GitHub activity.")
+#     parser.add_argument("--since", default=None, help="The starting date.")
+#     # parser.add_argument("--until", default=None, help="The end date.")
+#     parser.add_argument("--days", default=1, help="The number of days.")
 
-    args = parser.parse_args()
-    generate_repo_data_from_local_archive(start  = args.since, days = int(args.days))
+#     args = parser.parse_args()
+#     generate_repo_data_from_local_archive(start  = args.since, days = int(args.days))
