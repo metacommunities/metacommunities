@@ -39,7 +39,6 @@ def generate_repo_data_from_local_archive(start = '2013-03-01', days = 1):
     """read created_at dates for repositories. These dates are only included in the archive date 
     as a field beginning at '2012-03-10-22' hrs. All repos before that, don't have it in the github data. 
     """
-
     print start
     start_hour = 0
     evs = {}

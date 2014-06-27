@@ -9,6 +9,11 @@
 
 # <codecell>
 
+%load_ext autoreload
+%autoreload 2
+
+# <codecell>
+
 import redis
 import matplotlib.pyplot as plt
 import seaborn
@@ -17,8 +22,15 @@ import re
 import itertools
 import numpy as np
 import time
+import sys
 # import mpld3
 # mpld3.enable_notebook()
+
+# <codecell>
+
+sys.path.append('../')
+import RedisRepos as rr
+redisrepos = rr.Repos()
 
 # <codecell>
 
@@ -47,6 +59,11 @@ sort(keys)
 #only run if there is fresh data in the redis db
 # un =red.sunionstore('repos:union', *keys)
 red.bitop('AND', 'repo:union', *keys)
+
+# <codecell>
+
+redisrepos = rr.Repos()
+moocs = redisrepos.load_repo_collection('repos:moocs')
 
 # <codecell>
 

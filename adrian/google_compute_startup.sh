@@ -20,8 +20,10 @@ sudo /usr/share/google/safe_format_and_mount -m "mkfs.ext4 -F" /dev/disk/by-id/s
 
 # start redis
 sudo /etc/init.d/redis_6379 start
-sudo /etc/init.d/redis-server stop
 # sudo redis-server /etc/redis/6379.conf 
 
 # to get some github archive files
 wget http://data.githubarchive.org/2012-07-{01..31}-{0..23}.json.gz
+
+# to push/pull files
+gcutil push 'instance-1' repo_list.pyd /home/mackenza
