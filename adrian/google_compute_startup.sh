@@ -2,11 +2,11 @@
 
 gcutil --service_version="v1" --project="metacommunities" addinstance "instance-1" --zone="europe-west1-b" --machine_type="n1-standard-2" --network="default" --external_ip_address="ephemeral" --metadata="sshKeys:" --service_account_scopes="https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/bigquery" --disk="instance-1,deviceName=instance-1,mode=READ_WRITE,boot"  --auto_delete_boot_disk="false"
 
+#attach data disk
+gcutil attachdisk  --project="metacommunities"  --zone="europe-west1-b"  --disk="disk-1,deviceName=disk-1,mode=READ_WRITE" "instance-1"
 # to stop
 gcutil --project="metacommunities" deleteinstance "instance-1"
 
-#attach data disk
-gcutil attachdisk  --project="metacommunities"  --zone="europe-west1-b"  --disk="disk-1,deviceName=disk-1,mode=READ_WRITE" "instance-1"
 
 # to fix ssh
 eval `ssh-agent -s`
