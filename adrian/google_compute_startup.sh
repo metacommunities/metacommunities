@@ -26,4 +26,4 @@ sudo /etc/init.d/redis_6379 start
 wget http://data.githubarchive.org/2012-07-{01..31}-{0..23}.json.gz
 
 # to push/pull files
-gcutil push 'instance-1' repo_list.pyd /home/mackenza
+gcutil push 'instance-1' repo_list.pyd /git_data
