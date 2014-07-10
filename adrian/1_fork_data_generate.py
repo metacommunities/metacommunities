@@ -62,5 +62,5 @@ def plot_growth_by_repos(forks):
 #top_forks_set = plot_growth_by_repos(forks)
 plot_overall_growth(forks, repo_name)
 plt.legend(loc='upper left')
-plt.savefig('plots/{}_fork_growth.png'.format(repo_name))
+plt.savefig('plots/{}_fork_growth.png'.format(repo_name), figsize=(10,12))
 plt.close()

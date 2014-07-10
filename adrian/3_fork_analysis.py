@@ -31,9 +31,8 @@ print 'plotting {} repo forks without {} itself'.format(forkcount, repo_name)
 plt.figure(figsize = (16,10))
 forks_minus_repo_name = fork_week[fork_week.index.get_level_values(0) !=repo_name]
 fp.fork_stackplot(forks_minus_repo_name)
-plt.title('{} {}-related repository forks since 2012'.format(forkcount, repo_name))
 plt.ylabel('forks/week')
-#plt.show()
 
-plt.savefig('plots/{0}_stackplot_no_{0}_{1}.png'.format(repo_name, datetime.datetime.strftime(datetime.datetime.now(), format = '%Y-%m-%d-%H-%M')))
+plt.savefig('plots/{0}_stackplot_no_{0}_{1}.png'.format(repo_name, datetime.datetime.strftime(datetime.datetime.now(), format = '%Y-%m-%d-%H-%M')), figsize=(10,12))
+
 plt.close()
