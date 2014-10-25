@@ -1,0 +1,83 @@
+# In and out of the  data:  frictions in digital sociology
+
+Increasingly many disciplines and techniques  target cultural objects and processes using digital data. From the statistical modelling of audience reaction to films based on Wikipedia edits [@mestyan_early_2013] through to the 'cultural analytics' of visual patterns Hollywood cinema [@manovich_cultural_2009], from the many analyses of sentiment  in Twitter streams [@procter_reading_2013] through to the topic modelling of genres of literature, government policy or news events [@mohr_introductiontopic_2013; @rusch_model_2013] or even the high-dimensional modelling of emotional states during music listening  [@baltrusaitis_dimensional_2013], not to mention the abundant and well-established techniques of social network analysis, an extraordinarily diverse set of efforts seek to disentangle the components, the structures and patterns of cultural life in all its aesthetic, spatial, temporal, textual and numerical variations.  There are increasing overlaps and intersections between disciplines as diverse as ecology, computer science,  literature, mathematics, film studies, robotics, marketing, manufacturing, geology, operations research and sociology as they seek patterns in data. In some respects, these intersections mainly take the form of imitation: the techniques of working with and modelling data circulate increasingly rapidly across disciplinary boundaries with little modification. In other cases, techniques and methods are loosely assembled under the rubric of doing  'data intensive science' [@hey_fourth_2009] or just 'data science' [@schutt_doing_2013].  In either case a critical question for sociology remains:  how will  it differ from adjacent and sometimes encroaching endeavours in  analytics  or computer science?  Is there any prospect for a sociology of culture in which these techniques  of large scale data accumulation, machine learning and modelling in order to find patterns or classify things,  or data visualisation as a way of condensing results, generate propositions, experiments and modes of engagement that diverge from the growing consensus? This chapter will explore some key responses ranging from recent work on 'redistribution of methods' in sociology [@marres_redistribution_2012] through to the somewhat interdiscplinary tendencies of some data science  in order to suggest that sociology of culture might better engage with the conditions of the productions of its own knowledge, with  what 'thought owes to its social conditions of production'  [@bourdieu_pascalian_2000]. Whether in the forms of the 'ethical economy' of social production [@arvidsson_ethical_2009] or the critical question of how to invent interesting fictions [@stengers_power_1997], the liveliness of the sociology of culture depends on modes of engaging that which lies outside the data itself, and only dimly traced within it. 
+
+## old abstract
+There is very little academic literature on 'digital sociology.' A broad range of work on digital methods, digital tools, digital techniques, as well as scattering of work on computational social science might form parts of some version of digital sociology, but at the moment, the field has little definite shape. The core issue in struggles to define it concern the recursive loop between digital objects and digital subjects of knowledge of knowledge. This loop connects and periodically updates  what is known, how it is known and by whom it is known.  This loopiness of digital sociology is not unique. Perhaps it is always the case that knowledge of culture is part of making culture, and the knowledge of culture is culture. This is partly what Pierre Bourdieu would call what 'thought owes to its social conditions of production,' and partly what the social conditions of production/consumption owe to styles of thought, especially thought objectified in communication systems. Within this dynamic loopiness, the question is what digital sociology will do? How will its practices differ from those of cultural sociology more generally? How will they differ from adjacent and sometimes overlapping endeavours in digital humanities, computational social science, cultural analytics  or 'data science'? This chapter will suggest that a comparison between a classical tool of cultural sociology such as multiple correspondence analysis (MCA) as used by Pierre Bourdieu and some of the clustering, pattern recognition and predictive models such  used in much contemporary data work might shed light on some of the stakes of digital sociology. While the latter techniques certainly do not define or exhaust digital sociology, they are very much part of the material and technical environment inhabited by digital sociology. 
+
+## ideas
+
+- symbolic boundaries made through automatic classifiers
+- notion of the 'overview object' - an entity that has views of the world as part of its constitution; they are endemic in art and culture (e.g. landscape painting, portraits) - ask Matthew about this -- but also in contemporary memory systems (databases) and sensors (satellites), and the extraordinary abundance of control panels associated with technological objects. 
+- these objects find/display/store patterns, but they are have a pattern in their own right -- they are subject to imitation, copying and reproduction
+	- descriptive assemblages (Savage)
+- how to study these kinds of entities that give overviews but themselves occur in many similar versions? How do these entities challenge our capacities to critical know them?
+- methodologies for 'overview objects'
+	- working with the data in the writing: code/analysis/visualization/media mix together
+	- the role of numbers, models and counting
+	- apis and other data sources
+	- the role of code -- that which produces overviews; that is itself very susceptible copying -- hence the 6 million repos
+	- the case of code -- github -- overview objects in flows of forking
+ - finding  in the overview objects recursive descriptions of the world they overview
+	 - media, art, science, commerce, government  domains in github 
+	 - fractal scaling of the overviews, ranging from the individuals configuration for their editor to whole systems of modelling, content management, etc, with many many tools for describing and making descriptions (pandas, ggplot)
+- Do we 'reflect' culture/art?
+	- Criticise the notion of reflexive vs reflective?
+		- To practise reflexivity means questioning the privilege of a knowing 'subject' arbitrarily excluded from the effort of objectification. , Bourdieu, 119
+	 - freeing itself from determinations -- in this case, in relation to the pervasive reach of digital media; and the unthinking reliance on it. 
+		- By endeavouring to intensify awareness of the limits that thought owes to its social conditions of production and to destroy the illusion of the absence of limits or of freedom from all determinations which leaves thought defenceless against these determinations, it aims to offer the possibility of a real freedom with respect to the determinations that it reveals. 121
+- Marres - 'how does digitization affect the relations between researchers and researched, and those between the objects, methods, techniques of social research, broadly conceived?' www.csisponline.net/2013/01/21/what-is-digital-sociology/
+- Lupton - To summarise, here are the main activities in which digital sociologists can engage:
+
+     Professional digital practice : using digital media tools for professional purposes: to build networks, construct an e-profile, publicise and share research and instruct students.
+    Sociological analyses of digital use : researching the ways in which people’s use of digital media configures their sense of selves, their embodiment and their social relations.
+    Digital data analysis : using digital data for social research, either quantitative or qualitative.
+    Critical digital sociology : undertaking reflexive and critical analysis of digital media informed by social and cultural theory.
+http://simplysociology.wordpress.com/2012/07/08/digital-sociology-part-1-what-is-it/
+
+## References and quotes
+
+- symbolic boundaris: Symbolic boundaries are “conceptual distinctions made by social actors…that separate people into groups and generate feelings of similarity and group membership.”
+- cultural capital - embodied, objectified, institutionalized - 'forms of knowledge, skills, education, and advantages that a person has, which give them a higher status in society. Parents provide their children with cultural capital by transmitting the attitudes and knowledge needed to succeed in the current educational system.' -- computers as cultural capital? (Frow, 1986)
+- Beer  2013 on circulation
+- Bourdieu forms of capital -pdf
+- Hanquinet on changing boundaries in aesthetics -- 2013 in pdf
+- Savage 2009 on visualizations
+- Hanquinet, Roose & Savage -- remaking cultural capital
+- Adkins and Lury on Measure and Value
+- Wikipedia page on 'digital sociology' has a couple of references
+- Wynne 2009 on field and classroom
+- Ruppert, 2012 -- devices
+- Orton-Johnson, K. and Prior, N. (eds) (2013) Digital Sociology: Critical Perspectives. Houndmills: Palgrave Macmillan -- couldnt find this
+- Berry on digital humanities -- could be good target re topic modelling
+
+## Titles
+ The associations of digital sociology  or digital cultural sociology
+ The automation of symbolic boundaries
+
+
+## Outline
+- a slender growth in the use of digital sociology as well as computational social science -- only a couple of references on ISI and really only Lupton on google scholar
+	- digital social research, digital sociology, computational social science, data science, 
+	- computational social science -- healthier, but spread widely across disciplines ... 
+	- data science -- quotes from Schutt and ONeill
+	- vernacular social science -- information visualization; data visualisation - 'information is beautiful', McCandless; 
+	- Visualization -- see Burrows article on this; the collection in sociological review -live methods
+		- d3.js, Nathan Yau
+		- grammar of graphics -- ggplot2 - Cleveland, Tufte, 
+- The rapid embrace of data in social science, without thinking about the source of that data. 
+	- hardly any consideration of the digital as a software culture or algorithmic culture or as produced by analytics; Marres and Uprichard as exceptions here; also some of Beer, although somewhat honoured in the breach
+	- The relation of data science/digital sociology to tech industry; vernacular social science; - playbour - Burrows on this
+	- Dunne-Raby as the example: we need to study them; but they are not typical of data science now
+	- Culture as data production -- connection to debates on labour, etc, -- terranova on this; 
+- The prevalence of topic models and what to do about them -- digital humanities stuff on this
+	- breakdowns between language and other forms of action -- just as topic modelling gets hold of language, language slips in some key places ... 
+- need to reflect on the patterns of the digital, not in the digital
+	- finding  in the overview objects recursive descriptions of the world they overview
+		 - media, art, science, commerce, government  domains in github 
+		 - fractal scaling of the overviews, ranging from the individuals configuration for their editor to whole systems of modelling, content management, etc, with many many tools for describing and making descriptions (pandas, ggplot)
+- the body of the researcher in the digital social science (Wacquant, Bourdieu)
+	- researchers own cultural capital and digital cultural sociology
+	- feedback loops beween field and habitus through data
+
+## References 
