@@ -1,5 +1,5 @@
 # ignore gedit backup files
-mysql_*
+#mysql_*
 *~
 *.pyc
 *.pyd
