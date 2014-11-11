@@ -1,0 +1,1039 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"load",
+				"load_repo_id"
+			],
+			[
+				"id",
+				"id_repo"
+			],
+			[
+				"repo",
+				"repo_id"
+			],
+			[
+				"get",
+				"get_repo_by_id"
+			],
+			[
+				"ite",
+				"item_number"
+			],
+			[
+				"buck",
+				"bucket_number"
+			],
+			[
+				"rep",
+				"repo_id"
+			],
+			[
+				"repo_id_",
+				"repo_id_dict"
+			],
+			[
+				"for",
+				"format"
+			],
+			[
+				"curre",
+				"current_ids"
+			],
+			[
+				"set",
+				"set_to_convert"
+			],
+			[
+				"re",
+				"repo_id"
+			],
+			[
+				"b",
+				"bucket_size"
+			],
+			[
+				"bu",
+				"bucket_size"
+			],
+			[
+				"bucket",
+				"bucket_size"
+			],
+			[
+				"hs",
+				"hmset"
+			],
+			[
+				"sta",
+				"start_day"
+			],
+			[
+				"star",
+				"start_year"
+			],
+			[
+				"start_",
+				"start_hour"
+			],
+			[
+				"end",
+				"end_file"
+			],
+			[
+				"start",
+				"start_file"
+			],
+			[
+				"creat",
+				"created_at"
+			],
+			[
+				"st",
+				"start_file"
+			],
+			[
+				"predict_do",
+				"predict_domain"
+			],
+			[
+				"res",
+				"response_domain"
+			],
+			[
+				"train",
+				"train_csv"
+			],
+			[
+				"y_",
+				"y_actual"
+			],
+			[
+				"alpa",
+				"alphas"
+			],
+			[
+				"pred",
+				"predict_social_media"
+			],
+			[
+				"ter",
+				"term_count"
+			],
+			[
+				"socmed",
+				"socmedia_test"
+			],
+			[
+				"soc",
+				"soc_media_training"
+			],
+			[
+				"ind",
+				"indicator_m"
+			],
+			[
+				"ra",
+				"random"
+			],
+			[
+				"theta",
+				"theta_c"
+			],
+			[
+				"1-theta",
+				"1-theta_j0"
+			],
+			[
+				"i",
+				"is_social"
+			],
+			[
+				"soci",
+				"soc_media_training"
+			],
+			[
+				"col",
+				"colnames"
+			],
+			[
+				"co",
+				"columns"
+			],
+			[
+				"qu",
+				"query_test"
+			],
+			[
+				"q",
+				"query_web"
+			],
+			[
+				"H",
+				"H1N1"
+			],
+			[
+				"but",
+				"butler_when_2013"
+			],
+			[
+				"H1",
+				"H1N1"
+			],
+			[
+				"dele",
+				"deleuze_what_1994"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"ebi",
+				"ebi_files"
+			],
+			[
+				"missing",
+				"missing_proportion"
+			],
+			[
+				"msing",
+				"missing_proportion"
+			],
+			[
+				"missing_prop",
+				"missing_proportion"
+			],
+			[
+				"missing_",
+				"missing_all_df"
+			],
+			[
+				"study_summ",
+				"study_summary"
+			],
+			[
+				"rai",
+				"ratio_x"
+			],
+			[
+				"ratio_",
+				"ratio_y"
+			],
+			[
+				"uni",
+				"unicode"
+			],
+			[
+				"try",
+				"try	Try/Except/Finally"
+			],
+			[
+				"sub",
+				"sub_dict"
+			],
+			[
+				"cen",
+				"center_name"
+			],
+			[
+				"tr",
+				"try	Try/Except"
+			],
+			[
+				"sub_",
+				"sub_dict"
+			],
+			[
+				"study_su",
+				"study_summary_df"
+			],
+			[
+				"query",
+				"query_runs"
+			],
+			[
+				"study",
+				"study_summary_df"
+			],
+			[
+				"sra",
+				"SRAdb"
+			],
+			[
+				"sr",
+				"SRA"
+			],
+			[
+				"study_",
+				"study_names_clean"
+			],
+			[
+				"go",
+				"goldman_towards_2013"
+			],
+			[
+				"top",
+				"top_machines"
+			],
+			[
+				"insu",
+				"instrument_name"
+			],
+			[
+				"fi",
+				"fields_to_use"
+			],
+			[
+				"graph",
+				"graph_sra_term"
+			],
+			[
+				"sra_",
+				"sra_xml"
+			],
+			[
+				"tab",
+				"table_count"
+			],
+			[
+				"data",
+				"data-economy"
+			],
+			[
+				"n",
+				"ngs_paper"
+			],
+			[
+				"da",
+				"data_economy"
+			],
+			[
+				"plot",
+				"plot_basic_users"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 253.0,
+		"selected_items":
+		[
+			[
+				"pyth",
+				"Set Syntax: Python"
+			],
+			[
+				"set py",
+				"Set Syntax: Python"
+			],
+			[
+				"pack",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"set",
+				"Set Syntax: Markdown"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"set sq",
+				"Set Syntax: SQL"
+			],
+			[
+				"set mark",
+				"Set Syntax: Markdown"
+			],
+			[
+				"set amk",
+				"Set Syntax: Markdown"
+			],
+			[
+				"mark",
+				"Set Syntax: Markdown"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"lis",
+				"Package Control: List Packages"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"set am",
+				"Set Syntax: Markdown"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"set python",
+				"Set Syntax: Python"
+			],
+			[
+				"set ma",
+				"Set Syntax: Makefile"
+			],
+			[
+				"set pyth",
+				"Set Syntax: Python"
+			],
+			[
+				"Snippet: ",
+				"Snippet: knit-chunk"
+			],
+			[
+				"set syntaxm",
+				"Set Syntax: Markdown"
+			],
+			[
+				"pa",
+				"Package Control: Install Package"
+			],
+			[
+				"set syntax py",
+				"Set Syntax: Python"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"set s",
+				"Set Syntax: R"
+			],
+			[
+				"p",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"View: Toggle Side Bar"
+			],
+			[
+				"se",
+				"Set Syntax: Markdown"
+			],
+			[
+				"s",
+				"Set Syntax: BibTeX"
+			],
+			[
+				"S",
+				"Set Syntax: R"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 609.0,
+		"history":
+		[
+			"os.listdir('.')",
+			"os.dir('.')",
+			"sys.path",
+			"sys.path()",
+			"import sys",
+			"os.dir()",
+			"os.chdir('ch3_dimensionality')",
+			"import os",
+			"setwd('ch3_dimensionality')",
+			"pwd()",
+			"sys.path.append('/home/mackenza/Documents/data_intensive/book/ml_lit')",
+			"sys.path",
+			"sys.path.append('ml_lit')",
+			"import sys",
+			"import ml_lit_anal",
+			"sys.path.append('/home/mackenza/Documents/data_intensive/book/ml_lit')",
+			"import ml_lit_anal",
+			"sys.path.append('~/Documents/data_intensive/book/ml_lit')",
+			"from ml_lit import ml_lit_anal",
+			"import book",
+			"sys.path",
+			"sys.path.append('~/Documents/data_intensive/book')",
+			"sys.append('~/Documents/data_intensive/book')",
+			"import __init__",
+			"import tree",
+			"sys.path",
+			"sys.path.append('.')",
+			"sys.path",
+			"import sys",
+			"import ml_lit_anal as ml",
+			"sys.path.append('/home/mackenza/Documents/data_intensive/book/ml_lit')",
+			"sys.path",
+			"path",
+			"import ml_lit_anal as ml",
+			"sys.path.append('home/mackenza/Documents/data_intensive/book/ml_lit/')",
+			"import ml_lit_anal as ml",
+			"sys.path",
+			"sys.path.append('home/mackenza/Documents/data_intensive/book/ml_lit')",
+			"sys.path",
+			"sys.path()",
+			"import sys",
+			"import ml_lit_anal",
+			"print(platform.python_version())",
+			"print platform.python_version()",
+			"import platform",
+			"import numpy as np",
+			"$PYTHONPATH",
+			"import ml_lit.ml_lit_anal",
+			"PYTHONPATH",
+			"$PYTHONPATH"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/mackenza/Documents/notes/bowker-star-sorting_things.md",
+		"/home/mackenza/Documents/notes/bowker_info_mythology.md.txt",
+		"/home/mackenza/Documents/notes/WhiteheadModes.mdown",
+		"/home/mackenza/Documents/notes/whitehead(leclerc).rtf",
+		"/home/mackenza/Documents/notes/wark-hacker-2004.rtf",
+		"/home/mackenza/Documents/google_analytics/workplan.odt",
+		"/home/mackenza/Documents/notes/bowker_memory_practices_2005.odt",
+		"/home/mackenza/Documents/notes/bollas, the evocative object world.md",
+		"/home/mackenza/Documents/notes/bowker-things-change-1996.rtf",
+		"/home/mackenza/Documents/notes/bowker-star-sorting-things.rtf",
+		"/home/mackenza/Documents/google_analytics/blank.odt",
+		"/home/mackenza/Documents/notes/bowker_info_mythology.odt",
+		"/home/mackenza/Documents/notes/bowker-second-nature.rtf",
+		"/home/mackenza/Documents/notes/Bowker_pleats_2011.odt",
+		"/home/mackenza/Documents/notes/Bowker_pleats_2011.md",
+		"/home/mackenza/Documents/notes/bowker.rtf",
+		"/home/mackenza/Documents/notes/barry_thrift_on_tarde_2007.odt",
+		"/home/mackenza/Documents/notes/barry_thrift_on_tarde_2007.txt",
+		"/home/mackenza/.history_git/settings.conf",
+		"/home/mackenza/Documents/notes/James_1996.md",
+		"/home/mackenza/Documents/notes/james-radical-empiricism.rtf",
+		"/home/mackenza/Documents/notes/java_language.rtf",
+		"/home/mackenza/Documents/notes/java_enterprise.rtf",
+		"/home/mackenza/Documents/notes/jaonkar_imaginaries.txt",
+		"/home/mackenza/Documents/notes/javaspaces.rtf",
+		"/home/mackenza/google-cloud-sdk/help/text.long/gcloud-components",
+		"/home/mackenza/R/github/git_archive_experiments.py",
+		"/home/mackenza/R/github/git_archive_experiments.python",
+		"/home/mackenza/R/github/github_api_experiments.py",
+		"/home/mackenza/R/github/installation_stuff.sh",
+		"/home/mackenza/R/github/repo_test.csv",
+		"/home/mackenza/R/github/repotest.csv",
+		"/home/mackenza/R/github/data/2012-04-01-0.json",
+		"/home/mackenza/R/github/data/2012-04-01-0.json.gz",
+		"/home/mackenza/R/github/data/2012-04-01-1.json.gz",
+		"/home/mackenza/R/github/data/2012-04-01-10.json.gz",
+		"/home/mackenza/Documents/notes/barry_thrift_on_tarde_2007.rtf",
+		"/home/mackenza/Documents/notes/barry_2001.rtf",
+		"/home/mackenza/Documents/notes/bogost_alien_2012.md",
+		"/home/mackenza/Documents/notes/butler_excitab.txt",
+		"/home/mackenza/Documents/tcs_editing/may2014/tcs_may_2014.md",
+		"/tmp/cron2.txt",
+		"/tmp/cron3.txt",
+		"/home/mackenza/R/metacommunities/repo-topics/1c_Validate_Repo_Topics.py",
+		"/tmp/README",
+		"/home/mackenza/.config/sublime-text-3/Packages/User/AcademicMarkdown.sublime-settings",
+		"/home/mackenza/.config/sublime-text-3/Packages/AcademicMarkdown/AcademicMarkdown.sublime-settings",
+		"/home/mackenza/Documents/google_analytics/publications/dast_conference_june_2014/imitation_notes.md",
+		"/tmp/.fr-5ixqSE/samples/api-python-client-doc/main.py",
+		"/home/mackenza/R/metacommunities/repo-topics/generate_data.py",
+		"/home/mackenza/.history-git/settings.conf",
+		"/home/mackenza/R/metacommunities/admin/agenda_workshop_march2014.md",
+		"/home/mackenza/R/metacommunities/history-git/owner_repo.txt",
+		"/home/mackenza/R/metacommunities/history-git/README.md",
+		"/home/mackenza/R/metacommunities/history-git/github_api/__init__.py",
+		"/home/mackenza/R/metacommunities/history-git/github_api/db.py",
+		"/home/mackenza/Documents/ref_bibs/machine_learning.bib",
+		"/home/mackenza/Documents/ref_bibs/google_analytics.bib",
+		"/home/mackenza/Documents/ref_bibs/crontab.txt",
+		"/home/mackenza/Documents/funding/esrc_transformative_2014/references/esrc_transformative.bib",
+		"/home/mackenza/R/metacommunities/use-bigrquery/example-select.r",
+		"/home/mackenza/R/metacommunities/bq_queries.txt",
+		"/home/mackenza/R/metacommunities/adrian/repo_names.py",
+		"/home/mackenza/R/metacommunities/history-git/github_api/get_activity.py",
+		"/home/mackenza/R/metacommunities/history-git/github_events.py",
+		"/home/mackenza/R/metacommunities/admin/ideas_to_try.md",
+		"/home/mackenza/Documents/google_analytics/publications/itu-copenhagen/173million.md",
+		"/home/mackenza/Documents/teaching/fass-ma-stats_2014/xx02.txt",
+		"/home/mackenza/Documents/teaching/fass-ma-stats_2014/xx06.txt",
+		"/home/mackenza/Documents/teaching/fass-ma-stats_2014/xx07.txt",
+		"/home/mackenza/Documents/teaching/fass-ma-stats_2014/xx08.txt",
+		"/home/mackenza/R/Mining-the-Social-Web-2nd-Edition/mtsw2e-requirements.txt",
+		"/home/mackenza/R/metacommunities/use-bigrquery/install.r",
+		"/home/mackenza/Documents/ref_bibs/data_forms_thought.bib",
+		"/home/mackenza/Documents/notes/data_forms_thought.bib",
+		"/home/mackenza/Documents/notes/R.bib",
+		"/home/mackenza/R/metacommunities/.git/MERGE_MSG",
+		"/home/mackenza/R/metacommunities/history-git/readme.md",
+		"/home/mackenza/R/metacommunities/history-git/history-git.py",
+		"/home/mackenza/.git-history/settings.conf",
+		"/home/mackenza/R/metacommunities/history-git/settings.conf",
+		"/home/mackenza/Documents/teaching/socl_906STs/lecture_notes/STS_core6.md",
+		"/home/mackenza/Documents/teaching/socl_906STs/lecture_notes/Ethics_Doing_Good_in_Practice.mdown",
+		"/home/mackenza/Documents/teaching/socl_906STs/lecture_notes/STS Core 5 ANT 2012.md",
+		"/home/mackenza/.config/sublime-text-3/Packages/MarkdownEditing/Markdown.sublime-settings",
+		"/home/mackenza/.config/sublime-text-3/Packages/User/Markdown.sublime-settings",
+		"/home/mackenza/Documents/data_intensive/book/ml_lit/ml_lit_anal.py",
+		"/home/mackenza/Documents/admin/sabbatical_leave_2012/mackenzie_post_sabb_report_dec2013.md",
+		"/home/mackenza/Documents/data_intensive/ejcs_data_mining_2014/mackenzie_abstract_ejcs2013.md",
+		"/home/mackenza/Documents/data_intensive/eurojourncultstud/mackenzie_abstract_ejcs2013.md",
+		"/home/mackenza/Documents/data_intensive/ejcs_data_mining_2014/mackenzie_abstract.mdown",
+		"/home/mackenza/Documents/data_intensive/number_supply/h1n1_paper.rmd",
+		"/tmp/.fr-z4hgyX/README.md",
+		"/home/mackenza/bank.txt",
+		"/home/mackenza/Documents/data_intensive/number_supply/.git/COMMIT_EDITMSG",
+		"/home/mackenza/Documents/data_intensive/number_supply/h1n1_paper.md",
+		"/var/tmp/kdecache-mackenza/krun/17521.0.events",
+		"/home/mackenza/Documents/data_intensive/number_supply/references/refs.bib",
+		"/home/mackenza/Documents/data_intensive/number_supply/h1n1_feb2013.rmd",
+		"/home/mackenza/Documents/data_intensive/number_supply/distributions.py",
+		"/home/mackenza/Documents/data_intensive/number_supply/transmission_model.R",
+		"/tmp/histogram_demo_extended.py",
+		"/home/mackenza/R/models/model_exercises.R",
+		"/home/mackenza/Documents/data_intensive/number_supply/h1n1_jan2013.md",
+		"/home/mackenza/Documents/data_intensive/number_supply/birrell_functions.md",
+		"/home/mackenza/Documents/data_intensive/book/functions.mdown",
+		"/home/mackenza/Documents/notes/peirce_philosophical_writings1955.mdown",
+		"/home/mackenza/Documents/data_intensive/number_supply/references/Exported Items.bib",
+		"/home/mackenza/Documents/data_intensive/number_supply/build.sh",
+		"/home/mackenza/Documents/data_intensive/number_supply/data/codeAM/RTM_MetropHast.cc",
+		"/home/mackenza/Documents/data_intensive/number_supply/data/codeAM/RTM_Likelihoods.cc",
+		"/home/mackenza/Documents/data_intensive/number_supply/data/codeAM/R_like_fns.cc",
+		"/home/mackenza/Documents/data_intensive/number_supply/data/codeAM/RTM_FunctDefs.h",
+		"/home/mackenza/Documents/data_intensive/number_supply/data/codeAM/RTM_RegRTM_Beta3.0.cc",
+		"/home/mackenza/Documents/data_intensive/number_supply/knitr.sh",
+		"/home/mackenza/Documents/data_intensive/number_supply/.~lock.h1n1_april2013.docx#",
+		"/home/mackenza/Desktop/to_do.txt",
+		"/home/mackenza/R/pianists/pianists.txt",
+		"/home/mackenza/Documents/notes/Boyce_DiPrima_convolution.md",
+		"/home/mackenza/.matplotlib/matplotlibrc",
+		"/home/mackenza/Documents/data_intensive/number_supply/test.rmd",
+		"/home/mackenza/Documents/data_intensive/number_supply/test.md",
+		"/home/mackenza/Documents/data_intensive/number_supply/functions.md",
+		"/home/mackenza/Documents/data_intensive/number_supply/data/codeAM/RTM_StructDefs.h",
+		"/home/mackenza/Documents/data_intensive/number_supply/data/codeAM/mod_inputs.txt",
+		"/home/mackenza/Documents/data_intensive/number_supply/data/codeAM/mod_pars.txt",
+		"/home/mackenza/Documents/data_intensive/number_supply/data/codeAM/p_GP_design_file.txt",
+		"/home/mackenza/Documents/data_intensive/number_supply/data/codeAM/.Rhistory"
+	],
+	"find":
+	{
+		"height": 37.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/home/mackenza/Documents/data_intensive/number_supply/data/codeAM",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ids",
+			"b",
+			"b3t",
+			"repo_d",
+			"name",
+			"tests_bits",
+			"repos_d",
+			"image",
+			"start_date",
+			"repository",
+			"nam",
+			"name",
+			"socmedia",
+			"evaluate_nb_model",
+			"predict_social_media",
+			"'social'",
+			"social",
+			"'is_social'",
+			"is_socmedia",
+			"sm",
+			"sc_terms",
+			"200",
+			"soc_media",
+			"word",
+			"soc_media_training",
+			"\n\n",
+			"# <codecell>",
+			"server",
+			"kelty",
+			"references",
+			"notes",
+			"data_intensive/book/references/",
+			"keyword",
+			"Oct",
+			"h1n1_paper",
+			"deleuzedifference2001",
+			"Mansner",
+			"deleuze_difference_2001",
+			"tilston_internetbased_2010",
+			"ginsberg_detecting_2008",
+			"whitehead_modes_1956",
+			"whitehead_modes_1958",
+			"cohen",
+			"cohen	",
+			"parikka",
+			"the diagrams",
+			"Thrift",
+			"}",
+			"S, E, I, R",
+			"thrift",
+			"mansn",
+			"h1n1_april2013",
+			"h1n1_feb2013",
+			"baguelin_age_specific_2011",
+			"specific_2011",
+			"equation (1)",
+			"equation",
+			"  ",
+			"Deterministic_S_E1_E2_I1_I2_R_AG_RF",
+			"regional_population_by_age",
+			"propagate_SEEIIR",
+			"transmission",
+			"badiou_number_2008",
+			"Mansnerus, E.",
+			"cohen_paradoxical_2011",
+			" H1N1",
+			"H1N1",
+			"wor",
+			"who ",
+			"baguelin_vaccination_2010",
+			"google",
+			"random_walk_proposal",
+			"\nplot(",
+			"plot",
+			"subplot",
+			"prior_distribution",
+			"prop_symp",
+			"fn_reporting_model",
+			"fn_log_likelihood",
+			"metrop_hast",
+			"thrift",
+			"Thrift",
+			"Ross",
+			"ross",
+			"Region",
+			"metrop_hast",
+			"parameters",
+			"verran",
+			"Thrift",
+			"lambda",
+			"\\gamma",
+			"$$",
+			"{Birrell, 2011,",
+			"object",
+			"hey",
+			"read",
+			"li_s",
+			"BAM",
+			"runs?",
+			"run\\\\s",
+			"experiment",
+			"Rasko",
+			"**",
+			"<?\\>",
+			"conn",
+			"Law",
+			"SRA",
+			"Law",
+			" 'months')",
+			"'months'",
+			"sra_con",
+			"runs",
+			"sapply",
+			"runs",
+			"samples",
+			"studies",
+			"experiments",
+			"Ankeny",
+			"especially",
+			"ncbi_stat",
+			"img/",
+			"SRA",
+			"')\n",
+			"ERA",
+			"\n",
+			"DRA",
+			"subm$",
+			"subm"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"ref_bibs",
+			"Equation (1)",
+			" ",
+			"",
+			"—",
+			" ",
+			"Mansnerus, Erika",
+			" A/H1N1",
+			"RASKO",
+			" Rasko: ",
+			" ",
+			"—"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 37.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "code_cities.sublime-project",
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"whi",
+				"notes/WhiteheadModes.mdown"
+			],
+			[
+				"bow",
+				"notes/bowker_info_mythology.md.txt"
+			],
+			[
+				"ja",
+				"notes/james-radical-empiricism.rtf"
+			],
+			[
+				"",
+				"metacommunities/repo-topics/repo_creation_dates.py"
+			],
+			[
+				"barr",
+				"notes/barry_thrift_on_tarde_2007.txt"
+			],
+			[
+				"ex",
+				"references/Exported Items.bib"
+			],
+			[
+				"ref",
+				"references/refs.bib"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/R/metacommunities/metacommunities.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"query",
+				"query_yes_no"
+			],
+			[
+				"kelt",
+				"Kelty_2009"
+			],
+			[
+				"up",
+				"uprichard_dirty_2011"
+			],
+			[
+				"sava",
+				"Savage_2008"
+			],
+			[
+				"cover",
+				"cover_nearest_1967"
+			],
+			[
+				"wass",
+				"wasserman_all_2003"
+			],
+			[
+				"bellman",
+				"bellman_adaptive_1961"
+			],
+			[
+				"qui",
+				"quinlan_c4._1993"
+			],
+			[
+				"wu",
+				"wu_top_2008"
+			],
+			[
+				"domin",
+				"domingos_few_2012"
+			],
+			[
+				"bog",
+				"bogost_alien_2012"
+			],
+			[
+				"bre",
+				"breiman_cart:_1984"
+			],
+			[
+				"mor",
+				"morgan_problems_1963"
+			],
+			[
+				"doyl",
+				"doyle_use_1973"
+			],
+			[
+				"einhor",
+				"einhorn_alchemy_1972"
+			],
+			[
+				"morng",
+				"morgan_problems_1963"
+			],
+			[
+				"morgan",
+				"morgan_problems_1963"
+			],
+			[
+				"white",
+				"whitehead_modes_1956"
+			],
+			[
+				"bra",
+				"breiman_random_2001"
+			],
+			[
+				"cort",
+				"cortes_support-vector_1995"
+			],
+			[
+				"stei",
+				"steinberg_cart:_2009"
+			],
+			[
+				"mall",
+				"malley_statistical_2011"
+			],
+			[
+				"brei",
+				"breiman_random_2001"
+			],
+			[
+				"rab",
+				"rabinow_anthropos_2003"
+			]
+		],
+		"width": 392.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 338.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
