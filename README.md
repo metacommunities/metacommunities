@@ -1,4 +1,4 @@
-metacommunities
+Metacommunities of the Code Sharing Commons
 ===============
 
 
@@ -25,4 +25,10 @@ The main components of the repository are:
     - [software repository topics](data_analysis/github_repository_topics/)
     - [data analytic experiments](data_analysis/github_data_infrastructures/)
 
+## More information
+
 The blog for the project is [http://metacommunitiesofcode.org/](http://metacommunitiesofcode.org/).
+
+## Citation information
+
+The DOI for this repository (for use in citations in academic articles) is [![DOI](https://zenodo.org/badge/7115/metacommunities/metacommunities.png)](http://dx.doi.org/10.5281/zenodo.12651)
