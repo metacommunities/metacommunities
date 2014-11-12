@@ -15,15 +15,15 @@ The project was funded by the UK Economic and Social Research Council under its 
 
 The main components of the repository are:
 
-1. [Publications](publications) - manuscripts in process of publication as well as papers and presentations written for conferences and workshops
+1. [Publications](https://github.com/metacommunities/metacommunities/publications) - manuscripts in process of publication as well as papers and presentations written for conferences and workshops
 
-2. [Data Analysis](data_analysis) -- scripts, sample and secondary data, and figures or plots produced in the course of the work. These range across a number of different foci including:
+2. [Data Analysis](https://github.com/metacommunities/metacommunities/data_analysis) -- scripts, sample and secondary data, and figures or plots produced in the course of the work. These range across a number of different foci including:
 
-    - [social practices](data_analysis/github_social_practices/)
-    - [trends and tendencies](data_analysis/github_time)
-    - [platform specific features](data_analysis/github_platform/)
-    - [software repository topics](data_analysis/github_repository_topics/)
-    - [data analytic experiments](data_analysis/github_data_infrastructures/)
+    - [social practices](https://github.com/metacommunities/metacommunities/data_analysis/github_social_practices/)
+    - [trends and tendencies](https://github.com/metacommunities/metacommunities/data_analysis/github_time)
+    - [platform specific features](https://github.com/metacommunities/metacommunities/data_analysis/github_platform/)
+    - [software repository topics](https://github.com/metacommunities/metacommunities/data_analysis/github_repository_topics/)
+    - [data analytic experiments](https://github.com/metacommunities/metacommunities/data_analysis/github_data_infrastructures/)
 
 ## More information
 
