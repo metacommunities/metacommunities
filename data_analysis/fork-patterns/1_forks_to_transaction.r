@@ -53,6 +53,9 @@ summary(top_repo_actors)
 top_repo_actors$repo_count <- NULL
 top_repo_actors = top_repo_actors[order(top_repo_actors$actor_attributes_login),]
 top_repo_actors_melted = melt(top_repo_actors, id = c('repository_name', 'actor_attributes_login'))
+# transform factors to char -- otherwise arules can't cope
+top_repo_actors_melted$repository_name = as.character(top_repo_actors_melted$repository_name)
+top_repo_actors_melted$actor_attributes_login = as.character(top_repo_actors_melted$actor_attributes_login)
 dim(top_repo_actors_melted)
 head(top_repo_actors_melted) 
 top_repo_actors_melted = unique(top_repo_actors_melted[, 1:2])
@@ -60,13 +63,13 @@ top_repo_actors_list = dlply(top_repo_actors_melted, 'actor_attributes_login', f
 head(top_repo_actors_list)
 tail(top_repo_actors_list)
 length(top_repo_actors_list)
-trans_actor_fork = as(sample(top_repo_actors_list, 2000), 'transactions')
+trans_actor_fork = as(top_repo_actors_list, 'transactions')
 image(trans_actor_fork)
 summary(trans_actor_fork)
 itemFrequencyPlot(trans_actor_fork, support=0.007, cex.names=0.7)
 rules = apriori(trans_actor_fork, parameter = list(support=0.003, confidence=0.3))
 summary(rules)
-inspect(rules[1:90])
+inspect(rules)
 
 # without cutting anything in advance
 
