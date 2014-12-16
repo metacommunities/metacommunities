@@ -95,63 +95,26 @@ While we did use the Github APIs, and wrote scripts that allows us to move back 
 
 Most of our daily analyses were constructed then using GoogleBigQuery. As mentioned above, the advantage of this platform is that it allows SQL-style queries to be run against a large, albeit not quite $N=All$ Github dataset. On the one hand, these queries can be done interactively through a website interface (especially useful for incrementally constructing queries), but on the other hand, the nature of the  GithubArchive stored on GoogleBigQuery means that queries are quite difficult to construct. 
 
-% latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Tue Dec 16 16:32:33 2014
-\begin{table}[ht]
-\centering
-\begin{tabular}{rr}
-  \hline
- & data types \\ 
-  \hline
-boolean &   7 \\ 
-  integer &  41 \\ 
-  string & 151 \\ 
-   \hline
-\end{tabular}
-\caption{Columns in GithubArchive on GoogleBigQuery} 
-\label{tab:gbq_datatypes}
-\end{table}
+```{r schema, results='asis', echo=FALSE, warnings=FALSE, messages=FALSE}
+
+    library(xtable)
+    schema = read.csv('~/metacommunities/data_analysis/github_data_infrastructures/googlebigqueryschema.csv', header=FALSE)
+    colnames(schema) = c('field', 'type')
+    schema$type = tolower(schema$type)
+    type_table = table(schema$type, dnn='data types')
+    datatypes = xtable(type_table, label = 'tab:gbq_datatypes', caption = 'Columns in GithubArchive on GoogleBigQuery')
+    print(datatypes) 
+```
 As Table \ref{tab:bgq_datatypes} shows, 75% of the fields in the GoogleBigQuery dataset are string, around 20% are numerical count data, and the remainder are boolean or True/False values. But for any given event, many of these fields are likely to be empty because the  GoogleBigQuery has been constructed to accommodate every conceivable event type without consideration of the distribution of events. 
 
 
-% latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Tue Dec 16 16:32:33 2014
-\begin{table}[ht]
-\centering
-\begin{tabular}{rl}
-  \hline
- & type \\ 
-  \hline
-1 &     CommitCommentEvent \\ 
-  2 &     CreateEvent \\ 
-  3 &     DeleteEvent \\ 
-  4 &     DeploymentEvent \\ 
-  5 &     DeploymentStatusEvent \\ 
-  6 &     DownloadEvent \\ 
-  7 &     FollowEvent \\ 
-  8 &     ForkEvent \\ 
-  9 &     ForkApplyEvent \\ 
-  10 &     GistEvent \\ 
-  11 &     GollumEvent \\ 
-  12 &     IssueCommentEvent \\ 
-  13 &     IssuesEvent \\ 
-  14 &     MemberEvent \\ 
-  15 &     MembershipEvent \\ 
-  16 &     PageBuildEvent \\ 
-  17 &     PublicEvent \\ 
-  18 &     PullRequestEvent \\ 
-  19 &     PullRequestReviewCommentEvent \\ 
-  20 &     PushEvent \\ 
-  21 &     ReleaseEvent \\ 
-  22 &     RepositoryEvent \\ 
-  23 &     StatusEvent \\ 
-  24 &     TeamAddEvent \\ 
-  25 &     WatchEvent \\ 
-   \hline
-\end{tabular}
-\caption{Event types on Github Events API} 
-\label{tab:gbq_eventtypes}
-\end{table}
+```{r events, results='asis', echo=FALSE, warnings=FALSE, messages=FALSE}
+    library(xtable)
+    events = read.csv('~/metacommunities/data_analysis/github_data_infrastructures/github_eventtypes.csv')
+    event_types = xtable(events, label='tab:gbq_eventtypes', caption= 'Event types on Github Events API')
+    print(event_types)
+
+```
 
 [HERE] == show the event types, and point out how unevenly distributed they are; and how much missing data there is;
 
