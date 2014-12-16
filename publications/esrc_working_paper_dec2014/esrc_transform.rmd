@@ -105,7 +105,12 @@ Most of our daily analyses were constructed then using GoogleBigQuery. As mentio
     datatypes = xtable(type_table, label = 'tab:gbq_datatypes', caption = 'Columns in GithubArchive on GoogleBigQuery')
     print(datatypes) 
 ```
+
 As Table \ref{tab:bgq_datatypes} shows, 75% of the fields in the GoogleBigQuery dataset are string, around 20% are numerical count data, and the remainder are boolean or True/False values. But for any given event, many of these fields are likely to be empty because the  GoogleBigQuery has been constructed to accommodate every conceivable event type without consideration of the distribution of events. 
+
+To both give an idea of the distribution of event types, and the relative distribution of events using GoogleBigQuery is relatively straightforward. A query to count show the frequency of events on Github is:
+
+`SELECT type, count(type) as event_count FROM [githubarchive:github.timeline] group by type order by event_count desc`
 
 
 ```{r events, results='asis', echo=FALSE, warnings=FALSE, messages=FALSE}
