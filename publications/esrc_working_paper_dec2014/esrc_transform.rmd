@@ -50,9 +50,9 @@ In the course of the project, which ran for around 14 months overall, we did not
 
 ## Using public datasets
 
-The metacommunities concept, with its focus on dispersion, on multiple 'species' (this could be understood in various ways in our domain), and on potential interactions, suggested a need to work with the data in aggregate. While we ended up focusing almost all of our efforts on the data that relates to the Gibhub software repositories, we also made some of public data dumps of the popular Q&A site [StackOverflow.com](StackOverflow.com) to help identify important processes of interaction between developers. 
+The metacommunities concept, with its focus on dispersion, on multiple 'species' (this could be understood in various ways in our domain), and on potential interactions, suggested a need to work with the data in aggregate. While we ended up focusing almost all of our efforts on the data that relates to the Github software repositories, we also made some of public data dumps of the popular Q&A site [StackOverflow.com](StackOverflow.com) to help identify important processes of interaction between developers. 
 
-We faced some fairly profound practical choices in working with the Github data. We could harvest data from Github's extensive APIs (see <https://api.github.com/>):
+We faced some fairly fundamental practical choices in working with the Github data. We could harvest data from Github's extensive APIs (see <https://api.github.com/>):
 
     
         {
@@ -87,13 +87,67 @@ We faced some fairly profound practical choices in working with the Github data.
       "user_search_url"
     }
 
-As this list shows, we were facing several dozen different access points to what was happening on Github. The data available through the APIs varies in volume, and rate-limits apply to many of the API points of access, but in general we were faced with an abundance of data, of varying duration. The problem was more one of being spoiled for choice. 
+Each item in this list designates a specific facet of the Github platform data. The `events_url` is probably the most general one since it offers almost live access to everything that people do on Github. But as this list shows, we were facing several dozen different access points to what was happening on Github. The data available through the APIs varies in volume, and rate-limits apply to many of the API points of access, but in general we were faced with an abundance of data, of varying duration. The problem was more one of being spoiled for choice. 
 
-Even given this abundance of data, several other major viable alternatives presented themselves. This may not be typical of all social media data, but in the Github case, Github API data from the `event` access point has been archived in a public archive <http://www.githubarchive.org> by a Google employee named Ilya Grigoik for the last year or two [@Grigorik_2012]. This archive was published after we submitted our grant application, but as soon as we discovered it in early 2013, we seriously considered using it because it does not suffer from the rate-limits that Github's own APIs impose. Initially, GithubArchive only reached back to early 2012, but now it extends back to February 2011, so offers a timeline datastream of every public event on Github since then. This dataset can almost be wrangled on a single machine. It totals around 179 Gb compressed, and consists of a file for every hour since early 2011. As is often the case in software cultures, the code that runs GithubArchive can itself found on Github as a `git` repository: <https://github.com/igrigorik/githubarchive.org>. A quick glance at that repository shows that GithubArchive.org feeds directly into another major Github data resource, the Google BigQuery data analytics platform, which hosts the full GithubArchive dataset at [GithubArchive.timeline](https://bigquery.cloud.google.com/table/githubarchive:github.timeline?pli=1). On Google BigQuery (GBQ hereafter), the formatting of the event data is quite different. The data is stored in a single huge table, with almost 200 columns and, at the time of writing, around 280 million rows.  This massive table can be queried using an SQL (Structured Query Language) dialect. 
+Even given this abundance of data, several other major viable alternatives presented themselves. This may not be typical of all social media data, but in the Github case, Github API data from the `events` API  has been archived in a public archive <http://www.githubarchive.org> by a Google employee named Ilya Grigorik for the last year or two [@Grigorik_2012]. This archive was published after we submitted our grant application, but as soon as we discovered it in early 2013, we seriously considered using it because it does not suffer from the rate-limits that Github's own APIs impose. Initially, GithubArchive only reached back to early 2012, but now it extends back to February 2011, so offers a timeline datastream of every public event on Github for the last three years. This dataset can almost be wrangled on a single machine. It totals around 179 Gb compressed, and consists of a file for every hour since early 2011. As is often the case in software cultures, the code that runs GithubArchive can itself found on Github as a `git` repository: <https://github.com/igrigorik/githubarchive.org>.
 
-While we did use the Github APIs, and wrote scripts that allows us to move back past the February 2011 limits of the GithubArchive data, having the full `events` timeline in both the compressed forms of hourly files from GithubArchive and in the GoogleBigQuery table made any efforts to construct our own dataset from scratch seem somewhat futile. But working with either the GithubArchive or the GoogleBigQuery data brings its own problems. GithubArchive is in around 30,000 files that need to be read or loaded into memory in order to work with them. Even using GoogleCompute platform, processing those files takes takes many hours. We did process all the files several times, in particular in pursuit of a full description of the terrain covered by the 12 million or so code repositories on Github, but the result of the processing were new database summaries of the Github data (for instance, we build a [Redis](http://redis.io) database to give us quick access to the main attributes of all the repositories, and all the user attributes whenever we needed it). The problem with these full dataset traversals is that each time they are run, they produce a new summary or synoptic dataset, but a slight change or variation in the information needed for a particular analysis means running all the scripts again. This is not a good workflow.
+A quick glance at that repository shows that GithubArchive.org feeds directly into another major Github data resource, the GoogleBigQuery data analytics platform, which hosts the full GithubArchive dataset at [GithubArchive.timeline](https://bigquery.cloud.google.com/table/githubarchive:github.timeline?pli=1). On GoogleBigQuery the formatting of the event data is quite different. The data is stored in a single huge table, with almost 200 columns and, at the time of writing, around 280 million rows.  This massive table can be queried using an SQL (Structured Query Language) dialect. 
 
-Most of our daily analyses were constructed then using GoogleBigQuery. As mentioned above, the advantage of this platform is that it allows SQL-style queries to be run against a large, albeit not quite $N=All$ Github dataset. On the one hand, these queries can be done interactively through a website interface (especially useful for incrementally constructing queries), but on the other hand, the nature of the  GithubArchive stored on GoogleBigQuery means that queries are quite difficult to construct. 
+While we did use the Github APIs, and wrote scripts that allows us to move back past the February 2011 limits of the GithubArchive data, having the full `events` timeline in both the compressed forms of hourly files from GithubArchive and in the GoogleBigQuery table made any efforts to construct our own dataset from scratch seem somewhat futile. But working with either the GithubArchive or the GoogleBigQuery data brings its own problems. GithubArchive is in around 30,000 files that need to be read or loaded into memory in order to work with them. Even using GoogleCompute platform instances as we did, processing those files takes takes many hours. We did process all the files several times, in particular in pursuit of a full description of the terrain covered by the 12 million or so code repositories on Github, but the result of the processing were new database summaries of the Github data (for instance, we build a [Redis](http://redis.io) database to give us quick access to the main attributes of all the repositories, and all the user attributes whenever we needed it). The problem with these full dataset traversals is that each time they are run, they produce a new summary or synoptic dataset, but a slight change or variation in the information needed for a particular analysis means running all the scripts again. This is not a good workflow.
+
+Most of our daily analyses were constructed then using GoogleBigQuery. As mentioned above, the advantage of this platform is that it allows SQL-style queries to be run against a large, albeit not quite $N=All$ Github dataset. On the one hand, these queries can be done interactively through a website interface (especially useful for incrementally constructing queries), but on the other hand, the nature of the  GithubArchive data stored on GoogleBigQuery means that queries are quite difficult to construct.  They are often highly intricate, nested queries. 
+
+It should be noted too that these data analytic tools are changing rapidly. When we first started working with GoogleBigQuery, we were writing quite a lot of `Python` code to set up a query, execute and then reshape the data it returned into forms that we could work with. A typical set up query in June 2013 began something like this:
+
+```
+def query_table(query, max_rows=1000000, timeout=1.0):
+
+    """ Returns the results of query on the githubarchive
+    args:
+    ----------------
+    query: a BigQuery SQL query
+    max_rows: maximum number of rows to return
+    timeout: how long to wait for results before
+    checking for actual data in the rows
+
+    returns:
+    ---------------------------
+    results_df: a pandas.DataFrame of the results
+    """
+    
+    try:
+        bigquery_service = setup_bigquery()
+        job_collection = bigquery_service.jobs()
+
+        # put limit on query if it doesn't have one
+        if query.lower().find('limit') == -1:
+            query = query.replace(';', ' ') + '    LIMIT %d' % max_rows + ';'
+
+        print 'executing query:'
+        print query
+        query_data = {'query':query}
+
+        query_reply = job_collection.query(projectId=PROJECT_NUMBER,
+                                     body=query_data).execute()
+
+        job_reference = query_reply['jobReference']
+
+        while (not query_reply['jobComplete']):
+            print 'Job not yet complete...'
+            query_reply = job_collection.getQueryResults(
+                              projectId=job_reference['projectId'],
+                              jobId=job_reference['jobId'],
+                              timeoutMs=timeout).execute()
+    
+        results_df = pn.DataFrame()
+```
+
+By January 2014, the query, including all the setup (not shown in the code vignette above) could be written in one line of `R` something like this:
+
+```
+query_exec(project="metacommunities",  query=sql)
+```
+This contrast is probably commonly experienced by researchers working with data analytics tools and commercial data sources. The churn of tools and infrastructures can make even quite recent work, and indeed investments in infrastructure somewhat redundant. Much of the code we wrote to wrangle GithubArchive and GoogleBigQuery in the first half of the project is already somewhat beside the point in terms of ongoing use. At the time, it was the only way to work with the data, but because so many people are working on similar problems, the tools changes quickly.  
 
 ```{r schema, results='asis', echo=FALSE, warnings=FALSE, messages=FALSE}
 
@@ -106,7 +160,9 @@ Most of our daily analyses were constructed then using GoogleBigQuery. As mentio
     print(datatypes) 
 ```
 
-As Table \ref{tab:bgq_datatypes} shows, 75% of the fields in the GoogleBigQuery dataset are string, around 20% are numerical count data, and the remainder are boolean or True/False values. But for any given event, many of these fields are likely to be empty because the  GoogleBigQuery has been constructed to accommodate every conceivable event type without consideration of the distribution of events. 
+As Table \ref{tab:bgq_datatypes} shows, 75% of the fields in the GoogleBigQuery dataset are string, around 20% are numerical count data, and the remainder are boolean or True/False values. But for any given event, many of these fields are likely to be empty because the  GoogleBigQuery has been constructed to accommodate every conceivable event type without consideration of the distribution of events. Having all the attributes of every different event type stored in a single table, and trying to avoid moving things in and out of  GoogleBigQuery too much leads to quite complicated SQL queries. The tremendous advantage of the GoogleBigQuery is freedom from the need to think very much about platform computing capacity. But adapting ourselves to the constraint to build densely nested queries that extract everything we want from a single table of GoogleBigQuery was quite hard.[^2]
+
+[^2]: As mentioned above, GoogleBigQuery can be accessed through a web interface, which is good for testing queries, and programmatically using scripts written in `R` or `Python`. We used scripts to run full queries. On one occasion, a `Python` script ran up a query charge of $US2400 overnight. We were shocked and dismayed at the cost. After verious discussions with the GoogleBigQuery engineering team, we received a credit for 75% of the charge. We also had quite an interesting and length discussion with Google Marketing team in California about some problems in using GoogleBigQuery. Soon after this event (October 2013), Google announced a massive reduction in the price of using GoogleCompute. 
 
 To both give an idea of the distribution of event types, and the relative distribution of events using GoogleBigQuery is relatively straightforward. A query to count show the frequency of events on Github is:
 
@@ -118,10 +174,39 @@ To both give an idea of the distribution of event types, and the relative distri
     events = read.csv('~/metacommunities/data_analysis/github_data_infrastructures/github_eventtypes.csv')
     event_types = xtable(events, label='tab:gbq_eventtypes', caption= 'Event types on Github Events API')
     print(event_types)
+```
+
+```{r event_count, results='asis', cache=TRUE, echo=TRUE, warnings=FALSE, messages=FALSE}
+    library(bigrquery)
+    event_query = 'SELECT type, count(type) as event_count FROM [githubarchive:github.timeline] group by type order by event_count desc'
+    event_counts = query_exec(project="metacommunities",  query=event_query)
 
 ```
 
-[HERE] == show the event types, and point out how unevenly distributed they are; and how much missing data there is;
+As we will see, the complexity of practices on Github means that there are more than 20 different event types in the Github event data. On the one hand, this is really helpful and interesting in terms of our aim to analyse the diversity and commonalities of coding practice. On the other hand, it poses some real analytic problems that we struggled with throughout the project. Event types occur in a huge range of patterns. They are dominated by PushEvents, but the event total includes many other other events types, and this suggests that code repositories are much more than just repositories. They are sites of production, sociality and community, not just places where people store code.  
+
+Standing back a little from this detail, the important point here is we were easily able to meet our first objective of 'using datasets generated from publicly accessible code repositories' almost by the accident of GithubArchive and GoogleBigQuery choosing to treat Github data as something worth publishing in bulk. 
+
+## Database on diversity of practices
+
+Our second objective to develop an empirically rich and reusable database of evidence describing the extent and diversity of code sharing practices across a comprehensive range of software projects. This was a slightly misconceived objective in some ways. Evidence of the diversity and commonality of code sharing practice was at the centre of our interest as we analysed what has been happening in the last few years on Github. We did struggle with the pre-2011 history of the platform in terms of data analysis. Like many social media platforms -- Github is a social media platform in key respects -- Github has constantly changed since its launch in late 2007. Unlike many platforms, in which working with everything that happens in even one month is difficult (for instance, all Tweets for a month), it is possible to work with whole years of Github activity at a time, especially with GoogleBigQuery. This, however, does not mean that we could easily make a database of diversity. 
+
+\begin{figure}
+  \centering
+      \includegraphics[width=0.5\textwidth]{figures/powertime-wide.png}
+        \caption{Github repository durations by event count}
+  \label{fig:repo_durations}
+\end{figure}
+
+The problem of constructing such a database can be detected in Figure \ref{fig:repo_durations}.  below.
+The main obstacle in doing that quickly became obvious as we began to work with the data. Although the existence of 12-13 million repositories on Github suggests that there are great variety of different things happening on Github, when you count those things, some familiar patterns begin to appear. 
+The availability of all the Github data means that making a database of the data 
+
+## Learning and modelling diversity of practices
+
+## Tracking practices in the field of devices
+
+## Reproducible research
 
 
 ## Conclusion
