@@ -150,7 +150,7 @@ query_exec(project="metacommunities",  query=sql)
 This contrast is probably commonly experienced by researchers working with data analytics tools and commercial data sources. The churn of tools and infrastructures can make even quite recent work, and indeed investments in infrastructure somewhat redundant. Much of the code we wrote to wrangle GithubArchive and GoogleBigQuery in the first half of the project is already somewhat beside the point in terms of ongoing use. At the time, it was the only way to work with the data, but because so many people are working on similar problems, the tools changes quickly.  
 
 % latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Wed Dec 17 13:54:55 2014
+% Thu Dec 18 12:45:16 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -176,7 +176,7 @@ To both give an idea of the distribution of event types, and the relative distri
 
 
 % latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Wed Dec 17 13:54:55 2014
+% Thu Dec 18 12:45:16 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rl}
@@ -214,25 +214,51 @@ To both give an idea of the distribution of event types, and the relative distri
 \label{tab:gbq_eventtypes}
 \end{table}
 
+Running this query directly against GoogleBigQuery, the accessibility of this dataset appears in Table \ref{tab:event_count}. 
+
 
 ```r
     library(bigrquery)
-    event_query = 'SELECT type, count(type) as event_count FROM [githubarchive:github.timeline] group by type order by event_count desc'
+    library(xtable)
+    event_query = 'SELECT type, count(type) as event_count FROM [githubarchive:github.timeline]
+                         group by type order by event_count desc'
     event_counts = query_exec(project="metacommunities",  query=event_query)
+    event_table = xtable(event_counts[event_counts$event_count>0,], label='tab:event_count', caption='Event counts for all GithubArchive data')
+    print(event_table)
 ```
 
-```
-## Auto-refreshing stale OAuth token.
-```
-
-```
-## Warning: cannot open compressed file '.httr-oauth', probable reason
-## 'Permission denied'
-```
-
-```
-## Error: cannot open the connection
-```
+% latex table generated in R 3.1.2 by xtable 1.7-4 package
+% Thu Dec 18 12:45:19 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rlr}
+  \hline
+ & type & event\_count \\ 
+  \hline
+1 & PushEvent & 138412812 \\ 
+  2 & CreateEvent & 34863498 \\ 
+  3 & WatchEvent & 25646834 \\ 
+  4 & IssueCommentEvent & 24661363 \\ 
+  5 & IssuesEvent & 15862628 \\ 
+  6 & PullRequestEvent & 11010011 \\ 
+  7 & ForkEvent & 9878207 \\ 
+  8 & GistEvent & 4816399 \\ 
+  9 & GollumEvent & 4197677 \\ 
+  10 & DeleteEvent & 3596656 \\ 
+  11 & FollowEvent & 3435804 \\ 
+  12 & PullRequestReviewCommentEvent & 3007603 \\ 
+  13 & CommitCommentEvent & 2463472 \\ 
+  14 & MemberEvent & 1477657 \\ 
+  15 & ReleaseEvent & 403744 \\ 
+  16 & DownloadEvent & 302247 \\ 
+  17 & PublicEvent & 257611 \\ 
+  18 & TeamAddEvent & 175909 \\ 
+  19 & ForkApplyEvent & 5628 \\ 
+   \hline
+\end{tabular}
+\caption{Event counts for all GithubArchive data} 
+\label{tab:event_count}
+\end{table}
 
 As we will see, the complexity of practices on Github means that there are more than 20 different event types in the Github event data. On the one hand, this is really helpful and interesting in terms of our aim to analyse the diversity and commonalities of coding practice. On the other hand, it poses some real analytic problems that we struggled with throughout the project. Event types occur in a huge range of patterns. They are dominated by PushEvents, but the event total includes many other other events types, and this suggests that code repositories are much more than just repositories. They are sites of production, sociality and community, not just places where people store code.  
 
@@ -244,27 +270,58 @@ Our second objective to develop an empirically rich and reusable database of evi
 
 \begin{figure}
   \centering
-      \includegraphics[width=0.5\textwidth]{figures/powertime-wide.png}
+      \includegraphics[width=0.95\textwidth]{figures/powertime-wide.png}
         \caption{Github repository durations by event count}
   \label{fig:repo_durations}
 \end{figure}
 
-The problem of constructing such a database can be detected in Figure \ref{fig:repo_durations}.  below.
-The main obstacle in doing that quickly became obvious as we began to work with the data. Although the existence of 12-13 million repositories on Github suggests that there are great variety of different things happening on Github, when you count those things, some familiar patterns begin to appear. 
-The availability of all the Github data means that making a database of the data 
+The problem of constructing such a database can be detected in Figure \ref{fig:repo_durations}. Although the existence of 12-13 million repositories on Github suggests that there are great variety of different things happening on Github, when you count those things, some familiar patterns begin to appear. The vast majority of repositories only survive for a few events (<5) before lapsing into stasis. At the other end, a small number of massive repositories attract hundreds of thousands of events. This distribution of event counts/repository is another instance of the infamous [power law distributions](http://en.wikipedia.org/wiki/Power_law) of events endemic to many social processes. Faced with a power law distribution of events/repository, we could not design a database without first trying to disentangle some of the processes that gave rise to that distribution (and we discuss the problems in doing that in the next section). 
+
+
+```
+##  [1] "all_repos_1"                "Repo_Null_Language"        
+##  [3] "all_forks_2"                "fork_actors_repos_500k"    
+##  [5] "all_repos_4_3"              "all_repos_4"               
+##  [7] "all_repos_3_3"              "repo_list"                 
+##  [9] "AddedUsers"                 "200k_fork_parent_relations"
+## [11] "all_repos_1_3"              "all_forks_1"               
+## [13] "org_ultimate"               "alphagov_watchers_repos"   
+## [15] "alphagov_pushers_repos"     "repo_type"                 
+## [17] "alphagov_forks_pushers"     "all_forks_old"             
+## [19] "PR_relationships_all"       "posttags"
+```
+
+More importantly, the point of developing an empirically rich and reusable database on code repositories has in some ways been obviated. GithubArchive and GoogleBigQuery render that objective slightly redundant. We did construct many tables derived from those datasets in the course of using GoogleBigQuery (a partial listing is shown above), but these tables are themselves intermediate representations that support high-level analysis. They can be constructed by running the queries again, and this bring more recent events into the data. But these tables themselves do not constitute a schema that organises the $N=All$ data on Github. They are more like instruments that create views on events. That datastream itself carries much more value than any of the many intermediate tables we produced using queries. 
+
 
 ## Learning and modelling diversity of practices
 
+A key objective of our project was to explore the potential of $N=All$ data using classificatory and inferential techniques from statistical learning.  The main obstacle in bring these methods to bear is the sheer diversity of practices. We tried various ways of cutting through the noise of many small repositories and a small number of very large repositories. Again, the range of activities on Github is nothing like the relative homogeneity of tweets on Twitter, or the network of relations in the Facebook Social Graph. Github is a magnet for very different software development communities, ranging from the highly commercial worlds of Javascript coders building websites or 'devops', through to very esoteric hobbyist groups working on drone software or 3D printer CAD designs. A stunning diversity of non-coding practices also cascade across Github -- people using it to co-author legal documents (Whitehouse.gov) or recipes, manifestos and novels. 
+
+Much of our modelling, clustering and classificatory work focused on trying to tame this diversity, to code it in various ways, or to locate it in various domains. The idea here is that if we could manage to model, cluster or code significant regions of the sprawling terrain of Github, we could begin to cut through the power law distributions more effectively, and begin to show how they come into being. This proved challenging in key respects.
+
+For instance, one might think it is simple matter to decide how many repositories contain code and how many repositories relate to something else based on the event timeline data. Of course, by looking directly at a code repository on Github using a web browser, you can quite quickly tell what a repository generally contains. But we couldn't look at 12 million repositories, only at 280 million events in the  GithubArchive event data. Can one tell from the patterns of events concerning a particular repository whether it contains software or not? We couldn't find a way to do that. 
+
 ## Tracking practices in the field of devices
 
-## Reproducible research
+This objective was mainly focused on current debates in sociology and social science methodology. 
+
+## Distributing reproducible data-based research
+
+Our original plan was to bundle all of the data, scripts and data analysis into a virtual machine distribution. During the early phases of the project we were working towards this objective. As in the case of the analytical tools, the terrain shifted considerably during the course of the project. First of all, while virtual machine distributions were prominent in 2011-2012 as a way of publishing major scientific datasets and analyses, usually as a supplement to a single scientific paper. The main example is the international ENCODE consortium's 'Encyclopedia of DNA Elements' <https://www.encodeproject.org/about/2012-integrative-analysis/>. Virtual machine distributions might be the gold standard of reproducible scientific research, especially for large consortial projects in life or physical sciences. The problem with the distributions is that are relatively frozen in time. They bundle datasets, data processing and data analysis flows that relate to a single publication. They do not lend themselves to ongoing analysis, to augmentation by new data, or for that matter, open up entirely new lines of analysis. Practically, there are difficult to move around. The ENCODE virtual machine is 18GB. Since its initial release in early 2012, the ENCODE project has been packaged as an AWS Cloud Computing Instance. 
+
+Rather than distributing shrink-wrapped virtual machines via download or as cloud computing instance, we have accessioned our data processing, data analysis, interactive notebooks and draft publications as a Github repository <https://github.com/metacommunities/metacommunities>. Like many other researchers, we used a Github repository as a way to organise our own work, to keep track of different versions and code and for collaborative work (see [Metacommunities](https://github.com/metacommunities/metacommunities). Because of their deeply versionable and highly granular structure, `git` repositories combined with the Github's accessibility, offer a way to continue to keep working on the research even after a particular release. For instance, we released a preliminary version of our research in October 2014 with a DOI (Digital Object Identifier) <http://dx.doi.org/10.5281/zenodo.12651>[^4]. Github repositories, because they are based on the `git` version control system, offer great flexibility in offering different versions of the same research project over time. Moreover, these repositories can have a multi-branch structure. Different branches of the same repository can very easily offer different perspectives on the same project. For instance, a publication relation to the role of organisation on Github can exist as a distinct branch of the metacommunities repository. These branches can be radically different to each other, yet still draw on common scripts and datasets. This has huge advantages over the virtual machine packaging of the research, since new branches can be added as needed (for instance, in working towards a new publication), and when work is completed on that branch, it can be released and assigned a DOI so that it begins to have an independent existence. 
+
+Like many researchers in life, earth and physical sciences, we also made extensive use of the newer 'executable' scientific notebook tools such as IPython <http://www.ipython.org> for Python work and `knitr` for work in the statistical programming language `R` [@Xie_2013]. We experimented widely with different ways of bringing together the data processing (querying, transforming, re-coding, etc), data analysis (exploratory data analysis, clustering, classification, visualisation). Given that the operational endpoint for social science researchers is not the model, the dashboard or the visualisation (as it might be in a commercial or industry setting) but the publishable paper, we spent quite a lot of effort in aligning the flows of data from  GithubArchive or GoogleBigQuery in the direction of written papers. The goal of the executable paper somewhat eluded us, although it is not in principle impossible with good resources. A truly executable paper would pull data from primary sources (perhaps using SQL queries on GoogleBigQuery), transform the data, generate various statistics, clusterings and visualization in a series of steps that could be followed in the electronic version of the paper itself. The code and the social science analysis co-inhabit the same document (as for instance, the code above that pulls current events counts does). We managed to do this to varying extents, but not 100% for any particular publication during the course of the funded research. We will need further time to retrospectively re-engineer some of our written outputs in order to fully realise this possibility in all its different facets. Our goal here would be produce an executable paper that stands at the endpoint of a branch of our 'metacommunities' repository, and reaches right back along the branch through all the preparatory steps that begin with the  GithubArchive data.
+
+[^4]: The Zenodo research sharing platform allows Github repositories to be re-packaged as a single zip file download <https://zenodo.org/>. Github itself allows this, and indeed `git`, the underlying tool on which everything in Github depends allows cloning of repositories (e.g. `git clone https://github.com/metacommmunities/metacommunities`). Zenodo adds something important, at least for academic purposes, to Github and Git: a permanent accession number in the form of a DOI. This means that a repository can be referenced in publications. More importantly, by granting a software/data repository a DOI, it begins to function as a primary research output, not just a supplementary material. In general, data analysis has appeared as 'supplementary materials' in scientific publications. 
 
 
 ## Conclusion
 
 - how Github differs from much more complicated twitter-based analysis
 - why Github matters as a social research topic
-
+- 
 ## References
 
 
