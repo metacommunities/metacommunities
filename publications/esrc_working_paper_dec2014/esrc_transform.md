@@ -147,10 +147,9 @@ By January 2014, the query, including all the setup (not shown in the code vigne
 ```
 query_exec(project="metacommunities",  query=sql)
 ```
+
 This contrast is probably commonly experienced by researchers working with data analytics tools and commercial data sources. The churn of tools and infrastructures can make even quite recent work, and indeed investments in infrastructure somewhat redundant. Much of the code we wrote to wrangle GithubArchive and GoogleBigQuery in the first half of the project is already somewhat beside the point in terms of ongoing use. At the time, it was the only way to work with the data, but because so many people are working on similar problems, the tools changes quickly.  
 
-% latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Thu Dec 18 12:45:16 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -166,7 +165,7 @@ boolean &   7 \\
 \label{tab:gbq_datatypes}
 \end{table}
 
-As Table \ref{tab:bgq_datatypes} shows, 75% of the fields in the GoogleBigQuery dataset are string, around 20% are numerical count data, and the remainder are boolean or True/False values. But for any given event, many of these fields are likely to be empty because the  GoogleBigQuery has been constructed to accommodate every conceivable event type without consideration of the distribution of events. Having all the attributes of every different event type stored in a single table, and trying to avoid moving things in and out of  GoogleBigQuery too much leads to quite complicated SQL queries. The tremendous advantage of the GoogleBigQuery is freedom from the need to think very much about platform computing capacity. But adapting ourselves to the constraint to build densely nested queries that extract everything we want from a single table of GoogleBigQuery was quite hard.[^2]
+As Table \ref{tab:gbq_datatypes} shows, 75% of the fields in the GoogleBigQuery dataset are string, around 20% are numerical count data, and the remainder are boolean or True/False values. But for any given event, many of these fields are likely to be empty because the  GoogleBigQuery has been constructed to accommodate every conceivable event type without consideration of the distribution of events. Having all the attributes of every different event type stored in a single table, and trying to avoid moving things in and out of  GoogleBigQuery too much leads to quite complicated SQL queries. The tremendous advantage of the GoogleBigQuery is freedom from the need to think very much about platform computing capacity. But adapting ourselves to the constraint to build densely nested queries that extract everything we want from a single table of GoogleBigQuery was quite hard.[^2]
 
 [^2]: As mentioned above, GoogleBigQuery can be accessed through a web interface, which is good for testing queries, and programmatically using scripts written in `R` or `Python`. We used scripts to run full queries. On one occasion, a `Python` script ran up a query charge of $US2400 overnight. We were shocked and dismayed at the cost. After verious discussions with the GoogleBigQuery engineering team, we received a credit for 75% of the charge. We also had quite an interesting and length discussion with Google Marketing team in California about some problems in using GoogleBigQuery. Soon after this event (October 2013), Google announced a massive reduction in the price of using GoogleCompute. 
 
@@ -175,8 +174,6 @@ To both give an idea of the distribution of event types, and the relative distri
 `SELECT type, count(type) as event_count FROM [githubarchive:github.timeline] group by type order by event_count desc`
 
 
-% latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Thu Dec 18 12:45:16 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rl}
@@ -219,39 +216,43 @@ Running this query directly against GoogleBigQuery, the accessibility of this da
 
 ```r
     library(bigrquery)
-    library(xtable)
     event_query = 'SELECT type, count(type) as event_count FROM [githubarchive:github.timeline]
                          group by type order by event_count desc'
     event_counts = query_exec(project="metacommunities",  query=event_query)
+```
+
+```
+## Auto-refreshing stale OAuth token.
+```
+
+```r
     event_table = xtable(event_counts[event_counts$event_count>0,], label='tab:event_count', caption='Event counts for all GithubArchive data')
     print(event_table)
 ```
 
-% latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Thu Dec 18 12:45:19 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlr}
   \hline
  & type & event\_count \\ 
   \hline
-1 & PushEvent & 138412812 \\ 
-  2 & CreateEvent & 34863498 \\ 
-  3 & WatchEvent & 25646834 \\ 
-  4 & IssueCommentEvent & 24661363 \\ 
-  5 & IssuesEvent & 15862628 \\ 
-  6 & PullRequestEvent & 11010011 \\ 
-  7 & ForkEvent & 9878207 \\ 
+1 & PushEvent & 138455718 \\ 
+  2 & CreateEvent & 34873055 \\ 
+  3 & WatchEvent & 25654015 \\ 
+  4 & IssueCommentEvent & 24669358 \\ 
+  5 & IssuesEvent & 15867858 \\ 
+  6 & PullRequestEvent & 11014450 \\ 
+  7 & ForkEvent & 9881006 \\ 
   8 & GistEvent & 4816399 \\ 
-  9 & GollumEvent & 4197677 \\ 
-  10 & DeleteEvent & 3596656 \\ 
+  9 & GollumEvent & 4198827 \\ 
+  10 & DeleteEvent & 3598309 \\ 
   11 & FollowEvent & 3435804 \\ 
-  12 & PullRequestReviewCommentEvent & 3007603 \\ 
-  13 & CommitCommentEvent & 2463472 \\ 
-  14 & MemberEvent & 1477657 \\ 
-  15 & ReleaseEvent & 403744 \\ 
+  12 & PullRequestReviewCommentEvent & 3009258 \\ 
+  13 & CommitCommentEvent & 2464118 \\ 
+  14 & MemberEvent & 1478053 \\ 
+  15 & ReleaseEvent & 404030 \\ 
   16 & DownloadEvent & 302247 \\ 
-  17 & PublicEvent & 257611 \\ 
+  17 & PublicEvent & 257691 \\ 
   18 & TeamAddEvent & 175909 \\ 
   19 & ForkApplyEvent & 5628 \\ 
    \hline
@@ -262,7 +263,9 @@ Running this query directly against GoogleBigQuery, the accessibility of this da
 
 As we will see, the complexity of practices on Github means that there are more than 20 different event types in the Github event data. On the one hand, this is really helpful and interesting in terms of our aim to analyse the diversity and commonalities of coding practice. On the other hand, it poses some real analytic problems that we struggled with throughout the project. Event types occur in a huge range of patterns. They are dominated by PushEvents, but the event total includes many other other events types, and this suggests that code repositories are much more than just repositories. They are sites of production, sociality and community, not just places where people store code.  
 
-Standing back a little from this detail, the important point here is we were easily able to meet our first objective of 'using datasets generated from publicly accessible code repositories' almost by the accident of GithubArchive and GoogleBigQuery choosing to treat Github data as something worth publishing in bulk. 
+Standing back a little from this detail, the important point here is we were easily able to meet our first objective of 'using datasets generated from publicly accessible code repositories' almost by the accident of GithubArchive and GoogleBigQuery choosing to treat Github data as something worth publishing in bulk.[^12]
+
+[^12]: We should point out too that another massive source of data on what is happening on Github comes from a substrate of activity accessible using the `git` version control system. The `git` data is available on every public repository, and it usually ranges back to the inception of the repository in question. In comparison to the GithubArchive data, this data is very molecular. But `git` data has to be individually harvested from each repository, and this is slow, complicated work.
 
 ## Database on diversity of practices
 
@@ -279,16 +282,16 @@ The problem of constructing such a database can be detected in Figure \ref{fig:r
 
 
 ```
-##  [1] "all_repos_1"                "Repo_Null_Language"        
-##  [3] "all_forks_2"                "fork_actors_repos_500k"    
-##  [5] "all_repos_4_3"              "all_repos_4"               
-##  [7] "all_repos_3_3"              "repo_list"                 
-##  [9] "AddedUsers"                 "200k_fork_parent_relations"
-## [11] "all_repos_1_3"              "all_forks_1"               
-## [13] "org_ultimate"               "alphagov_watchers_repos"   
-## [15] "alphagov_pushers_repos"     "repo_type"                 
-## [17] "alphagov_forks_pushers"     "all_forks_old"             
-## [19] "PR_relationships_all"       "posttags"
+##  [1] "early_repos_2000_only"        "all_repos_4_2"               
+##  [3] "repo_summary"                 "post_domains"                
+##  [5] "200k_active_parents_PRheads"  "all_forks_2"                 
+##  [7] "100k_repos_most_pushes"       "100k_DeleteEvents"           
+##  [9] "all_repos_1_3"                "activity"                    
+## [11] "tags"                         "200k_active_forks_parentdata"
+## [13] "all_repos_4_3"                "actor_location"              
+## [15] "alphagov_forks"               "200k_active_parents_PRbase"  
+## [17] "actors_who_fork_a_lot"        "PR_AddedUsers_NoIntra"       
+## [19] "100k_pull_requests"           "all_forks_old"
 ```
 
 More importantly, the point of developing an empirically rich and reusable database on code repositories has in some ways been obviated. GithubArchive and GoogleBigQuery render that objective slightly redundant. We did construct many tables derived from those datasets in the course of using GoogleBigQuery (a partial listing is shown above), but these tables are themselves intermediate representations that support high-level analysis. They can be constructed by running the queries again, and this bring more recent events into the data. But these tables themselves do not constitute a schema that organises the $N=All$ data on Github. They are more like instruments that create views on events. That datastream itself carries much more value than any of the many intermediate tables we produced using queries. 
@@ -302,9 +305,20 @@ Much of our modelling, clustering and classificatory work focused on trying to t
 
 For instance, one might think it is simple matter to decide how many repositories contain code and how many repositories relate to something else based on the event timeline data. Of course, by looking directly at a code repository on Github using a web browser, you can quite quickly tell what a repository generally contains. But we couldn't look at 12 million repositories, only at 280 million events in the  GithubArchive event data. Can one tell from the patterns of events concerning a particular repository whether it contains software or not? We couldn't find a way to do that. 
 
+We made various attempts to orient ourselves in the event datastream. Some of our early efforts focused on the 'topics' of repositories. We tried to construct topic models (or Latent Dirichlet Allocation document models [@Blei_2011]) for code repositories. The topic model algorithms, which are based on quite recent statistical learning research into probability distributions of words in documents, and attempt to identify mixtures of latent topics in large document collections, foundered heavily in the Github repositories. The problem is that descriptions of code repositories take many different forms. Some repositories offer very practical installation and configuration details, others report on very specific technical details (sometimes reaching down into hardware device specificities or infrastructural configurations). The texts differ greatly in length and in technical complexity. Topic models were not able to produce very useful results. 
+We made use of some supervised learning techniques such as random forest and Naive Bayes classifiers. For instance, given the prominence of _organisations_ on Github (including BBC, Google, Facebook, Mozilla, Apache, etc.), we hypothesised that organisations might organise Github, or that organisation might shape what happens on the event timeline in important ways. We manually classified 1000 organisations using an organisational typology derived from recent social theory, and then used that coded dataset to classify organisations more generally on Github. But again, as in the topic models, our classifier struggled to find much signal amidst the extremely variability of organisational forms and scales on Github.
+
+\begin{figure}
+  \centering
+      \includegraphics[width=0.9\textwidth]{figures/repotopics.pdf}
+  \label{fig:repo_topics}
+\end{figure}
+
+Similarly, with perhaps greater success, we worked extensively with the names of the repositories and supervised machine learning techniques to classify repositories in terms of the many separate domains in which coding work is done. Using just the names of repositories, we labelled several thousand repositories in terms of approximately 20 different software categories (file formats, editors, database, package management, web framework, javascript library, compilers, geographic software, etc.). We then trained Naive Bayes classifiers on the labelled data, and used them to identify repository topics on a much larger number of repositories (see Figure \ref{fig:repo_topics} for a preliminary result from this work). While this work remains incomplete, it does demonstrate the possibility of generating accounts of what is happening on Github in aggregate or at the metacommunity level. In particular, if these classifiers can be tuned so that they work with a bit more precision, we can begin to access the mixing of coding domains on Github. This was one of the primary intuitions in our 'metacommunity' concept.
+
 ## Tracking practices in the field of devices
 
-This objective was mainly focused on current debates in sociology and social science methodology. 
+This objective was mainly focused on current debates in sociology and social science methodology. We discuss this objective at much greater length in some forthcoming publications [@Mackenzie_2015]. 
 
 ## Distributing reproducible data-based research
 
@@ -319,8 +333,12 @@ Like many researchers in life, earth and physical sciences, we also made extensi
 
 ## Conclusion
 
-- how Github differs from much more complicated twitter-based analysis
-- why Github matters as a social research topic
+We have not described anything of the substantive key findings on contemporary coding practice. The 'Metacommunities of practice in the code-sharing commons' project has made substantial progress in developing sociological accounts of software cultures as they take shape in the post-open source world. In this paper, however, we have focused on describing the design, methods and practices of our work in relation to data analysis and its associated infrastructures. 
+
+The interest, we would suggest,  of cases like Github concerns their messiness and complexity. Although they bear all the marks of a typical social media platform -- followers, likes, sharing, participation, etc. -- they differ greatly from many other contemporary platforms in terms of their complicated event structures, their wide variations in scale, and wildly disparate patters of practice. Atypically, the data relating to such practices (at least, in so far as they are public) is 100% available, and this again contrasts markedly with many other settings where social science researchers are compelled to work on $N \neq All$ samples of the data (thus putting them in a different position to the platforms themselves). Github is one of the few cases where the full data needs to be available for the platform to work properly. 
+
+Another interest of the Github case is the fact there is so much interest in the Github dataset. We were not alone in analysing the GithubArchive data. Various data competitions and many independent mapping efforts have worked with the data. A sub-culture of data visualization pivots on this data, with many dashboards and network visualizations spinning around it. Many of these stem from software developers who use Github and take a strong interest in what happens. Their projects and visualizations provide an extremely useful backdrop or pinboard to use as points of comparison and sometimes springboard from. 
+
 - 
 ## References
 
