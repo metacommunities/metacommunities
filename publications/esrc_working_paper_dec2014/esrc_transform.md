@@ -1,42 +1,33 @@
-# Metacommunities of practice in the code-sharing commons
 
-## Adrian Mackenzie (Lancaster), Matthew Fuller (Goldsmiths), Andrew Goffey (Nottingham), Richard Mills (Cambridge), Stuart Sharples (Lancaster)
+# Discussion paper: Metacommunities of practice in the code-sharing commons
 
-December 2014
+## Adrian Mackenzie (Lancaster), 
 
-## Topics of the paper online data, analytical and presentational tool
-·  transmit best practice in use of such tools for social science;
-·  show how the tools can be used to test social-science theories; and
-·  suggest possible improvements/innovations in the tools to help integrate analytics and open-source data tools in general into the teaching/learning community
+## Matthew Fuller (Goldsmiths), 
 
-## ideas for esrc dragons den paper
+## Andrew Goffey (Nottingham),
 
-- relationality is the potential for singular effects of qualitative change to occur in excess 
-||  over or as a supplement to objective interactions.
+## Richard Mills (Cambridge),
 
- -- we didn't do that; but we could use this to identify organisations who we could work with 
-- embedding findings in the field
-- computer scientists and statisticians as buddies - tensions around that; 
-- newbies to the domain -- qualitative and quantitative thing -- voluntary naivete
- - how the api shapes what you can find out -- our attempts to find stuff out; failure to address the infrastructures that produce data
-- do you need a lab? there is a need for combining critical perspectives and capacity to do analysis; how do scientists work with their devices to modify them;  uncomfortable message for esrc --- you have to get geeky;
-- what we couldn't do -- are we competitors in the fields of github data challenges? william bunge using quantitative data to show inequality; -- conjunctions; lackadaisical solidarity; commons with potential forms of solidarity; 
-- what we did with the namespace -- messy data that works against the api -- other examples of working against the api?
+## Stuart Sharples (Lancaster)
 
-##quotes to use
+December 2014, a.mackenzie@lancaster.ac.uk
 
 
-
-## Overview
+## Introduction
 
 >A metacommunity is a set of interacting communities which are linked by the dispersal of multiple, potentially interacting species [@Leibold_2004].
 
 >One of the areas that being most dramatically shaken up by $N = All$ is the social sciences. They have lost their monopoly on making sense of empirical social data, as big-data analysis replaces the highly skilled survey specialists of the past. ... More important, the need to sample disappears [@Mayer-Schonberger_2013, 30].
 
 
-The 'Metacommunities of practice in the code-sharing commons' project was an $N=All$ style data analysis. By $N=All$, we mean that it sought to make use of all the publicly available data in the domain of research. The title of the project is a slightly loopy one, but relates to this $N=All$ approach in important ways. First of all, the domain of the research was software, code, and coding practices as seen in public software repositories. We focused almost solely on Github.com, the leading public code repository today. We could have done comparative work with other platforms such as GoogleCode or SourceForge, but working with all the data from Github was substantial enough. We did not sample code and coding practices on Github. We sought to analyse them in their entirety precisely because we wanted to look for evidence of the _commons_ in code. Our guiding theme of 'meta-community' was meant to open up a different perspective on the flow of code across platforms, devices, apps and applications. This perspective would contrast with much of the existing social science that focuses right down on exemplary cases (often by doing fieldwork with particular communities of software developers such as Debian [@Coleman_2012]), and diverge also from the extensive work done by computer scientists and software engineers who do look at the aggregate phenomena but tend to focus on issues of productivity, reliability or code quality on particular projects (often by using software repositories as their data source [@Godfrey_2012]). In contrast with both the existing social science and the computer science, we were looking for transverse flows and connections between different parts of the seething pool of software development. More importantly, we were treating the repositories in aggregate as the form to be analysed, rather than seeing them as a site for sampling of independent, representative cases. The overarching goal was something like what ,  as Viktor Mayer-Schőnberger and Kenneth Cukier suggest in _Big Data_: 'using all the data makes it possible to spot connections and details that are otherwise cloaked in the vastness of the information' [@Mayer-Schonberger_2013, 27].
+The 'Metacommunities of practice in the code-sharing commons' project was an $N=All$ style analysis of data relating to open source code repositories. By $N=All$, we mean that it sought to make use of all the publicly available data in the domain of research. The title of the project is a slightly loopy one, but relates to this $N=All$ approach in important ways. First of all, the domain of the research was software, code, and coding practices as seen in public software repositories. We focused almost solely on Github.com, the leading public code repository today. We could have done comparative work with other platforms such as GoogleCode or SourceForge, but working with all the data from Github was substantial enough. We did not sample the data on code and coding practices on Github. We sought to analyse all the code repositories precisely because we wanted to look for evidence of the _commons_ in code. Our guiding theme of 'meta-community' was meant to open up a different perspective on the flow of code across platforms, devices, apps and applications.
+
+This perspective contrasts with much of the existing social science that focuses right down on exemplary cases (often by doing fieldwork with particular communities of software developers such as Debian [@Coleman_2012]), and diverge also from the extensive work done by computer scientists and software engineers who do look at the aggregate phenomena but tend to focus on issues of productivity, reliability or code quality on particular projects (often by using software repositories as their data source [@Godfrey_2012]). In contrast with both the existing social science and the computer science, we were looking for transverse flows and connections between different parts of the seething pool of software development. More importantly, we were treating the repositories in aggregate as the form to be analysed, rather than seeing them as a site for sampling of independent, representative cases. The overarching assumption was something like what  Viktor Mayer-Schőnberger and Kenneth Cukier suggest in _Big Data_: 'using all the data makes it possible to spot connections and details that are otherwise cloaked in the vastness of the information' [@Mayer-Schonberger_2013, 27].
 
 ## Research objectives and their practicalities
+
+This discussion paper is framed by the research objectives we formulated at the time of the grant proposal in late 2012. We are also taking the notion of the 'working paper' fairly literally in what follows, so we have not shied away from including code, data, and graphics to illustrate the discussion. 
 
 Our research objectives in order of priority were:
 
@@ -174,44 +165,50 @@ To both give an idea of the distribution of event types, and the relative distri
 `SELECT type, count(type) as event_count FROM [githubarchive:github.timeline] group by type order by event_count desc`
 
 
-\begin{table}[ht]
-\centering
-\begin{tabular}{rl}
-  \hline
- & type \\ 
-  \hline
-1 &     CommitCommentEvent \\ 
-  2 &     CreateEvent \\ 
-  3 &     DeleteEvent \\ 
-  4 &     DeploymentEvent \\ 
-  5 &     DeploymentStatusEvent \\ 
-  6 &     DownloadEvent \\ 
-  7 &     FollowEvent \\ 
-  8 &     ForkEvent \\ 
-  9 &     ForkApplyEvent \\ 
-  10 &     GistEvent \\ 
-  11 &     GollumEvent \\ 
-  12 &     IssueCommentEvent \\ 
-  13 &     IssuesEvent \\ 
-  14 &     MemberEvent \\ 
-  15 &     MembershipEvent \\ 
-  16 &     PageBuildEvent \\ 
-  17 &     PublicEvent \\ 
-  18 &     PullRequestEvent \\ 
-  19 &     PullRequestReviewCommentEvent \\ 
-  20 &     PushEvent \\ 
-  21 &     ReleaseEvent \\ 
-  22 &     RepositoryEvent \\ 
-  23 &     StatusEvent \\ 
-  24 &     TeamAddEvent \\ 
-  25 &     WatchEvent \\ 
-   \hline
-\end{tabular}
-\caption{Event types on Github Events API} 
-\label{tab:gbq_eventtypes}
-\end{table}
 
-Running this query directly against GoogleBigQuery, the accessibility of this dataset appears in Table \ref{tab:event_count}. 
+We should note in passing this is not a typical query. Most of the queries we ran against GoogleBigQuery were much more complicated, as shown in the example below:
+
+    SELECT
+        ForkTable.repository_url,
+        COUNT(DISTINCT ForkTable.url) AS f2p_number,
+        AVG(PARSE_UTC_USEC(PullTable.created_at)-PARSE_UTC_USEC(ForkTable.created_at))/3600000000 AS f2p_interval_hour
+    FROM
+        (SELECT
+        url,
+        repository_url,
+        MIN(created_at) AS created_at
+        FROM
+        [githubarchive:github.timeline]
+        WHERE type='ForkEvent'
+        AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-04-01 00:00:00')
+        AND PARSE_UTC_USEC(created_at) < PARSE_UTC_USEC('2011-05-01 00:00:00')
+        GROUP BY
+        repository_url,
+        url)
+    AS ForkTable
+    INNER JOIN
+        (SELECT
+        repository_url,
+        payload_pull_request_head_repo_html_url,
+        MIN(created_at) AS created_at
+        FROM
+        [githubarchive:github.timeline]
+        WHERE type='PullRequestEvent'
+        AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-04-01 00:00:00')
+        AND PARSE_UTC_USEC(created_at) < PARSE_UTC_USEC('2012-05-01 00:00:00')
+        GROUP BY
+        repository_url,
+        payload_pull_request_head_repo_html_url)
+    AS PullTable
+    ON
+        ForkTable.repository_url=PullTable.repository_url AND
+        ForkTable.url=PullTable.payload_pull_request_head_repo_html_url
+    GROUP BY
+    ForkTable.repository_url
+    ORDER BY
+    f2p_number DESC
+
+Running the simply query directly against GoogleBigQuery, the accessibility of this dataset appears in Table \ref{tab:event_count}. 
 
 
 ```r
@@ -306,7 +303,7 @@ Much of our modelling, clustering and classificatory work focused on trying to t
 For instance, one might think it is simple matter to decide how many repositories contain code and how many repositories relate to something else based on the event timeline data. Of course, by looking directly at a code repository on Github using a web browser, you can quite quickly tell what a repository generally contains. But we couldn't look at 12 million repositories, only at 280 million events in the  GithubArchive event data. Can one tell from the patterns of events concerning a particular repository whether it contains software or not? We couldn't find a way to do that. 
 
 We made various attempts to orient ourselves in the event datastream. Some of our early efforts focused on the 'topics' of repositories. We tried to construct topic models (or Latent Dirichlet Allocation document models [@Blei_2011]) for code repositories. The topic model algorithms, which are based on quite recent statistical learning research into probability distributions of words in documents, and attempt to identify mixtures of latent topics in large document collections, foundered heavily in the Github repositories. The problem is that descriptions of code repositories take many different forms. Some repositories offer very practical installation and configuration details, others report on very specific technical details (sometimes reaching down into hardware device specificities or infrastructural configurations). The texts differ greatly in length and in technical complexity. Topic models were not able to produce very useful results. 
-We made use of some supervised learning techniques such as random forest and Naive Bayes classifiers. For instance, given the prominence of _organisations_ on Github (including BBC, Google, Facebook, Mozilla, Apache, etc.), we hypothesised that organisations might organise Github, or that organisation might shape what happens on the event timeline in important ways. We manually classified 1000 organisations using an organisational typology derived from recent social theory, and then used that coded dataset to classify organisations more generally on Github. But again, as in the topic models, our classifier struggled to find much signal amidst the extremely variability of organisational forms and scales on Github.
+We made use of some machine learning techniques such as random forest and Naive Bayes classifiers. For instance, given the prominence of _organisations_ on Github (including BBC, Google, Facebook, Mozilla, Apache, etc.), we hypothesised that organisations might organise Github, or that organisation might shape what happens on the event timeline in important ways. We manually classified 1000 organisations using an organisational typology derived from recent social theory, and then used that coded dataset to classify organisations more generally on Github. But again, as in the topic models, our classifier struggled to find much signal amidst the extremely variability of organisational forms and scales on Github.
 
 \begin{figure}
   \centering
@@ -314,11 +311,11 @@ We made use of some supervised learning techniques such as random forest and Nai
   \label{fig:repo_topics}
 \end{figure}
 
-Similarly, with perhaps greater success, we worked extensively with the names of the repositories and supervised machine learning techniques to classify repositories in terms of the many separate domains in which coding work is done. Using just the names of repositories, we labelled several thousand repositories in terms of approximately 20 different software categories (file formats, editors, database, package management, web framework, javascript library, compilers, geographic software, etc.). We then trained Naive Bayes classifiers on the labelled data, and used them to identify repository topics on a much larger number of repositories (see Figure \ref{fig:repo_topics} for a preliminary result from this work). While this work remains incomplete, it does demonstrate the possibility of generating accounts of what is happening on Github in aggregate or at the metacommunity level. In particular, if these classifiers can be tuned so that they work with a bit more precision, we can begin to access the mixing of coding domains on Github. This was one of the primary intuitions in our 'metacommunity' concept.
+Similarly, with perhaps greater success, we worked extensively with the names of the repositories and supervised machine learning techniques to classify repositories in terms of the many separate domains in which coding work is done. Using just the names of repositories, we labelled several thousand repositories in terms of approximately 20 different software categories (file formats, editors, database, package management, web frameworks, javascript library, compilers, geographic software, etc.). We then trained Naive Bayes classifiers on the labelled data, and used them to identify repository topics on a much larger number of repositories (see Figure \ref{fig:repo_topics} for a preliminary result from this work). While this work remains incomplete, it does demonstrate the possibility of generating accounts of what is happening on Github in aggregate or at the metacommunity level. In particular, if these classifiers can be tuned so that they work with a bit more precision, we can begin to access the mixing of coding domains on Github. This was one of the primary intuitions in our 'metacommunity' concept.
 
 ## Tracking practices in the field of devices
 
-This objective was mainly focused on current debates in sociology and social science methodology. We discuss this objective at much greater length in some forthcoming publications [@Mackenzie_2015]. 
+This objective was mainly focused on current debates in sociology and social science methodology. We discuss this objective at much greater length in some forthcoming publications [@Mackenzie_2015a]. 
 
 ## Distributing reproducible data-based research
 
@@ -339,7 +336,6 @@ The interest, we would suggest,  of cases like Github concerns their messiness a
 
 Another interest of the Github case is the fact there is so much interest in the Github dataset. We were not alone in analysing the GithubArchive data. Various data competitions and many independent mapping efforts have worked with the data. A sub-culture of data visualization pivots on this data, with many dashboards and network visualizations spinning around it. Many of these stem from software developers who use Github and take a strong interest in what happens. Their projects and visualizations provide an extremely useful backdrop or pinboard to use as points of comparison and sometimes springboard from. 
 
-- 
 ## References
 
 
