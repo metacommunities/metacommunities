@@ -1,9 +1,23 @@
+---
+title:  'Discussion paper: Metacommunities of practice in the code-sharing commons'
+author:
+- name: Adrian Mackenzie
+  affiliation: Lancaster University
+- name: Matthew Fuller
+  affiliation: Goldsmith College, London
+- name: Andrew Goffey
+  affiliation: University of Nottingham
+- name: Richard Mills
+  affiliation: University of Cambridge
+- name: Stuart Sharples
+  affiliation: Lancaster University 
+...
 
-# Discussion paper: Metacommunities of practice in the code-sharing commons
+# 
 
 ## Adrian Mackenzie (Lancaster), 
 
-## Matthew Fuller (Goldsmiths), 
+## (Goldsmiths), 
 
 ## Andrew Goffey (Nottingham),
 
