@@ -1,6 +1,20 @@
+# Combinatorial infrastructures: from compiling to continuous building
+
 # 'Dev-ops' and continuous building: when making infrastructures becomes operating infrastructures 
 
 Adrian Mackenzie, Sociology, Lancaster, a.mackenzie@lancaster.ac.uk
+
+## ideas
+
+- is assemblage thinking addressing what is happening today?
+- who or what is infrastructure: lots of people or organisations call themselves infrastructure
+- github is like a small, high-tech island -- a Singapore or a Lagos of the internet -- tremendous amounts of sophisticated affluence surrounded by a morain of service, administrative, maintenance and individual projects.
+- snowden revelations about nsa suggest a kind of combinatorial generation of infrastructures, in which systems, machines, etc are stacked on top of each other
+- data centres and their management as a critical infrastructure in multiple ways -- security, business, but access and participation -- but also in the way that they have generated new circuits of infrastructural work that tends to combinatorial contagions. 
+- devops as a symptom of the change in the nature of infrastructres in that repair and maintenance are impossible to separate from experimentation and innovation (cf Google article on their experimental approach)
+- github itself as an infra-infrastructure that seeks to cope with what people do -- can only use recursion to do this
+- infrastructures as attempts to organise the field of participation and to organise social relations in global assemblages
+
 
 This contribution will principally explore how we might think about infrastructures as cultural processes. It will do this by describing how certain infrastructures are increasingly made as and through software or code. It approaches software less in terms of digital media or control system, and more in terms of software as a permeable material threaded through many different media, communication, administrative and operational infrastructures. The conceptual genealogies I draw on include science and technology studies accounts of information and scientific data infrastructures [@Bowker_2005; @Edwards_2011], as well as anthropological accounts of software in terms of recursion and freedom [@Kelty_2008; @Coleman_2013].
 
