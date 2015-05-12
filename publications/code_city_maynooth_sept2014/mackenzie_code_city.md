@@ -7,29 +7,31 @@ a.mackenzie@lancaster.ac.uk
 
 > The initial step can be made through the venerable geographical act of mapping the expanding realm of machinekind, clearly part of the remaining terra incognita. [@Horvath_1974, 188]
 
-Writing in 2002, Nigel Thrift and Shaun French asked: 'is there any way of making a more general assessment of software in the city?' [@Thrift_2002,  314].  They sketch some possibilities, ranging from hegemony to haunting:
+We take it as read that cities are deeply shaped by code through infrastructures, devices, services, protocols, and many mundane capillary orderings. In what frame, at what levels of abstraction does the density and plurality of this coding become legible or even enumerable? Writing in 2002, Nigel Thrift and Shaun French asked: 'is there any way of making a more general assessment of software in the city?' [@Thrift_2002,  314].  They sketch some possibilities, ranging from hegemony to haunting:
 
 > It would be easy at this point to fall back on some familiar notions to describe software's grip on spaces like cities. One would be hegemony. But that notion suggests a purposeful project, whilst software consists of numerous projects cycling through and continually being rewritten in code. Another notion would be haunting. But again the notion is not quite the right one. Ghosts are ethereal presences, phantoms that are only half- there, which usually obtain their effects by stirring up emotions – of fear, angst, regret, and the like [@Thrift_2002, 311-312].
 
-Thrift and French's empirical response to their own question begins with the Y2K bug, and the long lists of software potentially affected by it: keypad locks, pagers, solar panels, smoke detectors, camcorders, VCRs, elevators. Although these lists now look dated, when a similar listing would include so many  things that didn't exist in 2002, Thrift and French's description of the effect of software development on urban space remains recognisable: 'we will exist in a broadband world in which the internet will be a permanently available ‘cloud’ of information able to be called up through a number of appliances scattered through the environment. These appliances will be something more than portals for information. Rather, like many other devices which will not have internet connections, they will be "practice-aware"' (315) and 'will, through a process of cultural absorption into practices, sink down from the representational into the non- representational world, so becoming a part of a taken-for-granted set of passions and skills' (318). The fact that these developments more than a decade later are still very much in train suggests that there is something quite predictable about the development of software and coding in organising urban life and spaces.  
+In this take on software in the city, they observe 'numerous projects ... continually being rewritten in code.' The rest of this chapter could be seen as an update on that observation from 2001. What has happened to the cycling through and re-writing of code?[^1.1] They go on to  describe three geographies that were cycling (or as I'd prefer to say, trafficking)  code into cities: a geography of *writing code*, a geography of *power and control*, and a geography of *indeterminancy.*  
 
-They go to  list three geographies that were driving code into cities: a geography of *writing code*, a geography of *power and control*, and a geography of *indeterminancy.*  
+
+[^1.1]: Thrift and French's empirical response to their own question begins with the Y2K bug, and the long lists of software potentially affected by it: keypad locks, pagers, solar panels, smoke detectors, camcorders, VCRs, elevators. Although these lists now look dated, when a similar listing would include many  things that didn't exist in 2002, Thrift and French's description of the effect of software development on urban space remains recognisable: 'we will exist in a broadband world in which the internet will be a permanently available ‘cloud’ of information able to be called up through a number of appliances scattered through the environment. These appliances will be something more than portals for information. Rather, like many other devices which will not have internet connections, they will be "practice-aware"' (315) and 'will, through a process of cultural absorption into practices, sink down from the representational into the non- representational world, so becoming a part of a taken-for-granted set of passions and skills' (318). The fact that these developments more than a decade later are still very much in train suggests that there is something quite predictable about the development of software and coding in organising urban life and spaces.  
+
 
 >  The first of these geographies is the most obvious, the large and complex geography of the writing of software – of the production of lines of code – a geography that takes in many different locations and many different languages and which has been built up progressively since the invention of programming in the 1940s [@Thrift_2002, 323].
 
-According to Thrift and French, the geography of software writing clusters around  key places and regions: Silicon Valley, New York, London, and a number of auxiliary software mass production zones (often concentrating on tasks like consulting, testing and support) in countries like Ireland and India. China, Russia and Brazil are not mentioned.  
+According to Thrift and French, the geography of software writing clusters around  key places and regions: Silicon Valley, New York, London, and a number of auxiliary software mass production zones (often concentrating on tasks like consulting, testing and support) in countries like Ireland and India. China, Russia and Brazil are not mentioned.  As we will see, this geographic centring still matters, but in a somewhat re-configured form: code cycles through platforms that tremendously re-distribute the production of lines of code.
 
-A second less concentrated geography of power, conceived in Foucaultean terms as the conduct of conduct, or massive proliferation of corporeally practiced rules, was also  unfurling through software: 'in essence, we can say that it [software] consists of rules of conduct able to be applied to determinate situations' [@Thrift_2002, 325]. Through power-geography, software increasingly interlinks rather than compartmentalises urban processes. (Again,  the ongoing growth of data analytics, virtualizing computing infrastructures, social media, mobile apps and sensors is largely consistent with this analysis of power.)
+A second less concentrated geography of power, conceived in Foucaultean terms as the conduct of conduct, or massive proliferation of corporeally practiced rules, was also  unfurling through software: 'in essence, we can say that it [software] consists of rules of conduct able to be applied to determinate situations' [@Thrift_2002, 325]. Through this power-geography, software increasingly interlinks rather than compartmentalises urban processes. In many ways, the app economy, the virtualization of computing into cloud and containerised infrastructures, and the spectacular growth of social media platforms or indeed the internet of sensor-equipped things attests to an intensified application of rules to determinate situations. Again, coding itself, the process of specifying, configuring and propagating these rules of conduct, has not been exempt from the conduct of conduct. Coding has been powerfully re-coded in recent years.
 
-A  final geography was the most open and the least geographically localised. In this geography, abundance produces indeterminacy and lack of closure:
+Thrift envisaged a  final more open and less localised geography in which abundance produces indeterminacy and lack of closure:
 
 > the general profusion of software, its increasing complexity and consequent emergent properties, all count as means of producing playful idioms that have not been captured by dominant orders. Software's very indeterminacy and lack of closure provide a means of creating new kinds of order (328). 
 
-These playful idioms are largely irreducible to the centres of coding or power-generated control practices, and therefore will take on singular forms, unexpected locations and non-representational aspects. Where or how does the geography of indeterminacy take shape? Against various attempts to see software and code as either hegemonic, as law, as an epochal shift, as what has always haunted writing, or as the epitome of the post-human technics, Thrift and French sketched  the phenomenality of code  as a form of traffic: 
+In this geography, 'profusion' and 'increasing complexity' generate less orderly or regulated idioms. These playful idioms are largely irreducible to the geographic centres of coding or power-generated control practices, and therefore take on singular forms, arise in unexpected locations and articulate non-representational processes. Thrift and French attributed this generative aspect of software to the phenomenality of code  as a form of traffic: 
 
 > Software is more like a kind of traffic between beings, wherein one sees, so to speak, the effects of the relationship. What transpires becomes reified in actions, body stances, general anticipations. We would argue, then, that software is best thought of as a kind of absorption, an expectation of what will turn up in the everyday world.[@Thrift_2002, 312]
 
-These formulations are the most elliptical in the paper.  But the 'traffic between beings' they refer to here, the reification of 'general anticipations,' the curiously contrasting descriptions of software as absorption _and_ expectation could be seen as implicitly urban. They concern 'traffic' in everyday worlds. 
+The 'traffic between beings' they refer to here, the reification of 'general anticipations,' the curiously contrasting descriptions of software as absorption _and_ expectation could be seen as implicitly urban. They concern 'traffic' in everyday worlds. In this third geography, the traffic in beings, we might see processes of composition that not only generate much code traffic, but assemble compositions of people and things that turn up new things. 
 
 More than a decade later, these geographies remain in play. Code work is done in more or less the same places; and the coded conduct of conduct certainly continues. But when  we think about code in terms of traffic, what has happened to it? What kinds of new order have eventuated? Writing in 2014, Thrift again asks addressed coded cities: 'Take just the case of coded cities understood as a whole,' [@Thrift_2014, 13], and then proceeds to offer a sixfold topography of the code city - as externalization of capitalist power,  as prescribed matter of concern, as care-laden responses to the demand for resilience, as projected-retrojected dream life, as navigational geometry, and as materialized visualisation. He finally suggests that something links this diversity: the possibility for 'these entities to learn ... to transform themselves.'   Echoing the 2001 discussion of the geography of indeterminacy, he attributes this possibility to 'emergent tendencies arising out of complexity' or 'through simple happenstance which places them in unexpected situations which require adaptation' (13). 
 
@@ -67,7 +69,7 @@ In the spirit of `git`, GitHub.com  promises a radically de-centered patterning 
 
 If we look at the code-traffic generated by the 233 staff listed as the GitHub team, there is some evidence of their `git`-like activity as they write the code that constructs, augments, re-shapes or expands Github. The geography of their work on GitHub is still very much centred on San Francisco (followed by Portland, Chicago, Seattle, Boulder, etc.), despite claims of de-centralization.[^6]  As Thrift and French argued, geographic localities still matter greatly to code-traffic.   But this largely localised traffic is perhaps less important than the kind of movements it entails.  The table below offers a view on what happens as the several hundred Hubbernauts work on GitHub as a  platform.[^5] It is important to note that only some of the GitHub code appears here. The anchoring  repository `github/github`, the repository that contains the code for whatever GitHub becomes, remains private.
 
-[^5]: We can see some of what the GitHub team has been doing in GitHub repositories by running queries against the GitHub API (Application Programmer Interface) or using the GithubArchive.org archived datastream of GitHub activity. All of the numerical data in this paper results from such queries. In the case of Table 1, the query process went: find all the public repositories on which the named 'actor' works, and count the different actions they perform on those repositories. If we run this query for all 233 Hubbernauts as well as `mojombo`, then something of the network of work done on GitHub itself begins to appear. 
+[^5]: We can see some of what the GitHub team has been doing in GitHub repositories by running queries against the GitHub API (Application Programmer Interface) or using the GithubArchive.org archived datastream of GitHub activity. All of the numerical data in this paper results from such queries. In the case of Figure 1, the query process went: find all the public repositories on which the named 'actor' works, and count the different actions they perform on those repositories. If we run this query for all 233 Hubbernauts as well as `mojombo`, then something of the network of work done on GitHub itself begins to appear. This assumes that the coding of Github can be seen in `git` traffic. 
 
 [^6]: This geography refers to the 'Hubbernauts' themselves, not to Github users who are much more dispersed. 
 
@@ -93,3 +95,105 @@ The recursive work of Hubbernauts on Github can be seen as projected  over the t
 
 
 Certain elements of the platform hold together more strongly together than others.  For instance, `libgit2` generates a large number of imitative events (cloning or forking)  because the `git` functionality of committing, branching, merging, forking, cloning, etc underpins nearly all of the other flows of  imitation associated with the growth of 13.2 million repositories and several hundred million events.  Typically of such entities, `libgit2` migrates throughout the software development ecosystem so that 'bindings' to `libgit2` have been made in almost any programming language imaginable, from Delphi to Lua, as well as to database backends such as `MySQL`, `redis`, `memcache` or the ubiquitous `sqlite`.  The broader point here is that code traffic in and around GitHub is itself constantly transformed, modified and intensified by the flows of imitation that Hubbernauts themselves semi-consciously generate as they assemble the platform. Music, robots, editors, libraries, databases and webpages intersect with each other in the small-crowd teams of GitHub work and in the object of their mimetic immersion, GitHub itself. 
+
+## Github as convolutional process
+
+At  the same time as Github takes shape through convolutions that transform forms through their moving integration with other forms, Github as a terminus for code traffic seeks to socially code flows of code.  The 'social coding' apparatus they create -- Watchers, Followers, stars, showcases, search facilities, along with their attempts to render code flow more like public spaces (see the 'showcases' at [http://github.com/explore](http://github.com/explore) for examples of this public-making) -- does not tame or corral the imitative fluxes on GitHub. The primary fluxes are more networked than the social media apparatus that GitHub codes around `git` because they are not dependent on the formats and facades supplied by the GitHub platform. In other words, these convolutional fluxes are the most crowd-like aspects of coding, and they criss-cross geographies, cities, feeding into and overloading Github geography in key respects.
+
+How would we characterise something of these relatively pre-social imitative fluxes in the GitHub traffic?[^6] A simple comparison between repositories on Github in early 2007 and in 2014 suggests something of the tension between the efforts to socially code the fluxes and code traffic.  The early repositories on GitHub by creation date suggest a rather orderly and sensible traffic in beings. Table 1, which shows the first 20 repositories on GitHub, dating from 2007-8, lists repositories created and worked on mainly by Github Hubbernauts themselves. These are the repository that somewhat recursively hold the code from which Github was being made. Repository names on GitHub are lightly formatted. The first part of a repository name refers to a person or organisation ('mojombo', 'wycats', etc.) and the second to the specific code repository. Both parts of the full repository name are interesting since they vary between humans and things, between individuals and groups. Their constant variations bear the traces of the complicated intersection between people and things, between coders and code that looms large in code traffic. For the present purposes, however, the second part of the name is more symptomatic since it refers more directly to the code. In the early days of GitHub, these names are largely comprehensible in terms of the GitHub platform itself. Names like `grit`, a Ruby-language version of `git`, `git-wiki` or `merb-core` (a Ruby web-development framework) nearly all relate to various aspects of GitHub as a platform under development.  Other platforms and concerns are already present (`amazon-ec2` or `ebay4r`) but they are somewhat marginal to the work of developing a platform to host `git` repositories. 
+
+[^6]: Here, like Thrift's,  my analysis of the coded-city needs to become more psychedelic. Tracking imitative fluxes means engaging with things that inherently lack any full formatting or clear outline. I focus here on the names of  repositories and the names of actors. I have argued elsewhere that naming practices and code names spaces offer a rich resource for thinking about recursive and imitative processes in software culture [@Mackenzie_2014a]
+
+
+  order|2007|2014
+  ---|   --- | ----
+
+  1 mojombo/grit    |2m1tsu3/practice
+  2 wycats/merb-core    |tylerdmace/ledomme
+  3 rubinius/rubinius   |yehiaelghaly/xssya
+  4 mojombo/god |istvan-antal/commandjs
+  5 vanpelt/jsawesome   |JohnKrigbjorn/ObjectOne
+  6 wycats/jspec    |chenx/Ci35_1
+  7 defunkt/exception_logger    |mohsenbezanj/AI_Project
+  8 defunkt/ambition    |Dineshkarthik/blogengine
+  9 labria/restful-authentication   |sapanbhuta/Sapari
+ 10 technoweenie/restful-authentication |gwoodroof/chat-gwoodroof
+ 11 technoweenie/attachment_fu  |tryuichi/Hello-World
+ 12 topfunky/bong   |prateek0020/NepTravelMate
+ 13 anotherjesse/s3 |discoverfly/discoverfly.github.io
+ 14 anotherjesse/taboo  |evan-007/ng-wikiful
+ 15 mojombo/glowstick   |sanemat/zipcode-jp
+ 16 wycats/merb-more    |donreamey/PJKiller
+ 17 macournoyer/thin    |discoverfly/discover
+ 18 jamesgolick/resource_controller |jkkorean/MIUI-KK
+ 19 defunkt/cache_fu    |rtofacks1/ionic-app
+ 20 bmizerany/sinatra   |jkkorean/MIUI-JB
+ 
+-----------------------------------
+Table 1: 20 early and recent repositories on Github.com    
+
+
+A similar list from seven years later  in 2014 reveals many complications (see column 3 of Table 1). The names of coders have become increasingly unrecognisable, even allowing for the internationalisation of Github use that occurred in that time.  The coder names in GitHub become more and more like random patterns of key presses. (Indeed, thousands of repository and actor names comprise key sequences such as `qwerty` or `asdf` or `poiu` or `lkjh` or `1234`, all of which derive from the keyboard layouts.)  And something similar happens to the repository names. Only a few components from the early days are recognisable in type (that is, things like a `blogengine` or `footer-fixed-boostrap`, and as we will soon see, the `bootstrap` web development framework is almost a fixation for GitHubbers since it provides the look and feel of GitHub itself). Many other elements of this stream are also recognisable and proliferate widely on GitHub: `practice`, `Hello-World`, `testing` and `temp` repositories occur in huge numbers on Github (in the order of million or more). These trivial fluxes are like people starting to edge into a crowd, to form part of a mass  on the move.  Broad swathes of generic imitation surface here too. We can also see here the appearance of quite disparate matters of concern: `game-cho-android` and `AI_Project` may have some similarities, but they at first appearance lie at quite a long distance away from each other. It is very hard to see any flux of imitation here. Like the many repositories named using convenient patterns of keystrokes, these repositories seem almost like code-noise. This might support a sense of code traffic as transient and somewhat disorderly multiplicity, but it hardly seems to reflect the co-adaption of imitative fluxes that, following crowd sociologists such as Tarde and Park we might see as materialising code in the city.
+
+If we start counting imitative events, things look a bit different. For instance, in January 2013, around 200,000 repositories were forked (or copied). Forking, as suggested above, is a basic imitative event in `git`-like practices. The most forked repositories have a now familiar look (see Table 2):
+
+forks  repository
+------    ----------
+1478             bootstrap
+1276           Spoon-Knife
+763              dotfiles
+504                 rails
+426     html5-boilerplate
+410                jquery
+375              homebrew
+345                 linux
+343               android
+291      phonegap-plugins
+280                  node
+----------------------------------
+Table 2: Most forked repositories on Github in January 2013
+
+This list is reasonably familiar since it has major platforms like `linux`, `android`  and `node` as well as well as a popular test repository on Github called `Spoon-Knife`.  But even the most forked repository in this list,  `bootstrap`, is not a single or homogeneous imitative flux.[^3] But `bootstrap` itself is not  singular entity. Look at what else was forked heavily in January 2013 relating to `bootstrap`(see Table 5):
+
+[^3]:  As we glimpsed already, the GitHub team takes a strong interest in `bootstrap`, a set of components such as buttons, forms, progress bars, tables, typographic elements and colour themes for web front end development. These visual elements figure heavily in the visual appearance of GitHub as a social media platform, and hence, `bootstrap` already matters to the social coding of code that  GitHub itself does.
+
+ forks                                         repo
+--------    -------------------------------
+1478                                    bootstrap
+109                         bootstrap-datepicker
+84                             jekyll-bootstrap
+60                          bootstrap-wysihtml5
+54                               bootstrap-tour
+48                      twitter-bootstrap-rails
+48                               bootstrap-sass
+46                     bootstrap-datetimepicker
+43                          jquery-ui-bootstrap
+42                              bootstrap-modal
+40                          wordpress-bootstrap
+36                    bootstrap-daterangepicker
+31                       sass-twitter-bootstrap
+31                      Bootstrap-Image-Gallery
+26               rails3-bootstrap-devise-cancan
+26  bootstrapwp-Twitter-Bootstrap-for-WordPress
+24                              metro-bootstrap
+24                         bootstrap-timepicker
+23                     bootstrap-toggle-buttons
+23                          MopaBootstrapBundle
+19                        twitter.bootstrap.mvc
+16                        CodeIgniter-Bootstrap
+-------------------------------------------------------
+Table 3: Forks of `bootstrap` related repositories during January 2013
+
+While it was copied more often than any other repository in that month, the `bootstrap` repository itself is accompanied by many variational imitations.  The total count of `bootstrap` related forks during January 2013 is for instance, 3074, almost twice the size of the forks of `bootstrap` itself (1478). Widening the frame a bit, we can see (Figure 4) that the since 2012, `bootstrap` has been an important imitative flux running through GitHub, and has been the most highly 'starred' code repository on GitHub for several years.
+
+!['Figure 4: Bootstrap-related forks on Github'](plots/bootstrap_repository_forks_plain_counts_all.png)
+
+The stackplot of ForkEvents (or their equivalent and underlying `git clone` operations) associated with the `twitter/bootstrap` repository shows a more differentiated flux of imitation. The imitation varies over time as we would expect, but the patterns of imitation are heavily interconnected with each other through repositories that juxtapose or merge different repositories with each other. The several thousand bootstrap-related repositories are much more diverse than `bootstrap` itself. They combine variously with mobile devices ('Android', 'iOS'), with web-browser software( 'IE6'), with various web-development infrastructures (django, rails, ASP, PHP), with media platforms (WordPress, Google, CodeIgniter) and server management systems (sinatra). They respond to events in the main `bootstrap` repository, but also have a life apart from that repository that relates to other platforms and other software projects. Here something like the co-adaptation of imitative flux begins to come into view. Each of the devices, platforms, or systems in these variations has its own code traffic, its own crowds of coders and code, that begin to mix here with `bootstrap`. 
+
+## Conclusion
+
+There are many other dynamics on GitHub that we might analyse in  terms of co-adaption of imitative fluxes. The very crude metrics of imitation based on forking and repository names could be refined in various ways. We could ask, for instance, what are the most forked repositories, and how do changes in copying practices help us think about different directions of movement of code and coders. I have mentioned the profusion of `dotfile` repositories in the last few years. These repositories can be analysed in terms of micro-gestural and micro-perceptual differentations at work in the writing of code. Choices of colour, font size, line separation, shortcuts for keystroke commands and the multiplicity of configurations for code development could be used to develop a much richer account of how people move through code, almost like a 'gait analysis' for code.  Similarly, the metrics of the name space could, at a very different end of infrastructural dimensioning of code help us see how,for instance, the contemporary re-scaling of computational infrastructures through 'cloud' computing or virtualization ripple across code-as-crowd. In all of these settings, the mergers, coalescences, branching and replication of code done by coders suggests that [HERE] 
+
+Many of the inventive dynamics of GitHub could be identified as externalizations of the investments in the scaling of digital media platforms to match the scales of urban life. 
+Regardless of these possible directions of analysis, the broader point here is that software today is less like a machine, a system or even an assemblage, and more like a crowd. That is, it has fluxing, flowing and somewhat disordered existence that generates powerful flashes and movements, that creates atmospherics and densely woven patches of order, but remain unstable and dynamic. 
+
