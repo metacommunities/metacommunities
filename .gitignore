@@ -11,3 +11,5 @@ bigquery_credentials.dat
 adrian/repo-topics/data/*
 *.rdb
 *login*
+*.json
+all_repos*
