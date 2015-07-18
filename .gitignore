@@ -13,3 +13,4 @@ adrian/repo-topics/data/*
 *login*
 *.json
 all_repos*
+*ipynb_*
