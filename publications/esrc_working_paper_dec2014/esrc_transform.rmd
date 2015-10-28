@@ -14,6 +14,10 @@
 December 2014, a.mackenzie@lancaster.ac.uk
 
 
+The work described in this paper was funded by the UK Economic and Social Research Council Grant ES/K007912/1, 2013-2014. 
+
+\newpage
+
 ## Introduction
 
 >A metacommunity is a set of interacting communities which are linked by the dispersal of multiple, potentially interacting species [@Leibold_2004].
@@ -287,6 +291,10 @@ We have not described anything of the substantive key findings on contemporary c
 The interest, we would suggest,  of cases like Github concerns their messiness and complexity. Although they bear all the marks of a typical social media platform -- followers, likes, sharing, participation, etc. -- they differ greatly from many other contemporary platforms in terms of their complicated event structures, their wide variations in scale, and wildly disparate patters of practice. Atypically, the data relating to such practices (at least, in so far as they are public) is 100% available, and this again contrasts markedly with many other settings where social science researchers are compelled to work on $N \neq All$ samples of the data (thus putting them in a different position to the platforms themselves). Github is one of the few cases where the full data needs to be available for the platform to work properly. 
 
 Another interest of the Github case is the fact there is so much interest in the Github dataset. We were not alone in analysing the GithubArchive data. Various data competitions and many independent mapping efforts have worked with the data. A sub-culture of data visualization pivots on this data, with many dashboards and network visualizations spinning around it. Many of these stem from software developers who use Github and take a strong interest in what happens. Their projects and visualizations provide an extremely useful backdrop or pinboard to use as points of comparison and sometimes springboard from. 
+
+## Acknowledgments
+
+The work described in this paper was funded by the UK Economic and Social Research Council Grant ES/K007912/1, 2013-2014. 
 
 ## References
 
