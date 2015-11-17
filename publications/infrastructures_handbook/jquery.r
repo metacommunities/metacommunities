@@ -65,3 +65,5 @@ jqt %>% filter(grepl(j, repository_url)) %>% count(type)
 ev = jqt %>% filter(grepl(j, repository_url), grepl('Fork|Push|Pull', type)) %>% arrange(created_at)
 g = ggplot(ev, aes(x=as.Date(created_at), group=type, linetype=type )) + geom_freqpoly(binwidth=9)
 g+ scale_x_date(labels = date_format('%m/%Y'), breaks= '1 month')
+
+
