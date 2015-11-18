@@ -1,4 +1,4 @@
-# Infrastructures in name only? Deep surfaces and knowledge How infrastructures become superficial
+# Infrastructures in name only? The effects of depth and scale
 
 Adrian Mackenzie, Sociology Department, Lancaster University.
 
@@ -26,10 +26,12 @@ The names of repositories hosted on Github display a baffling polysemy. Reposito
 
 Between the two extremes of the random keypress repositories and the installed bulk of `linux` or `apache` lies a very diverse and dense population of names.   If we could read them serially in their spread and diversification over time, these names would diagram infrastructures multiplying, combining, and decaying in layers. Processes of repair, re-invention, appropriation, capitalisation and speculation are engrained in the distribution of names. The gamut of names of Github repositories, enough to populate a small country, is somewhat heterogeneous, pluralistic and full of transient multiplicities, but axes of organisation and centralisation that assemble infrastructural elements into something like the 'full stack' associated with the digital networks can be discerned there. Infrastructures like Github allocate all things a position in a common _namespace_. The Github  platform, with its infrastructures for storage, searching, tracking and graphing of coding work, arrays all repositories on the same surface. In this respect, it renders all differences superficial, and this superficiality is perhaps a somewhat novel experience in relation to infrastructure. The relations and connections between disparate bodies of code of many different ilk have only recently started to congregate in a common namespace.
 
+![Github repositories with more than 10,000 events in 2014. Repositories receiving more than 100,000 events during 2014 are labelled by name.](figure1_github_2014.svg)
+
 \begin{figure}
   \centering
       \includegraphics[width=0.9\textwidth]{figure1_github_2014.pdf}
-        \caption[Github repositories 2014]{Github repositories with more than 10,000 events in 2014. Repositories receiving more than 100,000 events during 2014 are labelled }
+        \caption[Github repositories 2014]{Github repositories with more than 10,000 events in 2014. Repositories receiving more than 100,000 events during 2014 are labelled. }
   \label{fig:figure_repos}
 \end{figure}
 
