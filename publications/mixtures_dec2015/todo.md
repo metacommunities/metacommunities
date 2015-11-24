@@ -9,4 +9,7 @@ Tue Nov 24 12:37:36 GMT 2015
 
 add in some comments on the difference between 2013 gender trouble and 2015 China denial of service attack
 
+Tue Nov 24 13:46:02 GMT 2015
+add in some comments about Google London January 2015
+
 
