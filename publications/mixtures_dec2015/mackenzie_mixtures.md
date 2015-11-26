@@ -16,7 +16,7 @@
 
 I wanted to talk about a year long project I did during 2013-2014, funded by the ESRC and also sponsored by Google Corporation. Along with 4-5 other funded projects, my project called 'metacommunities of code' sought to analyse how code was shared being shared across millions of software repositories.
 
-Some context here for code sharing:
+### Some context here for code sharing:
 
 1. We are used to hearing about the importance of code and programming. Here in the UK, the government mandated last year that all children will learn to code because coding is a vital economic activity. Such legislative moves suggest that software development is not one work practice amongst others, but a locus of power, agency, labour or value; 
 2. Coding practices have changed over the last decade or so in fairly profound ways, which I won't detail here. The principal changes are a broad cultural shift in the organization of software development away from massively centralized software development (the kind epitomised by Microsoft or IBM) to a much more de-centralized process in which lines between production, distribution, and use have thoroughly blurred. Code flows in much more diverse ways. At the same time, it has become a much more *public* activity, and the *publicness of code* has become a major concern for business, government and science, for different reasons.
@@ -29,7 +29,7 @@ How does Github describe itself? In June 2014, Github showed a photo of a women 
 
 >GitHub is how people build software. With a community of more than 11 million people, developers can discover, use, and contribute to over 29 million projects using a powerful collaborative development workflow. [Github/About](https://github.com/about)
 
-## diagrammatic cultures and data:  the political economies of counting and graphing
+## Diagrammatic cultures and data:  the political economies of counting and graphing
 
 The other aspect of this case study concerns Google and the ESRC. Both of these bodies have a certain investment in data and digital technologies. While Google's interest in that will be well-known, the ESRC's might be less familiar. Here's the call for applications:
 
@@ -91,7 +91,7 @@ This is about as raw as Github data gets. This is a relatively simple 'social ev
 
 ## What can be done with event data?
 
-Now that we have a grasp of the basic data format of a social media platform, what work can be done with it? 
+Now that we have a grasp of the basic data format of a social media platform, what work can be done with it? What can be done with hundreds of millions of them? For that's how many we have: around 300 million public events can be retrieved from  Github.  
 
 I should say that the actors in my research project included two social statisticians, two StS-aware media theorists, and myself, someone who stands somewhere between STS and media and cultural studies, with a strong interest in methods. As the PI, I had a vision of working with the data in ways that resonated with recent StS work on traceability, on device-specific methods in the growth of digital sociology, and with media and cultural studies work on platforms, algorithms and participation.
 
@@ -151,7 +151,31 @@ It seems like 'the social' has been rapidly and heavily colonised here. The Data
 
 ## Overflow in the data
 
-What would the methodological orientations of traceability, or of device-specific research do here? The speed of the work done on GithubArchive during the Data Challenges completely overtook the slow development that we had been planning. Secondly, many of the obvious empirical questions were quickly addressed, and analyzed. All of this going on with the numbers is very tangled, because more than two formats interact with each other in the diagrams. The event data from  Github encounters the operational data formatting of  GoogleBigQuery, and its query architectures. 
+What would the methodological orientations of traceability, or of device-specific research do here? The speed of the work done on GithubArchive during the Data Challenges completely overtook the slow development that we had been planning. Secondly, many of the obvious empirical questions were quickly addressed, and analyzed. And, as is often the case with contemporary data analytics, the data here is quite social, so those analyses are already in our space, the space of the social. 
+
+Or is it in the social in the same way? The long-standing Lancaster take on the social is that methods enact the social [see @Law_2004]. All of this going on with the numbers is very tangled, because as it shows the sociality of Github data -- the patterns of social networking, the ebb and flow of sentiment around particular practices, the geography of code work, etc. -- it also enacts the framing of the social that Google and ESRC advance. This version of the social replaces the demographic counting of populations and, as well, the mid-20th century version of the social associated with media, marketing and government, the public defined by opinions and attitudes elicited through polls [see @Osborne_1999], with a hybrid entity formed at the intersection of practices, their traces (event data) and some transformations in inscription devices that in this case take the form of GoogleBigQuery.
+
+Tensions between different ways of doing the social began to play out in the project. My vision of device-specific researcher or digital sociologist began to encounter the ways of going on with numbers in contemporary applied statistics. With good justification, statisticians like to say 'no' to many of my desires to enact the social through the data. Statisticians, it seems, like to say 'no', 'statistician says "no"'. 
+
+\begin{figure}
+  \centering
+      \includegraphics[width=0.9\textwidth]{figure/info1.pdf}
+        \caption{Figure title}
+  \label{fig:events_in_time}
+\end{figure}
+
+\begin{figure}
+  \centering
+      \includegraphics[width=0.9\textwidth]{figure/organisation_parent_community.pdf}
+        \caption{Figure title}
+  \label{fig:organisations_on_gh}
+\end{figure}
+
+The contrast can be seen in the figures. Figure \ref{fig:events_in_time} carefully examines
+
+HERE
+
+more than two formats interact with each other in the diagrams. The event data from  Github encounters the operational data formatting of  GoogleBigQuery, and its query architectures. 
 
 
 This paper concerns the work needed to get contemporary digital data and particularly, large numbers numbers, to do something other than confirm what we already know. This work is somewhat ethnographic in its ambitions. That is, it hopes to be a form of writing that derives from an encounter with some particular differences or alterity that challenges accepted understandings of what is happening. The ethnographic setting here is not a field site, but principally a stream of timestamped event data from a social media platform. Rather than travelling some place to do ethnography, I'm asking: how can can we treat a body of data ethnographically as a kind of field site? That means finding a place to sit in relation to the data and learning some ways of having a conversation with it, a conversation that will include questions about how many and how often, but will also include the experience of being located in the data. The question here is: how might deliberate and somewhat naïve preoccupation with digital data become not
