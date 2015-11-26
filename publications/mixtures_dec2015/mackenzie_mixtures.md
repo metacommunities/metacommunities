@@ -155,7 +155,7 @@ What would the methodological orientations of traceability, or of device-specifi
 
 Or is it in the social in the same way? The long-standing Lancaster take on the social is that methods enact the social [see @Law_2004]. All of this going on with the numbers is very tangled, because as it shows the sociality of Github data -- the patterns of social networking, the ebb and flow of sentiment around particular practices, the geography of code work, etc. -- it also enacts the framing of the social that Google and ESRC advance. This version of the social replaces the demographic counting of populations and, as well, the mid-20th century version of the social associated with media, marketing and government, the public defined by opinions and attitudes elicited through polls [see @Osborne_1999], with a hybrid entity formed at the intersection of practices, their traces (event data) and some transformations in inscription devices that in this case take the form of GoogleBigQuery.
 
-Tensions between different ways of doing the social began to play out in the project. My vision of device-specific researcher or digital sociologist began to encounter the ways of going on with numbers in contemporary applied statistics. With good justification, statisticians like to say 'no' to many of my desires to enact the social through the data. Statisticians, it seems, like to say 'no', 'statistician says "no"'. 
+Tensions between different ways of doing the social began to play out in the project during 2013, even before we were fully aware of all the work being done on the GithubArchive data by data scientists and the like. My vision of device-specific researcher or digital sociologist began to encounter the ways of going on with numbers in contemporary applied statistics. With good justification, statisticians like to say 'no' to many of my desires to enact the social through the data.  
 
 \begin{figure}
   \centering
@@ -171,9 +171,11 @@ Tensions between different ways of doing the social began to play out in the pro
   \label{fig:organisations_on_gh}
 \end{figure}
 
-The contrast can be seen in the figures. Figure \ref{fig:events_in_time} carefully examines
+The contrast can be seen in the figures. Figure \ref{fig:events_in_time} on the left patiently examines patterns events across repositories over time, graphing how they are distributed in different ways. The main message here, as can be seen from the subplot 'Github Repo Events' is that very little happens in the vast majority of code repositories. (This is the infamous 'power-law' or 'long-tail' distribution of social media activity.) This figure, while soundly based in the GithubArchive event data, tells us very little about the heterogeneity and diversity of activity around coding. On the right hand side represents the work of the digital sociologist. The vast network graph of organisations and their relations on Github does evoke something of the crowdlike intensity of software cultures, but at the cost of losing legibility as well. The nodes in this graph represent 'organisations' and their repositories.  Their colour comes from a 'community detection' algorithm developed by physicists to explore social network structures in the same way they explore molecular forces [@REF_TBA].  
 
-HERE
+Which of these two diagrams is better? The first remains close to the discipline of statistics in its cautious attempt to diagram patterns of practice. Like that discipline, however, it remains somewhat detached from the values and differences that matter in particular domains. The second more or less imitates what is happening in the field of data-intensive re-enactments of the social, inadvertently reusing many of the same inscriptive devices, ranging from GoogleBigQuery to the network graphs shown in the figure. 
+
+HERE 
 
 more than two formats interact with each other in the diagrams. The event data from  Github encounters the operational data formatting of  GoogleBigQuery, and its query architectures. 
 
