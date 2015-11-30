@@ -1841,110 +1841,21 @@ style="font-style: normal"><span style="font-weight: normal">
 Conclusion {.western}
 ----------
 
-I have been suggesting that STS research might develop its strong
-ethnographic sensibilities in relation to data event streams by sitting
-in an ambivalent space between formats and disfiguring elements, between
-the device-specific and its overflows. There are several different ways
-to understand what is at stake in this work.
+I have been suggesting that STS research might develop its strong ethnographic sensibilities in relation to data event streams by sitting in an ambivalent space between formats and disfiguring elements, between the device-specific and its overflows. There are several different ways to understand what is at stake in this work.
 
 One comes from Latour, Jensen, and Venturini, who ask:
 
-Is it possible to do justice to … common experieng ce by shifting from
-prediction and simulation to description and data mining? … Let the
-agents produce a dynamics and collect the traces that their actions
-leave as they unfold so as to produce a rich data set’ (Latour et al.,
-2012)
+Is it possible to do justice to … common experieng ce by shifting from prediction and simulation to description and data mining? … Let the agents produce a dynamics and collect the traces that their actions leave as they unfold so as to produce a rich data set’ (Latour et al., 2012)
 
-I broadly agree with them but think there are hidden complications in
-their recommendation, because the data set is pre-formatted for
-particular actors and agents. If we are interested in alternative
-agencies, we have to work against the traces in some ways.
+I broadly agree with them but think there are hidden complications in their recommendation, because the data set is pre-formatted for particular actors and agents. If we are interested in alternative agencies, we have to work against the traces in some ways. 
 
-<span style="font-style: normal"><span style="font-weight: normal">I
-started with Helen Verran's observation about work on numbers, and some
-ways I think it might be helpful. As she says, 'i</span></span><span
-style="font-style: normal"><span style="font-weight: normal">n any
-practical going-on with numbers, what matters is that they can be
-</span></span>*<span style="font-weight: normal">made </span>*<span
-style="font-style: normal"><span style="font-weight: normal"> to work,
-and </span></span>*<span style="font-weight: normal">making them work
-</span>*<span style="font-style: normal"><span
-style="font-weight: normal">is a politics</span></span><span
-style="font-style: normal"><span style="font-weight: normal">'
-</span></span>(Verran, 2001)<span style="font-style: normal"><span
-style="font-weight: normal">. </span></span>
+<span style="font-style: normal"><span style="font-weight: normal">I started with Helen Verran's observation about work on numbers, and some ways I think it might be helpful. As she says, 'i</span></span><span style="font-style: normal"><span style="font-weight: normal">n any practical going-on with numbers, what matters is that they can be </span></span>*<span style="font-weight: normal">made </span>*<span style="font-style: normal"><span style="font-weight: normal"> to work, and </span></span>*<span style="font-weight: normal">making them work </span>*<span style="font-style: normal"><span style="font-weight: normal">is a politics</span></span><span style="font-style: normal"><span style="font-weight: normal">' </span></span>(Verran, 2001)<span style="font-style: normal"><span style="font-weight: normal">. </span></span>
 
-How do we re-animate and open up the foundationist growth-curve numbers
-that abound in contemporary sciences and technologies as they accumulate
-and aggregate time-stamped data? Like Verran, I see the interplay
-between different kinds of numbering as generative. To do this, we need
-to find ways of working on formatted data that goes against its
-pre-formatted counting relations and uses. The massive availability of
-data from online databases is power-laden number work. Its very openness
-allows a certain kind of capitalising and governing based on data to
-expand. For instance, does the formatting of data streams tend to simply
-confirm and expand how the platform already advertises itself? I think
-we could say that in many of the data-reuse situations act as mirrors
-for the platform.
+How do we re-animate and open up the foundationist growth-curve numbers that abound in contemporary sciences and technologies as they accumulate and aggregate time-stamped data? Like Verran, I see the interplay between different kinds of numbering as generative. To do this, we need to find ways of working on formatted data that goes against its pre-formatted counting relations and uses. The massive availability of data from online databases is power-laden number work. Its very openness allows a certain kind of capitalising and governing based on data to expand. For instance, does the formatting of data streams tend to simply confirm and expand how the platform already advertises itself? I think we could say that in many of the data-reuse situations act as mirrors for the platform.
 
-By contrast, device-specific research that attends to the ways in which
-data is formatted, and how that formatting affects practices around the
-platform seems to me quite important in alternative to the much
-advertised (but actually often limitied) opennness of data.
+By contrast, device-specific research that attends to the ways in which data is formatted, and how that formatting affects practices around the platform seems to me quite important in alternative to the much advertised (but actually often limitied) opennness of data. <span lang="en-GB">A </span><span lang="en-GB">complementary </span><span lang="en-GB">facet of this work with data concerns indeterminacy or </span><span lang="en-GB">what Winthereik and Verran call 'double vision' (Winthereik and Verran, 2012: 48) </span><span lang="en-GB">in relation to </span><span lang="en-GB">the platform or device and what overflows it. Many contemporary digital platforms seek to capture and format these overflows. Vast and complex infrastructures have been built in the service of that end. </span><span lang="en-GB">W</span><span lang="en-GB">e can't always know whether the data we are looking at comes fr</span><span lang="en-GB">o</span><span lang="en-GB">m the platform or from a social practice that overflows that platform.</span><span lang="en-GB"> </span><span lang="en-GB"> The intersections </span><span lang="en-GB">and collisions between names in the Github event streams are complex and multiple. Even the imitation and copying of names points to the ways in which code repositories are forms of economic and political organization, as well as desires, concerns and passionate interests</span><span lang="en-GB">. </span><span lang="en-GB">The mixing of entities in names suggest that imitation works in plural ways, and that it is recombines different devices, groups, and organisations in a vast array of forms. </span>
 
-<span lang="en-GB">A </span><span lang="en-GB">complementary
-</span><span lang="en-GB">facet of this work with data concerns
-indeterminacy or </span><span lang="en-GB">what Winthereik and Verran
-call 'double vision' (Winthereik and Verran, 2012: 48) </span><span
-lang="en-GB">in relation to </span><span lang="en-GB">the platform or
-device and what overflows it. Many contemporary digital platforms seek
-to capture and format these overflows. Vast and complex infrastructures
-have been built in the service of that end. </span><span
-lang="en-GB">W</span><span lang="en-GB">e can't always know whether the
-data we are looking at comes fr</span><span lang="en-GB">o</span><span
-lang="en-GB">m the platform or from a social practice that overflows
-that platform.</span><span lang="en-GB"> </span><span lang="en-GB"> The
-intersections </span><span lang="en-GB">and collisions between names in
-the Github event streams are complex and multiple. Even the imitation
-and copying of names points to the ways in which code repositories are
-forms of economic and political organization, as well as desires,
-concerns and passionate interests</span><span lang="en-GB">.
-</span><span lang="en-GB">The mixing of entities in names suggest that
-imitation works in plural ways, and that it is recombines different
-devices, groups, and organisations in a vast array of forms. </span>
-
-<span lang="en-GB"><span style="font-style: normal">If our
-</span></span><span lang="en-GB"><span
-style="font-style: normal">concern </span></span><span
-lang="en-GB"><span style="font-style: normal">is </span></span><span
-lang="en-GB"><span style="font-style: normal">to </span></span><span
-lang="en-GB"><span style="font-style: normal">begin to explore
-</span></span><span lang="en-GB"><span style="font-style: normal">the
-indeterminacy in the relations between what is specific to the devices
-</span></span><span lang="en-GB"><span style="font-style: normal">or
-platforms</span></span><span lang="en-GB"><span
-style="font-style: normal"> and what is specific to the social practices
-</span></span><span lang="en-GB"><span style="font-style: normal">that
-come to those platforms</span></span><span lang="en-GB"><span
-style="font-style: normal">. </span></span><span lang="en-GB"><span
-style="font-style: normal">I think ethnographic work on things like the
-flow of naming heads in a different direction to the formatting of data
-for purposes of platform services and enterprises. </span></span><span
-lang="en-GB"><span style="font-style: normal">I</span></span><span
-lang="en-GB"><span style="font-style: normal">t cannot remain content
-with the familiar </span></span><span lang="en-GB"><span
-style="font-style: normal">processes of reduction to </span></span><span
-lang="en-GB"><span style="font-style: normal">social networks,
-</span></span><span lang="en-GB"><span style="font-style: normal">or
-counting specific kinds of pre-formatted event types.
-</span></span><span lang="en-GB"><span style="font-style: normal">In the
-case of Github, the names of repositories offer one way to begin to
-explore this ambiguity and indeterminacy, </span></span><span
-lang="en-GB"><span style="font-style: normal">or what Riles called
-'momentary apprehensions of depth</span></span><span lang="en-GB"><span
-style="font-style: normal">.</span></span><span lang="en-GB"><span
-style="font-style: normal">'</span></span><span lang="en-GB"><span
-style="font-style: normal"> </span></span>
+<span lang="en-GB"><span style="font-style: normal">If our </span></span><span lang="en-GB"><span style="font-style: normal">concern </span></span><span lang="en-GB"><span style="font-style: normal">is </span></span><span lang="en-GB"><span style="font-style: normal">to </span></span><span lang="en-GB"><span style="font-style: normal">begin to explore </span></span><span lang="en-GB"><span style="font-style: normal">the indeterminacy in the relations between what is specific to the devices </span></span><span lang="en-GB"><span style="font-style: normal">or platforms</span></span><span lang="en-GB"><span style="font-style: normal"> and what is specific to the social practices </span></span><span lang="en-GB"><span style="font-style: normal">that come to those platforms</span></span><span lang="en-GB"><span style="font-style: normal">. </span></span><span lang="en-GB"><span style="font-style: normal">I think ethnographic work on things like the flow of naming heads in a different direction to the formatting of data for purposes of platform services and enterprises. </span></span><span lang="en-GB"><span style="font-style: normal">I</span></span><span lang="en-GB"><span style="font-style: normal">t cannot remain content with the familiar </span></span><span lang="en-GB"><span style="font-style: normal">processes of reduction to </span></span><span lang="en-GB"><span style="font-style: normal">social networks, </span></span><span lang="en-GB"><span style="font-style: normal">or counting specific kinds of pre-formatted event types. </span></span><span lang="en-GB"><span style="font-style: normal">In the case of Github, the names of repositories offer one way to begin to explore this ambiguity and indeterminacy, </span></span><span lang="en-GB"><span style="font-style: normal">or what Riles called 'momentary apprehensions of depth</span></span><span lang="en-GB"><span style="font-style: normal">.</span></span><span lang="en-GB"><span style="font-style: normal">'</span></span><span lang="en-GB"><span style="font-style: normal"> </span></span> 
 
 References {.western}
 ----------
