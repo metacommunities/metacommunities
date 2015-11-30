@@ -193,6 +193,41 @@ Despite working very hard on this problem of finding a different way of going on
 
 If I did find any relief from the problem of doing statistically weak and behind the cutting-edge data science in this project, that relief came mainly in the form of taking imitation seriously and seeing imitation as both productive, and possibly politically efficacious. After I left Lancaster in 2014 to spend a term of research leave in Copenhagen, one potential in the hundreds of millions of events in  GithubArchive seemed to remain: that even if we could not know about that general distribution of repo topics, or whether they contained code or not, or whether they mattered as repos or not, one thing in the event data was not fully formatted and homogenised in its formatting: the names of the repositories themselves, in all their trivial, superficial, often imitative yet quite countable entity. 
 
+## Analysing imitation
+
+\begin{figure}
+  \centering
+      \includegraphics[width=0.9\textwidth]{figure/powertime-wide.pdf}
+        \caption{The power of events over time}
+  \label{fig:power_time}
+\end{figure}
+
+The analysis of the event timeline continually suggested a great proportion of events in the data were trivial, and in particular, imitative. Millions of repositories were simply copies of other repositories. Millions of repositories flash into visibility on the timeline for a brief period before falling back into obscurity. The diagram shown in the Figure \ref{fig:power_time} encapsulates this imitative flux quite well. It comprises three graphs that count how many events are associated with repositories. On the left hand side, millions of repositories receive less than five events during the 18 months. On the right hand side, less than 50 repos receive more than a thousand events. 
+
+But rather than see this empherality as a waste, noise or something to be discarded, maybe in terms of immaterial labour and the politics of large numbers, it matters quite a lot. Given that repositories are receptacles for the work of software developers and coders, and that they are the material expression of all the immaterial labour associated with code, it seems strange that the vast bulk of them are so ephemeral. When we start tracking the patterns of imitation, rather than looking for the events that define repositories as important, something different starts to appear.
+
+Looking at the flow of names of repositories, and how they move in waves of imitation begins to show something of the dynamics that animate the growth of large numbers.  These take two forms in the event data. Firstly, almost one half of the repositories in Github are simply copies of other repositories. This is part of the 'sharing' practice of Github coding. People 'fork' other repositories frequently. 
+
+\begin{figure}
+  \centering
+      \includegraphics[width=0.9\textwidth]{figure/bootstrap_repository_forks_plain_counts.pdf}
+        \caption{Figure title}
+  \label{fig:bootstrap_forks}
+\end{figure}
+
+\begin{figure}
+  \centering
+      \includegraphics[width=0.9\textwidth]{figure/android_stackplot_2014-07-03-22-40.pdf}
+        \caption{Android forks}
+  \label{fig:android_forks}
+\end{figure}
+
+
+The figures shown above show some versions of this counting of imitation. In both Figure \ref{fig:bootstrap_forks} and \ref{fig:android_forks}, the imitations appears in two different ways. The broad bands of color rippling across the figures graph the counts of copies being made each day on Github of important repos. But the much more dense striations seen in Figurew \ref{fig:android_forks} count copies of repositories whose names incorporate the important repository, but vary it in some way. These striations still imitate, and they generate large numbers of events, but less homogenously, and in greater variety. In this striations, new things sometimes appear. 
+
+I see these figures as presenting a different way of working with large numbers. They sense the average everydayness of working with code as a form of work. In this work, important repositories act like brands, as points around which forms of identity take hold and multiply. A sensibility for imitation, therefore, in STS might benefit from media and cultural studies.  With certain exceptions like Donna Haraway, STS doesn't always play happily with the critical approaches developed in media and cultural studies. But media and cultural studies approaches to brands, commodities, imitation, identity and differences might help us here. Imitation saturates popular culture, and media and cultural studies has long grappled with what to make of imitation. 
+
+
 ## Conclusions
 
 I have been describing the work needed to get contemporary digital data and associated large numbers to do something other feed back into the platform and its associated data-as-raw-material imaginary. I have been suggesting that STS research might develop its strong ethnographic sensibilities in relation to data event streams by sitting in an ambivalent space between formats and disfiguring elements, between the device-specific and its overflows. There are several different ways to understand what is at stake in this work.
@@ -201,10 +236,14 @@ One comes from Latour, Jensen, and Venturini, who ask:
 
 >Is it possible to do justice to … common experience by shifting from prediction and simulation to description and data mining? … Let the agents produce a dynamics and collect the traces that their actions leave as they unfold so as to produce a rich data set’ (Latour et al., 2012)
 
-I broadly agree with them but think there are hidden complications in their recommendation, because what they call the 'rich data set' is pre-formatted for particular actors and agents. If we are interested in alternative agencies, we have to work against the traces in some ways. Helen Verran's observation about work on numbers might be a more productive starting point. As she says, 'in any practical going-on with numbers, what matters is that they can be made to work, and making them work is a politics' (Verran, 2001). Like Verran, I see the interplay between different kinds of numbering as generative. 
+I broadly agree with them but think there are hidden difficulties in their recommendation. What they call the 'rich data set' is pre-formatted for particular actors and agents (the platform usually). If we are interested in alternative agencies, we have to work against the traces in some ways. Helen Verran's observation about work on numbers might be a more productive starting point. As she says, 'in any practical going-on with numbers, what matters is that they can be made to work, and making them work is a politics' (Verran, 2001). Like Verran, I see the interplay between different kinds of numbering as generative. 
 
 How do we re-animate and open up the large numbers that abound in contemporary sciences and technologies? To do this, we need to find ways of working on formatted data that goes against its pre-formatted counting relations and uses. The massive availability of data from online databases is power-laden number work. Its very openness allows a certain kind of capitalising and governing based on data to expand. The formatting of data streams tends to simply confirm and expand how the platform already advertises itself. By contrast, device-specific research that attends to the ways in which data is formatted, and how that formatting affects practices around the platform seems to me quite important in alternative to the much advertised (but actually often limited) opennness of data.
 
-If our concern is to begin to explore the indeterminacy in the relations between what is specific to the devices or platforms and what is specific to the social practices that come to those platforms. I think ethnographic work on things like the flow of naming heads in a different direction to the formatting of data for purposes of platform services and enterprises. It cannot remain content with the familiar processes of reduction to social networks, or counting specific kinds of pre-formatted event types. In the case of Github, the names of repositories offer one way to begin to explore this ambiguity and indeterminacy, or what Riles called 'momentary apprehensions of depth' [@Riles_TBA]
+If our concern is to begin to explore the indeterminacy in the relations between what is specific to the devices or platforms and what is specific to the social practices that come to those platforms. I think ethnographic work on things like the flow of naming heads in a different direction to the formatting of data for purposes of platform services and enterprises. It cannot remain content with the familiar processes of reduction to social networks, or counting specific kinds of pre-formatted event types. In the case of Github, the names of repositories offer one way to begin to explore this ambiguity and indeterminacy.o
+
+I have also been suggesting that STS work on numbers might help us understand better the transformations in work that concepts such as immaterial labour and cognitive capitalism often describe in quite abstract ways. If coding epitomises contemporary immaterial labour, the patterning of events on Github might indicate the imitative fluxes that organise that work, rendering it routine, ordering it and controlling it. 
 
 [^2]: At a workshop with Google employers in their London offices in early 2015, all the funded projects described their experience. The other projects had used twitter data to identify changing brand loyalties,  classified mp3 tracks according to their musical genre, and build infrastructures to allow social researchers to collect lots of social network meidia and then analyse it using network analysis approaches. Given the audience of Google managers and ESRC officers in a crowded boardroom, with video links to other parts of Google Corporation around the world, there was little scope to articulate the complications that I describe here. I had the sense that, apart from our intensive use of GoogleBigQuery (and we were the only project to use Google's on data analytics and cloud computing services), these issues were simply over the horizon for that audience. 
+
+## References
