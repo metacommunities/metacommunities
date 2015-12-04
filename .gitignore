@@ -1,9 +1,16 @@
 # ignore gedit backup files
-mysql_*
+#mysql_*
 *~
 *.pyc
 *.pyd
 *.h5
 *_api_key.txt
+*.log
 client*json
 bigquery_credentials.dat
+adrian/repo-topics/data/*
+*.rdb
+*login*
+*.json
+all_repos*
+*ipynb_*

@@ -1,0 +1,174 @@
+body {
+    font-family: 'Droid Sans', sans-serif;
+    font-size: x-small;
+    background: #111;
+    color: white;
+}
+
+#graph {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#hist {
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 1;
+}
+
+#linkbox {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+}
+
+#langsearch {
+    width: 100%;
+    z-index: 1;
+}
+
+#language-search {
+    position: absolute;
+    left: 200px;
+    width: 500px;
+    top: 10px;
+}
+
+#selected-languages {
+    margin-top: 20px;
+}
+
+.lang-close {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.langLabel {
+    padding: 7px 14px;
+    border-radius: 38px;
+    color: white;
+    font-size: 20px;
+    z-index: 2;
+}
+
+.lang-remove {
+    margin-left: 5px;
+    color: #f00;
+}
+
+.link-value-box {
+    height: 100%;
+    float: left;
+    clear: left;
+    padding: 10px;
+}
+
+#info {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px 8px;
+}
+
+#algo-select {
+    position: absolute;
+    left: 20px;
+    width: 100px;
+    top: 60px;
+    vertical-align: center;
+}
+
+#edge-select {
+    position: absolute;
+    left: 20px;
+    width: 100px;
+    top: 100px;
+    vertical-align: center;
+}
+
+#project-search {
+    position: absolute;
+    left: 20px;
+    width: 100px;
+    top: 150px;
+    vertical-align: center;
+}
+
+.link.active {
+  stroke: red;
+  stroke-width: 2px;
+  stroke-opacity: 1;
+}
+
+.active {
+    /*stroke: red;*/
+    stroke-width: 3px;
+}
+
+.langLabel.active {
+    border-color: red;
+    border-width: 3px;
+}
+
+.nodename {
+  font: 10px;
+  pointer-events: none;
+  -webkit-font-smoothing: "antialized";
+}
+
+circle {
+    fill: #f55;
+    stroke: #fff;
+    stroke-width: 1.2px;
+}
+
+circle.node.fixed {
+    stroke: #000;
+    stroke-width: 3px;
+}
+
+line.link {
+    stroke: #999;
+    stroke-opacity: .3;
+}
+
+.axis path, 
+.axis line {
+    fill: none;
+    stroke: #ccc;
+    shape-rendering: crispEdges;
+}
+
+text {
+    stroke: #fff;
+}
+
+.brush {
+    fill: #fff;
+    fill-opacity: .125;
+    stroke: #fff;
+}
+
+div#pop-up {
+    display: none;
+    position:absolute;
+    color: white;
+    font-size: 14px;
+    background: rgba(0,0,0,0.5);
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px 8px;
+}
+div#pop-up-title {
+    font-size: 15px;
+    margin-bottom: 4px;
+    font-weight: bolder;
+}
+
+div#pop-up-content {
+    font-size: 12px;
+}

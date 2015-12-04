@@ -1,0 +1,17 @@
+base
+<<<<<<< HEAD
+bigrquery
+datasets
+ggplot2
+graphics
+grDevices
+knitr
+methods
+stats
+utils
+xtable
+=======
+knitr
+xtable
+bigrquery
+>>>>>>> 932d0e1ef3fb45a342b2e49f07607239ae89e9d4

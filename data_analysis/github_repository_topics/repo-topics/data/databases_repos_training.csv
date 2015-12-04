@@ -1,0 +1,1000 @@
+repo	terms	is_databases	url
+tsi/compass	compass	False	http://github.com/tsi/compass
+lpshou/hiredis	hiredis	True	http://github.com/lpshou/hiredis
+axsh/vmapp-redis	vmapp redis	True	http://github.com/axsh/vmapp-redis
+albertwkchin/HackTech2014	hacktech    	False	http://github.com/albertwkchin/HackTech2014
+4ARMED/BurpOSXApp	burposxapp	False	http://github.com/4ARMED/BurpOSXApp
+riyaspuliyampoyil/titanium_modules	titanium modules	False	http://github.com/riyaspuliyampoyil/titanium_modules
+JetFault/redis-proxy	redis proxy	True	http://github.com/JetFault/redis-proxy
+splunk/splunk-plugin-eclipse	splunk plugin eclipse	False	http://github.com/splunk/splunk-plugin-eclipse
+owengriffin/compass-wordpress	compass wordpress	False	http://github.com/owengriffin/compass-wordpress
+jukka/jackrabbit	jackrabbit	True	http://github.com/jukka/jackrabbit
+rochal/jQuery-slimScroll	jquery slimscroll	False	http://github.com/rochal/jQuery-slimScroll
+hugoyq/SolrBundle	solrbundle	True	http://github.com/hugoyq/SolrBundle
+OrenLederman/hive	hive	True	http://github.com/OrenLederman/hive
+philip-wernersbach/fsarchiver-plus	fsarchiver plus	True	http://github.com/philip-wernersbach/fsarchiver-plus
+kritib/W3D3_HNClient	w d3  hnclient	False	http://github.com/kritib/W3D3_HNClient
+scbai/annotated_redis_source	annotated redis source	True	http://github.com/scbai/annotated_redis_source
+wdalmut/chef-mongodb	chef mongodb	True	http://github.com/wdalmut/chef-mongodb
+jdberry/sqlite3-ruby	sqlite  ruby	True	http://github.com/jdberry/sqlite3-ruby
+brndnmtthws/hive-udf	hive udf	True	http://github.com/brndnmtthws/hive-udf
+junsuk/elasticsearch	elasticsearch	True	http://github.com/junsuk/elasticsearch
+fengxiaoxiao/shiro-redis	shiro redis	True	http://github.com/fengxiaoxiao/shiro-redis
+sumod/d3	d3 	False	http://github.com/sumod/d3
+chenfeng2478/rethinkdb	rethinkdb	True	http://github.com/chenfeng2478/rethinkdb
+andyspb/severtrans-mysql	severtrans mysql	True	http://github.com/andyspb/severtrans-mysql
+deemox/d3test	d3 test	False	http://github.com/deemox/d3test
+gitpan/Cache-Memcached-Fast	cache memcached fast	True	http://github.com/gitpan/Cache-Memcached-Fast
+nvdnkpr/elasticsearch	elasticsearch	True	http://github.com/nvdnkpr/elasticsearch
+cureatr/nagios-plugin-mongodb	nagios plugin mongodb	True	http://github.com/cureatr/nagios-plugin-mongodb
+nexusriot/ingress-intel-total-conversion	ingress intel total conversion	True	http://github.com/nexusriot/ingress-intel-total-conversion
+masanao-aoki/defaultCompass	defaultcompass	False	http://github.com/masanao-aoki/defaultCompass
+mikedev9000/clustering-with-infinispan	clustering with infinispan	False	http://github.com/mikedev9000/clustering-with-infinispan
+aburan28/drizzle-nginx-module	drizzle nginx module	True	http://github.com/aburan28/drizzle-nginx-module
+iancrosser/oauth2token	oauth token	False	http://github.com/iancrosser/oauth2token
+trifork/riak_function_contrib	riak function contrib	False	http://github.com/trifork/riak_function_contrib
+tutsplus/learning-mongodb	learning mongodb	True	http://github.com/tutsplus/learning-mongodb
+flysky8312/elasticsearch-rtf	elasticsearch rtf	True	http://github.com/flysky8312/elasticsearch-rtf
+shareablee/django-redis-cache	django redis cache	True	http://github.com/shareablee/django-redis-cache
+emedina/modeshape	modeshape	True	http://github.com/emedina/modeshape
+steveklabnik/redis	redis	True	http://github.com/steveklabnik/redis
+jonbaer/h2o	h o	False	http://github.com/jonbaer/h2o
+masayukioguni/redis_key_copy	redis key copy	True	http://github.com/masayukioguni/redis_key_copy
+padi/sparkoauth2	sparkoauth 	True	http://github.com/padi/sparkoauth2
+mikewallace1979/backbone-couchdb	backbone couchdb	True	http://github.com/mikewallace1979/backbone-couchdb
+thedod/couchdb	couchdb	True	http://github.com/thedod/couchdb
+yanatan16/lasthbase	lasthbase	True	http://github.com/yanatan16/lasthbase
+kenming/zen-sphinx-themes	zen sphinx themes	False	http://github.com/kenming/zen-sphinx-themes
+microacup/python3-memcached	python  memcached	True	http://github.com/microacup/python3-memcached
+scofieldcai/ZipArchive	ziparchive	True	http://github.com/scofieldcai/ZipArchive
+nisaacson/git-archive	git archive	False	http://github.com/nisaacson/git-archive
+chris710/OK_zad3	ok zad 	False	http://github.com/chris710/OK_zad3
+mscook/Archiver	archiver	False	http://github.com/mscook/Archiver
+smostovoy/mongodb_logger	mongodb logger	True	http://github.com/smostovoy/mongodb_logger
+jordoh/sqlite-net	sqlite net	True	http://github.com/jordoh/sqlite-net
+skimcom/connect-mongodb	connect mongodb	True	http://github.com/skimcom/connect-mongodb
+bag-of-projects/cassandra-with-hadoop-tutorial	cassandra with hadoop tutorial	True	http://github.com/bag-of-projects/cassandra-with-hadoop-tutorial
+drtobbe/neo4j-batchinserterprovider-contrib	neo j batchinserterprovider contrib	True	http://github.com/drtobbe/neo4j-batchinserterprovider-contrib
+l4u/devise-neo4j	devise neo j	True	http://github.com/l4u/devise-neo4j
+hawaii-desktop/karchive	karchive	False	http://github.com/hawaii-desktop/karchive
+buger/cassandra-chef-cookbook	cassandra chef cookbook	True	http://github.com/buger/cassandra-chef-cookbook
+csmatt/d3-drawer	d3  drawer	False	http://github.com/csmatt/d3-drawer
+vrillusions/git-archive-all.sh	git archive all sh	False	http://github.com/vrillusions/git-archive-all.sh
+Val9/node_redis	node redis	True	http://github.com/Val9/node_redis
+victorandreoni92/Ruby-Postgresql-Webpage	ruby postgresql webpage	True	http://github.com/victorandreoni92/Ruby-Postgresql-Webpage
+wikizhao/ssziparchive	ssziparchive	False	http://github.com/wikizhao/ssziparchive
+yocc/memcached	memcached	True	http://github.com/yocc/memcached
+jhe/node-elasticsearch	node elasticsearch	True	http://github.com/jhe/node-elasticsearch
+Vathsa/titanium_mobile	titanium mobile	False	http://github.com/Vathsa/titanium_mobile
+AKQACookbooks/mysql	mysql	True	http://github.com/AKQACookbooks/mysql
+rense/django-dynamodb-sessions	django dynamodb sessions	True	http://github.com/rense/django-dynamodb-sessions
+willianjusten/Grunt-Boostrap3-Compass	grunt boostrap  compass	False	http://github.com/willianjusten/Grunt-Boostrap3-Compass
+ieda/think_compass	think compass	False	http://github.com/ieda/think_compass
+chrisblanch/mongodb-engine	mongodb engine	True	http://github.com/chrisblanch/mongodb-engine
+mastropinguino/sqlitejdbc	sqlitejdbc	True	http://github.com/mastropinguino/sqlitejdbc
+TheHydroImpulse/co-ssh2	co ssh 	False	http://github.com/TheHydroImpulse/co-ssh2
+avbdr/PHP-MySQLi-Database-Class	php mysqli database class	True	http://github.com/avbdr/PHP-MySQLi-Database-Class
+zined/phpredis	phpredis	True	http://github.com/zined/phpredis
+wwek/gopush2	gopush 	False	http://github.com/wwek/gopush2
+Yury1986/iOS-Ingress	ios ingress	True	http://github.com/Yury1986/iOS-Ingress
+jtoy/compass-fluid960-plugin	compass fluid    plugin	False	http://github.com/jtoy/compass-fluid960-plugin
+wahyusumartha/mysql	mysql	True	http://github.com/wahyusumartha/mysql
+pborreli/oauth2-client	oauth  client	False	http://github.com/pborreli/oauth2-client
+joaoafrmartins/node-oauth2-server	node oauth  server	False	http://github.com/joaoafrmartins/node-oauth2-server
+mjakop/d3	d3 	False	http://github.com/mjakop/d3
+ramuenugurthi/solr	solr	True	http://github.com/ramuenugurthi/solr
+rpour/SolrClient	solrclient	True	http://github.com/rpour/SolrClient
+julp/FindSQLite3.cmake	findsqlite  cmake	True	http://github.com/julp/FindSQLite3.cmake
+waltercruz/wp-redis-cache	wp redis cache	True	http://github.com/waltercruz/wp-redis-cache
+keha76/Pending-Posts-Indicator	pending posts indicator	False	http://github.com/keha76/Pending-Posts-Indicator
+astrodsg/mpld3	mpld 	False	http://github.com/astrodsg/mpld3
+Viandoks/Bootstrap-Vertical-Thumbnail-Carousel	bootstrap vertical thumbnail carousel	False	http://github.com/Viandoks/Bootstrap-Vertical-Thumbnail-Carousel
+chunkified/Field3D	field d3	False	http://github.com/chunkified/Field3D
+nikhilapatil/solr-monitor	solr monitor	True	http://github.com/nikhilapatil/solr-monitor
+s3ththompson/id3tag	id tag	False	http://github.com/s3ththompson/id3tag
+dieswaytoofast/erlang_cassandra	erlang cassandra	True	http://github.com/dieswaytoofast/erlang_cassandra
+fhferreira/oauth2-server	oauth  server	False	http://github.com/fhferreira/oauth2-server
+odbtp/jade	jade	False	http://github.com/odbtp/jade
+jitendravyas/compass-normalize-plugin	compass normalize plugin	False	http://github.com/jitendravyas/compass-normalize-plugin
+brianyang/d3.js-boilerplate	d3  js boilerplate	False	http://github.com/brianyang/d3.js-boilerplate
+mediaprojects/flockdb	flockdb	True	http://github.com/mediaprojects/flockdb
+naleeng/jobberbase	jobberbase	True	http://github.com/naleeng/jobberbase
+Sysvision/spring-data-orientdb	spring data orientdb	True	http://github.com/Sysvision/spring-data-orientdb
+johnvey/splunk-viz-particle	splunk viz particle	False	http://github.com/johnvey/splunk-viz-particle
+walterfrs/SQLiteCpp	sqlitecpp	True	http://github.com/walterfrs/SQLiteCpp
+leecade/WakandaDB-Academy	wakandadb academy	True	http://github.com/leecade/WakandaDB-Academy
+xredevil/10gen-M102-MongoDB-for-DBAs	  gen m    mongodb for dbas	True	http://github.com/xredevil/10gen-M102-MongoDB-for-DBAs
+tomz/thinking-sphinx	thinking sphinx	False	http://github.com/tomz/thinking-sphinx
+dazagrohovaz/mongodb-rest	mongodb rest	True	http://github.com/dazagrohovaz/mongodb-rest
+dn365/nvd3-rails	nvd  rails	False	http://github.com/dn365/nvd3-rails
+sergiu-paraschiv/PHPRavenDBDev	phpravendbdev	True	http://github.com/sergiu-paraschiv/PHPRavenDBDev
+mountriv99/titanium_modules	titanium modules	False	http://github.com/mountriv99/titanium_modules
+emaag/StringTemplate	stringtemplate	False	http://github.com/emaag/StringTemplate
+darklatiz/DeferedStore	deferedstore	True	http://github.com/darklatiz/DeferedStore
+Timmee/MongoDB.Web	mongodb web	True	http://github.com/Timmee/MongoDB.Web
+franklinsun/memcached-session-manager	memcached session manager	True	http://github.com/franklinsun/memcached-session-manager
+roman-kulish/ingress-for-glass	ingress for glass	True	http://github.com/roman-kulish/ingress-for-glass
+omorandi/titanium_mobile	titanium mobile	False	http://github.com/omorandi/titanium_mobile
+dschiavu/storm-mysql	storm mysql	True	http://github.com/dschiavu/storm-mysql
+somia/cassandra	cassandra	True	http://github.com/somia/cassandra
+ray-dong/flockdb	flockdb	True	http://github.com/ray-dong/flockdb
+johnnyhg/redis-timeline	redis timeline	True	http://github.com/johnnyhg/redis-timeline
+travisfcollins/Class-Archive	class archive	False	http://github.com/travisfcollins/Class-Archive
+Engboilers/scredis	scredis	True	http://github.com/Engboilers/scredis
+Qwh/interactive_d3_map	interactive d3  map	False	http://github.com/Qwh/interactive_d3_map
+DICE-UNC/jargon-modeshape	jargon modeshape	False	http://github.com/DICE-UNC/jargon-modeshape
+chodongsuk/Android-ViewPagerIndicator	android viewpagerindicator	False	http://github.com/chodongsuk/Android-ViewPagerIndicator
+rnarasimhan/RiakBasho	riakbasho	False	http://github.com/rnarasimhan/RiakBasho
+roybarber/psd-compass-sprites	psd compass sprites	False	http://github.com/roybarber/psd-compass-sprites
+chrisdrobison/quartznet-mongodb	quartznet mongodb	True	http://github.com/chrisdrobison/quartznet-mongodb
+NickPadilla/elasticsearch	elasticsearch	True	http://github.com/NickPadilla/elasticsearch
+jlarmstrong/cake-redisdb	cake redisdb	True	http://github.com/jlarmstrong/cake-redisdb
+cleverti/vagrant-ezp5-puppet-mysql-debian7-QA	vagrant ezp  puppet mysql debian  qa	True	http://github.com/cleverti/vagrant-ezp5-puppet-mysql-debian7-QA
+ffaerber/mongodbtest	mongodbtest	True	http://github.com/ffaerber/mongodbtest
+endyman/mongodb-engine	mongodb engine	True	http://github.com/endyman/mongodb-engine
+indexzero/winston-redis	winston redis	True	http://github.com/indexzero/winston-redis
+danse/d3	d3 	False	http://github.com/danse/d3
+chriswk/academysolr	academysolr	True	http://github.com/chriswk/academysolr
+facebook/swift-hive-metastore	swift hive metastore	True	http://github.com/facebook/swift-hive-metastore
+MicFin/d3-lesson-two	d3  lesson two	False	http://github.com/MicFin/d3-lesson-two
+dsphinx/mysqli	mysqli	True	http://github.com/dsphinx/mysqli
+mneedham/neo4j-football-stadiums	neo j football stadiums	True	http://github.com/mneedham/neo4j-football-stadiums
+yeqiaojun/redis	redis	True	http://github.com/yeqiaojun/redis
+GunioRobot/ruby-redis	ruby redis	True	http://github.com/GunioRobot/ruby-redis
+nysenate/lib_mysqludf_preg	lib mysqludf preg	True	http://github.com/nysenate/lib_mysqludf_preg
+hanklee/simpledbutils	simpledbutils	True	http://github.com/hanklee/simpledbutils
+forsingdelis/ti-89-titanium-driver-download	ti    titanium driver download	False	http://github.com/forsingdelis/ti-89-titanium-driver-download
+fdouetteau/bottle-mongodb-plugin	bottle mongodb plugin	True	http://github.com/fdouetteau/bottle-mongodb-plugin
+enigmaquip/ingress-intel-total-conversion	ingress intel total conversion	True	http://github.com/enigmaquip/ingress-intel-total-conversion
+sengeezer/html5_boilerplate_wp_compass	html  boilerplate wp compass	False	http://github.com/sengeezer/html5_boilerplate_wp_compass
+ChristianMatola/extjs4-mvc-json-crud-php-mysql	extjs  mvc json crud php mysql	True	http://github.com/ChristianMatola/extjs4-mvc-json-crud-php-mysql
+rameshrr/connect-session-ejdb	connect session ejdb	True	http://github.com/rameshrr/connect-session-ejdb
+mattallty/socket.io-titanium	socket io titanium	False	http://github.com/mattallty/socket.io-titanium
+mrpixeldream/MySQL-Reader	mysql reader	True	http://github.com/mrpixeldream/MySQL-Reader
+boneill42/cassandra-indexing	cassandra indexing	True	http://github.com/boneill42/cassandra-indexing
+gruntjs/grunt-contrib-compass	grunt contrib compass	False	http://github.com/gruntjs/grunt-contrib-compass
+intekhabrizvi/codeigniter-mongodb-library	codeigniter mongodb library	True	http://github.com/intekhabrizvi/codeigniter-mongodb-library
+agopaul/h2o-php	h o php	False	http://github.com/agopaul/h2o-php
+thatisscary/quartznet-mongodb	quartznet mongodb	True	http://github.com/thatisscary/quartznet-mongodb
+hudie8655/Android-ViewPagerIndicator	android viewpagerindicator	False	http://github.com/hudie8655/Android-ViewPagerIndicator
+doctyper/compass-borderbox	compass borderbox	False	http://github.com/doctyper/compass-borderbox
+titanium-forks/appcelerator-titans.Toolkit	appcelerator titans toolkit	False	http://github.com/titanium-forks/appcelerator-titans.Toolkit
+ifanrx/django-oauth2-provider	django oauth  provider	False	http://github.com/ifanrx/django-oauth2-provider
+johntdyer/splunk_cookbook	splunk cookbook	False	http://github.com/johntdyer/splunk_cookbook
+jcaudill/MonoTouch.SQLite	monotouch sqlite	True	http://github.com/jcaudill/MonoTouch.SQLite
+boatmeme/Geoloqi-Android-Titanium-Module	geoloqi android titanium module	False	http://github.com/boatmeme/Geoloqi-Android-Titanium-Module
+prithvi93/hiveyo	hiveyo	True	http://github.com/prithvi93/hiveyo
+andever/Android-ViewPagerIndicator	android viewpagerindicator	False	http://github.com/andever/Android-ViewPagerIndicator
+mocoso/Flickr-Archiver	flickr archiver	False	http://github.com/mocoso/Flickr-Archiver
+stevemlayton/archive-utils	archive utils	False	http://github.com/stevemlayton/archive-utils
+vacay/cookbook-elasticsearch	cookbook elasticsearch	True	http://github.com/vacay/cookbook-elasticsearch
+juhaelee/oauth2-extensions	oauth  extensions	False	http://github.com/juhaelee/oauth2-extensions
+khorgath/hive	hive	True	http://github.com/khorgath/hive
+amyhaber/redis	redis	True	http://github.com/amyhaber/redis
+quiachonj/sqlitejdbc	sqlitejdbc	True	http://github.com/quiachonj/sqlitejdbc
+nordicnomad/jQuery-slimScroll	jquery slimscroll	False	http://github.com/nordicnomad/jQuery-slimScroll
+GeorgeJahad/redis	redis	True	http://github.com/GeorgeJahad/redis
+raggiskula/PyMySQL	pymysql	True	http://github.com/raggiskula/PyMySQL
+rdooh/jade-bootstrap3-boilerplate	jade bootstrap  boilerplate	False	http://github.com/rdooh/jade-bootstrap3-boilerplate
+adoy/php-memcached	php memcached	True	http://github.com/adoy/php-memcached
+NeilChenCN/node_redis	node redis	True	http://github.com/NeilChenCN/node_redis
+dbankier/titanium_mobile	titanium mobile	False	http://github.com/dbankier/titanium_mobile
+s1xtec/firedisplay	firedisplay	False	http://github.com/s1xtec/firedisplay
+ray1729/lims2	lims 	False	http://github.com/ray1729/lims2
+dhydrated/cassandra-web	cassandra web	True	http://github.com/dhydrated/cassandra-web
+ksurent/Archive-Any-Plugin-Rar	archive any plugin rar	False	http://github.com/ksurent/Archive-Any-Plugin-Rar
+mauricionobrega/Retina-Sprites-for-Compass	retina sprites for compass	False	http://github.com/mauricionobrega/Retina-Sprites-for-Compass
+MoOx/compass-recipes	compass recipes	False	http://github.com/MoOx/compass-recipes
+sbuchok/nvd3	nvd 	False	http://github.com/sbuchok/nvd3
+matthewtemple/ih2010	ih    	False	http://github.com/matthewtemple/ih2010
+Khan/oauth2client	oauth client	False	http://github.com/Khan/oauth2client
+jeveloper/DynamoDBtoCSV	dynamodbtocsv	True	http://github.com/jeveloper/DynamoDBtoCSV
+tzaavi/ravendb	ravendb	True	http://github.com/tzaavi/ravendb
+ties/trac-postgresql-svn-to-git	trac postgresql svn to git	True	http://github.com/ties/trac-postgresql-svn-to-git
+iyf/kdbg	kdbg	False	http://github.com/iyf/kdbg
+timwee/memcached	memcached	True	http://github.com/timwee/memcached
+bhaskar-jft/mongodb-assignment	mongodb assignment	True	http://github.com/bhaskar-jft/mongodb-assignment
+FlashGuy13/GDD311	gdd   	False	http://github.com/FlashGuy13/GDD311
+curzonj/compass	compass	False	http://github.com/curzonj/compass
+is00hcw/solr-in-action	solr in action	True	http://github.com/is00hcw/solr-in-action
+bykau/Cordova-SQLitePlugin	cordova sqliteplugin	True	http://github.com/bykau/Cordova-SQLitePlugin
+rvanweerd/mysql-convert-latin1-to-utf8	mysql convert latin  to utf 	True	http://github.com/rvanweerd/mysql-convert-latin1-to-utf8
+matteosister/CompassElephant	compasselephant	False	http://github.com/matteosister/CompassElephant
+stephlag/elasticsearch	elasticsearch	True	http://github.com/stephlag/elasticsearch
+hiwang123/d3	d3 	False	http://github.com/hiwang123/d3
+mamccr/titan	titan	True	http://github.com/mamccr/titan
+t-mart/d3whiskey	d3 whiskey	False	http://github.com/t-mart/d3whiskey
+chu888chu888/MySQL-Syncer	mysql syncer	True	http://github.com/chu888chu888/MySQL-Syncer
+shiyezheng/leveldb	leveldb	True	http://github.com/shiyezheng/leveldb
+max246/ingress-intel-total-conversion	ingress intel total conversion	True	http://github.com/max246/ingress-intel-total-conversion
+cjuhong/book-node-mongodb-backbone	book node mongodb backbone	True	http://github.com/cjuhong/book-node-mongodb-backbone
+tsimbalar/RavenDbTestDrive	ravendbtestdrive	True	http://github.com/tsimbalar/RavenDbTestDrive
+lumoslabs/node-mysql	node mysql	True	http://github.com/lumoslabs/node-mysql
+brijs/d3AngularIntegration	d3 angularintegration	False	http://github.com/brijs/d3AngularIntegration
+zendesk/libmemcached_store	libmemcached store	True	http://github.com/zendesk/libmemcached_store
+jgunawan/rwd-sass-compass-training	rwd sass compass training	False	http://github.com/jgunawan/rwd-sass-compass-training
+deepinit-arek/luajit-mysql	luajit mysql	True	http://github.com/deepinit-arek/luajit-mysql
+rozerosie/d3-learning	d3  learning	False	http://github.com/rozerosie/d3-learning
+dukt/oauth2	oauth 	False	http://github.com/dukt/oauth2
+akhil/mybatis-coherence	mybatis coherence	False	http://github.com/akhil/mybatis-coherence
+mhemesath/connect-heroku-redis	connect heroku redis	True	http://github.com/mhemesath/connect-heroku-redis
+zdendapa/testPush2	testpush 	False	http://github.com/zdendapa/testPush2
+plastisound/compass	compass	False	http://github.com/plastisound/compass
+walpolea/CloudantAS3	cloudantas 	False	http://github.com/walpolea/CloudantAS3
+brettg/dAOAuth2Example	daoauth example	False	http://github.com/brettg/dAOAuth2Example
+deoliveiraa/cryptredis	cryptredis	True	http://github.com/deoliveiraa/cryptredis
+coderhaoxin/go-mysql-pool	go mysql pool	True	http://github.com/coderhaoxin/go-mysql-pool
+MaKeBits/node-mysql	node mysql	True	http://github.com/MaKeBits/node-mysql
+ruleb/node-neo4j	node neo j	True	http://github.com/ruleb/node-neo4j
+nero520/Memcached-Java-Client	memcached java client	True	http://github.com/nero520/Memcached-Java-Client
+DrSkippy27/Greenplum2013	greenplum    	False	http://github.com/DrSkippy27/Greenplum2013
+eddiejr/MySQLDumpInspector	mysqldumpinspector	True	http://github.com/eddiejr/MySQLDumpInspector
+saga/titanium_desktop	titanium desktop	False	http://github.com/saga/titanium_desktop
+elfsternberg/django_mysqlfulltextsearch	django mysqlfulltextsearch	True	http://github.com/elfsternberg/django_mysqlfulltextsearch
+fly122361/d3-book	d3  book	False	http://github.com/fly122361/d3-book
+bojoer/compass-style.org	compass style org	False	http://github.com/bojoer/compass-style.org
+gitpan/BerkeleyDB-Tie	berkeleydb tie	True	http://github.com/gitpan/BerkeleyDB-Tie
+hersha/newrelic-mongodb-agent	newrelic mongodb agent	True	http://github.com/hersha/newrelic-mongodb-agent
+airfer/mysql-proxy-cache	mysql proxy cache	True	http://github.com/airfer/mysql-proxy-cache
+bproctor/codeigniter-mongodb-library	codeigniter mongodb library	True	http://github.com/bproctor/codeigniter-mongodb-library
+mattdeboard/pysolr	pysolr	True	http://github.com/mattdeboard/pysolr
+billyct/OAuth2	oauth 	False	http://github.com/billyct/OAuth2
+thomascoding/oauth2-php	oauth  php	False	http://github.com/thomascoding/oauth2-php
+huangcongmin12/cims	cims	False	http://github.com/huangcongmin12/cims
+rca/redisco	redisco	True	http://github.com/rca/redisco
+abhi922/d3	d3 	False	http://github.com/abhi922/d3
+qingliangcn/Emysql	emysql	True	http://github.com/qingliangcn/Emysql
+lotterblad/githubarchive.org	githubarchive org	False	http://github.com/lotterblad/githubarchive.org
+mwasyou/d3	d3 	False	http://github.com/mwasyou/d3
+simpsonjulian/neo4j-org	neo j org	True	http://github.com/simpsonjulian/neo4j-org
+models/elasticsearch-skywalker	elasticsearch skywalker	True	http://github.com/models/elasticsearch-skywalker
+architek360/predis	predis	True	http://github.com/architek360/predis
+aktuba/kohana-database-mysqli	kohana database mysqli	True	http://github.com/aktuba/kohana-database-mysqli
+maserg/unmap_mysql_logs	unmap mysql logs	True	http://github.com/maserg/unmap_mysql_logs
+apsaltis/elasticsearch-transport-couchbase	elasticsearch transport couchbase	True	http://github.com/apsaltis/elasticsearch-transport-couchbase
+oyslboy/leveldb	leveldb	True	http://github.com/oyslboy/leveldb
+pnamasondhi/d3	d3 	False	http://github.com/pnamasondhi/d3
+Protonk/d3.chart	d3  chart	False	http://github.com/Protonk/d3.chart
+delving/basex	basex	True	http://github.com/delving/basex
+tanaevr/miniMs2Order	minims order	False	http://github.com/tanaevr/miniMs2Order
+joemiller/mysql-dump-split	mysql dump split	True	http://github.com/joemiller/mysql-dump-split
+johnykifle/spring_hibernate_mysql_maven_tomcat	spring hibernate mysql maven tomcat	True	http://github.com/johnykifle/spring_hibernate_mysql_maven_tomcat
+zhang527/h264	h   	False	http://github.com/zhang527/h264
+projecthydra/solrizer	solrizer	True	http://github.com/projecthydra/solrizer
+ZhangJianAo/mnesia-node-rename	mnesia node rename	False	http://github.com/ZhangJianAo/mnesia-node-rename
+Marsell/riak-js	riak js	False	http://github.com/Marsell/riak-js
+Web5design/solr-vs-elasticsearch	solr vs elasticsearch	True	http://github.com/Web5design/solr-vs-elasticsearch
+dangayle/compass	compass	False	http://github.com/dangayle/compass
+michaelsacca/Fancy-Compass-Button-Mixin	fancy compass button mixin	False	http://github.com/michaelsacca/Fancy-Compass-Button-Mixin
+robustfengbin/node_redis	node redis	True	http://github.com/robustfengbin/node_redis
+jnorthrup/scouchdb	scouchdb	True	http://github.com/jnorthrup/scouchdb
+starmomo/install-nginx-php-fpm-mongodb	install nginx php fpm mongodb	True	http://github.com/starmomo/install-nginx-php-fpm-mongodb
+sunfirefox/ssh2	ssh 	False	http://github.com/sunfirefox/ssh2
+chloe899/node-couchdb	node couchdb	True	http://github.com/chloe899/node-couchdb
+sourishkrout/hiredis-node	hiredis node	True	http://github.com/sourishkrout/hiredis-node
+kthakore/libperl-hyperdex	libperl hyperdex	True	http://github.com/kthakore/libperl-hyperdex
+ingydotnet/yaml-pgh2009-talk	yaml pgh     talk	False	http://github.com/ingydotnet/yaml-pgh2009-talk
+jsander/titanium_mobile	titanium mobile	False	http://github.com/jsander/titanium_mobile
+wakemaster39/redis-mutex	redis mutex	True	http://github.com/wakemaster39/redis-mutex
+CPep22/titanium_mobile	titanium mobile	False	http://github.com/CPep22/titanium_mobile
+rpots/cassandra	cassandra	True	http://github.com/rpots/cassandra
+Sebelino/vimsettings	vimsettings	False	http://github.com/Sebelino/vimsettings
+prezi/scalikesolr	scalikesolr	True	http://github.com/prezi/scalikesolr
+jekahy/organizerdb2	organizerdb 	True	http://github.com/jekahy/organizerdb2
+davist11/refresh-dc-compass-sass-presentation	refresh dc compass sass presentation	False	http://github.com/davist11/refresh-dc-compass-sass-presentation
+marcusramberg/protocol-redis	protocol redis	True	http://github.com/marcusramberg/protocol-redis
+Innovation-Toolkit/sails-postgresql	sails postgresql	True	http://github.com/Innovation-Toolkit/sails-postgresql
+uran1980/mongodb-odm	mongodb odm	True	http://github.com/uran1980/mongodb-odm
+johnyang/CreateTableByRegionForHBase	createtablebyregionforhbase	True	http://github.com/johnyang/CreateTableByRegionForHBase
+cespare/libssh2-ruby	libssh  ruby	False	http://github.com/cespare/libssh2-ruby
+littson/hbase-book	hbase book	True	http://github.com/littson/hbase-book
+dmitric/d3	d3 	False	http://github.com/dmitric/d3
+Alakin/Kohana-MongoDB-A1	kohana mongodb a 	True	http://github.com/Alakin/Kohana-MongoDB-A1
+clemherreman/SncRedisBundle	sncredisbundle	True	http://github.com/clemherreman/SncRedisBundle
+inthecloud247/ls-hive	ls hive	True	http://github.com/inthecloud247/ls-hive
+parmaras/nodejs-MySQL-push-notifications-demo	nodejs mysql push notifications demo	True	http://github.com/parmaras/nodejs-MySQL-push-notifications-demo
+akollegger/neo4j-redress	neo j redress	True	http://github.com/akollegger/neo4j-redress
+rokthewok/acm-icpc-archive-problems	acm icpc archive problems	False	http://github.com/rokthewok/acm-icpc-archive-problems
+motain/android-ViewPagerIndicator	android viewpagerindicator	False	http://github.com/motain/android-ViewPagerIndicator
+pentaho/hive-0.7.0	hive      	True	http://github.com/pentaho/hive-0.7.0
+cabenitez/phpredis	phpredis	True	http://github.com/cabenitez/phpredis
+tligda/solr	solr	True	http://github.com/tligda/solr
+mulriple/leveldb	leveldb	True	http://github.com/mulriple/leveldb
+ShinyTechTastic/d3	d3 	False	http://github.com/ShinyTechTastic/d3
+henchan/CouchDB-Kanban-Board	couchdb kanban board	True	http://github.com/henchan/CouchDB-Kanban-Board
+makinacorpus/Leaflet.Compass	leaflet compass	False	http://github.com/makinacorpus/Leaflet.Compass
+celite/neo4j-django-tutorial	neo j django tutorial	True	http://github.com/celite/neo4j-django-tutorial
+lusinek/titanium_mobile	titanium mobile	False	http://github.com/lusinek/titanium_mobile
+ytoh/jade4j	jade j	False	http://github.com/ytoh/jade4j
+fdouetteau/d3-cache	d3  cache	False	http://github.com/fdouetteau/d3-cache
+eerwitt/redis-lzma-example	redis lzma example	True	http://github.com/eerwitt/redis-lzma-example
+fullscreeninteractive/node-mongodb-native	node mongodb native	True	http://github.com/fullscreeninteractive/node-mongodb-native
+TigerZhang/libcouchbase	libcouchbase	True	http://github.com/TigerZhang/libcouchbase
+jamalahmedmaaz/cassandra	cassandra	True	http://github.com/jamalahmedmaaz/cassandra
+pb-pravin/d3	d3 	False	http://github.com/pb-pravin/d3
+ash211/elasticsearch-transport-wares	elasticsearch transport wares	True	http://github.com/ash211/elasticsearch-transport-wares
+kubes/elasticsearch	elasticsearch	True	http://github.com/kubes/elasticsearch
+levkin/redis-sharding-hs	redis sharding hs	True	http://github.com/levkin/redis-sharding-hs
+MelkyPie/MySQL	mysql	True	http://github.com/MelkyPie/MySQL
+cdd/mysql2	mysql 	True	http://github.com/cdd/mysql2
+sksamuel/elasticsearch	elasticsearch	True	http://github.com/sksamuel/elasticsearch
+yunchen/neo4j-import	neo j import	True	http://github.com/yunchen/neo4j-import
+TakashiSasaki/CouchDbWithPython	couchdbwithpython	True	http://github.com/TakashiSasaki/CouchDbWithPython
+bnotteghem/titanium_modules	titanium modules	False	http://github.com/bnotteghem/titanium_modules
+wlangstroth/redis-hs	redis hs	True	http://github.com/wlangstroth/redis-hs
+gimenete/redis	redis	True	http://github.com/gimenete/redis
+ncbo/4store	 store	True	http://github.com/ncbo/4store
+jmonegro/LevelDB-ObjC	leveldb objc	True	http://github.com/jmonegro/LevelDB-ObjC
+ca98am79/d3	d3 	False	http://github.com/ca98am79/d3
+pmeier82/sphinx-natbib	sphinx natbib	True	http://github.com/pmeier82/sphinx-natbib
+danielwraith/mysql	mysql	True	http://github.com/danielwraith/mysql
+Olsonish/d3-timeline	d3  timeline	False	http://github.com/Olsonish/d3-timeline
+musiczone/NGVerticalTabBarController	ngverticaltabbarcontroller	False	http://github.com/musiczone/NGVerticalTabBarController
+philipjkim/redis-mq-demo	redis mq demo	True	http://github.com/philipjkim/redis-mq-demo
+perrygregg/cimbal-hbase	cimbal hbase	True	http://github.com/perrygregg/cimbal-hbase
+Raizlabs/RZAndroidBaseUtils	rzandroidbaseutils	True	http://github.com/Raizlabs/RZAndroidBaseUtils
+dleehr/D3bugging	d3 bugging	False	http://github.com/dleehr/D3bugging
+litao-buptsse/hbase	hbase	True	http://github.com/litao-buptsse/hbase
+fsys/puppetlabs-postgresql	puppetlabs postgresql	True	http://github.com/fsys/puppetlabs-postgresql
+NarrativeScience/cookbook-elasticsearch	cookbook elasticsearch	True	http://github.com/NarrativeScience/cookbook-elasticsearch
+pombredanne/marmotta-virtuoso	marmotta virtuoso	True	http://github.com/pombredanne/marmotta-virtuoso
+vlandham/d3.heatmap	d3  heatmap	False	http://github.com/vlandham/d3.heatmap
+yanickj/SncRedisBundle	sncredisbundle	True	http://github.com/yanickj/SncRedisBundle
+mussi/barclamp-mysql	barclamp mysql	True	http://github.com/mussi/barclamp-mysql
+serGrey/Oracle	oracle	True	http://github.com/serGrey/Oracle
+TemplarQi/ingress-portal-map	ingress portal map	True	http://github.com/TemplarQi/ingress-portal-map
+tk1cntt/ajax-solr	ajax solr	True	http://github.com/tk1cntt/ajax-solr
+serg-io/backbone-dynamodb	backbone dynamodb	True	http://github.com/serg-io/backbone-dynamodb
+alexeyr/erlang-sqlite3	erlang sqlite 	True	http://github.com/alexeyr/erlang-sqlite3
+ycgitter/d3-plugins	d3  plugins	True	http://github.com/ycgitter/d3-plugins
+davejachimiak/redis-store	redis store	True	http://github.com/davejachimiak/redis-store
+djburnham/mongodb-backupchk	mongodb backupchk	True	http://github.com/djburnham/mongodb-backupchk
+Mauin/VerticalViewPager	verticalviewpager	False	http://github.com/Mauin/VerticalViewPager
+JDevlieghere/CasperStellar	casperstellar	False	http://github.com/JDevlieghere/CasperStellar
+ClickTravelLtd/java-memcached-client	java memcached client	True	http://github.com/ClickTravelLtd/java-memcached-client
+Fleshgrinder/mysql	mysql	True	http://github.com/Fleshgrinder/mysql
+zanson/django-and-mongodb-on-dotcloud	django and mongodb on dotcloud	True	http://github.com/zanson/django-and-mongodb-on-dotcloud
+netconstructor/mongodb_logger	mongodb logger	True	http://github.com/netconstructor/mongodb_logger
+pombredanne/puppet-elasticsearch-1	puppet elasticsearch  	True	http://github.com/pombredanne/puppet-elasticsearch-1
+ankurjoshi16/Solr	solr	True	http://github.com/ankurjoshi16/Solr
+patrick333/ravendb	ravendb	True	http://github.com/patrick333/ravendb
+tepatamal/titan-quest-pc-rom-download	titan quest pc rom download	False	http://github.com/tepatamal/titan-quest-pc-rom-download
+nicksieger/neo4j	neo j	True	http://github.com/nicksieger/neo4j
+stemnikov/Untitled33	untitled  	False	http://github.com/stemnikov/Untitled33
+MOST2K2/Android-ViewPagerIndicator	android viewpagerindicator	False	http://github.com/MOST2K2/Android-ViewPagerIndicator
+yanke-guo/enhanced-mysql-pool	enhanced mysql pool	True	http://github.com/yanke-guo/enhanced-mysql-pool
+Yarimizu14/_COMPASS_SpriteGeneration	 compass spritegeneration	False	http://github.com/Yarimizu14/_COMPASS_SpriteGeneration
+Ziink/derby-examples-auth	derby examples auth	False	http://github.com/Ziink/derby-examples-auth
+gretchiemoran/pentaho-hadoop-shims	pentaho hadoop shims	True	http://github.com/gretchiemoran/pentaho-hadoop-shims
+juliensobrier/Net-Google-SafeBrowsing2-Redis	net google safebrowsing  redis	True	http://github.com/juliensobrier/Net-Google-SafeBrowsing2-Redis
+studiofrenetic/AFOAuth2Client	afoauth client	False	http://github.com/studiofrenetic/AFOAuth2Client
+LespiletteMaxime/rethinkdb	rethinkdb	True	http://github.com/LespiletteMaxime/rethinkdb
+jncorpron/titan	titan	False	http://github.com/jncorpron/titan
+dbhattar/redis	redis	True	http://github.com/dbhattar/redis
+lesleyvanrijn/Forging-Titanium	forging titanium	False	http://github.com/lesleyvanrijn/Forging-Titanium
+dreamsxin/webkit_titanium	webkit titanium	False	http://github.com/dreamsxin/webkit_titanium
+JustinTArthur/nvd3	nvd 	False	http://github.com/JustinTArthur/nvd3
+instantautomatic/titanium_mobile	titanium mobile	False	http://github.com/instantautomatic/titanium_mobile
+eightnet/jade	jade	True	http://github.com/eightnet/jade
+threedaymonk/delsolr	delsolr	True	http://github.com/threedaymonk/delsolr
+samjwong/d3	d3 	False	http://github.com/samjwong/d3
+manikantnigam/oracle-11g	oracle   g	True	http://github.com/manikantnigam/oracle-11g
+bsmr-ruby/couchbase-ruby-client	couchbase ruby client	True	http://github.com/bsmr-ruby/couchbase-ruby-client
+rakesh-mohanta/redis	redis	True	http://github.com/rakesh-mohanta/redis
+kovyrin/Hive-JSON-Serde	hive json serde	True	http://github.com/kovyrin/Hive-JSON-Serde
+paulie4/ultramysql	ultramysql	True	http://github.com/paulie4/ultramysql
+malheiros/postgresql	postgresql	True	http://github.com/malheiros/postgresql
+kevinhowbrook/davidsims	davidsims	False	http://github.com/kevinhowbrook/davidsims
+GlennVanHaute/2imd-webtech2-labs	 imd webtech  labs	False	http://github.com/GlennVanHaute/2imd-webtech2-labs
+djskinner/ZipArchive	ziparchive	False	http://github.com/djskinner/ZipArchive
+plfs/plfs-archive	plfs archive	False	http://github.com/plfs/plfs-archive
+eldhosejohn/mongodb-engine	mongodb engine	True	http://github.com/eldhosejohn/mongodb-engine
+sionide21/imdb-neo4j-loader	imdb neo j loader	True	http://github.com/sionide21/imdb-neo4j-loader
+sergeyt/NJade	njade	True	http://github.com/sergeyt/NJade
+drcraig/little_riak_book	little riak book	True	http://github.com/drcraig/little_riak_book
+alex87/AS3SQLite	as sqlite	True	http://github.com/alex87/AS3SQLite
+unicron/SolrNet	solrnet	True	http://github.com/unicron/SolrNet
+johnmbaughman/SQLiteConverter	sqliteconverter	True	http://github.com/johnmbaughman/SQLiteConverter
+kaosf/clj-jade	clj jade	True	http://github.com/kaosf/clj-jade
+nicolastamba/Extjs4_PHP_MySQL	extjs  php mysql	True	http://github.com/nicolastamba/Extjs4_PHP_MySQL
+essboyer/nvd3	nvd 	False	http://github.com/essboyer/nvd3
+marswei/oauth2-server	oauth  server	False	http://github.com/marswei/oauth2-server
+satok/IntroD3	introd 	False	http://github.com/satok/IntroD3
+thatsnotright/chef-mongodb	chef mongodb	True	http://github.com/thatsnotright/chef-mongodb
+adpande/oauth2app	oauth app	False	http://github.com/adpande/oauth2app
+aajimal/elasticsearch	elasticsearch	True	http://github.com/aajimal/elasticsearch
+ddnexus/elasticsearch.github.com	elasticsearch github com	True	http://github.com/ddnexus/elasticsearch.github.com
+codeknight/d3	d3 	False	http://github.com/codeknight/d3
+LeadsPlus/headshift-solr-wp	headshift solr wp	True	http://github.com/LeadsPlus/headshift-solr-wp
+godvmxi/ldd3-1	ldd   	False	http://github.com/godvmxi/ldd3-1
+pld-linux/php-horde-Horde_Imsp	php horde horde imsp	False	http://github.com/pld-linux/php-horde-Horde_Imsp
+Deadlysmile/M101P-MongoDB-for-Developers	m   p mongodb for developers	True	http://github.com/Deadlysmile/M101P-MongoDB-for-Developers
+sancopanco/mysql-postgresql-converter	mysql postgresql converter	True	http://github.com/sancopanco/mysql-postgresql-converter
+rodro12/FileMaker	filemaker	True	http://github.com/rodro12/FileMaker
+mcaprari/riak-java-client	riak java client	True	http://github.com/mcaprari/riak-java-client
+asilvas/redis-doc	redis doc	True	http://github.com/asilvas/redis-doc
+liamzebedee/gedit-vertical-tabs	gedit vertical tabs	False	http://github.com/liamzebedee/gedit-vertical-tabs
+hzhao/ajax-solr	ajax solr	True	http://github.com/hzhao/ajax-solr
+ricardoerro/Easy-Cassandra	easy cassandra	True	http://github.com/ricardoerro/Easy-Cassandra
+AdamPflug/express-brute-redis	express brute redis	True	http://github.com/AdamPflug/express-brute-redis
+blax/node-mysql	node mysql	True	http://github.com/blax/node-mysql
+mangoicestar/d3-plugins	d3  plugins	False	http://github.com/mangoicestar/d3-plugins
+5pyd3r/ldd3	ldd 	False	http://github.com/5pyd3r/ldd3
+andradeandrey/d3	d3 	False	http://github.com/andradeandrey/d3
+aaronj1335/grunt-contrib-jade	grunt contrib jade	True	http://github.com/aaronj1335/grunt-contrib-jade
+Nangal/d3	d3 	False	http://github.com/Nangal/d3
+ameer-alhadidi/titanium_modules	titanium modules	False	http://github.com/ameer-alhadidi/titanium_modules
+platbox/riak_core	riak core	True	http://github.com/platbox/riak_core
+prasad321/Android-ViewPagerIndicator	android viewpagerindicator	False	http://github.com/prasad321/Android-ViewPagerIndicator
+cybojanek/RedisArray	redisarray	True	http://github.com/cybojanek/RedisArray
+cpeckens/childtheme_academic_vertical	childtheme academic vertical	False	http://github.com/cpeckens/childtheme_academic_vertical
+zhangbo1234/mongodb-csharp	mongodb csharp	True	http://github.com/zhangbo1234/mongodb-csharp
+jerrytingley/RedditArchive	redditarchive	False	http://github.com/jerrytingley/RedditArchive
+stulentsev/as3redis	as redis	True	http://github.com/stulentsev/as3redis
+Gloegg/redis-doc	redis doc	True	http://github.com/Gloegg/redis-doc
+sohaibbhatti/couchbase-ruby-model	couchbase ruby model	True	http://github.com/sohaibbhatti/couchbase-ruby-model
+franz-deleon/OAuth2Provider	oauth provider	False	http://github.com/franz-deleon/OAuth2Provider
+YasKuraishi/titanium_modules	titanium modules	False	http://github.com/YasKuraishi/titanium_modules
+tothegump/redis	redis	True	http://github.com/tothegump/redis
+hknochi/elasticsearch.github.com	elasticsearch github com	True	http://github.com/hknochi/elasticsearch.github.com
+FuturePublishing/jhr-nsd3	jhr nsd 	False	http://github.com/FuturePublishing/jhr-nsd3
+dennisfaust/redis-attrs	redis attrs	True	http://github.com/dennisfaust/redis-attrs
+shivakumars/Titanium-Crittercism-Android	titanium crittercism android	False	http://github.com/shivakumars/Titanium-Crittercism-Android
+lnwdr/vagrant-ubuntu-elasticsearch	vagrant ubuntu elasticsearch	True	http://github.com/lnwdr/vagrant-ubuntu-elasticsearch
+erlangdev/riak_redis_backend	riak redis backend	True	http://github.com/erlangdev/riak_redis_backend
+fairchild/rack-oauth2-server	rack oauth  server	False	http://github.com/fairchild/rack-oauth2-server
+crcn/plugin-mongodb	plugin mongodb	True	http://github.com/crcn/plugin-mongodb
+kobe6661/vagrant_mysql_drbd_pacemaker	vagrant mysql drbd pacemaker	True	http://github.com/kobe6661/vagrant_mysql_drbd_pacemaker
+duncanchen/bayes_on_redis	bayes on redis	True	http://github.com/duncanchen/bayes_on_redis
+oladehin/spring-data-mongodb	spring data mongodb	True	http://github.com/oladehin/spring-data-mongodb
+nagrao/node-mysql	node mysql	True	http://github.com/nagrao/node-mysql
+evilmiky/SQLite-Database-Example	sqlite database example	True	http://github.com/evilmiky/SQLite-Database-Example
+norbu09/Plack_Session_Store_KyotoTycoon	plack session store kyototycoon	False	http://github.com/norbu09/Plack_Session_Store_KyotoTycoon
+sunilj/puppet-mysql	puppet mysql	True	http://github.com/sunilj/puppet-mysql
+sukbinsuh/hive	hive	True	http://github.com/sukbinsuh/hive
+SundSGithub/h2test	h test	False	http://github.com/SundSGithub/h2test
+volkantufekci/neo4j-unmanaged-extension-template	neo j unmanaged extension template	True	http://github.com/volkantufekci/neo4j-unmanaged-extension-template
+chiehwen/annotated_redis_source	annotated redis source	True	http://github.com/chiehwen/annotated_redis_source
+viettranme/mongodb-csharp	mongodb csharp	True	http://github.com/viettranme/mongodb-csharp
+yuliang87/redis	redis	True	http://github.com/yuliang87/redis
+wmora/jade	jade	False	http://github.com/wmora/jade
+esimionato/getting_started_with_d3	getting started with d3 	False	http://github.com/esimionato/getting_started_with_d3
+lorcanmcdonald/redbrick.contest.github	redbrick contest github	True	http://github.com/lorcanmcdonald/redbrick.contest.github
+sidoruk-sv/opencart-mysql-cache	opencart mysql cache	True	http://github.com/sidoruk-sv/opencart-mysql-cache
+licq/compass	compass	False	http://github.com/licq/compass
+pmrowla/deploy-elasticsearch	deploy elasticsearch	True	http://github.com/pmrowla/deploy-elasticsearch
+SiteSoft/kohana-postgresql	kohana postgresql	True	http://github.com/SiteSoft/kohana-postgresql
+thisisgoke/us_budget_d3	us budget d3 	False	http://github.com/thisisgoke/us_budget_d3
+gcristea/cassandra-chef-cookbook	cassandra chef cookbook	True	http://github.com/gcristea/cassandra-chef-cookbook
+pierrelorioux/elasticsearch-osmosis-plugin	elasticsearch osmosis plugin	True	http://github.com/pierrelorioux/elasticsearch-osmosis-plugin
+ramonpin/cassandra_blog	cassandra blog	True	http://github.com/ramonpin/cassandra_blog
+amccurry/hbase-value-bloomfilter	hbase value bloomfilter	True	http://github.com/amccurry/hbase-value-bloomfilter
+jghoman/giraphGraphiteReporter	giraphgraphitereporter	True	http://github.com/jghoman/giraphGraphiteReporter
+zhangzehao/hbase	hbase	True	http://github.com/zhangzehao/hbase
+somanybut/parser-mysql-select	parser mysql select	True	http://github.com/somanybut/parser-mysql-select
+RtxLabs/mongodb	mongodb	True	http://github.com/RtxLabs/mongodb
+wolski/imsbInfer	imsbinfer	False	http://github.com/wolski/imsbInfer
+RobertKielty/spring-data-neo4j	spring data neo j	True	http://github.com/RobertKielty/spring-data-neo4j
+netcon-source/mongodb_logger	mongodb logger	True	http://github.com/netcon-source/mongodb_logger
+liorbd/redis	redis	True	http://github.com/liorbd/redis
+srmobile/sphinxsearch	sphinxsearch	True	http://github.com/srmobile/sphinxsearch
+danielfoglio/puppetlabs-mysql	puppetlabs mysql	True	http://github.com/danielfoglio/puppetlabs-mysql
+tutumcloud/requests-sshadapter	requests sshadapter	False	http://github.com/tutumcloud/requests-sshadapter
+SilverChaliceNewMedia/spring-data-mongodb	spring data mongodb	True	http://github.com/SilverChaliceNewMedia/spring-data-mongodb
+ryanza/redis-store	redis store	True	http://github.com/ryanza/redis-store
+ganeshlam/chef-mongodb	chef mongodb	True	http://github.com/ganeshlam/chef-mongodb
+trisle/urlite-dirbased	urlite dirbased	True	http://github.com/trisle/urlite-dirbased
+joaoqalves/web2py-oauth2	web py oauth 	False	http://github.com/joaoqalves/web2py-oauth2
+rusabd/virtuoso-opensource	virtuoso opensource	True	http://github.com/rusabd/virtuoso-opensource
+MartinBruce/d3	d3 	False	http://github.com/MartinBruce/d3
+Mindelusions/titanium_alloy	titanium alloy	False	http://github.com/Mindelusions/titanium_alloy
+LeadsPlus/django-elasticsearch	django elasticsearch	True	http://github.com/LeadsPlus/django-elasticsearch
+eelpie/webarchiver	webarchiver	False	http://github.com/eelpie/webarchiver
+bluemoon/django-mongodb-engine	django mongodb engine	True	http://github.com/bluemoon/django-mongodb-engine
+feifangit/MongoDB-GridFS-test	mongodb gridfs test	True	http://github.com/feifangit/MongoDB-GridFS-test
+iamedu/oracle-vagrant	oracle vagrant	True	http://github.com/iamedu/oracle-vagrant
+bugiii/qsqlcubrid	qsqlcubrid	True	http://github.com/bugiii/qsqlcubrid
+artworker/TitaniumYoutubePlayer	titaniumyoutubeplayer	True	http://github.com/artworker/TitaniumYoutubePlayer
+erikhazzel/kd322b	kd   b	False	http://github.com/erikhazzel/kd322b
+haridatu/titanium-jasmine	titanium jasmine	False	http://github.com/haridatu/titanium-jasmine
+kunalb/d3	d3 	False	http://github.com/kunalb/d3
+AlexKordic/redis-py	redis py	True	http://github.com/AlexKordic/redis-py
+AmitShah/d3-floorplan	d3  floorplan	False	http://github.com/AmitShah/d3-floorplan
+antmat/Rediska	rediska	True	http://github.com/antmat/Rediska
+diogocosta/h2o-php	h o php	True	http://github.com/diogocosta/h2o-php
+ryanpeterson/GoMySQL	gomysql	True	http://github.com/ryanpeterson/GoMySQL
+aquto/puppet-memcached	puppet memcached	True	http://github.com/aquto/puppet-memcached
+oluckyman/d3-gantt	d3  gantt	True	http://github.com/oluckyman/d3-gantt
+arcticranger/site-mysql	site mysql	True	http://github.com/arcticranger/site-mysql
+solgit/annotated_redis_source	annotated redis source	True	http://github.com/solgit/annotated_redis_source
+FronterAS/couchdb-nano-wrapper	couchdb nano wrapper	True	http://github.com/FronterAS/couchdb-nano-wrapper
+malikov/node-passport-couchbase-redis	node passport couchbase redis	True	http://github.com/malikov/node-passport-couchbase-redis
+hmarcacci/ProCoach2	procoach 	False	http://github.com/hmarcacci/ProCoach2
+kevinseelbach/AFOAuth2Client	afoauth client	False	http://github.com/kevinseelbach/AFOAuth2Client
+zc040921/PyMySQL	pymysql	True	http://github.com/zc040921/PyMySQL
+benjaminsmurray/IMstuff	imstuff	False	http://github.com/benjaminsmurray/IMstuff
+Sectoid/libnss-sqlite	libnss sqlite	True	http://github.com/Sectoid/libnss-sqlite
+ravirajj226/ims8803	ims    	False	http://github.com/ravirajj226/ims8803
+ejms/couchbase-lite-java-core	couchbase lite java core	True	http://github.com/ejms/couchbase-lite-java-core
+liongrade/mysql_backup	mysql backup	True	http://github.com/liongrade/mysql_backup
+realistschuckle/couchdb	couchdb	True	http://github.com/realistschuckle/couchdb
+hurrcaneN8/d3	d3 	False	http://github.com/hurrcaneN8/d3
+zenops/splunk-systemd-journal	splunk systemd journal	False	http://github.com/zenops/splunk-systemd-journal
+looplink/AlphaGoogleOAuth2Bundle	alphagoogleoauth bundle	False	http://github.com/looplink/AlphaGoogleOAuth2Bundle
+adahera222/LD30-4	ld    	False	http://github.com/adahera222/LD30-4
+ncv1177/elasticsearch-servicewrapper	elasticsearch servicewrapper	True	http://github.com/ncv1177/elasticsearch-servicewrapper
+triompha/Memcached-Java-Client	memcached java client	True	http://github.com/triompha/Memcached-Java-Client
+sgobin/normalize.css-with-sass-or-compass	normalize css with sass or compass	False	http://github.com/sgobin/normalize.css-with-sass-or-compass
+rabitarochan/scalikejdbc	scalikejdbc	True	http://github.com/rabitarochan/scalikejdbc
+TYPO3-extensions/solr	solr	True	http://github.com/TYPO3-extensions/solr
+eile/OpenMesh2	openmesh 	False	http://github.com/eile/OpenMesh2
+thomaslee/GoMySQL	gomysql	True	http://github.com/thomaslee/GoMySQL
+lexlapax/dockerfile-riak	dockerfile riak	True	http://github.com/lexlapax/dockerfile-riak
+szqking/PaperStack	paperstack	False	http://github.com/szqking/PaperStack
+mguillermin/play2-elasticsearch	play  elasticsearch	True	http://github.com/mguillermin/play2-elasticsearch
+stumbleupon/redis	redis	True	http://github.com/stumbleupon/redis
+bramwelt/sphinx_rtd_theme	sphinx rtd theme	False	http://github.com/bramwelt/sphinx_rtd_theme
+jhthorsen/mojo-redis-timeseries	mojo redis timeseries	True	http://github.com/jhthorsen/mojo-redis-timeseries
+bpot/leveldb	leveldb	True	http://github.com/bpot/leveldb
+Val9/angular-d3-demo	angular d3  demo	False	http://github.com/Val9/angular-d3-demo
+mtp95/rethinkdb	rethinkdb	True	http://github.com/mtp95/rethinkdb
+i-saint/D3DHookInterface	d3 dhookinterface	False	http://github.com/i-saint/D3DHookInterface
+TheTrivials/hive	hive	True	http://github.com/TheTrivials/hive
+zamnetwork/munin-redis	munin redis	True	http://github.com/zamnetwork/munin-redis
+msoftware/android-support-library-archive	android support library archive	False	http://github.com/msoftware/android-support-library-archive
+mausch/websolr-guides	websolr guides	True	http://github.com/mausch/websolr-guides
+azizur77/gensim-simserver	gensim simserver	False	http://github.com/azizur77/gensim-simserver
+tongbor/Android-ViewPagerIndicator	android viewpagerindicator	False	http://github.com/tongbor/Android-ViewPagerIndicator
+lucasfilippi/d3-radar	d3  radar	False	http://github.com/lucasfilippi/d3-radar
+denydias/mexapi	mexapi	False	http://github.com/denydias/mexapi
+SoggyNoose/Lab6-kimsj	lab  kimsj	False	http://github.com/SoggyNoose/Lab6-kimsj
+Nexenta/hiredis-node	hiredis node	True	http://github.com/Nexenta/hiredis-node
+xamry/neo4j-demo	neo j demo	True	http://github.com/xamry/neo4j-demo
+hermite/LilyPadCompass	lilypadcompass	False	http://github.com/hermite/LilyPadCompass
+miriamlakes/d3	d3 	False	http://github.com/miriamlakes/d3
+KodiCMS/plugin-archive	plugin archive	False	http://github.com/KodiCMS/plugin-archive
+myraz/PaperStack	paperstack	False	http://github.com/myraz/PaperStack
+dealnews/puppet-elasticsearch	puppet elasticsearch	True	http://github.com/dealnews/puppet-elasticsearch
+sumanthk2006/ssindicatorlabel	ssindicatorlabel	False	http://github.com/sumanthk2006/ssindicatorlabel
+tvdinner/redis	redis	True	http://github.com/tvdinner/redis
+h4ck3rm1k3/nutch-mongodb-indexer	nutch mongodb indexer	True	http://github.com/h4ck3rm1k3/nutch-mongodb-indexer
+mikehwang/hazelcast	hazelcast	True	http://github.com/mikehwang/hazelcast
+GeorgeM96/SQLiteInspector	sqliteinspector	True	http://github.com/GeorgeM96/SQLiteInspector
+achellies/rotation-vector-compass	rotation vector compass	False	http://github.com/achellies/rotation-vector-compass
+ivern/RavenDbUntypedGridExample	ravendbuntypedgridexample	True	http://github.com/ivern/RavenDbUntypedGridExample
+BATYD-Turksat/postgresql	postgresql	True	http://github.com/BATYD-Turksat/postgresql
+JSabay/mongodbBlogging	mongodbblogging	True	http://github.com/JSabay/mongodbBlogging
+cblokker/bottle-mongodb-example	bottle mongodb example	True	http://github.com/cblokker/bottle-mongodb-example
+georgiknox/github-d3-example-optimised	github d3  example optimised	False	http://github.com/georgiknox/github-d3-example-optimised
+akabos/redisco	redisco	True	http://github.com/akabos/redisco
+bbhenry/check_mysql_counters	check mysql counters	True	http://github.com/bbhenry/check_mysql_counters
+forthehackofit/html2jade-website	html jade website	False	http://github.com/forthehackofit/html2jade-website
+themgt/redis-io	redis io	True	http://github.com/themgt/redis-io
+deepchatterjee/d3	d3 	False	http://github.com/deepchatterjee/d3
+gnemoug/py-oauth2	py oauth 	False	http://github.com/gnemoug/py-oauth2
+Rister/iron-sphinx	iron sphinx	False	http://github.com/Rister/iron-sphinx
+chipounette/Traduction-Fr-ArkDB	traduction fr arkdb	True	http://github.com/chipounette/Traduction-Fr-ArkDB
+muggenhor/ssh2toronion	ssh toronion	False	http://github.com/muggenhor/ssh2toronion
+neodude/redis-settings	redis settings	True	http://github.com/neodude/redis-settings
+kasparaasamets/node-oauth2-provider	node oauth  provider	False	http://github.com/kasparaasamets/node-oauth2-provider
+drone2537/d3	d3 	False	http://github.com/drone2537/d3
+mfine2/node-oauth2-provider	node oauth  provider	False	http://github.com/mfine2/node-oauth2-provider
+andrew-nguyen/titanium	titanium	False	http://github.com/andrew-nguyen/titanium
+codeinpeace/d3	d3 	False	http://github.com/codeinpeace/d3
+alfyboza/node-memcached	node memcached	True	http://github.com/alfyboza/node-memcached
+is4tomj/CompilableClaimStyleGuide	compilableclaimstyleguide	False	http://github.com/is4tomj/CompilableClaimStyleGuide
+ngarneau/PHP-Apache-Solr-Adapter	php apache solr adapter	True	http://github.com/ngarneau/PHP-Apache-Solr-Adapter
+ni-ka/neo4j	neo j	True	http://github.com/ni-ka/neo4j
+coryodaniel/dm-sphinx-adapter	dm sphinx adapter	False	http://github.com/coryodaniel/dm-sphinx-adapter
+paulrouget/hacks.mozilla.archives	hacks mozilla archives	False	http://github.com/paulrouget/hacks.mozilla.archives
+gatalabs/socket.io-titanium	socket io titanium	False	http://github.com/gatalabs/socket.io-titanium
+reezer/redis-doc	redis doc	True	http://github.com/reezer/redis-doc
+bhaskarbhaumik/titandb	titandb	True	http://github.com/bhaskarbhaumik/titandb
+vhgroup/accumulo-formula	accumulo formula	True	http://github.com/vhgroup/accumulo-formula
+vc3/Amnesia	amnesia	False	http://github.com/vc3/Amnesia
+HaohanWang/TaxiWaitingTimePrediction	taxiwaitingtimeprediction	False	http://github.com/HaohanWang/TaxiWaitingTimePrediction
+brooklynDev/fluentcassandra	fluentcassandra	True	http://github.com/brooklynDev/fluentcassandra
+aboe76/puppetlabs-postgresql	puppetlabs postgresql	True	http://github.com/aboe76/puppetlabs-postgresql
+jennyandthebets/APC-Web-YH2C	apc web yh c	False	http://github.com/jennyandthebets/APC-Web-YH2C
+vertica/Vertica-Extension-Packages	vertica extension packages	True	http://github.com/vertica/Vertica-Extension-Packages
+sir-malefici/SilexAppTemplate	silexapptemplate	False	http://github.com/sir-malefici/SilexAppTemplate
+liquid/beehive-view	beehive view	True	http://github.com/liquid/beehive-view
+scottrice10/elasticsearch-hadoop	elasticsearch hadoop	True	http://github.com/scottrice10/elasticsearch-hadoop
+atomic-labs/redislock	redislock	True	http://github.com/atomic-labs/redislock
+cc-sysops/chef-mongodb-mms-agent	chef mongodb mms agent	True	http://github.com/cc-sysops/chef-mongodb-mms-agent
+rakawestu/pariwisataJogja	pariwisatajogja	False	http://github.com/rakawestu/pariwisataJogja
+ccellar/ravendb.contrib	ravendb contrib	True	http://github.com/ccellar/ravendb.contrib
+somu/instajour	instajour	False	http://github.com/somu/instajour
+WillPlatnick/check_neo4j_replication	check neo j replication	True	http://github.com/WillPlatnick/check_neo4j_replication
+apo117a/phpSesame	phpsesame	True	http://github.com/apo117a/phpSesame
+hackystat/hackystat-sensorbase-postgres	hackystat sensorbase postgres	True	http://github.com/hackystat/hackystat-sensorbase-postgres
+ivanmobi360/backbone-mongodb	backbone mongodb	True	http://github.com/ivanmobi360/backbone-mongodb
+jenssegers/Laravel-MongoDB-Session	laravel mongodb session	True	http://github.com/jenssegers/Laravel-MongoDB-Session
+dmcaulay/mongodb_elixir	mongodb elixir	True	http://github.com/dmcaulay/mongodb_elixir
+ashwoods/rh2graph	rh graph	True	http://github.com/ashwoods/rh2graph
+roidrage/riaktant-nodecamp	riaktant nodecamp	True	http://github.com/roidrage/riaktant-nodecamp
+cangencer/salesforce-oauth2	salesforce oauth 	False	http://github.com/cangencer/salesforce-oauth2
+oogiyot/MySqlS3Backup	mysqls backup	True	http://github.com/oogiyot/MySqlS3Backup
+NexsDev/TitanTricks	titantricks	True	http://github.com/NexsDev/TitanTricks
+steveklabnik/redis-store	redis store	True	http://github.com/steveklabnik/redis-store
+anandoracle9i/rethinkdb	rethinkdb	True	http://github.com/anandoracle9i/rethinkdb
+InfoStudent/d3	d3 	False	http://github.com/InfoStudent/d3
+weltling/php-leveldb	php leveldb	True	http://github.com/weltling/php-leveldb
+juntezhang/ajax-solr	ajax solr	True	http://github.com/juntezhang/ajax-solr
+matveym/vimscripts	vimscripts	False	http://github.com/matveym/vimscripts
+Braunson/d3	d3 	False	http://github.com/Braunson/d3
+JackStat/d3experiments	d3 experiments	False	http://github.com/JackStat/d3experiments
+yama/cascadingtemplates	cascadingtemplates	False	http://github.com/yama/cascadingtemplates
+Albertpa/SqliteAlbumPr	sqlitealbumpr	True	http://github.com/Albertpa/SqliteAlbumPr
+ahamidi/heroku-buildpack-couchbase-ruby	heroku buildpack couchbase ruby	True	http://github.com/ahamidi/heroku-buildpack-couchbase-ruby
+charsyam/redis-2.6.0-rh5	redis       rh 	True	http://github.com/charsyam/redis-2.6.0-rh5
+Community-Cellular/vbts-sqlite3	vbts sqlite 	True	http://github.com/Community-Cellular/vbts-sqlite3
+predictive-edge/d3	d3 	False	http://github.com/predictive-edge/d3
+cedecongins/titan-quest-change-cd-key	titan quest change cd key	False	http://github.com/cedecongins/titan-quest-change-cd-key
+jlnrd/mindhive	mindhive	True	http://github.com/jlnrd/mindhive
+ninjakttty/jade	jade	False	http://github.com/ninjakttty/jade
+matsudad/Hello-World3	hello world 	False	http://github.com/matsudad/Hello-World3
+acarr0/titanium-barcode	titanium barcode	False	http://github.com/acarr0/titanium-barcode
+neuland/jade4j-coffeescript-filter	jade j coffeescript filter	False	http://github.com/neuland/jade4j-coffeescript-filter
+icebourg/chef-redis	chef redis	True	http://github.com/icebourg/chef-redis
+lgvalle/Android-ViewPagerIndicator	android viewpagerindicator	False	http://github.com/lgvalle/Android-ViewPagerIndicator
+ajperalt/d3	d3 	False	http://github.com/ajperalt/d3
+eleonel/Timshel	timshel	False	http://github.com/eleonel/Timshel
+hobbs136/redis_lua	redis lua	True	http://github.com/hobbs136/redis_lua
+laruence/phpredis	phpredis	True	http://github.com/laruence/phpredis
+copernicus365/compass	compass	False	http://github.com/copernicus365/compass
+logscape/coherenceapp	coherenceapp	False	http://github.com/logscape/coherenceapp
+swilliams-pivotal/gemfire-dsl	gemfire dsl	False	http://github.com/swilliams-pivotal/gemfire-dsl
+vogxn/vagrant-riak-cs-cluster	vagrant riak cs cluster	True	http://github.com/vogxn/vagrant-riak-cs-cluster
+garcfab/d3micromaps	d3 micromaps	False	http://github.com/garcfab/d3micromaps
+mike-price/derby	derby	False	http://github.com/mike-price/derby
+zamnetwork/Memcached-Munin-Plugin	memcached munin plugin	True	http://github.com/zamnetwork/Memcached-Munin-Plugin
+ntietz/nvd3	nvd 	False	http://github.com/ntietz/nvd3
+ericwhitlock/titanium_modules	titanium modules	False	http://github.com/ericwhitlock/titanium_modules
+dankerrigan/riak-mdc-mon	riak mdc mon	True	http://github.com/dankerrigan/riak-mdc-mon
+ienliven/facebook-memcached-old	facebook memcached old	True	http://github.com/ienliven/facebook-memcached-old
+rdmpage/bionames-archive	bionames archive	False	http://github.com/rdmpage/bionames-archive
+niumowm/hive	hive	True	http://github.com/niumowm/hive
+rputbl/hashbase	hashbase	False	http://github.com/rputbl/hashbase
+mysqludf/lib_mysqludf_log	lib mysqludf log	True	http://github.com/mysqludf/lib_mysqludf_log
+athoune/node-redis-protocol	node redis protocol	True	http://github.com/athoune/node-redis-protocol
+cloudtrends/h2o	h o	True	http://github.com/cloudtrends/h2o
+eder/apontador_oauth2	apontador oauth 	False	http://github.com/eder/apontador_oauth2
+FredoVelcro/openmixapplib	openmixapplib	False	http://github.com/FredoVelcro/openmixapplib
+donkeystalk/neo4j-tut	neo j tut	True	http://github.com/donkeystalk/neo4j-tut
+bigbigbomb/resourceful-riak	resourceful riak	True	http://github.com/bigbigbomb/resourceful-riak
+ctilburg/trimslice	trimslice	False	http://github.com/ctilburg/trimslice
+johnschult/opensesame	opensesame	True	http://github.com/johnschult/opensesame
+minorblend/HNTextActivityIndicator	hntextactivityindicator	False	http://github.com/minorblend/HNTextActivityIndicator
+MilkyWaySoft/PHP-MySQL-Class	php mysql class	True	http://github.com/MilkyWaySoft/PHP-MySQL-Class
+mrcosta/d3	d3 	False	http://github.com/mrcosta/d3
+vikingco/django-piston-oauth2	django piston oauth 	False	http://github.com/vikingco/django-piston-oauth2
+aazhou/UIButton-ActivityIndicatorView	uibutton activityindicatorview	False	http://github.com/aazhou/UIButton-ActivityIndicatorView
+anandaverma/ElasticSearchLibrary	elasticsearchlibrary	True	http://github.com/anandaverma/ElasticSearchLibrary
+ukd1/mongodb-tools	mongodb tools	True	http://github.com/ukd1/mongodb-tools
+kevinc01/c01ph2	c  ph 	False	http://github.com/kevinc01/c01ph2
+jpstacey/hivelogic-flickrtouchr	hivelogic flickrtouchr	True	http://github.com/jpstacey/hivelogic-flickrtouchr
+chuchau/SQLiteManager4iOS	sqlitemanager ios	True	http://github.com/chuchau/SQLiteManager4iOS
+patrickward/compass-ui	compass ui	False	http://github.com/patrickward/compass-ui
+lyndsysimon/os.path2	os path 	False	http://github.com/lyndsysimon/os.path2
+Kizbitz/orientdb-mgmt	orientdb mgmt	True	http://github.com/Kizbitz/orientdb-mgmt
+aventurella/couchdb_php_proxy	couchdb php proxy	True	http://github.com/aventurella/couchdb_php_proxy
+theju/django-couchdb-utils	django couchdb utils	True	http://github.com/theju/django-couchdb-utils
+ypf412/hbase-test	hbase test	True	http://github.com/ypf412/hbase-test
+lbtm/oracle11gR2postinstall	oracle  gr postinstall	True	http://github.com/lbtm/oracle11gR2postinstall
+ahhqcheng/annotated_redis_source	annotated redis source	True	http://github.com/ahhqcheng/annotated_redis_source
+jeremytarling/marklogic-geospatial	marklogic geospatial	True	http://github.com/jeremytarling/marklogic-geospatial
+roundrobin/d3-svg-filter-templates	d3  svg filter templates	False	http://github.com/roundrobin/d3-svg-filter-templates
+xianhuawei/xapit	xapit	True	http://github.com/xianhuawei/xapit
+timemachine3030/node-couchdb	node couchdb	True	http://github.com/timemachine3030/node-couchdb
+fhanos/yammer-oauth2-php	yammer oauth  php	False	http://github.com/fhanos/yammer-oauth2-php
+mpociot/titanium-facebook-slide-menu	titanium facebook slide menu	False	http://github.com/mpociot/titanium-facebook-slide-menu
+LivelyKernel/subserver-couchdb	subserver couchdb	True	http://github.com/LivelyKernel/subserver-couchdb
+Symfony-Plugins/sfSphinxPlugin	sfsphinxplugin	True	http://github.com/Symfony-Plugins/sfSphinxPlugin
+croffler/oracle-delta-server	oracle delta server	True	http://github.com/croffler/oracle-delta-server
+Sameteam/docker-redis-shard	docker redis shard	True	http://github.com/Sameteam/docker-redis-shard
+laziel/hive	hive	True	http://github.com/laziel/hive
+apotema/treinodetitanium	treinodetitanium	False	http://github.com/apotema/treinodetitanium
+onikiienko/learn.nodejs-mongodb	learn nodejs mongodb	True	http://github.com/onikiienko/learn.nodejs-mongodb
+clintmiller1/cassandra-hs	cassandra hs	True	http://github.com/clintmiller1/cassandra-hs
+kouweizhong/memcached-providers	memcached providers	True	http://github.com/kouweizhong/memcached-providers
+shawnl/ruby-kyotocabinet	ruby kyotocabinet	False	http://github.com/shawnl/ruby-kyotocabinet
+stircompsterbe/the-sims-online-serial-number	the sims online serial number	False	http://github.com/stircompsterbe/the-sims-online-serial-number
+iulyus/excel_mysql	excel mysql	True	http://github.com/iulyus/excel_mysql
+bradking/libarchive	libarchive	False	http://github.com/bradking/libarchive
+levants/hbaseom	hbaseom	True	http://github.com/levants/hbaseom
+TPoise/ravendb2	ravendb 	True	http://github.com/TPoise/ravendb2
+lumost/riak_core	riak core	True	http://github.com/lumost/riak_core
+doubaokun/voltdb	voltdb	True	http://github.com/doubaokun/voltdb
+Wu-Wu/rubygem-hiera-redis	rubygem hiera redis	True	http://github.com/Wu-Wu/rubygem-hiera-redis
+travispavek/USDA-NNDB-To-PostgreSQL	usda nndb to postgresql	True	http://github.com/travispavek/USDA-NNDB-To-PostgreSQL
+scottnj700/php-mysql-test	php mysql test	True	http://github.com/scottnj700/php-mysql-test
+zmoon111/redisq	redisq	True	http://github.com/zmoon111/redisq
+zimbabao/devise_oauth2_canvas_facebook	devise oauth  canvas facebook	False	http://github.com/zimbabao/devise_oauth2_canvas_facebook
+nikunjdhawan/mongodb-csharp	mongodb csharp	True	http://github.com/nikunjdhawan/mongodb-csharp
+mikesoares/hamachi_online_status_indicator	hamachi online status indicator	False	http://github.com/mikesoares/hamachi_online_status_indicator
+meltwater/puppet-archive	puppet archive	True	http://github.com/meltwater/puppet-archive
+heeton/compass-less-plugin	compass less plugin	False	http://github.com/heeton/compass-less-plugin
+vkopitsa/the-little-mongodb-book	the little mongodb book	True	http://github.com/vkopitsa/the-little-mongodb-book
+kwattro/KDBTwigExtensionsBundle	kdbtwigextensionsbundle	False	http://github.com/kwattro/KDBTwigExtensionsBundle
+gledson-dataasservice/shiro-mongodb-realm	shiro mongodb realm	True	http://github.com/gledson-dataasservice/shiro-mongodb-realm
+Josiastech/mysql	mysql	True	http://github.com/Josiastech/mysql
+vlemonkey/thbase	thbase	True	http://github.com/vlemonkey/thbase
+fujimoto/php-libmemcached	php libmemcached	True	http://github.com/fujimoto/php-libmemcached
+orveg/codeigniter-mongodb-library	codeigniter mongodb library	True	http://github.com/orveg/codeigniter-mongodb-library
+SearchDream/django-redis-sessions-fork	django redis sessions fork	True	http://github.com/SearchDream/django-redis-sessions-fork
+larroy/redis-py	redis py	True	http://github.com/larroy/redis-py
+ypcs/h2012.fi	h     fi	False	http://github.com/ypcs/h2012.fi
+dmann/oracle-enhanced	oracle enhanced	True	http://github.com/dmann/oracle-enhanced
+woerwin/phpRedisAdmin	phpredisadmin	True	http://github.com/woerwin/phpRedisAdmin
+carlos-lopez-garces/memcached	memcached	True	http://github.com/carlos-lopez-garces/memcached
+calidion/sqliteorm	sqliteorm	True	http://github.com/calidion/sqliteorm
+cloudian/riak_sysmon	riak sysmon	True	http://github.com/cloudian/riak_sysmon
+jeuner/cfredis	cfredis	True	http://github.com/jeuner/cfredis
+anguszhou/Build3DProject	build dproject	False	http://github.com/anguszhou/Build3DProject
+voondo/orientdb-ar	orientdb ar	True	http://github.com/voondo/orientdb-ar
+cjie888/storm-cassandra	storm cassandra	True	http://github.com/cjie888/storm-cassandra
+kryczko/H2_FREQ	h  freq	False	http://github.com/kryczko/H2_FREQ
+dreamsxin/potlatch2	potlatch 	False	http://github.com/dreamsxin/potlatch2
+boothead/sphinx-to-github	sphinx to github	True	http://github.com/boothead/sphinx-to-github
+yanchao727/memcached	memcached	True	http://github.com/yanchao727/memcached
+GeoNet/puppet-postgresql	puppet postgresql	True	http://github.com/GeoNet/puppet-postgresql
+mahmoudimus/postgresql	postgresql	True	http://github.com/mahmoudimus/postgresql
+ikame/git-archive-all	git archive all	False	http://github.com/ikame/git-archive-all
+rcrsv/nvd3	nvd 	False	http://github.com/rcrsv/nvd3
+fergusstrange/elasticsearch-poc	elasticsearch poc	True	http://github.com/fergusstrange/elasticsearch-poc
+mantovani/d3	d3 	False	http://github.com/mantovani/d3
+StrataLabs/neo4j_spike	neo j spike	True	http://github.com/StrataLabs/neo4j_spike
+WonSong/JadEdit	jadedit	False	http://github.com/WonSong/JadEdit
+gurbuzali/hazelcast	hazelcast	False	http://github.com/gurbuzali/hazelcast
+Phdntom/d3	d3 	False	http://github.com/Phdntom/d3
+yeraycaballero/node-neo4j-template	node neo j template	True	http://github.com/yeraycaballero/node-neo4j-template
+vickrum/splunkstorm	splunkstorm	False	http://github.com/vickrum/splunkstorm
+ratdream/node-mongodb-native	node mongodb native	True	http://github.com/ratdream/node-mongodb-native
+aldoutrera/geddy-jade-coffee-boilerplate	geddy jade coffee boilerplate	False	http://github.com/aldoutrera/geddy-jade-coffee-boilerplate
+inka/elasticsearch-rpms	elasticsearch rpms	True	http://github.com/inka/elasticsearch-rpms
+agilbert201/omniauth-google-oauth2	omniauth google oauth 	False	http://github.com/agilbert201/omniauth-google-oauth2
+zixuanwang/SolrIndexer	solrindexer	True	http://github.com/zixuanwang/SolrIndexer
+rafaltrojniak/redis-session-php	redis session php	True	http://github.com/rafaltrojniak/redis-session-php
+flyingghost/Compass	compass	False	http://github.com/flyingghost/Compass
+unixmen/OAuth2Client	oauth client	False	http://github.com/unixmen/OAuth2Client
+lkunemail/MySQL-Syncer	mysql syncer	True	http://github.com/lkunemail/MySQL-Syncer
+Meligy/SuperBasicSqliteNugetTest	superbasicsqlitenugettest	True	http://github.com/Meligy/SuperBasicSqliteNugetTest
+ashenfad/redistricting	redistricting	True	http://github.com/ashenfad/redistricting
+agner/riak_sysmon.agner	riak sysmon agner	True	http://github.com/agner/riak_sysmon.agner
+bwiklund/docker-mysql	docker mysql	True	http://github.com/bwiklund/docker-mysql
+jcflorville/Angular-Nodejs-Redis	angular nodejs redis	True	http://github.com/jcflorville/Angular-Nodejs-Redis
+eveiga/redis-munin	redis munin	True	http://github.com/eveiga/redis-munin
+carlosonsoft/node-firebird	node firebird	False	http://github.com/carlosonsoft/node-firebird
+andreineculau/imsg	imsg	False	http://github.com/andreineculau/imsg
+sdcsyyg/phpRedisAdmin	phpredisadmin	True	http://github.com/sdcsyyg/phpRedisAdmin
+lfo/neo4jbeans	neo jbeans	True	http://github.com/lfo/neo4jbeans
+tomekcp/redis-rb	redis rb	True	http://github.com/tomekcp/redis-rb
+lmello/riak_cs	riak cs	True	http://github.com/lmello/riak_cs
+Vin4/libsqlite3	libsqlite 	True	http://github.com/Vin4/libsqlite3
+mandrain/annotated_redis_source	annotated redis source	True	http://github.com/mandrain/annotated_redis_source
+congxing/Android-ViewPagerIndicator	android viewpagerindicator	False	http://github.com/congxing/Android-ViewPagerIndicator
+gitpan/DB-CouchDB-Schema	db couchdb schema	True	http://github.com/gitpan/DB-CouchDB-Schema
+AdaTheDev/MongoDB-ASP.NET-Session-State-Store	mongodb asp net session state store	True	http://github.com/AdaTheDev/MongoDB-ASP.NET-Session-State-Store
+aaronxhill/d3-book	d3  book	False	http://github.com/aaronxhill/d3-book
+gindox/hive-testbench	hive testbench	True	http://github.com/gindox/hive-testbench
+viezel/Titanium-Navigation-Controller	titanium navigation controller	False	http://github.com/viezel/Titanium-Navigation-Controller
+yongjhih/fh2py	fh py	False	http://github.com/yongjhih/fh2py
+sridharreddy7/node-neo4j	node neo j	True	http://github.com/sridharreddy7/node-neo4j
+ortoo/node-redis-sentinel	node redis sentinel	True	http://github.com/ortoo/node-redis-sentinel
+dbprojectisshit/oraclej2ee	oraclej ee	True	http://github.com/dbprojectisshit/oraclej2ee
+neilnorthrop/puppetlabs-postgresql	puppetlabs postgresql	True	http://github.com/neilnorthrop/puppetlabs-postgresql
+gomez2047/INVESTORDB2	investordb 	True	http://github.com/gomez2047/INVESTORDB2
+llcoolchak/virtuoso-opensource	virtuoso opensource	True	http://github.com/llcoolchak/virtuoso-opensource
+cupcake/go-riak	go riak	True	http://github.com/cupcake/go-riak
+dirkusmaximus/titanium	titanium	False	http://github.com/dirkusmaximus/titanium
+jlehen/push2mob	push mob	False	http://github.com/jlehen/push2mob
+Desosin/Android-ViewPagerIndicator	android viewpagerindicator	False	http://github.com/Desosin/Android-ViewPagerIndicator
+needle-cookbooks/chef-mongodb	chef mongodb	True	http://github.com/needle-cookbooks/chef-mongodb
+tudou527/python-qqoauth2	python qqoauth 	False	http://github.com/tudou527/python-qqoauth2
+dizzy7/bxApiDocs	bxapidocs	False	http://github.com/dizzy7/bxApiDocs
+danbovey/php-mysql-pdo-class	php mysql pdo class	True	http://github.com/danbovey/php-mysql-pdo-class
+ntietz/hbase-examples	hbase examples	True	http://github.com/ntietz/hbase-examples
+tkengo/omniauth-dropbox-oauth2	omniauth dropbox oauth 	False	http://github.com/tkengo/omniauth-dropbox-oauth2
+sharov/riakc_cluster	riakc cluster	True	http://github.com/sharov/riakc_cluster
+mmusgrov/infinispan-server	infinispan server	True	http://github.com/mmusgrov/infinispan-server
+DGI-City-Of-Hope/islandora_solr_search	islandora solr search	True	http://github.com/DGI-City-Of-Hope/islandora_solr_search
+vincentopensourcetaiwan/test_elasticsearch	test elasticsearch	True	http://github.com/vincentopensourcetaiwan/test_elasticsearch
+sschneid/puppet-redis	puppet redis	True	http://github.com/sschneid/puppet-redis
+inspurhua/go-sqlite3	go sqlite 	True	http://github.com/inspurhua/go-sqlite3
+dtianyu/drizzle	drizzle	False	http://github.com/dtianyu/drizzle
+rollbackpt/oauth2-client	oauth  client	False	http://github.com/rollbackpt/oauth2-client
+linearregression/mongodb-erlang	mongodb erlang	True	http://github.com/linearregression/mongodb-erlang
+chemicL/hive_scripts	hive scripts	True	http://github.com/chemicL/hive_scripts
+caina/titanium_modules	titanium modules	False	http://github.com/caina/titanium_modules
+fabn/mysql	mysql	True	http://github.com/fabn/mysql
+frenoy/geneious-postgresql	geneious postgresql	True	http://github.com/frenoy/geneious-postgresql
+edofrederix/Smarty-Memcached	smarty memcached	True	http://github.com/edofrederix/Smarty-Memcached
+koflerdavid/riak_pb	riak pb	True	http://github.com/koflerdavid/riak_pb
+AndreiAvadanei/PHP-MySQL-Class	php mysql class	True	http://github.com/AndreiAvadanei/PHP-MySQL-Class
+funkymonkeymonk/Ansible_MySQL_Deploy	ansible mysql deploy	True	http://github.com/funkymonkeymonk/Ansible_MySQL_Deploy
+aurora1625/d3-cloud	d3  cloud	False	http://github.com/aurora1625/d3-cloud
+futures/fcrepo-filesystem-modeshape-federation-connector	fcrepo filesystem modeshape federation connector	False	http://github.com/futures/fcrepo-filesystem-modeshape-federation-connector
+mattboston/puppet-redis	puppet redis	True	http://github.com/mattboston/puppet-redis
+flux423/CareDistro	caredistro	False	http://github.com/flux423/CareDistro
+kjordan2001/hazelcast	hazelcast	False	http://github.com/kjordan2001/hazelcast
+tylermachado/d3-book	d3  book	False	http://github.com/tylermachado/d3-book
+UXScripts/elasticsearch-groovy-scripts	elasticsearch groovy scripts	True	http://github.com/UXScripts/elasticsearch-groovy-scripts
+benhutton/remarkable_thinking_sphinx	remarkable thinking sphinx	False	http://github.com/benhutton/remarkable_thinking_sphinx
+ebittleman/helloredis	helloredis	True	http://github.com/ebittleman/helloredis
+carlossanchezp/mysql	mysql	True	http://github.com/carlossanchezp/mysql
+ionull/webOS-OAuth2	webos oauth 	False	http://github.com/ionull/webOS-OAuth2
+datr/solr-core-admin-php-client	solr core admin php client	True	http://github.com/datr/solr-core-admin-php-client
+nsigustavo/puppet-elasticsearch	puppet elasticsearch	True	http://github.com/nsigustavo/puppet-elasticsearch
+nemec/log4net.ElasticSearch	log net elasticsearch	True	http://github.com/nemec/log4net.ElasticSearch
+mpecan/OAuth2Android	oauth android	False	http://github.com/mpecan/OAuth2Android
+Omairss/d3-plugins	d3  plugins	False	http://github.com/Omairss/d3-plugins
+jctoledo/aptamerbasequeryer	aptamerbasequeryer	True	http://github.com/jctoledo/aptamerbasequeryer
+qinglong1983/mymysql	mymysql	True	http://github.com/qinglong1983/mymysql
+example42/puppet-redis	puppet redis	True	http://github.com/example42/puppet-redis
+mounirlamouri/web-compass	web compass	True	http://github.com/mounirlamouri/web-compass
+adcramer/redis-py	redis py	True	http://github.com/adcramer/redis-py
+bravecheng/phpredis	phpredis	True	http://github.com/bravecheng/phpredis
+thundo/puppet-solr4	puppet solr 	True	http://github.com/thundo/puppet-solr4
+aparo/django-elasticsearch	django elasticsearch	True	http://github.com/aparo/django-elasticsearch
+borriglione/Solr	solr	True	http://github.com/borriglione/Solr
+dgapitts/puppet-vagrant-lucid32	puppet vagrant lucid  	True	http://github.com/dgapitts/puppet-vagrant-lucid32
+domny/annotated_redis_source	annotated redis source	True	http://github.com/domny/annotated_redis_source
+limboyoun/limsking	limsking	False	http://github.com/limboyoun/limsking
+lordB8r/titanium_mobile	titanium mobile	False	http://github.com/lordB8r/titanium_mobile
+chareice/compass-rails	compass rails	False	http://github.com/chareice/compass-rails
+MBuchaus/puppetlabs-mysql	puppetlabs mysql	True	http://github.com/MBuchaus/puppetlabs-mysql
+beardeddev/sqlite-dynamic-data	sqlite dynamic data	True	http://github.com/beardeddev/sqlite-dynamic-data
+ruNovel/kohana-sphinxql	kohana sphinxql	True	http://github.com/ruNovel/kohana-sphinxql
+brieb/oauth2client	oauth client	False	http://github.com/brieb/oauth2client
+aduggin/d3-visualizations	d3  visualizations	False	http://github.com/aduggin/d3-visualizations
+nisshiee/scalikejdbc	scalikejdbc	True	http://github.com/nisshiee/scalikejdbc
+timothyhahn/gh2todo	gh todo	False	http://github.com/timothyhahn/gh2todo
+abhishekp906/mysql-country-list	mysql country list	True	http://github.com/abhishekp906/mysql-country-list
+gitlisted/solr	solr	True	http://github.com/gitlisted/solr
+Advael/nvd3	nvd 	False	http://github.com/Advael/nvd3
+andrewjc/Android-ViewPagerIndicator	android viewpagerindicator	False	http://github.com/andrewjc/Android-ViewPagerIndicator
+onkarjoshi/lucene-solr	lucene solr	True	http://github.com/onkarjoshi/lucene-solr
+leedo/Plack-Session-Store-Redis	plack session store redis	True	http://github.com/leedo/Plack-Session-Store-Redis
+seomoz/java-6-oracle-rt	java   oracle rt	True	http://github.com/seomoz/java-6-oracle-rt
+thainb/hbasene	hbasene	True	http://github.com/thainb/hbasene
+AmielZuniga/Taller-Vertical-E3	taller vertical e 	False	http://github.com/AmielZuniga/Taller-Vertical-E3
+hcguersoy/springdata-redis-example	springdata redis example	True	http://github.com/hcguersoy/springdata-redis-example
+jab416171/d3-api-php	d3  api php	False	http://github.com/jab416171/d3-api-php
+muhammadwajeeh/BobClockD3	bobclockd 	False	http://github.com/muhammadwajeeh/BobClockD3
+serkanserttop/node-mysql	node mysql	True	http://github.com/serkanserttop/node-mysql
+orangeyts/mariadb	mariadb	True	http://github.com/orangeyts/mariadb
+SamKuppusamy/ravendb	ravendb	True	http://github.com/SamKuppusamy/ravendb
+rushik/d3	d3 	False	http://github.com/rushik/d3
+javamanrj/SQLite-Proxy-ST2	sqlite proxy st 	True	http://github.com/javamanrj/SQLite-Proxy-ST2
+neilshannon/neo4j-scala-linkedin	neo j scala linkedin	True	http://github.com/neilshannon/neo4j-scala-linkedin
+sessien/Appcelerator-Titanium-DB-Model	appcelerator titanium db model	False	http://github.com/sessien/Appcelerator-Titanium-DB-Model
+luismottacampos/mha4mysql-manager	mha mysql manager	True	http://github.com/luismottacampos/mha4mysql-manager
+jingmidongye/mongodb	mongodb	True	http://github.com/jingmidongye/mongodb
+sudhir-j/spring-data-redis	spring data redis	True	http://github.com/sudhir-j/spring-data-redis
+TheCodeBoutique/Todo-s-CouchDB	todo s couchdb	True	http://github.com/TheCodeBoutique/Todo-s-CouchDB
+benjanderson/sqlite-net	sqlite net	True	http://github.com/benjanderson/sqlite-net
+oconetta/archive.org-getter	archive org getter	False	http://github.com/oconetta/archive.org-getter
+jrhoads/solr_angular_demo	solr angular demo	True	http://github.com/jrhoads/solr_angular_demo
+mailru/tarantool-utils	tarantool utils	False	http://github.com/mailru/tarantool-utils
+svoflee/rabbitmq-redis	rabbitmq redis	True	http://github.com/svoflee/rabbitmq-redis
+skidding/YOH2011	yoh    	False	http://github.com/skidding/YOH2011
+eklein/chef-redis	chef redis	True	http://github.com/eklein/chef-redis
+hendryluk/elasticsearch-zookeeper	elasticsearch zookeeper	True	http://github.com/hendryluk/elasticsearch-zookeeper
+jcarlson/cdx-mongodb	cdx mongodb	True	http://github.com/jcarlson/cdx-mongodb
+racSOker/mysqladmin	mysqladmin	True	http://github.com/racSOker/mysqladmin
+nicholaskeytholeong/splunk-storm-mobile-analytics	splunk storm mobile analytics	False	http://github.com/nicholaskeytholeong/splunk-storm-mobile-analytics
+thedangler/memcached-library	memcached library	True	http://github.com/thedangler/memcached-library
+jhdielman/twitter-titanium	twitter titanium	False	http://github.com/jhdielman/twitter-titanium
+timheuer/sqlite-net	sqlite net	True	http://github.com/timheuer/sqlite-net
+HiJiGOO/littleArchive	littlearchive	False	http://github.com/HiJiGOO/littleArchive
+jasonhancock/nagios-redis	nagios redis	True	http://github.com/jasonhancock/nagios-redis
+201-created/node-mongodb-native	node mongodb native	True	http://github.com/201-created/node-mongodb-native
+CuriousLayman/Harbour.RedisSessionStateStore	harbour redissessionstatestore	True	http://github.com/CuriousLayman/Harbour.RedisSessionStateStore
+rblyon/grimshaw	grimshaw	False	http://github.com/rblyon/grimshaw
+geraldvillorente/rethinkdb	rethinkdb	True	http://github.com/geraldvillorente/rethinkdb
+IlyaGulya/ingress-intel-total-conversion	ingress intel total conversion	True	http://github.com/IlyaGulya/ingress-intel-total-conversion
+tanji/MySQL-Tools	mysql tools	True	http://github.com/tanji/MySQL-Tools
+Mutant/couchdb-client	couchdb client	True	http://github.com/Mutant/couchdb-client
+btorch/postgresql_treasures	postgresql treasures	True	http://github.com/btorch/postgresql_treasures
+chrisferry/couchbase	couchbase	True	http://github.com/chrisferry/couchbase
+viilveer/mysql-class	mysql class	True	http://github.com/viilveer/mysql-class
+Malkeco/hbase	hbase	True	http://github.com/Malkeco/hbase
+tialibuce/slimsucpioda	slimsucpioda	True	http://github.com/tialibuce/slimsucpioda
+mathildathompson/D3Demo	d3 demo	False	http://github.com/mathildathompson/D3Demo
+srisatish/cassandra	cassandra	True	http://github.com/srisatish/cassandra
+ryanj/rediscloud-sinatra-quickstart	rediscloud sinatra quickstart	True	http://github.com/ryanj/rediscloud-sinatra-quickstart
+claudiababescu/elasticsearchtornado	elasticsearchtornado	True	http://github.com/claudiababescu/elasticsearchtornado
+p6/node-mongodb-provider	node mongodb provider	True	http://github.com/p6/node-mongodb-provider
+Doboy/mysql_fdw	mysql fdw	True	http://github.com/Doboy/mysql_fdw
+darkfeline/sphinxcontrib-napoleon	sphinxcontrib napoleon	True	http://github.com/darkfeline/sphinxcontrib-napoleon
+marcomachado/MongoDB_study	mongodb study	True	http://github.com/marcomachado/MongoDB_study
+jlogar/firebird-bootstrapper	firebird bootstrapper	False	http://github.com/jlogar/firebird-bootstrapper
+itisaid/NIST4Hive	nist hive	True	http://github.com/itisaid/NIST4Hive
+clintongormley/ElasticSearchX-UniqueKey	elasticsearchx uniquekey	True	http://github.com/clintongormley/ElasticSearchX-UniqueKey
+frafor/mysql-country-list	mysql country list	True	http://github.com/frafor/mysql-country-list
+crow-misia/cx-oracletools	cx oracletools	True	http://github.com/crow-misia/cx-oracletools
+EslamElHusseiny/elasticsearch-cloud-aws	elasticsearch cloud aws	True	http://github.com/EslamElHusseiny/elasticsearch-cloud-aws
+gigablah/mysql-workbench-schema-exporter	mysql workbench schema exporter	True	http://github.com/gigablah/mysql-workbench-schema-exporter
+mabrek/redis-presentation-2012	redis presentation     	True	http://github.com/mabrek/redis-presentation-2012
+bbland/mongodb-rest	mongodb rest	True	http://github.com/bbland/mongodb-rest
+sanger/lims-api	lims api	False	http://github.com/sanger/lims-api
+andrepacord/Tutorial_SQLiteEnAndroid	tutorial sqliteenandroid	True	http://github.com/andrepacord/Tutorial_SQLiteEnAndroid
+newnav15/node_jade_stylus_demo	node jade stylus demo	False	http://github.com/newnav15/node_jade_stylus_demo
+hyunjf/neo4j	neo j	True	http://github.com/hyunjf/neo4j
+rubyvrooom/riaknostic	riaknostic	True	http://github.com/rubyvrooom/riaknostic
+normanmaurer/vertx-mysql-postgresql	vertx mysql postgresql	True	http://github.com/normanmaurer/vertx-mysql-postgresql
+scraping/elasticsearch-analysis-skos	elasticsearch analysis skos	True	http://github.com/scraping/elasticsearch-analysis-skos
+erichaase/archive-fantasynba	archive fantasynba	False	http://github.com/erichaase/archive-fantasynba
+omanand/spring-data-redis-demo	spring data redis demo	True	http://github.com/omanand/spring-data-redis-demo
+gitpan/DBD-Informix4	dbd informix 	True	http://github.com/gitpan/DBD-Informix4
+jaraen/titanium_mobile	titanium mobile	False	http://github.com/jaraen/titanium_mobile
+irccloud/chef-postgresql	chef postgresql	True	http://github.com/irccloud/chef-postgresql
+qz267/mysql-snmp	mysql snmp	True	http://github.com/qz267/mysql-snmp
+yhexie/RGeos.SlimScene	rgeos slimscene	False	http://github.com/yhexie/RGeos.SlimScene
+benjamintripp/ingress-intel-total-conversion	ingress intel total conversion	True	http://github.com/benjamintripp/ingress-intel-total-conversion
+SimonHoenscheid/postgresql	postgresql	True	http://github.com/SimonHoenscheid/postgresql
+sethmcl/mock_redis	mock redis	True	http://github.com/sethmcl/mock_redis
+studioskylab/skMySQLCachePlugin	skmysqlcacheplugin	True	http://github.com/studioskylab/skMySQLCachePlugin
+tomoya55/devise-neo4j	devise neo j	True	http://github.com/tomoya55/devise-neo4j
+almccon/d3-cartogram	d3  cartogram	False	http://github.com/almccon/d3-cartogram
+samskiter/AFOAuth2Client	afoauth client	False	http://github.com/samskiter/AFOAuth2Client
+peerlibrary/dimsum	dimsum	False	http://github.com/peerlibrary/dimsum
+megacoder/oracleasm-stall	oracleasm stall	True	http://github.com/megacoder/oracleasm-stall
+kolypto/nodejs-missy-mongodb	nodejs missy mongodb	True	http://github.com/kolypto/nodejs-missy-mongodb
+onesime/d3	d3 	False	http://github.com/onesime/d3
+k0pernikus/otwarchive	otwarchive	False	http://github.com/k0pernikus/otwarchive
+vickyuec/accumulo	accumulo	True	http://github.com/vickyuec/accumulo
+gaech/mongodb-migrations	mongodb migrations	True	http://github.com/gaech/mongodb-migrations
+sebastienhatton/riak-pb	riak pb	True	http://github.com/sebastienhatton/riak-pb
+happyming1986/elasticsearch-ruby	elasticsearch ruby	True	http://github.com/happyming1986/elasticsearch-ruby
+Scotman100/Life-achive	life achive	False	http://github.com/Scotman100/Life-achive
+welkinli/hiredis	hiredis	True	http://github.com/welkinli/hiredis
+jprante/elasticsearch.github.com	elasticsearch github com	True	http://github.com/jprante/elasticsearch.github.com
+elishabz/hbase	hbase	True	http://github.com/elishabz/hbase
+sordina/cassandra_experiment	cassandra experiment	True	http://github.com/sordina/cassandra_experiment
+cvercelino/postgresql	postgresql	True	http://github.com/cvercelino/postgresql
+couchone/ubuntuone-couchdb-server	ubuntuone couchdb server	True	http://github.com/couchone/ubuntuone-couchdb-server
+CarlPhilippe/meteor-nvd3	meteor nvd 	False	http://github.com/CarlPhilippe/meteor-nvd3
+smulube/tokyotyrant-ruby	tokyotyrant ruby	True	http://github.com/smulube/tokyotyrant-ruby
+jasonll/oauth2-server-php	oauth  server php	False	http://github.com/jasonll/oauth2-server-php
+dehora/elasticsearch	elasticsearch	True	http://github.com/dehora/elasticsearch
+binbrain/OpenSesame	opensesame	True	http://github.com/binbrain/OpenSesame
+CTI-HPC/plantilla-sphinx	plantilla sphinx	False	http://github.com/CTI-HPC/plantilla-sphinx
+chrisDwarner/SQLite	sqlite	True	http://github.com/chrisDwarner/SQLite
+dresende/node-orm-mysql-fts	node orm mysql fts	True	http://github.com/dresende/node-orm-mysql-fts
+EdwardLee03/hbase_source_read	hbase source read	True	http://github.com/EdwardLee03/hbase_source_read
+jluchiji/svekla-redis-manager	svekla redis manager	True	http://github.com/jluchiji/svekla-redis-manager
+brianmcgee/mysql	mysql	True	http://github.com/brianmcgee/mysql
+coderm/memcached-library	memcached library	True	http://github.com/coderm/memcached-library
+pwarelis/mongodb-odm	mongodb odm	True	http://github.com/pwarelis/mongodb-odm
+tklun/nvd3	nvd 	False	http://github.com/tklun/nvd3
+CSRedRat/PyMySQL	pymysql	True	http://github.com/CSRedRat/PyMySQL
+seasontop/node-memcached	node memcached	True	http://github.com/seasontop/node-memcached
+imshriram/hazelCastSample	hazelcastsample	False	http://github.com/imshriram/hazelCastSample
+Lispython/redis_session_backend	redis session backend	True	http://github.com/Lispython/redis_session_backend
+heydluv/bh2014	bh    	False	http://github.com/heydluv/bh2014
+dorne/andbase	andbase	False	http://github.com/dorne/andbase
+wyhaines/riak-shim	riak shim	True	http://github.com/wyhaines/riak-shim
+mimoccc/couchbase-lite-android	couchbase lite android	True	http://github.com/mimoccc/couchbase-lite-android
+josephyzhou/node_redis	node redis	True	http://github.com/josephyzhou/node_redis
+arranhuxtable/MySQLBackupTask	mysqlbackuptask	True	http://github.com/arranhuxtable/MySQLBackupTask
+gnorsilva/SQLiteProvider	sqliteprovider	True	http://github.com/gnorsilva/SQLiteProvider
+itsmequinn/PHP-OAuth2	php oauth 	False	http://github.com/itsmequinn/PHP-OAuth2
+Skreep/compass-extensions	compass extensions	False	http://github.com/Skreep/compass-extensions
+giorgio-v/mysql	mysql	True	http://github.com/giorgio-v/mysql
+csilgoortiz/tutorial-dynamodbmapper	tutorial dynamodbmapper	True	http://github.com/csilgoortiz/tutorial-dynamodbmapper
+patrickdet/redis-bloomfilter	redis bloomfilter	True	http://github.com/patrickdet/redis-bloomfilter
+sparklemarkle/TagTime-1	tagtime  	False	http://github.com/sparklemarkle/TagTime-1
+barraponto/compass_radix	compass radix	False	http://github.com/barraponto/compass_radix
+jswitzer/python-oauth2	python oauth 	False	http://github.com/jswitzer/python-oauth2
+omc/solr-spatial-light	solr spatial light	True	http://github.com/omc/solr-spatial-light
+hquadrat/H2TaskTracker	h tasktracker	False	http://github.com/hquadrat/H2TaskTracker
+sebschlicht/graphity-titan	graphity titan	True	http://github.com/sebschlicht/graphity-titan
+davidgljay/twitter-archive	twitter archive	False	http://github.com/davidgljay/twitter-archive
+sonney2k/d3	d3 	False	http://github.com/sonney2k/d3
+Parthpatel1987/memcached	memcached	True	http://github.com/Parthpatel1987/memcached
+avriq/bootstrap-verticaltabs	bootstrap verticaltabs	False	http://github.com/avriq/bootstrap-verticaltabs
+npbendre/flockdb	flockdb	True	http://github.com/npbendre/flockdb
+uberbrady/riak-pb	riak pb	True	http://github.com/uberbrady/riak-pb
+dansmith65/FileMaker-Techniques	filemaker techniques	True	http://github.com/dansmith65/FileMaker-Techniques
