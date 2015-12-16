@@ -65,6 +65,7 @@ The project was awarded to work on Github using data that the platform makes ava
 
 The data is generated as developers write code and store that code in repositories. Coding has a complex collaborative structure that I won't attempt to describe here. The collaboration or 'sharing' to use social media keywords includes both people and things. The format of the data that records this activity is anything but 'raw.' By convention, for instance, nearly all API data from social media sites has an 'event' structure, and Github is no exception to  this. SHOW SLIDE of event.
 
+```
 {
 "id": "2111998059",
 "type": "WatchEvent",
@@ -93,6 +94,7 @@ The data is generated as developers write code and store that code in repositori
 "avatar_url": "https://avatars.githubusercontent.com/u/5497318?"
 }
 }
+```
 
 This is about as raw as Github data gets. This is a relatively simple 'social event', a `WatchEvent` on Github, recording the act of an `actor` calling themselves `mmemetea` interested in the repository called `azondi`, a software project coordinated by the 'organisation' calling itself `OpenSensorsIO`. This event has also has a datetime recording when the event occurred. Note that the event also has various status designations -- it is a `public` event, it has a 'payload' (often much more complicated than simply `started`) -- and includes various indexical references or `id`s that link the event to people, organisations, repositories and images (`gravatar_id`). The tricky syntax of all this data -- many brackets, inverted commas, colons, commas -- attests to an ontology which aligns all actors, actions, places and times in discrete events, and whose *nested* structure contains all variations within a formal hierarchy displayed via indentation.
 
