@@ -15,7 +15,7 @@ LIMIT = 1000
 
 query  = """SELECT repository_url, payload_member_avatar_url FROM
         [githubarchive:github.timeline] where payload_member_avatar_url != ''
-        LIMIT """ + LIMIT
+        LIMIT """ + str(LIMIT)
 df = pd.io.gbq.read_gbq(project_id = 'metacommunities', query = query)
 
 
