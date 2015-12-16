@@ -1,5 +1,6 @@
 
 Wed Dec 16 11:24:51 GMT 2015
+- check guidelines for sss [https://uk.sagepub.com/en-gb/eur/journal/social-studies-science#MANUSCRIPTSTYLE]
 - look at 1970s work on counting and citations and see how it matters today -- use WoS
 - look at recent marres/gerlitz article in sociological review for relevance of interface methods (device specific research, etc)
 - look up critical making -- Ratto, etc. -- see sss zotero folder for reference -- and see if it helps say what I'm doing
