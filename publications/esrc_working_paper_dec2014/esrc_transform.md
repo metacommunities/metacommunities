@@ -1,23 +1,9 @@
----
-title:  'Discussion paper: Metacommunities of practice in the code-sharing commons'
-author:
-- name: Adrian Mackenzie
-  affiliation: Lancaster University
-- name: Matthew Fuller
-  affiliation: Goldsmith College, London
-- name: Andrew Goffey
-  affiliation: University of Nottingham
-- name: Richard Mills
-  affiliation: University of Cambridge
-- name: Stuart Sharples
-  affiliation: Lancaster University 
-...
 
-# 
+# Discussion paper: Metacommunities of practice in the code-sharing commons
 
 ## Adrian Mackenzie (Lancaster), 
 
-## (Goldsmiths), 
+## Matthew Fuller (Goldsmiths), 
 
 ## Andrew Goffey (Nottingham),
 
@@ -27,6 +13,10 @@ author:
 
 December 2014, a.mackenzie@lancaster.ac.uk
 
+
+The work described in this paper was funded by the UK Economic and Social Research Council Grant ES/K007912/1, 2013-2014. 
+
+\newpage
 
 ## Introduction
 
@@ -293,16 +283,20 @@ The problem of constructing such a database can be detected in Figure \ref{fig:r
 
 
 ```
-##  [1] "early_repos_2000_only"        "all_repos_4_2"               
-##  [3] "repo_summary"                 "post_domains"                
-##  [5] "200k_active_parents_PRheads"  "all_forks_2"                 
-##  [7] "100k_repos_most_pushes"       "100k_DeleteEvents"           
-##  [9] "all_repos_1_3"                "activity"                    
-## [11] "tags"                         "200k_active_forks_parentdata"
-## [13] "all_repos_4_3"                "actor_location"              
-## [15] "alphagov_forks"               "200k_active_parents_PRbase"  
-## [17] "actors_who_fork_a_lot"        "PR_AddedUsers_NoIntra"       
-## [19] "100k_pull_requests"           "all_forks_old"
+## Adding .httr-oauth to .gitignore
+## Auto-refreshing stale OAuth token.
+```
+
+```
+## Error in refresh_oauth2.0(self$endpoint, self$app, self$credentials): client error: (400) Bad Request
+```
+
+```
+## Error in lapply(X = X, FUN = FUN, ...): object 'datasets' not found
+```
+
+```
+## Error in sample(tables, 20): object 'tables' not found
 ```
 
 More importantly, the point of developing an empirically rich and reusable database on code repositories has in some ways been obviated. GithubArchive and GoogleBigQuery render that objective slightly redundant. We did construct many tables derived from those datasets in the course of using GoogleBigQuery (a partial listing is shown above), but these tables are themselves intermediate representations that support high-level analysis. They can be constructed by running the queries again, and this bring more recent events into the data. But these tables themselves do not constitute a schema that organises the $N=All$ data on Github. They are more like instruments that create views on events. That datastream itself carries much more value than any of the many intermediate tables we produced using queries. 
@@ -349,6 +343,10 @@ We have not described anything of the substantive key findings on contemporary c
 The interest, we would suggest,  of cases like Github concerns their messiness and complexity. Although they bear all the marks of a typical social media platform -- followers, likes, sharing, participation, etc. -- they differ greatly from many other contemporary platforms in terms of their complicated event structures, their wide variations in scale, and wildly disparate patters of practice. Atypically, the data relating to such practices (at least, in so far as they are public) is 100% available, and this again contrasts markedly with many other settings where social science researchers are compelled to work on $N \neq All$ samples of the data (thus putting them in a different position to the platforms themselves). Github is one of the few cases where the full data needs to be available for the platform to work properly. 
 
 Another interest of the Github case is the fact there is so much interest in the Github dataset. We were not alone in analysing the GithubArchive data. Various data competitions and many independent mapping efforts have worked with the data. A sub-culture of data visualization pivots on this data, with many dashboards and network visualizations spinning around it. Many of these stem from software developers who use Github and take a strong interest in what happens. Their projects and visualizations provide an extremely useful backdrop or pinboard to use as points of comparison and sometimes springboard from. 
+
+## Acknowledgments
+
+The work described in this paper was funded by the UK Economic and Social Research Council Grant ES/K007912/1, 2013-2014. 
 
 ## References
 
