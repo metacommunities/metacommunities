@@ -1,0 +1,15 @@
+"","repository_name","evt"
+"1","compute-hadoop-java-python",1
+"2","elasticsearch-hadoop",8
+"3","glusterfs-hadoop",8
+"4","hadoop",2
+"5","hadoop-common",17
+"6","hadoop-glusterfs",11
+"7","hadoop-lzo",25
+"8","hadoop-nagios",3
+"9","hadoop-test",1
+"10","hadoopbuild",1
+"11","mongo-hadoop",4
+"12","msgpack-hadoop",2
+"13","msgpack-hadoop-pig",9
+"14","yhadoop-common",75

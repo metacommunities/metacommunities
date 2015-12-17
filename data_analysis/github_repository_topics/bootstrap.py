@@ -1,10 +1,11 @@
 # coding: utf-8
 
 import pandas as pd
-query = """SELECT repository_url, repository_name, created_at\nFROM [githubarchive:github.timeline] \nwhere type='ForkEvent' and lower(repository_name) contains 'bootstrap'\norder by created_at asc\nLIMIT 200000"""
+query = """SELECT repository_url, repository_name, created_at\n
+FROM [githubarchive:github.timeline] \nwhere type='ForkEvent' and
+lower(repository_name) contains 'bootstrap'\norder by created_at asc\nLIMIT 200000"""
 boot= pd.io.gbq.read_gbq(query)
 boot.shape
-boot.head
 boot.head()
 boot.repository_name.value_counts()
 boot
@@ -394,19 +395,19 @@ get_ipython().magic(u'history ')
 tbs_month_name_cumsum.index
 for key, grp in tbs_month_name_cumsum.groupby(level = 0):
    print key, grp
-  
+
 for key, grp in tbs_month_name_cumsum.groupby(level = 0):
    print key
-  
+
 for key, grp in tbs_month_name_cumsum.groupby(level = 0)[0]:
    print grp
-  
+
 for key, grp in tbs_month_name_cumsum.groupby(level = 0):
    print grp
-  
+
 for key, grp in tbs_month_name_cumsum.groupby(level = 0):
    print grp
-  
+
 for key, grp in tbs_month_name_cumsum.groupby(level = 0):
   >>        plt.plot(grp, label=key)
           #plt.plot(grp['D'], label='rolling ({k})'.format(k=key))
@@ -424,7 +425,7 @@ for key, grp in tbs_month_name_cumsum.groupby(level = 0):
         #plt.plot(grp['D'], label='rolling ({k})'.format(k=key))
         plt.legend(loc='best')
         plt.show()
-  
+
 tbs_month_name_cumsum[0]
 get_ipython().magic(u'pinfo tbs_month_name_cumsum')
 tbs_month_name_cumsum[0:10]
@@ -434,21 +435,21 @@ tbs_month_name_cumsum[0:100].groupby(level=0)
 for k, g in tbs_month_name_cumsum[0:100].groupby(level=0)
 for k, g in tbs_month_name_cumsum[0:100].groupby(level=0):
     print k, g
-    
+
 for k, g in tbs_month_name_cumsum[0:10].groupby(level=0):
     print k, g
-    
+
 for k, g in tbs_month_name_cumsum[0:10].groupby(level=0):
-    
+
     plt.plot(g, label=k)
-    
+
 for k, g in tbs_month_name_cumsum[0:10].groupby(level=0):
-    
+
     plt.plot(g, label=k)
-    
+
 for k, g in tbs_month_name_cumsum[0:10].groupby(level=0):
     print k, g
-    
+
 repos = tbs_month_name_cumsum.groupby(level=0)
 repos[:10]
 repos
@@ -511,17 +512,17 @@ tbs_mcs_top['Android-Bootstrap']
 tbs_mcs_top['Android-Bootstrap'].plot(label = 'Android-Bootstrap')
 for k in tbs_mcs_top.index(level=0):
     plt.plot(tbs_mcs_top[k], label=k)
-    
+
 for k in tbs_mcs_top.index.levels[0]:
     plt.plot(tbs_mcs_top[k], label=k)
-    
+
 for k in tbs_mcs_top.index.levels[0]:
     plt.plot(tbs_mcs_top[k], label=k)
     print k
-    
+
 for k in tbs_mcs_top.index.levels[0]:
     plt.plot(tbs_mcs_top[k].log(), label=k)
-    
+
 tbs_mcs_top = tbs_mcs.ix[ind[ind==True].index]
 tbs_mcs_top
 tbs_mcs_top.log()
@@ -530,16 +531,16 @@ np.log10(tbs_mcs_top)
 tbs_mcs_toplog = np.log10(tbs_mcs_top)
 for k in tbs_mcs_toplog.index.levels[0]:
     plt.plot(tbs_mcs_toplog[k], label=k)
-    
+
 for k in tbs_mcs_toplog.index.levels[0]:
     plt.plot(tbs_mcs_toplog[k], label=k)
-    
+
 ind = tbs_mcs.groupby(level=0).sum() > 2000
 tbs_mcs_top = tbs_mcs.ix[ind[ind==True].index]
 tbs_mcs_toplog = np.log10(tbs_mcs_top)
 for k in tbs_mcs_toplog.index.levels[0]:
     plt.plot(tbs_mcs_toplog[k], label=k)
-    
+
 plt.title('bootstrap repositories with more than 2000 forks since 2012')
 get_ipython().magic(u'pinfo plt.xscale')
 get_ipython().magic(u'pinfo plt.yscale')
