@@ -6,3 +6,7 @@ Wed Dec 16 11:24:51 GMT 2015
 - look up critical making -- Ratto, etc. -- see sss zotero folder for reference -- and see if it helps say what I'm doing
 - read Mackenzie on gaussian copula for stuff on methods
 - read verran paper on relational empiricism from care issue of sss to follow up on verran
+
+Thu Dec 17 11:53:59 GMT 2015
+- characterize github as only one of top 100 media sites that is about coding
+- perhaps add timeline as organizing narrative of the paper? -- see timeline branch for latest version
