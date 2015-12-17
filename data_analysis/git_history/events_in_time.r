@@ -5,15 +5,15 @@
 # an evocative visualization not analytical.
 # ==============================================================================
 
-library(bigrquery)
 library(Rook)
-library(tools)
+library(bigrquery)
 library(brew)
-library(rjson)
-library(ggplot2)
 library(data.table)
-library(plyr)
+library(ggplot2)
 library(lubridate)
+library(plyr)
+library(rjson)
+library(tools)
 
 billing_project <- "237471208995"
 
@@ -21,7 +21,10 @@ billing_project <- "237471208995"
 # only really interested in these event types
 event.types <- c("Push", "Create repository", "Watch", "Issues", "IssueComment",
   "Fork", "PullRequest")
-
+org_events = c('Member', 'TeamAdd')
+comment_events = c('CommitComment', 'PullRequestReviewComment', 'Issues/IssueComment')
+distrib_events = c('Fork', 'Download', 'Release')
+gitflow_events = c('Create branch', 'Create repository', 'Create tag')
 
 # ------------------------------------------------------------------------------
 # get a count of the interesting events on github aggregated by week
@@ -32,16 +35,14 @@ sql <-
   "
   SELECT date(created_at) AS date, type, payload_ref_type AS ref,
     count(*) AS count
-  FROM timeline
+  FROM [githubarchive:github.timeline]
   GROUP BY date, type, ref
   ORDER BY date;
   "
 
-dat.query <- query_exec("metacommunities", "github_explore", sql,
-  billing=billing_project)
+dat.query <- query_exec("metacommunities", query=sql)
 
 dat <- dat.query
-
 # remove 484,172 events without any information
 dat <- dat[!is.na(dat$date), ]
 
@@ -70,16 +71,16 @@ dat$type[dat$type == "IssueComment"] <- "Issues/IssueComment"
 dat$type[dat$type == "Issues"] <- "Issues/IssueComment"
 
 # keep only the 'interesting' events
-#dat <- subset(dat, type %in% event.types)
+dat2 <- subset(dat, type %in% comment_events)
 
 # round to the current month and week
-dat$month <- floor_date(dat$date, "month")
-dat$week <- floor_date(dat$date, "week")
+dat2$month <- floor_date(dat2$date, "month")
+dat2$week <- floor_date(dat2$date, "week")
 
 # ------------------------------------------------------------------------------
 # aggregate to just general activity
 # ------------------------------------------------------------------------------
-agg <- ddply(dat, .(week), summarise, count=sum(count))
+agg <- ddply(dat2, .(week), summarise, count=sum(count))
 
 p.agg <-
   ggplot(agg, aes(x=week, y=count)) +
@@ -88,13 +89,13 @@ p.agg <-
 
 p.agg
 
-ggsave(p.agg, file="~/p_all_events_per_week.png", width=9, height=6)
+ggsave(p.agg, file="p_all_events_per_week.png", width=9, height=6)
 
 # ------------------------------------------------------------------------------
 # colour in for different events
 # ------------------------------------------------------------------------------
 
-agg <- ddply(dat, .(week, type), summarise, count=sum(count))
+agg <- ddply(dat2, .(week, type), summarise, count=sum(count))
 
 #agg$type <- ordered(agg$type, levels=rev(c("PullRequest", "Fork",
 #  "Create repository", "Watch", "Issues/IssueComment", "Push")))
@@ -102,7 +103,10 @@ agg <- ddply(dat, .(week, type), summarise, count=sum(count))
 p.agg <-
   ggplot(agg, aes(x=week, y=count, fill=type, order=desc(type))) +
     geom_area() +
-    labs(x="", y="Number of events per week", fill="Event type")
+    labs(x="", y="Number of events per week", fill="Event type") +
+    ggtitle('Comment type Events ')
 
-ggsave(p.agg, file="~/p_all_events_per_week_by_type.png", width=9, height=4)
+p.agg
+
+ggsave(p.agg, file="Comment_type_events.svg", width=9, height=4)
 

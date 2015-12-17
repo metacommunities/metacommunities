@@ -1,11 +1,9 @@
 import ConfigParser
+import MySQLdb
 import datetime
 import github
 import logging
-import MySQLdb
-import numpy as np
 import os
-import requests
 import sys
 import textwrap
 import time
@@ -26,25 +24,25 @@ def create_logger(hg_path):
   log_file = os.path.join(hg_path, 'history_git.log')
   logger = logging.getLogger('history_git')
   logger.setLevel(logging.INFO)
-  
+
   # create file handler which logs even debug messages
   fh = logging.FileHandler(log_file)
   fh.setLevel(logging.INFO)
-  
+
   # create console handler with a higher log level
   ch = logging.StreamHandler()
   ch.setLevel(logging.INFO)
-  
+
   # create formatter and add it to the handlers
   formatter = logging.Formatter('%(asctime)s  %(levelname)s  %(message)s',
                                 '%Y-%m-%d %H:%M:%S')
   fh.setFormatter(formatter)
   ch.setFormatter(formatter)
-  
+
   # add the handlers to the logger
   logger.addHandler(fh)
   logger.addHandler(ch)
-  
+
   return logger
 
 
@@ -72,7 +70,7 @@ def query_yes_no(question, default="yes"):
     """
     valid = {"yes":True,   "y":True,  "ye":True,
              "no":False,     "n":False}
-    
+
     if default == None:
         prompt = " [y/n] "
     elif default == "yes":
@@ -81,7 +79,7 @@ def query_yes_no(question, default="yes"):
         prompt = " [y/N] "
     else:
         raise ValueError("invalid default answer: '%s'" % default)
-    
+
     while True:
         sys.stdout.write(question + prompt)
         choice = raw_input().lower()
@@ -93,80 +91,81 @@ def query_yes_no(question, default="yes"):
         else:
             sys.stdout.write("Please respond with 'yes' or 'no' "\
                              "(or 'y' or 'n').\n")
-    
+
+
 class HistoryGit():
   """
   History Git is this really grumpy guy who knows exactly how to get all the
   events for a given repo. Just pass him the 'owner/repo' string using .get()
   and he'll get to work, begrudingly.
   """
-  
+
   def __init__(self, path, drop_db=False):
     # load settings
     self.conf = ConfigParser.ConfigParser()
     self.conf.read(os.path.join(path, 'settings.conf'))
-    
+
     # history git settings
     self.commit_stats = self.conf.get('history_git', 'commit_stats')
     self.update_repo_names = self.conf.get('history_git', 'get_repo_names')
-    
+
     # tables!
     self.create_db(drop_db)
-    
+
     # github
     self.gh = github.Github(login_or_token = self.conf.get('github', 'user'),
                             password = self.conf.get('github', 'passwd'))
-  
+
   def open_con(self):
     """
     Open connection to mysql db.
     """
-    
+
     self.con = MySQLdb.connect(host=self.conf.get('mysql', 'host'),
                                user=self.conf.get('mysql', 'user'),
                                passwd=self.conf.get('mysql', 'passwd'),
                                db=self.conf.get('mysql', 'db'),
                                charset='utf8')
     self.cur = self.con.cursor()
-  
-  
+
+
   def close_con(self):
     """
     Commit inserts and close db connection.
     """
-    
+
     self.cur.close()
     self.con.commit()
     self.con.close()
-  
-  
+
+
   def create_db(self, drop_db):
     """
     Maybe drop the database. Create database and tables in the db specific in
     the config, if any don't exists.
     """
-    
+
     logger.info("Checking '%s' database..." % (self.conf.get('mysql', 'db')))
-    
+
     con = MySQLdb.connect(host=self.conf.get('mysql', 'host'),
                           user=self.conf.get('mysql', 'user'),
                           passwd=self.conf.get('mysql', 'passwd'))
     cur = con.cursor()
-    
+
     # wipe those tables
     if drop_db:
       drop_sql = "DROP DATABASE IF EXISTS %s;" % (self.conf.get('mysql', 'db'))
       cur.execute(drop_sql)
       logger.info("Dropped database %s" % (self.conf.get('mysql', 'db')))
-    
+
     # create db
     create_sql = "CREATE DATABASE IF NOT EXISTS %s;" % (self.conf.get('mysql', 'db'))
     cur.execute(create_sql)
-    
+
     # use db
     use_sql = "USE %s;" % (self.conf.get('mysql', 'db'))
     cur.execute(use_sql)
-    
+
     # create tables
     repo_sql = """
         CREATE TABLE IF NOT EXISTS repo (
@@ -189,7 +188,7 @@ class HistoryGit():
         );
     """
     cur.execute(repo_sql)
-    
+
     commit_sql = """
         CREATE TABLE IF NOT EXISTS commit (
           rid                 INTEGER,
@@ -226,7 +225,7 @@ class HistoryGit():
         );
     """
     cur.execute(fork_sql)
-    
+
     issue_sql = """
         CREATE TABLE IF NOT EXISTS issue (
           rid                 INTEGER,
@@ -248,7 +247,7 @@ class HistoryGit():
         );
     """
     cur.execute(issue_sql)
-    
+
     pull_sql = """
         CREATE TABLE IF NOT EXISTS pull (
           id                    INTEGER,
@@ -284,7 +283,7 @@ class HistoryGit():
         );
     """
     cur.execute(pull_sql)
-    
+
     language_sql = """
         CREATE TABLE IF NOT EXISTS language (
           rid           INTEGER NOT NULL,
@@ -294,11 +293,11 @@ class HistoryGit():
         );
     """
     cur.execute(language_sql)
-    
+
     cur.close()
     con.close()
     logger.info("Done.")
-  
+
   def get_repo_names(self):
     if self.update_repo_names:
       question = textwrap.dedent("""
@@ -316,19 +315,19 @@ class HistoryGit():
             time.sleep(600) # 10 mins
             logger.info("Trying again.")
             pass
-  
+
   def populate_repo(self):
     """
     See if there are new repos to add to the database. Only basic details are
     added; id, owner, name, description, is it a fork.
     """
-    
+
     logger.info("  Populating repo table...")
-    
+
     # get connection
     self.open_con()
     logger.info("    Opened database connection.")
-    
+
     # 'since' SQL
     select_sql = """
       SELECT max(id)
@@ -344,7 +343,7 @@ class HistoryGit():
         logger.info("    No records in repo table. Getting all...")
       else:
         logger.info("    Collecting repos with ID greater than %i..." % (since))
-      
+
       start_time = time.time()
       self.n = 0
       self.N = 0
@@ -356,12 +355,12 @@ class HistoryGit():
         except:
           print("\nError with repo: %s\n" % (rp._rawData['full_name']))
           raise
-        
+
         # after 50k repos memory starts to get close to full, so break the
         # for loop
         if self.N == 50000:
           break
-      
+
       self.con.commit()
       # results
       time_taken = time.time() - start_time
@@ -371,24 +370,24 @@ class HistoryGit():
       # so break the while loop, otherwise we should "restart" the for loop
       if self.N == 0:
         break
-    
+
     # goodbye
     self.close_con()
     logger.info("    Closed database connection.")
-  
-  
+
+
   def save_repo(self, rp):
     """
     Basic information for a repo is saved when scraped; id, name, full_name,
     description, fork, owner.
     """
-    
+
     data = rp._rawData
-    
+
     # repo level
     keys = ['id', 'name', 'full_name', 'description', 'fork']
     dat = { key: data[key] for key in keys }
-    
+
     # owner level
     try:
       dat['owner'] = data['owner']['login']
@@ -398,44 +397,44 @@ class HistoryGit():
 
     # stats last checked
     dat['last_updated'] = datetime.datetime.fromtimestamp(time.time()) # Now
-    
+
     self.insert(dat, "repo")
-  
-  
+
+
   def get(self, owner_repo):
     """
-    Retrieve backlog for a specific 'owner/repo'. Backlog consists of 
+    Retrieve backlog for a specific 'owner/repo'. Backlog consists of
     commits, issues, forks and pulls.
     """
-    
+
     # premable
     self.owner_repo = owner_repo
     self.owner, self.repo = owner_repo.split('/')
     logger.info("Starting event collection for %s..." % (self.owner_repo))
-    
+
     # get connection
     self.open_con()
     logger.info("  Opened database connection.")
-    
+
     # go
     self.github_repo = self.gh.get_user(self.owner).get_repo(self.repo)
-    
+
     self.get_commits()
     self.get_issues()
     self.get_forks()
     self.get_pulls()
-    
+
     # goodbye
     self.close_con()
     logger.info("  Closed database connection.")
-  
-  
+
+
   def set_until(self, table, dt, owner_repo="owner_repo", until_type="None"):
     """
     Determine the earliest date for a specific 'owner/repo' and hence retrieve
     events earlier than this.
     """
-    
+
     # any existing events in the table for this repo?
     select_sql = """
       SELECT min(%s)
@@ -454,21 +453,21 @@ class HistoryGit():
     else:
       until -= datetime.timedelta(0,1)
       logger.info("    Collecting %ss before %s..." % (table, until))
-    
+
     return until
-  
+
   def insert(self, dat, table):
     """
     Generate an INSERT statement off of the keys of the dat dict. Determine
     if records are commited to the db.
     """
-    
+
     fields = ', '.join(dat.viewkeys())
     values = ')s, %('.join(dat.viewkeys())
     insert_sql = "INSERT INTO " + table + " (" + fields + ") VALUES (%(" + values + ")s);"
-    
+
     self.cur.execute(insert_sql, dat)
-    
+
     # shall we commit to the db? -- Oh the irony...
     if self.n >= 1000:
       self.con.commit()
@@ -476,29 +475,29 @@ class HistoryGit():
       self.n = 0
     self.n += 1
     self.N += 1
-  
-  
+
+
   def get_commits(self):
     logger.info("  Getting commits...")
     until = self.set_until("commit", "committer_date")
     self.n = 0
     self.N = 0
-    
+
     # start processing the commits
     start_time = time.time()
-    
+
     for cm in self.github_repo.get_commits(until=until):
       try:
         self.save_commit(cm)
       except:
         print("\nError with SHA: %s\n" % (cm._rawData['sha']))
         raise
-    
+
     self.con.commit()
     # results
     time_taken = time.time() - start_time
     logger.info("    Processed %s commits in %.2fs." % (format(self.N, ",d"), time_taken))
-  
+
   def save_commit(self, cm):
     data = cm._rawData
     dat = {
@@ -506,14 +505,14 @@ class HistoryGit():
       'repo': self.repo,
       'owner_repo': self.owner_repo
     }
-    
+
     dat['sha'] = data['sha']
-    
+
     try:
       dat['author_login'] = data['author']['login']
     except (TypeError, KeyError):
       dat['author_login'] = data['commit']['author']['name']
-      
+
     dat['author_date'] = data['commit']['author']['date']
 
     if cm.committer is None:
@@ -522,39 +521,39 @@ class HistoryGit():
       dat['committer_login'] = data['committer']['login']
 
     dat['committer_date']  = data['commit']['committer']['date']
-    
+
     if self.commit_stats:
-      dat['files_n']         = len(cm.files)  
+      dat['files_n']         = len(cm.files)
       dat['stats_additions'] = cm.stats.additions
       dat['stats_deletions'] = cm.stats.deletions
       dat['stats_total']     = cm.stats.total
-    
+
     self.insert(dat, "commit")
-  
-  
+
+
   def get_forks(self):
     logger.info("  Getting forks...")
     until = self.set_until("fork", "created_at", "parent_owner_repo",
       until_type="dt")
     self.n = 0
     self.N = 0
-    
+
     # start processing the commits
     start_time = time.time()
-    
+
     for frk in self.github_repo.get_forks():
       try:
         self.save_fork(frk, until)
       except:
         print("\nError with fork: %i\n" % (frk._rawData['id']))
         raise
-    
+
     self.con.commit()
-    
+
     # results
     time_taken = time.time() - start_time
     logger.info("    Processed %i forks in %.2fs." % (self.N, time_taken))
-  
+
   def save_fork(self, fork, until):
     data = fork._rawData
 
@@ -571,10 +570,10 @@ class HistoryGit():
         'updated_at': data['updated_at'],
         'pushed_at': data['pushed_at']
       }
-      
+
       self.insert(dat, "fork")
-  
-  
+
+
   def get_issues(self):
     logger.info("  Getting issues...")
     until = self.set_until("issue", "created_at", until_type="ts")
@@ -582,7 +581,7 @@ class HistoryGit():
     self.N = 0
     start_time = time.time()
     self.issues_enabled = True
-    
+
     try:
       for issue in self.github_repo.get_issues(state="all"):
         self.save_issue(issue, until)
@@ -592,63 +591,63 @@ class HistoryGit():
         pass
       else:
         raise
-    
+
     self.con.commit()
-    
+
     # results
     time_taken = time.time() - start_time
     logger.info("    Processed %i issues in %.2fs." % (self.N, time_taken))
-  
+
   def save_issue(self, issue, until):
     data = issue._rawData
-    
+
     if issue.created_at < until:
       dat = {
         'owner': self.owner,
         'repo': self.repo,
         'owner_repo': self.owner_repo,
       }
-      
+
       # issue level
       keys = ['id', 'number', 'state', 'created_at', 'updated_at',
         'closed_at', 'title', 'comments']
       dat.update({ key: data[key]  for key in keys })
-      
+
       # assignee level
       try:
         dat['assignee_login'] = data['assignee']['login']
       except TypeError:
         pass
-      
+
       # user level
       dat['user_login'] = data['user']['login']
-      
+
       try:
         dat['duration'] = (dat['closed_at'] - dat['created_at']).total_seconds
       except TypeError:
         pass
-      
+
       if data['pull_request']['html_url'] is None:
         dat['pull_request'] = 0
       else:
         dat['pull_request'] = 1
-      
+
       try:
         self.insert(dat, "issue")
       except:
         print(dat)
         raise
-  
+
   def get_pulls(self):
     logger.info("  Getting pulls...")
     until = self.set_until("pull", "created_at", "base_owner_repo",
       until_type="ts")
     self.n = 0
     self.N = 0
-    
+
     # start processing the commits
     start_time = time.time()
-    
+
     for pull in self.github_repo.get_pulls(state="all"):
       try:
         self.save_pull(pull, until)
@@ -657,66 +656,66 @@ class HistoryGit():
         print("Here's the pull object:")
         pretty(pull._rawData)
         raise
-    
+
     self.con.commit()
-    
+
     # results
     time_taken = time.time() - start_time
     logger.info("    Processed %i pulls in %.2fs." % (self.N, time_taken))
-  
+
   def save_pull(self, pull, until):
     data = pull._rawData
-    
+
     if pull.created_at < until:
       dat = {}
-      
+
       # pull level
       keys = ['id', 'number', 'state', 'title', 'body', 'created_at',
         'updated_at', 'closed_at', 'merged_at', 'merge_commit_sha']
       dat.update({ key: data[key]  for key in keys })
-        
+
       # assignee level
       try:
         dat['assignee_login'] = data['assignee']['login']
       except TypeError:
         pass
-            
+
       # generated stats
       dat['commits'] = pull.commits
       dat['comments'] = pull.comments
-      
+
       # user level
       try:
         dat['user_login'] = data['user']['login']
       except TypeError:
         pass
-            
+
       # head level
       keys = ['label', 'ref', 'sha']
       dat.update({ 'head_' + key: data['head'][key]  for key in keys })
-      
+
       try:
         dat['head_owner'] = data['head']['user']['login']
       except TypeError:
         pass
-      
+
       # head repo level
       try:
         keys = ['fork', 'created_at', 'updated_at', 'pushed_at']
         dat.update({ 'head_' + key: data['head']['repo'][key]  for key in keys })
-        
+
         dat['head_repo'] = data['head']['repo']['name']
         dat['head_owner_repo'] = data['head']['repo']['full_name']
       except TypeError:
         pass
-      
+
       # base level
       keys = ['label', 'ref', 'sha']
       dat.update({ 'base_' + key: data['base'][key]  for key in keys })
       dat['base_owner'] = data['base']['user']['login']
       dat['base_repo'] = data['base']['repo']['name']
       dat['base_owner_repo'] = data['base']['repo']['full_name']
-      
+
       self.insert(dat, "pull")
 
 
