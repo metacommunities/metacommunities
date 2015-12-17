@@ -1,0 +1,10 @@
+library(ggplot2)
+library(stringr)
+fs = sapply(dir(), file.size)
+file_date = str_replace(names(fs), '\\.json\\.gz', '')
+file_date = str_replace(file_date, '\\.json', '')
+datetimes = strptime(file_date, '%Y-%m-%d-%H')
+df = data.frame(date = datetimes, filesize = fs)
+g = ggplot(df, aes(x=date, y=filesize, alpha=0.7 )) + geom_point() +
+ggtitle('File sizes of events by the hour from GithubArchive.org')
+print(g)
