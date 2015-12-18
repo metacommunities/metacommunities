@@ -23,7 +23,7 @@ event.types <- c("Push", "Create repository", "Watch", "Issues", "IssueComment",
   "Fork", "PullRequest")
 org_events = c('Member', 'TeamAdd')
 comment_events = c('CommitComment', 'PullRequestReviewComment', 'Issues/IssueComment')
-distrib_events = c('Fork', 'Download', 'Release')
+distrib_events = c('Public', 'Fork', 'Download', 'Release')
 gitflow_events = c('Create branch', 'Create repository', 'Create tag')
 
 # ------------------------------------------------------------------------------
