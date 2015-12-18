@@ -10,3 +10,10 @@ Wed Dec 16 11:24:51 GMT 2015
 Thu Dec 17 11:53:59 GMT 2015
 - characterize github as only one of top 100 media sites that is about coding
 - perhaps add timeline as organizing narrative of the paper? -- see timeline branch for latest version
+
+
+Fri Dec 18 13:51:19 GMT 2015
+- add some open source literature like Kelty & Coleman
+- if using capital number, write a short passage describing it
+- will probably be a combination of desrosieres and verran, with some boltanski/thevenot?
+- list sections/minianalyses that need to be written
