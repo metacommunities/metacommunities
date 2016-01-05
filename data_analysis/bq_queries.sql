@@ -23,8 +23,53 @@ GROUP BY RepoEvents, repository_name
 ORDER BY RepoEvents DESC
 limit 100;
 
+/*
+repo census with event counts and durations
+*/
+SELECT repository_url,
+count(repository_url) AS Events,
+datediff(max(repository_pushed_at), min(repository_created_at)) as Duration,
+count(distinct(actor_attributes_login)) AS Actors,
+sum(if(type = 'PushEvent', 1, 0)) AS PushEvents,
+sum(if(type = 'CreateEvent', 1, 0)) AS CreateEvents,
+sum(if(type = 'CreateEvent' AND payload_ref_type = 'branch', 1, 0)) AS CreateBranchEvents,
+sum(if(type = 'WatchEvent', 1, 0)) AS WatchEvents,
+sum(if(type = 'IssueCommentEvent', 1, 0)) AS IssueCommentEvents,
+sum(if(type = 'IssuesEvent', 1, 0)) AS IssuesEvents,
+sum(if(type = 'ForkEvent', 1, 0)) AS ForkEvents,
+sum(if(type = 'GistEvent', 1, 0)) AS GistEvents,
+sum(if(type = 'PullRequestEvent', 1, 0)) AS PullRequestEvents,
+sum(if(type = 'FollowEvent', 1, 0)) AS FollowEvents,
+sum(if(type = 'GollumEvent', 1, 0)) AS GollumEvents,
+sum(if(type = 'CommitCommentEvent', 1, 0)) AS CommitCommentEvents,
+sum(if(type = 'PullRequestReviewCommentEvent', 1, 0)) AS PullRequestReviewCommentEvents,
+sum(if(type = 'DeleteEvent', 1, 0)) AS DeleteEvents,
+sum(if(type = 'MemberEvent', 1, 0)) AS MemberEvents,
+sum(if(type = 'DownloadEvent', 1, 0)) AS DownloadEvents,
+sum(if(type = 'PublicEvent', 1, 0)) AS PublicEvents,
+sum(if(type = 'ForkApplyEvent', 1, 0)) AS ForkApplyEvents,
+min(repository_created_at) AS repo_created,
+max(repository_pushed_at) AS repo_pushed_at,
+min(repository_watchers) AS minWatchers,
+max(repository_watchers) as maxWatchers,
+min(repository_size) AS minSize,
+max(repository_size) AS maxSize,
+min(repository_forks) AS minForks,
+max(repository_forks) AS maxForks,
+max(repository_language) AS language,
+IF(max(repository_fork) = 'true', 1, 0) AS fork
 
-/*fork - pull requests
+FROM [githubarchive:github.timeline]
+GROUP EACH BY repository_url
+ORDER BY Events DESC
+limit 100;
+
+/*
+GET COMMIT MESSAGES
+*/
+SELECT payload_commit_msg FROM [githubarchive:github.timeline] where type='PushEvent' LIMIT 100
+
+/*FORK - PULL REQUESTS
 - only 1 month time window to deal with size of data
 - 3
 */
@@ -485,6 +530,46 @@ IF(max(repository_fork) = 'true', 1, 0) AS fork
 FROM [github_explore.timeline]
 GROUP EACH BY repository_url
 ORDER BY Events Desc
+
+
+-- version of the repo census that shows duration
+
+SELECT repository_url,
+count(repository_url) AS Events,
+datediff(repository_pushed_at, repository_created_at) as Duration,
+count(distinct(actor_attributes_login)) AS Actors,
+sum(if(type = 'PushEvent', 1, 0)) AS PushEvents,
+sum(if(type = 'CreateEvent', 1, 0)) AS CreateEvents,
+sum(if(type = 'CreateEvent' AND payload_ref_type = 'branch', 1, 0)) AS CreateBranchEvents,
+sum(if(type = 'WatchEvent', 1, 0)) AS WatchEvents,
+sum(if(type = 'IssueCommentEvent', 1, 0)) AS IssueCommentEvents,
+sum(if(type = 'IssuesEvent', 1, 0)) AS IssuesEvents,
+sum(if(type = 'ForkEvent', 1, 0)) AS ForkEvents,
+sum(if(type = 'GistEvent', 1, 0)) AS GistEvents,
+sum(if(type = 'PullRequestEvent', 1, 0)) AS PullRequestEvents,
+sum(if(type = 'FollowEvent', 1, 0)) AS FollowEvents,
+sum(if(type = 'GollumEvent', 1, 0)) AS GollumEvents,
+sum(if(type = 'CommitCommentEvent', 1, 0)) AS CommitCommentEvents,
+sum(if(type = 'PullRequestReviewCommentEvent', 1, 0)) AS PullRequestReviewCommentEvents,
+sum(if(type = 'DeleteEvent', 1, 0)) AS DeleteEvents,
+sum(if(type = 'MemberEvent', 1, 0)) AS MemberEvents,
+sum(if(type = 'DownloadEvent', 1, 0)) AS DownloadEvents,
+sum(if(type = 'PublicEvent', 1, 0)) AS PublicEvents,
+sum(if(type = 'ForkApplyEvent', 1, 0)) AS ForkApplyEvents,
+min(repository_created_at) AS repo_created,
+max(repository_pushed_at) AS repo_pushed_at,
+min(repository_watchers) AS minWatchers,
+max(repository_watchers) as maxWatchers,
+min(repository_size) AS minSize,
+max(repository_size) AS maxSize,
+min(repository_forks) AS minForks,
+max(repository_forks) AS maxForks,
+max(repository_language) AS language,
+IF(max(repository_fork) = 'true', 1, 0) AS fork
+FROM [githubarchive:github.timeline]
+GROUP EACH BY repository_url, Duration
+ORDER BY Events Desc
+limit 100;
 
 
 /* The following queries are for looking at ongoing relationships between base and head repos through pull requests
