@@ -1,25 +1,42 @@
-/*Stu's query on repositories: how often repos are used
+/*Stu's query on repositories: how many events do repos have.
+Useful as a way of cutting up the basic repo census into numerous small event repos. 
+Gives no names or details. Plots is a power law distribution.
 ------------------------------------------------ */
 SELECT RepoEvents, COUNT(*) AS Freq
 FROM
 (
-    SELECT repository_name, COUNT(repository_name) AS RepoEvents
+    SELECT repository_url, COUNT(repository_url) AS RepoEvents
     FROM [githubarchive:github.timeline]
-    GROUP BY repository_name
+    GROUP BY repository_url
 ) MyTable
 GROUP BY RepoEvents
 ORDER BY Freq DESC
+limit 1000
 
-/*  Top 100 Repos by number of events */
+/* how many events for fork repos account for
+*/
 
-SELECT repository_name, RepoEvents
+SELECT RepoEvents, COUNT(*) AS Freq
 FROM
 (
-    SELECT repository_name, COUNT(repository_name) AS RepoEvents
+    SELECT repository_url, COUNT(repository_url)  AS RepoEvents
+        FROM [githubarchive:github.timeline]
+        where repository_fork = "true"
+            GROUP each BY repository_url
+        ) MyTable
+GROUP each BY RepoEvents
+ORDER BY Freq DESC
+limit 1000
+
+/*  Top 100 Repos by number of events */
+SELECT repository_url, RepoEvents
+FROM
+(
+    SELECT repository_url, COUNT(repository_name) AS RepoEvents
     FROM [githubarchive:github.timeline]
-    GROUP BY repository_name
+    GROUP each BY repository_url
 ) MyTable
-GROUP BY RepoEvents, repository_name
+GROUP each BY RepoEvents, repository_url
 ORDER BY RepoEvents DESC
 limit 100;
 
@@ -181,7 +198,6 @@ ORDER BY PullRequests DESC, ForkEvents DESC
 limit 100;
 
 /* Richard's latest wide pull request table
-Really good one!
 */
 
 SELECT payload_pull_request_base_repo_url, 
