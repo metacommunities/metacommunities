@@ -1,0 +1,887 @@
+#table for prevalence of organisation over time
+CREATE TABLE  `git`.`organization_sample_1percent` (
+`repository_organization` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`repository_url` TEXT  COLLATE utf8_bin NULL ,
+`type` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`created_at` DATE NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+
+#table for repo turnover (pulling data for old repos from API)
+CREATE TABLE  `git`.`api_old_repo_commits` (
+`full_name` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`pre-timeline-commits` INT (10) NULL,
+`first-commit` DATE NULL,
+`last-commit` DATE NULL,
+`post-timeline-commits` INT (10) NULL,
+`last-pt-commit` DATE NULL,
+ PRIMARY  KEY (  `full_name`  )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+#tables for fork/parent relationships
+CREATE TABLE  `git`.`bq_forks_data` (
+`repository_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`PushEvents` INT(10) NULL,
+`Pushers` INT (10) NULL,
+`PushesByOwner` INT (10) NULL,
+`minWatchers` INT (10) NULL,
+`maxWatchers` INT (10) NULL,
+`minSize` INT (10) NULL,
+`maxSize` INT (10) NULL,
+`minForks` INT (10) NULL,
+`maxForks` INT (10) NULL,
+`created_at` DATETIME NULL,
+`last_push` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_forks_parentdata` (
+`parent_repo` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`Parent_PushEvents` INT(10) NULL,
+`Parent_Pushers` INT (10) NULL,
+`Parent_PushesByOwner` INT (10) NULL,
+`Parent_minWatchers` INT (10) NULL,
+`Parent_maxWatchers` INT (10) NULL,
+`Parent_minSize` INT (10) NULL,
+`Parent_maxSize` INT (10) NULL,
+`Parent_minForks` INT (10) NULL,
+`Parent_maxForks` INT (10) NULL,
+`Parent_created_at` DATETIME NULL,
+`Parent_last_push` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+
+
+CREATE TABLE  `git`.`bq_forks_parent_pushers` (
+`parent_repo` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`Parent_Pusher` VARCHAR (100) NULL,
+`Parent_PushEvents` INT(10) NULL,
+`Parent_first_push` DATETIME NULL,
+`Parent_last_push` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+CREATE TABLE  `git`.`bq_forks_pushers` (
+`fork_repo` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`pusher` VARCHAR (100) NULL,
+`PushEvents` INT(10) NULL,
+`first_push` DATETIME NULL,
+`last_push` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_forks_PR_base` (
+`BaseURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`HeadURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`PRUser` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`PR_Events` INT (10) NULL,
+`PR_OpenEvents` INT (10) NULL,
+`PR_CloseEvents` INT (10) NULL,
+`PR_DistinctPullRequests` INT (10) NULL,
+`PR_Merged` INT (10) NULL,
+`PR_SelfMerges` INT (10) NULL,
+`PR_first_pr` DATETIME NULL,
+`PR_last_pr` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_forks_PR_head` (
+`HeadURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`BaseURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`PRUser` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`PR_Events` INT (10) NULL,
+`PR_OpenEvents` INT (10) NULL,
+`PR_CloseEvents` INT (10) NULL,
+`PR_DistinctPullRequests` INT (10) NULL,
+`PR_Merged` INT (10) NULL,
+`PR_SelfMerges` INT (10) NULL,
+`PR_first_pr` DATETIME NULL,
+`PR_last_pr` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_forks_PR_parent_base` (
+`BaseURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`HeadURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`PRUser` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`PR_Events` INT (10) NULL,
+`PR_OpenEvents` INT (10) NULL,
+`PR_CloseEvents` INT (10) NULL,
+`PR_DistinctPullRequests` INT (10) NULL,
+`PR_Merged` INT (10) NULL,
+`PR_SelfMerges` INT (10) NULL,
+`PR_first_pr` DATETIME NULL,
+`PR_last_pr` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_forks_PR_parent_head` (
+`HeadURL` VARCHAR(300)  COLLATE utf8_bin NULL ,
+`BaseURL` VARCHAR(300)  COLLATE utf8_bin NULL ,
+`PRUser` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`PR_Events` INT (10) NULL,
+`PR_OpenEvents` INT (10) NULL,
+`PR_CloseEvents` INT (10) NULL,
+`PR_DistinctPullRequests` INT (10) NULL,
+`PR_Merged` INT (10) NULL,
+`PR_SelfMerges` INT (10) NULL,
+`PR_first_pr` DATETIME NULL,
+`PR_last_pr` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_fork_parent_relations` (
+`ForkTable_fork_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`ParentTable_repository_url` VARCHAR(250)  COLLATE utf8_bin NULL 
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+
+
+#tables to extract bigquery tables to
+
+CREATE TABLE  `git`.`bq_Base_Head_Pairs_NoIntra` (
+`payload_pull_request_base_repo_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`payload_pull_request_head_repo_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`pullrequestevents` INT (10) NULL,
+`DistinctPullRequests` INT (10) NULL,
+`FirstPR` DATETIME NULL,
+`LastPR` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_PR_BasePushers` (
+`BaseURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`BasePusher` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`Base_PushEvents` INT (10) NULL,
+`Base_first_push` DATETIME NULL,
+`Base_last_push` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_PR_HeadPushers` (
+`HeadURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`HeadPusher` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`Head_PushEvents` INT (10) NULL,
+`Head_first_push` DATETIME NULL,
+`Head_last_push` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+#use this to generate full_name for repo_events tables
+ALTER TABLE  `repo_events_bq_single` ADD  `full_name` VARCHAR( 120 ) NOT NULL;
+UPDATE repo_events_bq_single SET full_name = (SELECT SUBSTRING(repository_url FROM 20) );
+
+ALTER TABLE  `repo_events_bq_all` ADD  `full_name` VARCHAR( 120 ) NOT NULL;
+UPDATE repo_events_bq_all SET full_name = (SELECT SUBSTRING(repository_url FROM 20) );
+
+ALTER TABLE  `repo_events_bq_small` ADD  `full_name` VARCHAR( 120 ) NOT NULL;
+UPDATE repo_events_bq_small SET full_name = (SELECT SUBSTRING(repository_url FROM 20) );
+
+
+ALTER TABLE  `repo_pull_requests` ADD  `full_name` VARCHAR( 120 ) NOT NULL;
+UPDATE repo_pull_requests SET full_name = (SELECT SUBSTRING( payload_pull_request_base_repo_url
+FROM 29 )) ;
+
+
+CREATE TABLE  `git`.`descriptions` (
+`repository_url` varchar( 250  )  COLLATE utf8_bin NULL ,
+ `description` TEXT COLLATE utf8_bin NULL,
+ `fork` varchar(5) NULL ,
+`Events` INT (10) NULL,
+PRIMARY KEY (  `repository_url` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+
+CREATE  TABLE  `git`.`repo_pull_requests_heads` (  `payload_pull_request_head_repo_url` varchar( 250  )  COLLATE utf8_bin NULL ,
+`payload_pull_request_base_repo_url` varchar( 250  )  COLLATE utf8_bin NULL ,
+ `PullRequestEvents` int( 11  )  NULL ,
+ `DistinctPullRequests` int( 11  )  NULL ,
+ `DistinctHeadRepos` int( 11  )  NULL ,
+ `PullRequestOpenEvents` int( 11  )  NULL ,
+  `PullRequestCloseEvents` int( 11  )  NULL ,
+ `IntraRepoPullRequestOpenEvents` int( 11  )  NULL ,
+ `MergedPullRequests` int( 11  )  NULL ,
+ `UsersWhoMerge` int( 11  )  NULL ,
+ `PullRequestMergedBySameUser` int( 11  )  NULL, 
+ `FirstPullRequest` datetime NULL,
+ `LastPullRequest` datetime NULL,
+ `HeadRepoCreated` datetime NULL,
+ `fork` varchar(5) NULL ,
+ PRIMARY  KEY (  `payload_pull_request_head_repo_url`  )  ) ENGINE  = InnoDB  DEFAULT CHARSET  = utf8 COLLATE  = utf8_bin;
+
+
+#this one is a hack for the sql on virtual machine to use it for lda
+ALTER TABLE  `repo_events_bq` ADD  `full_name` VARCHAR( 120 ) NOT NULL;
+UPDATE repo_events_bq_all SET full_name = (SELECT SUBSTRING(repository_url FROM 20) );
+
+CREATE TABLE  `git`.`readmes2` (
+ `full_name` VARCHAR( 120 ) COLLATE utf8_bin NOT NULL ,
+ `readme` TEXT COLLATE utf8_bin,
+ `language` varchar( 20  )  COLLATE utf8_bin NULL ,
+ `Events` int( 11  )  NULL ,
+ `PullRequestEvents` int( 11  )  NULL ,
+ `fork` int( 1  )  NULL ,
+ `repo_created` datetime NULL ,
+ `repo_pushed_at` datetime NULL ,
+ `Actors` int( 11  )  NULL ,
+ `PushEvents` int( 11  )  NULL,
+PRIMARY KEY (  `full_name` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+CREATE TABLE  `git`.`readmes2` (
+`full_name` VARCHAR( 120 ) COLLATE utf8_bin NOT NULL ,
+ `readme` TEXT COLLATE utf8_bin,
+PRIMARY KEY (  `full_name` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+;
+#this makes the repo events table
+
+ CREATE  TABLE  `git`.`repo_events_bq` (  `repository_url` varchar( 140  )  COLLATE utf8_bin NULL ,
+ `Events` int( 11  )  NULL ,
+ `Actors` int( 11  )  NULL ,
+ `PushEvents` int( 11  )  NULL ,
+ `CreateEvents` int( 11  )  NULL ,
+ `CreateBranchEvents` int( 11  )  NULL ,
+ `WatchEvents` int( 11  )  NULL ,
+ `IssueCommentEvents` int( 11  )  NULL ,
+ `IssuesEvents` int( 11  )  NULL ,
+ `ForkEvents` int( 11  )  NULL ,
+ `GistEvents` int( 11  )  NULL ,
+ `PullRequestEvents` int( 11  )  NULL ,
+ `FollowEvents` int( 11  )  NULL ,
+ `GollumEvents` int( 11  )  NULL ,
+ `CommitCommentEvents` int( 11  )  NULL ,
+ `PullRequestReviewCommentEvents` int( 11  )  NULL ,
+ `DeleteEvents` int( 11  )  NULL ,
+ `MemberEvents` int( 11  )  NULL ,
+ `DownloadEvents` int( 11  )  NULL ,
+ `PublicEvents` int( 11  )  NULL ,
+ `ForkApplyEvents` int( 11  )  NULL ,
+ `repo_created` datetime NULL ,
+ `repo_pushed_at` datetime NULL ,
+ `minWatchers` int( 11  )  NULL ,
+ `maxWatchers` int( 11  )  NULL ,
+ `minSize` int( 11  )  NULL ,
+ `maxSize` int( 11  )  NULL ,
+ `minForks` int( 11  )  NULL ,
+ `maxForks` int( 11  )  NULL ,
+ `language` varchar( 20  )  COLLATE utf8_bin NULL ,
+ `fork` int( 1  )  NULL ,
+ PRIMARY  KEY (  `repository_url`  )  ) ENGINE  = InnoDB  DEFAULT CHARSET  = utf8 COLLATE  = utf8_bin;
+
+#pull requests table 
+CREATE  TABLE  `git`.`repo_pull_requests` (  `payload_pull_request_base_repo_url` varchar( 180  )  COLLATE utf8_bin NULL ,
+ `PullRequestEvents` int( 11  )  NULL ,
+ `DistinctPullRequests` int( 11  )  NULL ,
+ `DistinctHeadRepos` int( 11  )  NULL ,
+ `PullRequestOpenEvents` int( 11  )  NULL ,
+  `PullRequestCloseEvents` int( 11  )  NULL ,
+ `IntraRepoPullRequestOpenEvents` int( 11  )  NULL ,
+ `MergedPullRequests` int( 11  )  NULL ,
+ `UsersWhoMerge` int( 11  )  NULL ,
+ `PullRequestMergedBySameUser` int( 11  )  NULL, 
+ PRIMARY  KEY (  `payload_pull_request_base_repo_url`  )  ) ENGINE  = InnoDB  DEFAULT CHARSET  = utf8 COLLATE  = utf8_bin;
+ 
+ 
+#special table for single event repos 
+ 
+load data local infile 'E:/uniq.csv' into table tblUniq fields terminated by ','
+enclosed by '"'
+lines terminated by '\n'
+
+''' This is for making the 'repos' table for the data to go in
+CREATE TABLE  `git`.`repos` (
+`id` INT( 11 ) NOT NULL ,
+ `name` TEXT COLLATE utf8_bin NOT NULL ,
+ `full_name` TEXT COLLATE utf8_bin NOT NULL ,
+ `private` TINYINT( 1 ) NOT NULL ,
+ `description` TEXT COLLATE utf8_bin NOT NULL ,
+ `fork` TINYINT( 1 ) NOT NULL ,
+PRIMARY KEY (  `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin
+
+CREATE TABLE  `git`.`repo_no_full` (
+`full_name` TEXT COLLATE utf8_bin NOT NULL 
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+Table for expanded repo informaton
+CREATE TABLE  `git`.`fork_repos2` (
+`id` INT( 11 ) NOT NULL ,
+ `full_name` VARCHAR( 50 ) COLLATE utf8_bin NOT NULL ,
+ `description` TEXT COLLATE utf8_bin NOT NULL ,
+ `language` VARCHAR( 20 ) COLLATE utf8_bin ,
+ `fork` TINYINT( 1 ) NOT NULL ,
+ `forks` INT( 7 ) NOT NULL ,
+ `size` INT( 10 ) NOT NULL ,
+ `watchers` INT( 7 ) NOT NULL ,
+ `open_issues` INT( 5 ) NOT NULL ,
+ `created_at` DATETIME  ,
+ `pushed_at` DATETIME  ,
+ `updated_at` DATETIME  ,
+ `has_downloads` TINYINT( 1 ) NOT NULL ,
+ `has_issues` TINYINT( 1 ) NOT NULL ,
+ `has_wiki` TINYINT( 1 ) NOT NULL ,
+ `parent_id` INT( 11 ) NOT NULL ,
+ `parent_name` VARCHAR( 50 ) COLLATE utf8_bin NOT NULL ,
+PRIMARY KEY (  `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+CREATE TABLE  `git`.`repo_full` (
+`id` INT( 11 ) NOT NULL ,
+ `full_name` VARCHAR( 50 ) COLLATE utf8_bin NOT NULL ,
+ `description` TEXT COLLATE utf8_bin NOT NULL ,
+ `language` VARCHAR( 20 ) COLLATE utf8_bin ,
+ `fork` TINYINT( 1 ) NOT NULL ,
+ `forks` INT( 7 ) NOT NULL ,
+ `size` INT( 10 ) NOT NULL ,
+ `watchers` INT( 7 ) NOT NULL ,
+ `open_issues` INT( 5 ) NOT NULL ,
+ `created_at` DATETIME  ,
+ `pushed_at` DATETIME ,
+ `updated_at` DATETIME  ,
+ `has_downloads` TINYINT( 1 ) NOT NULL ,
+ `has_issues` TINYINT( 1 ) NOT NULL ,
+ `has_wiki` TINYINT( 1 ) NOT NULL ,
+ `parent_id` INT( 11 ) NOT NULL ,
+ `parent_name` VARCHAR( 50 ) COLLATE utf8_bin NOT NULL ,
+PRIMARY KEY (  `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+Table for Pull requests
+CREATE TABLE  `git`.`pull_requests` (
+`id` INT( 11 ) NOT NULL ,
+ `state` VARCHAR( 10 ) COLLATE utf8_bin NOT NULL ,
+ `title` TEXT COLLATE utf8_bin NOT NULL ,
+ `body` TEXT COLLATE utf8_bin NOT NULL ,
+ `number` INT (7) NOT NULL ,
+ `merged_at` DATETIME  ,
+ `created_at` DATETIME  ,
+ `closed_at` DATETIME  ,
+ `head_created_at` DATETIME  ,
+ `head_full_name` VARCHAR( 60 ) COLLATE utf8_bin NOT NULL ,
+ `head_fork` TINYINT( 1 ) NOT NULL ,
+ `head_forks` INT( 7 ) NOT NULL ,
+ `base_full_name` VARCHAR( 60 ) COLLATE utf8_bin NOT NULL ,
+  `pull_user` VARCHAR( 40 ) COLLATE utf8_bin NOT NULL ,
+PRIMARY KEY (  `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+'''
+#organizations
+CREATE TABLE  `git`.`organizations` (
+`repository_organization` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`Repos` INT NULL ,
+`PushEvents` INT NULL ,
+`Pushers` INT NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+#table for organisations/repos/pushers
+CREATE TABLE  `git`.`organizations_repos_pushers` (
+`actor` VARCHAR(120) COLLATE utf8_bin NULL,
+`repository_organization` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`repository_url` TEXT  COLLATE utf8_bin NULL ,
+`Pushes` INT NULL ,
+`FirstPush` DATETIME NULL,
+`LastPush` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+
+#table for actors number of orgs/repos
+CREATE TABLE  `git`.`organizations_actor_pushedto` (
+`actor` VARCHAR(120) COLLATE utf8_bin NULL,
+`number_of_orgs` INT NULL ,
+`number_of_repos` INT NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+#organizations_megatable
+CREATE TABLE  `git`.`organizations_megatable3` (
+`repository_organization` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`Repos` INT NULL ,
+`PushEvents` INT NULL ,
+`Pushers` INT NULL ,
+`FirstPush` DATETIME NULL,
+`LastPush` DATETIME NULL,
+`PushDurationDays` FLOAT NULL ,
+`repository_homepages` INT NULL ,
+`repository_owners` INT NULL ,
+`repository_languages` INT NULL ,
+`WatchEvents` INT NULL,
+`ForkEvents` INT NULL,
+`IssuesEvents` INT NULL,
+`IssueCommentEvents` INT NULL,
+`DownloadEvents` INT NULL,
+`PullRequestsClosed` INT NULL,
+`repos_linked_to` INT NULL ,
+`posts_linking_to_orgs_repos` INT NULL ,
+`answers_linking_to_orgs_repos` INT NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin
+
+CREATE TABLE  `git`.`organizations_megatable5` (
+`repository_organization` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`Repos` INT NULL ,
+`ReposWhichAreForks` INT NULL,
+`PushEvents` INT NULL ,
+`Pushers` INT NULL ,
+`FirstPush` DATETIME NULL,
+`LastPush` DATETIME NULL,
+`PushDurationDays` FLOAT NULL ,
+`repository_homepages` INT NULL ,
+`repository_owners` INT NULL ,
+`repository_languages` INT NULL ,
+`WatchEvents` INT NULL,
+`ForkEvents` INT NULL,
+`IssuesEvents` INT NULL,
+`IssueCommentEvents` INT NULL,
+`DownloadEvents` INT NULL,
+`PullRequestsClosed` INT NULL,
+`PullRequestsMerged` INT NULL,
+`repos_linked_to` INT NULL ,
+`posts_linking_to_orgs_repos` INT NULL ,
+`answers_linking_to_orgs_repos` INT NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+/* Some tables for the events data */
+
+CREATE TABLE  `git`.`stacked_repos_events` (
+`repo` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`type` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`created_at` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`stacked_repos_posts` (
+`repo` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`created_at` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`PostType` INT NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+
+/* Tables for the early events for each org */
+CREATE TABLE  `git`.`orgevents_temp1_20` (
+`repository_organization` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`repository_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`type` VARCHAR(50)  COLLATE utf8_bin NULL ,
+`created_at` DATETIME NULL,
+`repository_size` INT NULL, 
+`repository_created_at` DATETIME NULL,
+`dense_rank` INT NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`orgevents_temp2_20` (
+`repository_organization` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`repository_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`type` VARCHAR(50)  COLLATE utf8_bin NULL ,
+`created_at` DATETIME NULL,
+`repository_size` INT NULL, 
+`repository_created_at` DATETIME NULL,
+`dense_rank` INT NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`orgevents_temp3_20` (
+`repository_organization` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`repository_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`type` VARCHAR(50)  COLLATE utf8_bin NULL ,
+`created_at` DATETIME NULL,
+`repository_size` INT NULL, 
+`repository_created_at` DATETIME NULL,
+`dense_rank` INT NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`orgevents_temp4_20` (
+`repository_organization` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`repository_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`type` VARCHAR(50)  COLLATE utf8_bin NULL ,
+`created_at` DATETIME NULL,
+`repository_size` INT NULL, 
+`repository_created_at` DATETIME NULL,
+`dense_rank` INT NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`orgevents_temp5_20` (
+`repository_organization` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`repository_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`type` VARCHAR(50)  COLLATE utf8_bin NULL ,
+`created_at` DATETIME NULL,
+`repository_size` INT NULL, 
+`repository_created_at` DATETIME NULL,
+`dense_rank` INT NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`orgforkevents_temp20` (
+`repository_organization` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`repository_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`type` VARCHAR(50)  COLLATE utf8_bin NULL ,
+`created_at` DATETIME NULL,
+`repository_size` INT NULL, 
+`repository_created_at` DATETIME NULL,
+`dense_rank` INT NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+
+#tables for repo typology
+CREATE TABLE  `git`.`all_repos_1_2` (
+`repository_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`owner` VARCHAR(50)  COLLATE utf8_bin NULL ,
+`organization` VARCHAR(50)  COLLATE utf8_bin NULL ,
+`language` VARCHAR(50)  COLLATE utf8_bin NULL ,
+`repo_created` DATETIME NULL,
+`fork` VARCHAR(50)  COLLATE utf8_bin NULL ,
+`Watchers` INT NULL, 
+`Forks` INT NULL, 
+`Pushes` INT NULL, 
+`Pushers` INT NULL, 
+`FirstPush` DATETIME NULL,
+`LastPush` DATETIME NULL,
+`PR_Received` INT NULL, 
+`FirstPR` DATETIME NULL,
+`LastPR` DATETIME NULL,
+`PR_Issued` INT NULL, 
+`FirstPRissued` DATETIME NULL,
+`LastPRissued` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+
+#table for repo turnover (pulling data for old repos from API)
+CREATE TABLE  `git`.`api_old_repo_commits` (
+`full_name` VARCHAR(120)  COLLATE utf8_bin NULL ,
+`pre-timeline-commits` INT (10) NULL,
+`first-commit` DATE NULL,
+`last-commit` DATE NULL,
+`post-timeline-commits` INT (10) NULL,
+`last-pt-commit` DATE NULL,
+ PRIMARY  KEY (  `full_name`  )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+#tables for fork/parent relationships
+CREATE TABLE  `git`.`bq_forks_data` (
+`repository_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`PushEvents` INT(10) NULL,
+`Pushers` INT (10) NULL,
+`PushesByOwner` INT (10) NULL,
+`minWatchers` INT (10) NULL,
+`maxWatchers` INT (10) NULL,
+`minSize` INT (10) NULL,
+`maxSize` INT (10) NULL,
+`minForks` INT (10) NULL,
+`maxForks` INT (10) NULL,
+`created_at` DATETIME NULL,
+`last_push` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_forks_parentdata` (
+`parent_repo` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`Parent_PushEvents` INT(10) NULL,
+`Parent_Pushers` INT (10) NULL,
+`Parent_PushesByOwner` INT (10) NULL,
+`Parent_minWatchers` INT (10) NULL,
+`Parent_maxWatchers` INT (10) NULL,
+`Parent_minSize` INT (10) NULL,
+`Parent_maxSize` INT (10) NULL,
+`Parent_minForks` INT (10) NULL,
+`Parent_maxForks` INT (10) NULL,
+`Parent_created_at` DATETIME NULL,
+`Parent_last_push` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_forks_PR_base` (
+`BaseURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`HeadURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`PRUser` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`PR_Events` INT (10) NULL,
+`PR_OpenEvents` INT (10) NULL,
+`PR_CloseEvents` INT (10) NULL,
+`PR_DistinctPullRequests` INT (10) NULL,
+`PR_Merged` INT (10) NULL,
+`PR_SelfMerges` INT (10) NULL,
+`PR_first_pr` DATETIME NULL,
+`PR_last_pr` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_forks_PR_head` (
+`HeadURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`BaseURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`PRUser` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`PR_Events` INT (10) NULL,
+`PR_OpenEvents` INT (10) NULL,
+`PR_CloseEvents` INT (10) NULL,
+`PR_DistinctPullRequests` INT (10) NULL,
+`PR_Merged` INT (10) NULL,
+`PR_SelfMerges` INT (10) NULL,
+`PR_first_pr` DATETIME NULL,
+`PR_last_pr` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_forks_PR_parent_base` (
+`BaseURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`HeadURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`PRUser` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`PR_Events` INT (10) NULL,
+`PR_OpenEvents` INT (10) NULL,
+`PR_CloseEvents` INT (10) NULL,
+`PR_DistinctPullRequests` INT (10) NULL,
+`PR_Merged` INT (10) NULL,
+`PR_SelfMerges` INT (10) NULL,
+`PR_first_pr` DATETIME NULL,
+`PR_last_pr` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_forks_PR_parent_head` (
+`HeadURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`BaseURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`PRUser` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`PR_Events` INT (10) NULL,
+`PR_OpenEvents` INT (10) NULL,
+`PR_CloseEvents` INT (10) NULL,
+`PR_DistinctPullRequests` INT (10) NULL,
+`PR_Merged` INT (10) NULL,
+`PR_SelfMerges` INT (10) NULL,
+`PR_first_pr` DATETIME NULL,
+`PR_last_pr` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_fork_parent_relations` (
+`ForkTable_fork_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`ParentTable_repository_url` VARCHAR(250)  COLLATE utf8_bin NULL 
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+
+
+#tables to extract bigquery tables to
+
+CREATE TABLE  `git`.`bq_Base_Head_Pairs_NoIntra` (
+`payload_pull_request_base_repo_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`payload_pull_request_head_repo_url` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`pullrequestevents` INT (10) NULL,
+`DistinctPullRequests` INT (10) NULL,
+`FirstPR` DATETIME NULL,
+`LastPR` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_PR_BasePushers` (
+`BaseURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`BasePusher` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`Base_PushEvents` INT (10) NULL,
+`Base_first_push` DATETIME NULL,
+`Base_last_push` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+CREATE TABLE  `git`.`bq_PR_HeadPushers` (
+`HeadURL` VARCHAR(250)  COLLATE utf8_bin NULL ,
+`HeadPusher` VARCHAR(100)  COLLATE utf8_bin NULL ,
+`Head_PushEvents` INT (10) NULL,
+`Head_first_push` DATETIME NULL,
+`Head_last_push` DATETIME NULL
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+#use this to generate full_name for repo_events tables
+ALTER TABLE  `repo_events_bq_single` ADD  `full_name` VARCHAR( 120 ) NOT NULL;
+UPDATE repo_events_bq_single SET full_name = (SELECT SUBSTRING(repository_url FROM 20) );
+
+ALTER TABLE  `repo_events_bq_all` ADD  `full_name` VARCHAR( 120 ) NOT NULL;
+UPDATE repo_events_bq_all SET full_name = (SELECT SUBSTRING(repository_url FROM 20) );
+
+ALTER TABLE  `repo_events_bq_small` ADD  `full_name` VARCHAR( 120 ) NOT NULL;
+UPDATE repo_events_bq_small SET full_name = (SELECT SUBSTRING(repository_url FROM 20) );
+
+
+ALTER TABLE  `repo_pull_requests` ADD  `full_name` VARCHAR( 120 ) NOT NULL;
+UPDATE repo_pull_requests SET full_name = (SELECT SUBSTRING( payload_pull_request_base_repo_url
+FROM 29 )) ;
+
+
+CREATE TABLE  `git`.`descriptions` (
+`repository_url` varchar( 250  )  COLLATE utf8_bin NULL ,
+ `description` TEXT COLLATE utf8_bin NULL,
+ `fork` varchar(5) NULL ,
+`Events` INT (10) NULL,
+PRIMARY KEY (  `repository_url` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+
+CREATE  TABLE  `git`.`repo_pull_requests_heads` (  `payload_pull_request_head_repo_url` varchar( 250  )  COLLATE utf8_bin NULL ,
+`payload_pull_request_base_repo_url` varchar( 250  )  COLLATE utf8_bin NULL ,
+ `PullRequestEvents` int( 11  )  NULL ,
+ `DistinctPullRequests` int( 11  )  NULL ,
+ `DistinctHeadRepos` int( 11  )  NULL ,
+ `PullRequestOpenEvents` int( 11  )  NULL ,
+  `PullRequestCloseEvents` int( 11  )  NULL ,
+ `IntraRepoPullRequestOpenEvents` int( 11  )  NULL ,
+ `MergedPullRequests` int( 11  )  NULL ,
+ `UsersWhoMerge` int( 11  )  NULL ,
+ `PullRequestMergedBySameUser` int( 11  )  NULL, 
+ `FirstPullRequest` datetime NULL,
+ `LastPullRequest` datetime NULL,
+ `HeadRepoCreated` datetime NULL,
+ `fork` varchar(5) NULL ,
+ PRIMARY  KEY (  `payload_pull_request_head_repo_url`  )  ) ENGINE  = InnoDB  DEFAULT CHARSET  = utf8 COLLATE  = utf8_bin;
+
+
+#this one is a hack for the sql on virtual machine to use it for lda
+ALTER TABLE  `repo_events_bq` ADD  `full_name` VARCHAR( 120 ) NOT NULL;
+UPDATE repo_events_bq_all SET full_name = (SELECT SUBSTRING(repository_url FROM 20) );
+
+CREATE TABLE  `git`.`readmes2` (
+ `full_name` VARCHAR( 120 ) COLLATE utf8_bin NOT NULL ,
+ `readme` TEXT COLLATE utf8_bin,
+ `language` varchar( 20  )  COLLATE utf8_bin NULL ,
+ `Events` int( 11  )  NULL ,
+ `PullRequestEvents` int( 11  )  NULL ,
+ `fork` int( 1  )  NULL ,
+ `repo_created` datetime NULL ,
+ `repo_pushed_at` datetime NULL ,
+ `Actors` int( 11  )  NULL ,
+ `PushEvents` int( 11  )  NULL,
+PRIMARY KEY (  `full_name` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+CREATE TABLE  `git`.`readmes2` (
+`full_name` VARCHAR( 120 ) COLLATE utf8_bin NOT NULL ,
+ `readme` TEXT COLLATE utf8_bin,
+PRIMARY KEY (  `full_name` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+;
+#this makes the repo events table
+
+ CREATE  TABLE  `git`.`repo_events_bq` (  `repository_url` varchar( 140  )  COLLATE utf8_bin NULL ,
+ `Events` int( 11  )  NULL ,
+ `Actors` int( 11  )  NULL ,
+ `PushEvents` int( 11  )  NULL ,
+ `CreateEvents` int( 11  )  NULL ,
+ `CreateBranchEvents` int( 11  )  NULL ,
+ `WatchEvents` int( 11  )  NULL ,
+ `IssueCommentEvents` int( 11  )  NULL ,
+ `IssuesEvents` int( 11  )  NULL ,
+ `ForkEvents` int( 11  )  NULL ,
+ `GistEvents` int( 11  )  NULL ,
+ `PullRequestEvents` int( 11  )  NULL ,
+ `FollowEvents` int( 11  )  NULL ,
+ `GollumEvents` int( 11  )  NULL ,
+ `CommitCommentEvents` int( 11  )  NULL ,
+ `PullRequestReviewCommentEvents` int( 11  )  NULL ,
+ `DeleteEvents` int( 11  )  NULL ,
+ `MemberEvents` int( 11  )  NULL ,
+ `DownloadEvents` int( 11  )  NULL ,
+ `PublicEvents` int( 11  )  NULL ,
+ `ForkApplyEvents` int( 11  )  NULL ,
+ `repo_created` datetime NULL ,
+ `repo_pushed_at` datetime NULL ,
+ `minWatchers` int( 11  )  NULL ,
+ `maxWatchers` int( 11  )  NULL ,
+ `minSize` int( 11  )  NULL ,
+ `maxSize` int( 11  )  NULL ,
+ `minForks` int( 11  )  NULL ,
+ `maxForks` int( 11  )  NULL ,
+ `language` varchar( 20  )  COLLATE utf8_bin NULL ,
+ `fork` int( 1  )  NULL ,
+ PRIMARY  KEY (  `repository_url`  )  ) ENGINE  = InnoDB  DEFAULT CHARSET  = utf8 COLLATE  = utf8_bin;
+
+#pull requests table 
+CREATE  TABLE  `git`.`repo_pull_requests` (  `payload_pull_request_base_repo_url` varchar( 180  )  COLLATE utf8_bin NULL ,
+ `PullRequestEvents` int( 11  )  NULL ,
+ `DistinctPullRequests` int( 11  )  NULL ,
+ `DistinctHeadRepos` int( 11  )  NULL ,
+ `PullRequestOpenEvents` int( 11  )  NULL ,
+  `PullRequestCloseEvents` int( 11  )  NULL ,
+ `IntraRepoPullRequestOpenEvents` int( 11  )  NULL ,
+ `MergedPullRequests` int( 11  )  NULL ,
+ `UsersWhoMerge` int( 11  )  NULL ,
+ `PullRequestMergedBySameUser` int( 11  )  NULL, 
+ PRIMARY  KEY (  `payload_pull_request_base_repo_url`  )  ) ENGINE  = InnoDB  DEFAULT CHARSET  = utf8 COLLATE  = utf8_bin;
+ 
+ 
+#special table for single event repos 
+ 
+load data local infile 'E:/uniq.csv' into table tblUniq fields terminated by ','
+enclosed by '"'
+lines terminated by '\n'
+
+''' This is for making the 'repos' table for the data to go in
+CREATE TABLE  `git`.`repos` (
+`id` INT( 11 ) NOT NULL ,
+ `name` TEXT COLLATE utf8_bin NOT NULL ,
+ `full_name` TEXT COLLATE utf8_bin NOT NULL ,
+ `private` TINYINT( 1 ) NOT NULL ,
+ `description` TEXT COLLATE utf8_bin NOT NULL ,
+ `fork` TINYINT( 1 ) NOT NULL ,
+PRIMARY KEY (  `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin
+
+CREATE TABLE  `git`.`repo_no_full` (
+`full_name` TEXT COLLATE utf8_bin NOT NULL 
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+Table for expanded repo informaton
+CREATE TABLE  `git`.`fork_repos2` (
+`id` INT( 11 ) NOT NULL ,
+ `full_name` VARCHAR( 50 ) COLLATE utf8_bin NOT NULL ,
+ `description` TEXT COLLATE utf8_bin NOT NULL ,
+ `language` VARCHAR( 20 ) COLLATE utf8_bin ,
+ `fork` TINYINT( 1 ) NOT NULL ,
+ `forks` INT( 7 ) NOT NULL ,
+ `size` INT( 10 ) NOT NULL ,
+ `watchers` INT( 7 ) NOT NULL ,
+ `open_issues` INT( 5 ) NOT NULL ,
+ `created_at` DATETIME  ,
+ `pushed_at` DATETIME  ,
+ `updated_at` DATETIME  ,
+ `has_downloads` TINYINT( 1 ) NOT NULL ,
+ `has_issues` TINYINT( 1 ) NOT NULL ,
+ `has_wiki` TINYINT( 1 ) NOT NULL ,
+ `parent_id` INT( 11 ) NOT NULL ,
+ `parent_name` VARCHAR( 50 ) COLLATE utf8_bin NOT NULL ,
+PRIMARY KEY (  `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+CREATE TABLE  `git`.`repo_full` (
+`id` INT( 11 ) NOT NULL ,
+ `full_name` VARCHAR( 50 ) COLLATE utf8_bin NOT NULL ,
+ `description` TEXT COLLATE utf8_bin NOT NULL ,
+ `language` VARCHAR( 20 ) COLLATE utf8_bin ,
+ `fork` TINYINT( 1 ) NOT NULL ,
+ `forks` INT( 7 ) NOT NULL ,
+ `size` INT( 10 ) NOT NULL ,
+ `watchers` INT( 7 ) NOT NULL ,
+ `open_issues` INT( 5 ) NOT NULL ,
+ `created_at` DATETIME  ,
+ `pushed_at` DATETIME ,
+ `updated_at` DATETIME  ,
+ `has_downloads` TINYINT( 1 ) NOT NULL ,
+ `has_issues` TINYINT( 1 ) NOT NULL ,
+ `has_wiki` TINYINT( 1 ) NOT NULL ,
+ `parent_id` INT( 11 ) NOT NULL ,
+ `parent_name` VARCHAR( 50 ) COLLATE utf8_bin NOT NULL ,
+PRIMARY KEY (  `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+Table for Pull requests
+CREATE TABLE  `git`.`pull_requests` (
+`id` INT( 11 ) NOT NULL ,
+ `state` VARCHAR( 10 ) COLLATE utf8_bin NOT NULL ,
+ `title` TEXT COLLATE utf8_bin NOT NULL ,
+ `body` TEXT COLLATE utf8_bin NOT NULL ,
+ `number` INT (7) NOT NULL ,
+ `merged_at` DATETIME  ,
+ `created_at` DATETIME  ,
+ `closed_at` DATETIME  ,
+ `head_created_at` DATETIME  ,
+ `head_full_name` VARCHAR( 60 ) COLLATE utf8_bin NOT NULL ,
+ `head_fork` TINYINT( 1 ) NOT NULL ,
+ `head_forks` INT( 7 ) NOT NULL ,
+ `base_full_name` VARCHAR( 60 ) COLLATE utf8_bin NOT NULL ,
+  `pull_user` VARCHAR( 40 ) COLLATE utf8_bin NOT NULL ,
+PRIMARY KEY (  `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+
+'''
