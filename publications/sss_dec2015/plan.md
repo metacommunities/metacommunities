@@ -21,7 +21,7 @@ Dis-counting large numbers: how copying makes things big
 
 ## Abstract
 
-What constitute good counting today?  
+What constitutes good counting today?  
 This paper reports on an  attempt to re-count a large or 'capital' number, in this case, the approximately 20 million code repositories on the social media platform Github.
 Science Studies work has a decades-long interest in numbers and counting, both in understanding the power-politics of numbering and the diversity of numbering practices.
 Recent Science Studies debates have centred on both the accountability of numberings, and the practical making of number-based accounts in all their implications for ontology.
