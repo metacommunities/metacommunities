@@ -14,3 +14,5 @@ adrian/repo-topics/data/*
 *.json
 all_repos*
 *ipynb_*
+.httr-oauth
+.rope*
