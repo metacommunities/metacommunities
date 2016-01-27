@@ -40,6 +40,7 @@ Could then add to that the number of repos that are forks.
 - looking at abstract again - it seems to be doing too much. Maybe I need something simpler. Oh, but then I was looking at the old abstract. The new one is in plan.md 
 - did the number bibliographic work -- need to assemble the argument, tho. 
 - seems very little sthv but quite a bit in sss. Not sure why that is. Particularly relevant pieces would be Lampland on False numbers; Law & Callon on qualcalculation; 
+- also put refs from Distinktion into zotero folder -- nafus, lury, etc, should be useful
 - had the idea of setting out a middle ground between science and technology, between literature and things inhabited by software and other such things
 - also had the idea of reassessing counting in sts more generally -- how do we do it ourselves?
 
