@@ -1,5 +1,18 @@
 # log
 
+## TODO
+
+- *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
+- *DONE* add all to zotero and set up bib files 
+- Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
+
+
+## Thu Jan 28 16:07:54 GMT 2016 publication/material_cultures_london2016
+-merged sss stuff into this branch
+- need to check slides, but don't want to!
+- starting changing mixtures slides -- put in knorr cetina on post-social; had idea that 2 facets of the paper -- github + ethnographic sensibilithy; under what conditions is it possible to write with numbers
+
+
 ## Wed Dec 16 11:24:51 GMT 2015
 
 - check guidelines for sss [https://uk.sagepub.com/en-gb/eur/journal/social-studies-science#MANUSCRIPTSTYLE]
@@ -54,9 +67,4 @@ Could then add to that the number of repos that are forks.
 - these different senses suggest possibility of looking at names in terms of capitals?
 - re-wrote new abstract again. It's still too long. Need to cut down to 5-6 sentences. At the moment, its 280 words.
 
-# TODO
-
-
-- *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
-- *DONE* add all to zotero and set up bib files 
-- Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
+publication/material_cultures_london2016
