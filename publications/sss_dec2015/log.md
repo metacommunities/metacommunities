@@ -54,6 +54,11 @@ Could then add to that the number of repos that are forks.
 - these different senses suggest possibility of looking at names in terms of capitals?
 - re-wrote new abstract again. It's still too long. Need to cut down to 5-6 sentences. At the moment, its 280 words.
 
+
+## Mon Feb  1 21:01:06 GMT 2016
+- did a lot of notes on paper copy of material cultures seminar printout. Some should be brought in here. 
+- could flesh out accounts of code using a bit of David Berry as well as Kelty, Coleman, etc. 
+
 # TODO
 
 
