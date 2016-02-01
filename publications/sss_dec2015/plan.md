@@ -22,7 +22,7 @@ Capital numbers: re-counting how copying makes
 
 ## Abstract
 
-This paper reports on an  attempt to re-count a large number, in this case, the approximately 20 million code repositories on the social media platform Github.
+This paper reports on an  attempt to re-count a large number, in this case, the approximately 29 million code repositories on the social media platform Github.
 Science studies and related fields have a decades-long interest in numbers and counting, both in understanding the power-politics of numbering and the diversity of numbering practices.
 Debates have recently centred on the accountability of numberings and stand against a background of sociological debates about challenges to empirical methods posed by increasingly abundant digital data.
 Drawing on these accounts of number, the paper will suggest that science studies might develop ways of re-counting large numbers as capital numbers.
