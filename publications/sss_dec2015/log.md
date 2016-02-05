@@ -45,7 +45,7 @@ Could then add to that the number of repos that are forks.
 - also had the idea of reassessing counting in sts more generally -- how do we do it ourselves?
 
 
- ## Wed Jan 27 11:12:51 GMT 2016
+## Wed Jan 27 11:12:51 GMT 2016
 
 - drifing through Guyer on percentage and ordinals, Dumit on implosion, 
 - had the idea that numbers are a way to think about the bits of infrastructure that are forgotten or hard to study in infrastructural studies ... borrowed this from sss manuscript
@@ -59,9 +59,14 @@ Could then add to that the number of repos that are forks.
 - did a lot of notes on paper copy of material cultures seminar printout. Some should be brought in here. 
 - could flesh out accounts of code using a bit of David Berry as well as Kelty, Coleman, etc. 
 
+
+## Thu Feb  4 12:48:32 GMT 2016
+- finding it hard to get back into this article, but really think I should concentrate on the working with numbers thing
+
 # TODO
 
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
 - *DONE* add all to zotero and set up bib files 
 - Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
+- read material on numbers assembled in zotero + archives.
