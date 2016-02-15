@@ -17,6 +17,7 @@
 
 ## Title
 
+Capital numbers and the obscure numericalities of practice
 Dis-counting large numbers: how copying makes things big
 Capital numbers: re-counting how copying makes 
 

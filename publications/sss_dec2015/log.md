@@ -1,3 +1,4 @@
+
 # log publication/sss
 
 ## Wed Dec 16 11:24:51 GMT 2015
@@ -67,6 +68,7 @@ Could then add to that the number of repos that are forks.
 ## Mon Feb 15 11:01:32 GMT 2016
 
 - writing abstract for easst, realised that Badiou on numbers has some really useful stuff to think with. Have a new title to use on the basis of that -- 'Capital numbers and the obscure numericality of coding practice.'
+- could use Badiou to argue that STS accounts of number need to differentiate between different numericalities coming into play
 - also had the idea that I could look at the ways in which numbers work in code repositories -- how many numbers? different organisations of numbers? Need to think about how the numbers work there.
     - is there any change in the way numbers are being used? Are the kinds of numbers there different from what they were before? Is there a greater prevalence of the time-stamp than before? Or, are timestamp's being invoked in different ways? 
     - could follow up these in later projects?
@@ -78,3 +80,5 @@ Could then add to that the number of repos that are forks.
 - *DONE* add all to zotero and set up bib files 
 - Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
 - read material on numbers assembled in zotero + archives.
+- read Badiou again to see if anything there goes along with work on number
+- check citations of Badiou on number
