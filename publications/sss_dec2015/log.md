@@ -1,4 +1,4 @@
-# log
+# log publication/sss
 
 ## Wed Dec 16 11:24:51 GMT 2015
 
@@ -62,6 +62,14 @@ Could then add to that the number of repos that are forks.
 
 ## Thu Feb  4 12:48:32 GMT 2016
 - finding it hard to get back into this article, but really think I should concentrate on the working with numbers thing
+
+
+## Mon Feb 15 11:01:32 GMT 2016
+
+- writing abstract for easst, realised that Badiou on numbers has some really useful stuff to think with. Have a new title to use on the basis of that -- 'Capital numbers and the obscure numericality of coding practice.'
+- also had the idea that I could look at the ways in which numbers work in code repositories -- how many numbers? different organisations of numbers? Need to think about how the numbers work there.
+    - is there any change in the way numbers are being used? Are the kinds of numbers there different from what they were before? Is there a greater prevalence of the time-stamp than before? Or, are timestamp's being invoked in different ways? 
+    - could follow up these in later projects?
 
 # TODO
 
