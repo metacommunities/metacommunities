@@ -24,8 +24,9 @@ Capital numbers: re-counting how copying makes
 ## Abstract
 
 This paper reports on an  attempt to re-count a large number, in this case, the approximately 20 million code repositories on the social media platform Github.
-Science studies and related fields have a decades-long interest in numbers and counting, both in understanding the power-politics of numbering and the diversity of numbering practices.
-Debates have recently centred on the accountability of numberings and stand against a background of sociological debates about challenges to empirical methods posed by increasingly abundant digital data.
+Science studies and related fields have a decades-long interest in numbers and counting, both in understanding the power-politics of numbering and the diversity of numbering and calculative practices.
+How amidst these accounts of number could STS itself produce numbers differently? 
+Debates have recently centred on the accountability and calculability of numberings and stand against a background of sociological debates about challenges to empirical methods posed by increasingly abundant digital data.
 Drawing on these accounts of number, the paper will suggest that science studies might develop ways of re-counting large numbers as capital numbers.
 A capital number combines a sense of importance, the potential to be turned to profit and to name something. 
 In the Github case, the genesis of capital numbers, such as '20 million' or '300 million,' can be re-counted in two different ways.

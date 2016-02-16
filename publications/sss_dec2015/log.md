@@ -55,15 +55,12 @@ Could then add to that the number of repos that are forks.
 - these different senses suggest possibility of looking at names in terms of capitals?
 - re-wrote new abstract again. It's still too long. Need to cut down to 5-6 sentences. At the moment, its 280 words.
 
-
 ## Mon Feb  1 21:01:06 GMT 2016
 - did a lot of notes on paper copy of material cultures seminar printout. Some should be brought in here. 
 - could flesh out accounts of code using a bit of David Berry as well as Kelty, Coleman, etc. 
 
-
 ## Thu Feb  4 12:48:32 GMT 2016
 - finding it hard to get back into this article, but really think I should concentrate on the working with numbers thing
-
 
 ## Mon Feb 15 11:01:32 GMT 2016
 
@@ -73,12 +70,25 @@ Could then add to that the number of repos that are forks.
     - is there any change in the way numbers are being used? Are the kinds of numbers there different from what they were before? Is there a greater prevalence of the time-stamp than before? Or, are timestamp's being invoked in different ways? 
     - could follow up these in later projects?
 
-# TODO
+## Tue Feb 16 09:52:16 UTC 2016
 
+- looking at numbers notes -- Badiou, etc. Looking for the argument about number as the cultural fabric ... 
+- had the idea of number as the cultural fabric; but how would this follow from the names, etc. 
+- also look at zotero folder again 
+- created a file of number related points and quotes from zotero folder -- see number.md
+- added quotes to this from muniesa and callon in particular around calculation. Also the stuff there on algorithms is quite good on calculation. 
+- am I using the number literature to point to particular aggregate numbers? To say that these numbers are calculative devices that function as  part of a market for the platform to both coders and investors? So they are double numbers? To say that they are part of a more general economy of large numbers that suggest an incalculable proliferation, a bit like the P Prime case? Big numbers that have an aura or ritual *function*, or that suggest 'infrastructural aura'? Savage 
+- also had the idea from Muniesa and Callon that could think of Github as a calculative space like a market for code. Are publics/markets calculative agencies? Strange that the computational goods should become calculable goods encountering calculative agencies ... 
+- the idea is that the github's numbers also work like the false numbers that lampland describes in the way they stabilise the platform. Even the DoS attacks from China would play out here as part of the geopolitical capitalisation. 
+- if using Muniesa/Callon on calculation, would need to use the 3 moments of calculation -- separating, listing and synthesizing
+
+
+# TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
 - *DONE* add all to zotero and set up bib files 
 - Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
-- read material on numbers assembled in zotero + archives.
+- *DONE* read material on numbers assembled in zotero + archives.
 - read Badiou again to see if anything there goes along with work on number
 - check citations of Badiou on number
+- get desrosiere on politics of large numbers
