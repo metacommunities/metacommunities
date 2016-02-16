@@ -83,6 +83,11 @@ Could then add to that the number of repos that are forks.
 - if using Muniesa/Callon on calculation, would need to use the 3 moments of calculation -- separating, listing and synthesizing
 
 
+## Tue Feb 16 16:44:59 UTC 2016
+
+- looked up Desrosiere's more recent work and added reference to the zotero folder -- maybe useful, but nothing specific came up ... 
+
+
 # TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
