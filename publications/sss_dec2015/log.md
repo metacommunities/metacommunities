@@ -86,6 +86,11 @@ Could then add to that the number of repos that are forks.
 ## Tue Feb 16 16:44:59 UTC 2016
 
 - looked up Desrosiere's more recent work and added reference to the zotero folder -- maybe useful, but nothing specific came up ... 
+- good to use scopus to get chapters from books
+
+## Wed Feb 17 10:05:13 UTC 2016
+- pfaffed with extracting images from slides for a while. In case needed for article
+- put a lot more into abstract, using literature on calculation, and trying to stay true to the configuration work needed to do the counting. 
 
 
 # TODO
@@ -97,3 +102,4 @@ Could then add to that the number of repos that are forks.
 - read Badiou again to see if anything there goes along with work on number
 - check citations of Badiou on number
 - get desrosiere on politics of large numbers
+- do some notes from Lucy on configuration

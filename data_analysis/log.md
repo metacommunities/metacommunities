@@ -9,3 +9,8 @@ publication/sss
 - wrote query for GoogleBigQuery to test this:
     SELECT repository_name, type, created_at, payload_commit, payload_commit_msg FROM [githubarchive:github.timeline] 
     where payload_commit_msg != "null" and regexp_match(payload_commit_msg, 'virtualiz') limit 10
+
+## Wed Feb 17 10:01:29 UTC 2016
+    - added this to sql list
+    - could also extend it to include repo name and org name
+    - would need to craft search queries for different topics  -- 'docker or chef or etc.'

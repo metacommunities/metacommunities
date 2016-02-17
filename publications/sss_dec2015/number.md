@@ -21,6 +21,7 @@ works to impede calculation by an overload of qualculative resources. law and ca
 I develop an analytic vocabulary to give an account of the intensive properties of what I call enumerated entities, and link the shift to the move from a disciplinary to a control society.Verran 2011
 
 The conclusion reaffirms the importance of an ethnographic approach to widely used numerical forms, such as percentage, in all contexts, as they mediate public understanding and aspiration. Guyer
+
 s participant-storyteller, telling stories to facilitate epistemic flourishing within and as part of a historically located community of practice. Kenney on verran
 
 Porter, Desrosiere, Hacking, etc.
