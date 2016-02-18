@@ -1,5 +1,6 @@
 
-# log publication/sss
+# log publication/sss /home/mackenza/metacommunities/publications/sss_dec2015
+
 
 ## Wed Dec 16 11:24:51 GMT 2015
 
@@ -91,7 +92,16 @@ Could then add to that the number of repos that are forks.
 ## Wed Feb 17 10:05:13 UTC 2016
 - pfaffed with extracting images from slides for a while. In case needed for article
 - put a lot more into abstract, using literature on calculation, and trying to stay true to the configuration work needed to do the counting. 
+- looked at who cites Badiou on number - some papers in EP D. Nothing crucial there. 
 
+
+## Thu Feb 18 05:39:27 GMT 2016
+
+- on train to london - very early. Working out which bits of the abstract I have already written
+- added reactivity of numbers from Gerlitz -- that's useful for many of the lower level numbers on Github
+- turned the abstract into a series of headings for the new doc sss.md 7 sections overall, two of which could be intro and conclusion
+- wrote the first section on sts and numbers, and the 2nd section on STS calculative agency ... 
+- started the section on capital numbers -- a bit of repetition coming in here. But has the idea of 'capitalised number' as a better term. 
 
 # TODO
 
@@ -100,6 +110,7 @@ Could then add to that the number of repos that are forks.
 - Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
 - *DONE* read material on numbers assembled in zotero + archives.
 - read Badiou again to see if anything there goes along with work on number
-- check citations of Badiou on number
+- **DONE** check citations of Badiou on number
 - get desrosiere on politics of large numbers
 - do some notes from Lucy on configuration
+- add Ingmar on numbers, etc
