@@ -103,6 +103,11 @@ Could then add to that the number of repos that are forks.
 - wrote the first section on sts and numbers, and the 2nd section on STS calculative agency ... 
 - started the section on capital numbers -- a bit of repetition coming in here. But has the idea of 'capitalised number' as a better term. 
 
+## Sun Feb 21 22:43:17 GMT 2016
+
+- need to add some stuff on gitorious, gitlab, bitbucket, etc.
+- there is a full list of gitorious repos -- 120k -- that made me think of Harman's tool being, and Bryant's onto-graphy as a theoretical framings. 
+
 # TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
