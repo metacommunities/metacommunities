@@ -108,6 +108,10 @@ Could then add to that the number of repos that are forks.
 - need to add some stuff on gitorious, gitlab, bitbucket, etc.
 - there is a full list of gitorious repos -- 120k -- that made me think of Harman's tool being, and Bryant's onto-graphy as a theoretical framings. 
 
+## Mon Feb 22 14:45:00 UTC 2016
+
+- growing sense of being locked into github and why that might be problematic http://agateau.com/2016/github-lock-in/ -- should I include this?
+
 # TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
