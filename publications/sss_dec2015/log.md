@@ -117,6 +117,8 @@ Could then add to that the number of repos that are forks.
 
 - got a bit distracted looking at numbers over time in Github wayback archive, and writing a script about it.
 - trying to get my head back into what I wrote on the train last Thursday
+- got cochoy on captation (in archive); could add to the notion of capital number
+- managed to get sample event in, and started to link to counting ... a bit wobbly, but might work. Might need to bring in the interface methods argument?
 
 
 # TODO
