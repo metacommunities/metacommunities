@@ -112,6 +112,13 @@ Could then add to that the number of repos that are forks.
 
 - growing sense of being locked into github and why that might be problematic http://agateau.com/2016/github-lock-in/ -- should I include this?
 
+
+## Tue Feb 23 10:00:26 UTC 2016
+
+- got a bit distracted looking at numbers over time in Github wayback archive, and writing a script about it.
+- trying to get my head back into what I wrote on the train last Thursday
+
+
 # TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
@@ -123,3 +130,4 @@ Could then add to that the number of repos that are forks.
 - get desrosiere on politics of large numbers
 - do some notes from Lucy on configuration
 - add Ingmar on numbers, etc
+- add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. 
