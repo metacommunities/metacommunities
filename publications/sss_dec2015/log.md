@@ -137,4 +137,4 @@ Could then add to that the number of repos that are forks.
 - get desrosiere on politics of large numbers
 - do some notes from Lucy on configuration
 - add Ingmar on numbers, etc
-- add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. 
+- add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. including ones hosted on Github itself like gitlab
