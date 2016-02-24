@@ -121,6 +121,11 @@ Could then add to that the number of repos that are forks.
 - managed to get sample event in, and started to link to counting ... a bit wobbly, but might work. Might need to bring in the interface methods argument?
 
 
+## Wed Feb 24 13:33:22 UTC 2016
+
+- got into the sensemaking material ok. struggling a bit to keep the sts literature there -- did a bit on Latour, but nothing too substantial. 
+- worked with the idea that the naming of entities allows their association, and this association is intensive; this grows the capital numbers; but also places a burden of increasing nameability or naming on all things. 
+
 # TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
