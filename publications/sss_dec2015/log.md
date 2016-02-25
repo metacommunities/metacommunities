@@ -146,3 +146,5 @@ Could then add to that the number of repos that are forks.
 - do some notes from Lucy on configuration
 - add Ingmar on numbers, etc
 - add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. including ones hosted on Github itself like gitlab
+- add in the extra example of coding activity from codeology
+
