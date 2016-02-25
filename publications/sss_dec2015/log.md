@@ -126,6 +126,14 @@ Could then add to that the number of repos that are forks.
 - got into the sensemaking material ok. struggling a bit to keep the sts literature there -- did a bit on Latour, but nothing too substantial. 
 - worked with the idea that the naming of entities allows their association, and this association is intensive; this grows the capital numbers; but also places a burden of increasing nameability or naming on all things. 
 
+
+## Thu Feb 25 11:45:59 UTC 2016
+
+- today things went a bit better. Got rest of Github data challenge examples in -- 3800 words, and used them to frame capital numbers. Added more Latour on partial wholes. Which wholes are we partial to? Does he use partial in that sense? Not really. Also note the importance of Tarde here ... 
+- added extra references and subcollection to metacommunities on academic literature on gh. Probably need to move some more references in there
+- haven't managed to include any screenshots of the data projects -- need to choose one or two for that. 
+
+
 # TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
