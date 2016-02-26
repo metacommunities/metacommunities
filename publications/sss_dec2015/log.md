@@ -133,12 +133,18 @@ Could then add to that the number of repos that are forks.
 - added extra references and subcollection to metacommunities on academic literature on gh. Probably need to move some more references in there
 - haven't managed to include any screenshots of the data projects -- need to choose one or two for that. 
 
+## Fri Feb 26 09:29:28 GMT 2016
+
+- started on the imitation work -- ok for repos I think -- how do I know that 50% of repositories are clones? Also need to do this for people?
+- trying to sort out the queries to do that
+-
+
 
 # TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
 - *DONE* add all to zotero and set up bib files 
-- Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
+- *DONE* Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
 - *DONE* read material on numbers assembled in zotero + archives.
 - read Badiou again to see if anything there goes along with work on number
 - **DONE** check citations of Badiou on number
@@ -147,4 +153,5 @@ Could then add to that the number of repos that are forks.
 - add Ingmar on numbers, etc
 - add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. including ones hosted on Github itself like gitlab
 - add in the extra example of coding activity from codeology
+- gather figures for article in one place
 

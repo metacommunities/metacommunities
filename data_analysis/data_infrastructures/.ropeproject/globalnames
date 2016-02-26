@@ -1,6 +1,0 @@
-€}q(Ugithub_api_db]q(UDB_NAMEqUPASSWORDqUsave_repo_commitsqUdb_setupqUread_repo_commitsqU	USER_FILEqUUSERq	U
-save_reposq
-U
-SQL_TABLESqUsave_repository_fulldataqUread_repositoriesqeUgithub_api_data]q(Uunpack_repoItemqU	get_reposqUget_repository_pulldataqUget_organisation_membersqUget_repository_eventqhUget_repository_forkdataqh	Uget_readme_filesqhUunpack_repoItem_pullsqUget_repository_commitsqUgithub_timelineqUget_programming_languagesqeUgitdata_storage_tests]q(Umysql_setupqh	Uuncompressed_hourly_averageqUload_hd5_dfqUload_mysql_dfqUclean_test_dataqUload_csv_dfq Uload_pickle_dfq!Usetup_test_dataq"hhUcalculate_storage_in_gbytesq#Utime_data_retrievalq$hUload_mongo_dfq%eUgithubarchive_data]q&(Ugithub_event_exploreq'Uload_local_archive_jsonq(U
-WHITESPACEq)Uconstruct_githubarchive_urlq*Ufetch_archiveq+Uunnest_git_jsonq,Ufetch_one_dayq-UFLAGSq.Uload_local_archive_dataframeq/Ufetch_archive_demoq0UConcatJSONDecoderq1eUGithub_bigquery_experiments]q2(U	languagesq3Udtiq4Uprogramming_languages_2011q5Umsq6Useriesq7Uprogramming_languages_2012q8Uresdfq9Uqueryq:Uresults_2011_dfq;U
-results_dfq<U	by_monthsq=Udsq>U	events_dfq?eUGithub_api_experiments]q@(UlangqAUdf_reposqBUurlqCUrUdf_langqDeu.
