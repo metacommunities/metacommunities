@@ -1,3 +1,11 @@
+/* How many events per actor */
+
+SELECT actor_attributes_login, count(type) AS events
+FROM  [githubarchive:github.timeline]
+group by actor_attributes_login
+order by events desc
+
+
 /*Stu's query on repositories: how often repos are used
 ------------------------------------------------ */
 SELECT RepoEvents, COUNT(*) AS Freq
