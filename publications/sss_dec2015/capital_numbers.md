@@ -7,6 +7,7 @@ loss of life as punishment
 accumulated wealth
 accumulation with obscure prodigality
 peripheries -- opposites of capitals
+captation - cochoy
 
 
 ## number
