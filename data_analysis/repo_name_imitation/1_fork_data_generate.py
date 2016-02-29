@@ -24,15 +24,15 @@ seaborn.despine(trim=True)
 # get repo forks from BigQuery
 # this assumes you setup access to the BigQuery githubarchive dataset
 
-query = """SELECT repository_url, repository_name, created_at FROM 
-[githubarchive:github.timeline] where type='ForkEvent' and lower(repository_name) 
+query = """SELECT repository_url, repository_name, created_at FROM
+[githubarchive:github.timeline] where type='ForkEvent' and lower(repository_name)
 contains '{}'order by created_at asc""".format(repo_name)
 
 if os.path.isfile(file_name):
     forks = pd.read_csv(file_name, header=False)
     print 'reading ' + file_name
 else:
-    forks= pd.io.gbq.read_gbq(query)
+    forks= pd.io.gbq.read_gbq(query=query, project_id='metacommunities')
     #local saving and loading
     forks.drop_duplicates(inplace=True)
     print 'writing BigQuery results to {}'.format(file_name)
