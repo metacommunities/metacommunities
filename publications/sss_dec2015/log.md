@@ -140,6 +140,11 @@ Could then add to that the number of repos that are forks.
 -
 
 
+## Mon Feb 29 09:06:32 GMT 2016
+
+- over the weekend, did some of the actor graphs -- pretty much the same pattern -- 90% of actors trigger less than 5 events. Which is not to say that they are not doing something elsewhere, just not on Github 
+- need to merge analysis/actor_copying to get these graphs in .. 
+
 # TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon

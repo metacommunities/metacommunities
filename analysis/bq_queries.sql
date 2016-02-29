@@ -2935,3 +2935,10 @@ where payload_commit_msg != "null" and regexp_match(payload_commit_msg, 'virtual
 
 SELECT  count(distinct(actor)) as number_of_actors, count(distinct(repository_url)) AS number_of_repos
 FROM  [githubarchive:github.timeline]
+
+/* to find all the copies of bootstrap, not just forks -- but imitations
+that use the name */
+
+SELECT repository_url, repository_name, created_at
+FROM [githubarchive:github.timeline] \nwhere type='ForkEvent' and
+lower(repository_name) contains 'bootstrap'\norder by created_at asc LIMIT 20000
