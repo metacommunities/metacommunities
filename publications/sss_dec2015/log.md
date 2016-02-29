@@ -144,6 +144,9 @@ Could then add to that the number of repos that are forks.
 
 - over the weekend, did some of the actor graphs -- pretty much the same pattern -- 90% of actors trigger less than 5 events. Which is not to say that they are not doing something elsewhere, just not on Github 
 - need to merge analysis/actor_copying to get these graphs in .. 
+- tried to do this merging, but code that was working in the other branch didn't work here. 
+- also got sidetracked trying out R streamgraph package as an alternative to matplotlib and seaborn ...
+- trying to get back to the argument
 
 # TODO
 
