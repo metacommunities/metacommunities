@@ -1,3 +1,7 @@
+/* How many events of different types */
+
+SELECT type, count(type) as events FROM [githubarchive:github.timeline] group by type order by events desc LIMIT 1000
+
 /* How many events per actor */
 
 SELECT actor_attributes_login, count(type) AS events

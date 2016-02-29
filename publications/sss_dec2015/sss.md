@@ -86,7 +86,9 @@ Numbers such as '29 million' or '12 million' capitalize the capillary flow of as
 
 ## Imbuing numbers with importance
 
-In mid-2012, a 'Web Performance Engineer' at Google called Ilya Grigorik launched a Github repository `igrigorik/githubarchive` linked to a website `GithubArchive.org` dedicated to amalgamating all the Github API event data -- the so-called 'timeline' --  in one place [@Grigorik_2012].  Grigorik, or `igrigorik,` working at Google, had access to Google's infrastructure, and not only published all the data in a cloud-based data store but transformed that data, whose formatting we have discussed above, into the flat tabular forms familiar in much statistical work, and make it available through Google's newly launched cloud computing service, GoogleBigQuery.[^1] The Github timeline data was listed, along with all the words in Shakespeare and all the US birth name records, as one of three dataset exemplars that people could use to learn about GoogleBigQuery. Like the data on GithubArchive itself, the GoogleBigQuery datasets are updated hourly, and they go back to 2011. A database purporting to the whole associative fabric of Github has suddenly appeared. 
+A database purporting to contain the whole associative fabric of Github suddenly appeared. In mid-2012, a 'Web Performance Engineer' at Google called Ilya Grigorik launched a Github repository `igrigorik/githubarchive` linked to a website `GithubArchive.org` dedicated to amalgamating all the Github API public event data -- the so-called 'timeline' --  in one place [@Grigorik_2012].  Grigorik, or `igrigorik,` working at Google, had access to Google's infrastructure, and not only published all the data in a cloud-based data store but transformed that data, whose formatting we have discussed above, into the flat tabular forms familiar in much statistical work, and made it available through Google's newly launched cloud computing service, GoogleBigQuery.[^1] The [Github timeline data](https://bigquery.cloud.google.com/table/githubarchive:github.timeline) was listed, along with all the words in Shakespeare and all the US birth name records, as one of three dataset exemplars that people could use to learn about GoogleBigQuery [@Google_2016]. Like the data on GithubArchive itself, the GoogleBigQuery copy of the Github public timeline data was updated hourly. Reaching back to  2012, it comprises around 290 million public events.[^6]
+
+[^6]: In late 2015, the main GithubArchive timeline dataset was frozen. The last events date from October 2015. Data after that date flows into new datasets named by the month. e.g. [https://bigquery.cloud.google.com/table/githubarchive:month.201107](https://bigquery.cloud.google.com/table/githubarchive:month.201107) points to the data for July 2011. This re-tabling of the data attests partly to the increasing popularity of Github. For the purposes of my argument, and to simplify code slightly, I only make use of the main Github timeline dataset covering 2012-2015. 
 
 [^1]: GoogleBigQuery, it seems, is the commercialisation of an internal infrastructure called `Dremel`, that Google has since 2006 used in many different ways to manage its own platforms. 
     • Analysis of crawled web documents.
@@ -138,9 +140,32 @@ Analysis of the event timeline suggests a great proportion of events in the data
 
 [^5]: In all this re-counting, the data relates to the public repositories and actors on Github. An unknown but substantial number of repositories are private. Given Github's financial valuation at $US 2 billion in 2015, this number may be quite large. [@Gage_2015]
 
-Given that repositories are receptacles for all the work of software developers and coders, it seems strange that the vast bulk of them are so ephemeral. But rather than see this ephemerality as waste, noise or something to be discarded, we might see it as the working of associative processes. Tracking the patterns of imitation, rather than looking for the events that define repositories as important, allows something different to appear.
+Given that repositories are receptacles for all the work of software developers and coders, it seems strange that the vast bulk of them are so ephemeral. But rather than see this ephemerality as waste, noise or something to be discarded, we might trace the working of associative processes through it. Tracking the patterns of imitation, rather than looking for the events that define repositories as important, allows something different to appear.
 
-Looking at the flow of names of repositories, and how they move in waves of imitation begins to show something of the dynamics that animate the growth of large numbers.  These take two forms in the event data. Firstly, almost one half of the repositories in Github are simply copies of other repositories. This is part of the 'sharing' practice of Github coding. People 'fork' other repositories frequently. 
+Looking at the flow of names of repositories, and how they move in waves of imitation begins to show something of the dynamics that animate the growth of capital numbers.  These take two forms in the event data. We have already that  almost one half of the repositories in Github trigger only one event in the timeline data stream. What is this event? The ForkEvent or the act of copying ('forking') a repository. Acts of copying occur on many scales and at various levels of infrastructural and associative complexity, but on Github as a platform, the elementary act of copying is the 'fork.'  This is part of the 'sharing' practice of Github coding. People 'fork' other repositories frequently. Of the 290 million events in the timeline dataset, approximately 95 million result from copying, watching, commenting on or directly participating in other repositories. (The 140 million PushEvents show in the Table  
+
+
+type,events,
+PushEvent,"140,739,368",
+CreateEvent,"35,483,741",
+WatchEvent,"26,101,411","26,101,411"
+IssueCommentEvent,"25,056,189","25,056,189"
+IssuesEvent,"16,166,541","16,166,541"
+PullRequestEvent,"11,208,920","11,208,920"
+ForkEvent,"10,037,523","10,037,523"
+GistEvent,"4,816,399",
+GollumEvent,"4,253,087",
+DeleteEvent,"3,680,053",
+FollowEvent,"3,435,804","3,435,804"
+PullRequestReviewCommentEvent,"3,066,117","3,066,117"
+CommitCommentEvent,"2,493,741",
+MemberEvent,"1,492,529","1,492,529"
+ReleaseEvent,"418,180",
+DownloadEvent,"302,247",
+PublicEvent,"261,821",
+TeamAddEvent,"175,909","175,909"
+ForkApplyEvent,"5,628",
+Total,"289,195,208","96,740,943"
 
 \begin{figure}
   \centering
@@ -157,9 +182,9 @@ Looking at the flow of names of repositories, and how they move in waves of imit
 \end{figure}
 
 
-The figures shown above show some versions of this counting of imitation. In both Figure \ref{fig:bootstrap_forks} and \ref{fig:android_forks}, the imitations appears in two different ways. The broad bands of color rippling across the figures graph the counts of copies being made each day on Github of important repos. But the much more dense striations seen in Figure \ref{fig:android_forks} count copies of repositories whose names incorporate the important repository, but vary it in some way. These striations still imitate, and they generate large numbers of events, but less homogeneously, and in greater variety. In this striations, new things sometimes appear. 
+The figures shown above show some versions of this counting of imitation. Both Figure \ref{fig:bootstrap_forks} and \ref{fig:android_forks} count imitations in the form of copying code, but in ways that go beyond the formal copying mechanisms offered by Github itself (for instance in the 'Fork' button that appears on the top right hand side of any repository on Github; for example [https://github.com/twbs/bootstrap](https://github.com/twbs/bootstrap)). Imitations appears in two different ways in these figures. The broad bands of color rippling horizontally  across the middle of the figures graph the counts of copies being made each day on Github of popular repositories using the Fork action.  But the much more dense striations  on either side of the central bands seen for instance in Figure \ref{fig:android_forks} count repositories whose names incorporate the important repository, but vary it in some way. These repositories have some association with the `android` repository, but diverge from it in a multiplicity of ways. A repository may, for instance, relate to the popular  Twitter `bootstrap` repository yet combine it with a range of other platforms and devices. Visually,  these striated components of the diagram still point amount to imitations,  and they generate large numbers of events in the timeline dataset, but less homogeneously, and in greater multiplicity than the official copying mechanisms configured by social media platforms such as Github. 
 
-These figures suggest a different way of re-counting capital numbers. They sense the average everydayness of working with code as a form of associative work carried out through imitation and copying.  In this work, important repositories act like brands, as points around which forms of identity take hold and multiply. A sensibility for imitation, therefore, in STS might benefit from media and cultural studies.  With certain exceptions like Donna Haraway, STS doesn't always play happily with the critical approaches developed in media and cultural studies. But media and cultural studies approaches to brands, commodities, imitation, identity and differences might help us here. Imitation saturates popular culture, and media and cultural studies has long grappled with what to make of imitation. 
+In striated zones of associative imitation, it is possible that something different could be count.  These figures suggest a different way of re-counting capital numbers. They augment the average everydayness of working with code with a form of associative work carried out through imitation and copying.  In this work, important repositories act as points of identification around which forms of identity take hold and multiply. Unlike the capital numbers with their aggregates of people or repositories, the imitative fluxes that begin to appear in these diagrams have diverse configurations.  
 
  
 

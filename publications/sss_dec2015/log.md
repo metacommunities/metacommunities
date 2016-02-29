@@ -146,7 +146,9 @@ Could then add to that the number of repos that are forks.
 - need to merge analysis/actor_copying to get these graphs in .. 
 - tried to do this merging, but code that was working in the other branch didn't work here. 
 - also got sidetracked trying out R streamgraph package as an alternative to matplotlib and seaborn ...
-- trying to get back to the argument
+- trying to get back to the argument -- bit nervous that the imitation argument is too weak. I have device specificity to point to (marres); and the more Tardean point about association.
+- added a bit on the actual timeline dataset -- trying to give more specificity to that. 
+- got a bit of the way into imitation -- need to move to device specific stuff
 
 # TODO
 
