@@ -150,6 +150,13 @@ Could then add to that the number of repos that are forks.
 - added a bit on the actual timeline dataset -- trying to give more specificity to that. 
 - got a bit of the way into imitation -- need to move to device specific stuff
 
+
+## Tue Mar  1 15:56:13 UTC 2016
+- trying to recover direction by drawing on Lucy's idea of configuration as (1) bounds and composition of the object (2) ways in which technologies materialize cultural imaginaries and vice versa 48
+- added some configuration in near the beginning and started to bring it in towards the end. 
+- I need to do some work on imitation -- grepped for imitation in archive, and saved results as imitat.txt
+
+
 # TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
@@ -159,9 +166,9 @@ Could then add to that the number of repos that are forks.
 - read Badiou again to see if anything there goes along with work on number
 - **DONE** check citations of Badiou on number
 - get desrosiere on politics of large numbers
-- do some notes from Lucy on configuration
+- *DONE* do some notes from Lucy on configuration
 - add Ingmar on numbers, etc
 - add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. including ones hosted on Github itself like gitlab
 - add in the extra example of coding activity from codeology
-- gather figures for article in one place
+- *DONE* gather figures for article in one place
 - add some discussion of Espeland on performativity of number into background -- this will have to address numericality. What is STS's numericality?
