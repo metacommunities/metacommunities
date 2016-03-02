@@ -30,7 +30,7 @@ Science studies and related fields have a decades-long interest in numbers and c
 
 Debates have recently centred on the inherent instability of enumeration in practice [@Verran_2011], the reactivity of numbers in media assemblages [@Gerlitz_2013], the being of number [@Badiou_2008], the productive falseness of numbers [@Lampland_2010] or the configuration of market calculations [@Callon_2005a]. This attention to the specificity of numbers stands against a background of sociological debates about challenges to empirical methods posed by increasingly abundant digital enumerations [@Mayer-Schonberger_2013; @Rogers_2012].
 
-How amidst these accounts of number could STS itself produce numbers differently? Does STS have any calculative agency [@Muniesa_2005] amidst its field settings, its documents and data sets? 
+How amidst these accounts of number could STS itself produce numbers differently? Does STS have any calculative agency [@Muniesa_2005] amidst its field settings, its documents and data sets? Is there a way of treating numbers in terms of configurations? 
 
 Drawing on the experience of working with one number, the paper will suggest that science studies might develop ways of re-counting large numbers as capital numbers.
 
@@ -45,6 +45,10 @@ Such processes translate numbers into  regimes of social, aesthetic, political, 
 We can also attempt to re-count large numbers by paying attention to the acts of imitation [@Tarde_1902; @Barry_2007], copying, cloning and duplication characteristic of digital practices, and thereby show how they animate capital numbers. 
 
 Such re-counting entail, however, costly activities and implicates STS in complex, device-specific [@Marres_2012a]  configurations [@SuchmanLucy_2012]. 
+
+Device-specific numbers mean what?
+
+Configured numbers mean what?
 
 The re-counting of capital numbers has several implication for counting more generally. 
 
