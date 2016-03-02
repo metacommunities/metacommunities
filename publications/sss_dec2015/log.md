@@ -157,6 +157,10 @@ Could then add to that the number of repos that are forks.
 - I need to do some work on imitation -- grepped for imitation in archive, and saved results as imitat.txt
 
 
+## Wed Mar  2 10:04:20 UTC 2016
+- fixing up the table of event counts. Maybe that should go earlier. And I'm thinking the actual capital numbers I use should be synced with the timeline data, so that I have a clear view of particular numbers
+- about to write something about imitation as seen in names
+
 # TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
@@ -172,3 +176,5 @@ Could then add to that the number of repos that are forks.
 - add in the extra example of coding activity from codeology
 - *DONE* gather figures for article in one place
 - add some discussion of Espeland on performativity of number into background -- this will have to address numericality. What is STS's numericality?
+- move the table of event counts up higher
+- *DONE*  find the actor/repo count for late october 2015 https://web.archive.org/web/20151216055610/https://github.com/about
