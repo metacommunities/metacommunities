@@ -9,6 +9,11 @@ FROM  [githubarchive:github.timeline]
 group by actor_attributes_login
 order by events desc
 
+/*the top repository names by event count */
+SELECT repository_name, count(repository_name) as count FROM [githubarchive:github.timeline] 
+group by repository_name
+order by count desc
+LIMIT 1000
 
 /*Stu's query on repositories: how often repos are used
 ------------------------------------------------ */
