@@ -160,6 +160,9 @@ Could then add to that the number of repos that are forks.
 ## Wed Mar  2 10:04:20 UTC 2016
 - fixing up the table of event counts. Maybe that should go earlier. And I'm thinking the actual capital numbers I use should be synced with the timeline data, so that I have a clear view of particular numbers
 - about to write something about imitation as seen in names
+- put a couple of paras drawing on huge imitation literature, and started to write about ways of resisting their expansion. Too often it feels like imitative theory wants itself to go viral, rather than staying situated. Configuration might be answer to this ... or it might implode ...  
+- I like the point about there being no infrastructure -- should check that out more
+
 
 # TODO
 
