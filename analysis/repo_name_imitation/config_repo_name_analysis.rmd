@@ -1,3 +1,7 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE)
+```
+
 # Config repo names
 
 ## Thu Mar  3 10:20:12 GMT 2016
@@ -13,7 +17,7 @@ q1_sum = sum(df$count[grep(x=df$repo_names_clean, q)])
 q2 = 'cv|resume'
 q2_sum = sum(df$count[grep(x=df$repo_names_clean, q2)])
 total_events = sum(df$count)
-config_proportion = (q1+q2)/total_events
+config_proportion = (q1_sum+q2_sum)/total_events
 top_1000_proportion= round(total_events)/290000000 * 100
 timeline_total_events = 290000000
 ```
@@ -30,7 +34,7 @@ For instance, the repository `eclipse.platform.common` accounts for almost 2 mil
 
 The list of names is initially sorted by event count. The top 1000 repository names account for `r round(total_events)/290000000 * 100`% of Github timeline events. Within this proportion, however, the composition of the events vary greatly. We already know that many of the events on Github are associative. The flattening of the names emphasises a different form of association or affiliation. On the one hand, the sharing of names -- for instance, the many repositories that contain the term `dot` as in `dotfile` or `vimdot` -- suggests the imitation or repetition that Tarde describes. On the other hand, terms like `dot`, `test`, `hello`, `config`, `doc`, `build`, `setting` or `demo` also stream through this set of repository names. Many repository names proliferate from these stems. All of these stems relate to device-specific configurations and work done to sustain the configuration of devices in particular places. 
 
-```{r repo_name_stems}
+```{r repo_name_stems, echo=TRUE}
 
 q = 'dot|test|hello|build|setting|demo|config|git|learn|issue|doc|homebrew'
 q1_sum = sum(df$count[grep(x=df$repo_names_clean, q)])
