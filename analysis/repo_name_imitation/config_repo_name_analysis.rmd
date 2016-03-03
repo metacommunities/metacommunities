@@ -1,0 +1,53 @@
+# Config repo names
+
+## Thu Mar  3 10:20:12 GMT 2016
+
+I ran the query shown below against the timeline dataset on GoogleBigQuery. The query selects the top 1000 repository names on Github in terms of how often the named repository is named in an event. (Note: this does not include mentions of the repository name in other fields, for instance, as part of a ForkPullRequest Event). In this query, names are de-capitalised and re-ordered in certain ways (removing any `.` at the beginning of the name) to highlight their similarities. In counting the de-capitalised names, many specificities and local differences are lost. 
+
+```{r repo_names, echo=TRUE}
+
+df = read.csv('data/repository_names_count_events_top1000.csv')
+
+q = 'dot|test|hello|build|setting|demo|config|git|learn|issue|doc|homebrew'
+q1_sum = sum(df$count[grep(x=df$repo_names_clean, q)])
+q2 = 'cv|resume'
+q2_sum = sum(df$count[grep(x=df$repo_names_clean, q2)])
+total_events = sum(df$count)
+config_proportion = (q1+q2)/total_events
+top_1000_proportion= round(total_events)/290000000 * 100
+timeline_total_events = 290000000
+```
+
+The top 1000 repositories attract around `r round(total_events/290000000 * 100)`% of all events in the timeline period. Given the flattening of the names to lower case produced by this query, we cannot readily see how those events are distributed. But these repositories, which only comprise a small percentage of the 30 million on  Github, absorb many events. What happens in these high event count repositories. They show some unevenness in distribution of events.
+ 
+## Events have been eclipsed
+
+For instance, the repository `eclipse.platform.common` accounts for almost 2 million events. A single repository with 2 million events in a few years suggests something highly significant in the geography of coding work. Perhaps the fact that `eclipse` is itself 'an amazing open source community of Tools, Projects and Collaborative Working Groups' [@EclipseFoundation_2016] with almost a thousand of its own projects might help explain this. The  Github 'commmunity' is a community of communities. More importantly, however, `eclipse.platform.common` is an example of a configuration on  Github. For the `eclipse` repositories are not actively developed on  Github. They are mirrored  or themselves copied from the hundreds of `git` repositories found at (git://git.eclipse.org)[git://git.eclipse.org]. The work and much of the associative fabric of `eclipse` does not reside on  Github, but is itself copied there as part of the contemporary  Github configuration of coding.[^10]
+
+[^10]: The presence of `eclipse` on Github suggests another important analytical problem to consider: how do know for a given setting or place that what we find there comes from there? Sometime repositories on Github mention they are 'mirrors' of something else. Other times they may not. 
+
+## Many events are configurative 
+
+The list of names is initially sorted by event count. The top 1000 repository names account for `r round(total_events)/290000000 * 100`% of Github timeline events. Within this proportion, however, the composition of the events vary greatly. We already know that many of the events on Github are associative. The flattening of the names emphasises a different form of association or affiliation. On the one hand, the sharing of names -- for instance, the many repositories that contain the term `dot` as in `dotfile` or `vimdot` -- suggests the imitation or repetition that Tarde describes. On the other hand, terms like `dot`, `test`, `hello`, `config`, `doc`, `build`, `setting` or `demo` also stream through this set of repository names. Many repository names proliferate from these stems. All of these stems relate to device-specific configurations and work done to sustain the configuration of devices in particular places. 
+
+```{r repo_name_stems}
+
+q = 'dot|test|hello|build|setting|demo|config|git|learn|issue|doc|homebrew'
+q1_sum = sum(df$count[grep(x=df$repo_names_clean, q)])
+q2 = 'cv|resume'
+q2_sum = sum(df$count[grep(x=df$repo_names_clean, q2)])
+total_events = sum(df$count)
+config_proportion = q1/total_events
+person_config_proportion = (q1+q2)/total_events
+top_1000_proportion= round(total_events)/290000000 * 100
+timeline_total_events = 290000000
+
+```
+
+The proportion of events absorbed by  repositories explicitly concerned with configuration is substantial. Of the `r total_events` events, `r round(config_proportion*100)`% belong to configurative  repositories. These repositories explicitly relate to configuration work done as part of coding. A `dotfile` repository will typically contain the settings for a software developer's terminal windows, code editor, and 'shell' or command line interface (see the heavily forked `[https://github.com/mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)` repository for typical contents). The name `dotfile` refers to the fact that some operating systems hide from normal view file names beginning with the character `.`.  Many of these explicit configurative repositories stand quite close to personal actors and their configured work settings. The actor `mathiasbynens` maintains configuration relating to his coding in the repository `dotfiles.` 
+
+## The configurational intensity of a platform
+
+The substantial proportion of these mostly commonly used repository names concerned either with direct configuration work or with the development of configurative devices (for instance the `eclipse` platform is a commonly used coding environment) suggests the operation of device-specific supplements within the fluxes of imitation that appear more generally around places like Github. We could look further for implicit configurative work in the timeline events.[^11]
+
+[^11]: A quick query on the timeline dataset yields around ten million push events in which either a comment or message relating to 'config,' 'test' or 'build.' See Q_1
