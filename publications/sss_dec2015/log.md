@@ -163,6 +163,11 @@ Could then add to that the number of repos that are forks.
 - put a couple of paras drawing on huge imitation literature, and started to write about ways of resisting their expansion. Too often it feels like imitative theory wants itself to go viral, rather than staying situated. Configuration might be answer to this ... or it might implode ...  
 - I like the point about there being no infrastructure -- should check that out more
 
+## Thu Mar  3 16:14:29 GMT 2016
+
+- worked in repo_name_imitation branch today -- did mini-analysis of the repo-names, and wrote about 1k words on that. Much more there about configuration, and the idea that imitation is substantially concerned with configuration on Github. Configurations are imitated, and configuration is imitative. 
+- not sure how to link this with capital numbers: re-figuring accumulation without relying on general network effects? 
+- also had the idea of tracking mirroring more generally -- how much of the capital numbers accrues from imitation occurring elsewhere -- Github as a mirror of other places ... a stronger sense of meta-community here ...  
 
 # TODO
 
