@@ -32,6 +32,10 @@ Debates have recently centred on the inherent instability of enumeration in prac
 
 How amidst these accounts of number could STS itself produce numbers differently? Does STS have any calculative agency [@Muniesa_2005] amidst its field settings, its documents and data sets? Is there a way of treating numbers in terms of configurations? 
 
+Calculative agency has largely been done in terms of association and imitation in STS, hence the network and Tarde as primary references. 
+
+Could calculative agency be done more configuratively, taking into account the device-specific character of our research, those whom we research, and their intersectional imaginaries? Are there configurative calculations to be done?
+
 Drawing on the experience of working with one number, the paper will suggest that science studies might develop ways of re-counting large numbers as capital numbers.
 
 A capitalised number enumerates an aggregate, imbues it with importance linked to infrastructural scale and complexity, and promises the potential to generate further accumulation. 
