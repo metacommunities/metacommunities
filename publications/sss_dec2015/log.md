@@ -155,6 +155,12 @@
     - but I did bring it in -- word count at 6.5k; 
     - did a lot of fixing of numbers --- making sure that 29 million is the main number ... 
 
+## Mon Mar  7 09:29:06 UTC 2016
+    - want to draft the conclusion now, even though I haven't quite finished the section on configurative numbers. 
+    - for the conclusion, can bring in some stuff from older draft, but will also need to add the configurative argument -- that sts numericality does two things; it keeps both sides of the split that Badiou makes in play.
+    - so I brought in the conclusion from material cultures paper, but I don't think it is quite right.
+   
+
 ## TODO
     - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
     - *DONE* add all to zotero and set up bib files 
@@ -165,9 +171,11 @@
     - *DONE* gather figures for article in one place
     - *DONE*  find the actor/repo count for late october 2015 https://web.archive.org/web/20151216055610/https://github.com/about
     - *DONE* add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. including ones hosted on Github itself like gitlab
-    - read Badiou again to see if anything there goes along with work on number
+    - *DONE* read Badiou again to see if anything there goes along with work on number
     - add Ingmar on numbers, etc
     - add in the extra example of coding activity from codeology
     - get desrosiere on politics of large numbers
     - add some discussion of Espeland on performativity of number into background -- this will have to address numericality. What is STS's numericality?
     - move the table of event counts up higher
+    - write footnote describing the research
+    - write acknowledgment for the funding

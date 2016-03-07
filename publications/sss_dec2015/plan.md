@@ -52,7 +52,7 @@ Such re-counting entail, however, costly activities and implicates STS in comple
 
 Device-specific numbers mean what?
 
-Configured numbers mean what?
+Configurative numbers mean what?
 
 The re-counting of capital numbers has several implication for counting more generally. 
 
@@ -61,4 +61,6 @@ It directly contests the value-laden measures associated with certain large numb
 It decouples any essential link between working with digital data and ontological invention. 
 
 It suggests instead that any ontological or epistemic transformation associated with significantly large numbers -- for instance, in claims about the epistemic potentials of data --  pivots on the crafting of new calculative agencies for fragile, weak and diffuse collectives.
+
+This crafting has to deal both with the ontological and social contamination
 

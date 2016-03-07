@@ -245,4 +245,23 @@ The substantial proportion of these mostly commonly used repository names concer
 
 [^11]: A quick query on the timeline dataset yields around ten million push events in which either a comment or message relating to 'config,' 'test' or 'build.' See Q
 
+## Conclusion
+
+> Number is neither that which counts, nor that which we count. This regime of numericality organises the forgetting of number. [@Badiou_2008,51]
+
+I have been describing some regimes of numericality associated with software development and with social media more generally. Capital numbers, I have suggested,  enumerate an aggregate, imbue it with importance linked to infrastructural scale and complexity, and promise the potential to generate further accumulation. It takes work to get contemporary digital data and associated large numbers to do something other feed back into capital numbers and their platform-centred aggregates.  I have been suggesting that STS research might develop its strong ethnographic sensibilities in relation to data event streams (such as the Github timeline) by moving in an ambivalent space between visualization-friendly data formats and disfiguring elements, between the device-specific and its overflows. Configurative numbers, I have suggested, might be one term for the enumerations that result. 
+
+There are several different ways to understand what is at stake in this work. It differs from the network-based approaches of some recent STS work using digital methods. One comes from Latour, Jensen, and Venturini, who ask:
+
+>Is it possible to do justice to … common experience by shifting from prediction and simulation to description and data mining? … Let the agents produce a dynamics and collect the traces that their actions leave as they unfold so as to produce a rich data set’ (Latour et al., 2012)
+
+I broadly agree with them but think there are hidden difficulties in their recommendation. What they call the 'rich data set' is pre-formatted for particular actors and agents (the platform usually). If we are interested in alternative agencies, we have to work against the traces in some ways. Helen Verran's observation about work on numbers might be a more productive starting point. As she says, 'in any practical going-on with numbers, what matters is that they can be made to work, and making them work is a politics' (Verran, 2001). Like Verran, I see the interplay between different kinds of numbering as generative. 
+
+How do we re-animate and open up the large numbers that abound in contemporary sciences and technologies? To do this, we need to find ways of working on formatted data that goes against its pre-formatted counting relations and uses. The massive availability of data from online databases is power-laden number work. Its very openness allows a certain kind of capitalising and governing based on data to expand. The formatting of data streams tends to simply confirm and expand how the platform already advertises itself. By contrast, device-specific research that attends to the ways in which data is formatted, and how that formatting affects practices around the platform seems to me quite important in alternative to the much advertised (but actually often limited) opennness of data.
+
+If our concern is to begin to explore the indeterminacy in the relations between what is specific to the devices or platforms and what is specific to the social practices that come to those platforms. I think ethnographic work on things like the flow of naming heads in a different direction to the formatting of data for purposes of platform services and enterprises. It cannot remain content with the familiar processes of reduction to social networks, or counting specific kinds of pre-formatted event types. In the case of Github, the names of repositories offer one way to begin to explore this ambiguity and indeterminacy.o
+
+I have also been suggesting that STS work on numbers might help us understand better the transformations in work that concepts such as immaterial labour and cognitive capitalism often describe in quite abstract ways. If coding epitomises contemporary immaterial labour, the patterning of events on Github might indicate the imitative fluxes that organise that work, rendering it routine, ordering it and controlling it. 
+
+
 ## References
