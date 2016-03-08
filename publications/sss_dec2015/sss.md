@@ -265,6 +265,6 @@ If our concern is to begin to explore indeterminacies in the relations between w
 
 ## Acknowledgments
 
-The research reported on here was funded by XXX -- removed for anonymity --. Other researchers on this project were x,x,x,x.
+The research reported on here was funded by ES/K007912/1 'Metacommunities of practice in the code-sharing commons' XXX -- removed for anonymity --. Other researchers on this project were x,x,x,x.
 
 ## References
