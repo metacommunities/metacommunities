@@ -14,3 +14,7 @@ publication/sss
     - added this to sql list
     - could also extend it to include repo name and org name
     - would need to craft search queries for different topics  -- 'docker or chef or etc.'
+
+## Tue Mar  8 22:05:30 GMT 2016
+
+- having Stirling piece on  'general framework for analyzing diversity' -- could redo the metacommunity argument using that ... 
