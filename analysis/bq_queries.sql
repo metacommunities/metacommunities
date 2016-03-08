@@ -2967,7 +2967,7 @@
 
         proj = 'metacommunities'
         gh = src_bigquery(project ='githubarchive', dataset = 'year', billing=proj)
-        repos = gh %>% tbl('2014') %>% select(repository_url, repository_name, repository_created_at, type, created_at)
+        repos = gh %>% tbl('2014') %>% select(repository_url, repository_name, repository_created_at, filter(type=='ForkEvent'), created_at)
         events = repos %>% group_by(repository_name)  %>% summarise(count = count(type)) %>% arrange(desc(count))
         head(events)
 
