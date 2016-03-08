@@ -161,6 +161,16 @@
     - so I brought in the conclusion from material cultures paper, but I don't think it is quite right.
    
 
+## Tue Mar  8 09:47:10 UTC 2016
+
+- putting idea of configurative numbers into the conclusion
+- went through intro to number a bit and tightened it.; adding references to Leydesdorff
+- wrote quite a bit on the conclusion; felt like cutting some bits but left them; 
+- still not happy with configurative discussion, and avoiding doing what needs to be on device-specific. 
+- added token acknowledgments; 
+- check if still need to bring more of the device-specific configurative discussion into the paper
+
+
 ## TODO
     - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
     - *DONE* add all to zotero and set up bib files 
@@ -172,10 +182,10 @@
     - *DONE*  find the actor/repo count for late october 2015 https://web.archive.org/web/20151216055610/https://github.com/about
     - *DONE* add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. including ones hosted on Github itself like gitlab
     - *DONE* read Badiou again to see if anything there goes along with work on number
+    - *DONE IN PART* add some discussion of Espeland on performativity of number into background -- this will have to address numericality. What is STS's numericality?
     - add Ingmar on numbers, etc
     - add in the extra example of coding activity from codeology
     - get desrosiere on politics of large numbers
-    - add some discussion of Espeland on performativity of number into background -- this will have to address numericality. What is STS's numericality?
     - move the table of event counts up higher
     - write footnote describing the research
     - write acknowledgment for the funding
