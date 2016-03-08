@@ -1,3 +1,18 @@
+    +/* looking at actor locations*/
++
+        +SELECT actor_attributes_login, actor_attributes_location, actor_attributes_company, repository_language, count(actor_attributes_location) as location FROM [githubarchive:github.timeline] 
+        +where repository_forks > 10
+        +group by actor_attributes_location, actor_attributes_company, actor_attributes_login
+        +order by location desc
+        +LIMIT 1000
+    +
+    +/*looks more closely at uk people*/
+        +select actor_attributes_location, actor_attributes_login, count(actor_attributes_location) as loc_count from [githubarchive:github.timeline]
+        +where REGEXP_MATCH(lower(actor_attributes_location), 'london|manchester|cambridge|glasgow')
+        +group by actor_attributes_location, actor_attributes_login
+        +order by loc_count desc
+        +limit 1000
++
     /* Q_1 count events containing 'config, test, build' */
 
         SELECT count(type) as event, type FROM [githubarchive:github.timeline]
