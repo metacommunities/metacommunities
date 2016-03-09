@@ -16,3 +16,4 @@ all_repos*
 *ipynb_*
 .httr-oauth
 .rope*
+analysis/platform/github_website_overtime/images
