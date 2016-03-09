@@ -25,3 +25,6 @@
  - no way to aggregate, accommodate or articulate full variety, balance and disparity, all of which can be quantified ... 
 
 
+## Wed Mar  9 13:17:20 GMT 2016
+ - reading zach holman on deployment -- https://zachholman.com/posts/deploying-software -- useful in describing some of the experiments, containers, etc of contemporary infrastrustructures -- versions, branches, etc
+
