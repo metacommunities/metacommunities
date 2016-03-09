@@ -17,6 +17,9 @@
 
 ## Title
 
+The multiple multiply: capital numbers and the calculative agency of STS
+29 million and counting: the calculative agency of STS
+29 million and counting: capital numbers and their configurations
 Capitalised numbers and their obscure numericalities
 Capital numbers and the obscure numericalities of practice
 Dis-counting large numbers: how copying makes things big

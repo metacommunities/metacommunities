@@ -170,6 +170,12 @@
 - added token acknowledgments; 
 - check if still need to bring more of the device-specific configurative discussion into the paper
 
+## Wed Mar  9 08:57:39 GMT 2016
+- maybe add something about the ontology of number, and how this writing, the code that I did for this has been part of the object of analysis
+- moved event count table higher in the piece, and started to format it using xtable. 
+- spent quite a lot of time querying for languages and events, thinking that there might be a pattern there. Partly drawing on stirling idea of diversity, and thinking that it might be possible to represent diversity ... 
+- add the new phrase 'multiply multiple' to address the ontological work ... suggests also the possibility of a new title
+
 
 ## TODO
     - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
@@ -183,9 +189,13 @@
     - *DONE* add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. including ones hosted on Github itself like gitlab
     - *DONE* read Badiou again to see if anything there goes along with work on number
     - *DONE IN PART* add some discussion of Espeland on performativity of number into background -- this will have to address numericality. What is STS's numericality?
+    - *DONE* move the table of event counts up higher
+    - *DONE* write footnote describing the research
+    - *DONE* write acknowledgment for the funding
+    - *DONE* check that table can be formatted ok. 
     - add Ingmar on numbers, etc
     - add in the extra example of coding activity from codeology
     - get desrosiere on politics of large numbers
-    - move the table of event counts up higher
-    - write footnote describing the research
-    - write acknowledgment for the funding
+    - rewrite abstract
+    - run the whole doc as a rmd
+    - add footnote explaining how the paper seeks to do the multiple multiply

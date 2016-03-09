@@ -1,3 +1,20 @@
+/* repository languages counted */
+    SELECT repository_language, count(repository_language) as language_count,
+    count(distinct(repository_url)) as repo_url
+    FROM [githubarchive:github.timeline]
+    where repository_language != 'null'
+    group by repository_language
+    order by repo_url desc, language_count desc
+
+/* repo language counted by event type*/
+    SELECT repository_language, count(distinct(repository_url)) as repo_count, type as event, count(repository_language) as event_count
+    FROM [githubarchive:github.timeline]
+    where repository_language != 'null'
+    group by repository_language, event
+    order by repo_count desc, event_count desc
+
+"SELECT repository_language, count(distinct(repository_url)) as repo_count, type as event, count(repository_language) as event_count FROM [githubarchive:github.timeline] where repository_language != 'null' group by repository_language, event"
+    
     +/* looking at actor locations*/
     +SELECT actor_attributes_login, actor_attributes_location, actor_attributes_company, repository_language, count(actor_attributes_location) as location FROM [githubarchive:github.timeline] 
     +where repository_forks > 10
