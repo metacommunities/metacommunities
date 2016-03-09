@@ -1,5 +1,4 @@
 # data analysis ideas    
-publication/sss
 
 
 ## Tue Feb 16 16:50:43 UTC 2016
@@ -18,3 +17,11 @@ publication/sss
 ## Tue Mar  8 22:05:30 GMT 2016
 
 - having Stirling piece on  'general framework for analyzing diversity' -- could redo the metacommunity argument using that ... 
+
+## Wed Mar  9 11:27:01 GMT 2016
+
+### Github diversity -- how would we think of diversity in code-sharing commons? Is this a mono-culture? 
+ - played a bit with MastodonC NESTA github thing -- and started a new branch on repo-languages  to see if it could implement the 'diversity' idea. What would software diversity be? Languages? organisational-associative structures? variety- the number of categories; balance- the pattern of apportionment of elements across categories; disparity - manner and degree to which elements may be distinguished; how different from each other are they? 
+ - no way to aggregate, accommodate or articulate full variety, balance and disparity, all of which can be quantified ... 
+
+
