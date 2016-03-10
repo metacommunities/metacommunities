@@ -177,6 +177,14 @@
 - add the new phrase 'multiply multiple' to address the ontological work ... suggests also the possibility of a new title
 
 
+## Thu Mar 10 09:25:45 GMT 2016
+- not going to do much today -- spent hours last night looking at how to query more recent Github data, using json payload, and date ranges. 
+- brought in list of visualizations from GithubArchive -- might be good to add some of these
+- rewrote abstract in the plan.md
+- did some more tweaking on the sts intro stuff
+- changed file from .md to .rmd
+- maybe almost ready to go -- do I need to redo the images in ggplot? could leave it to after refereeing is done ... 
+
 ## TODO
     - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
     - *DONE* add all to zotero and set up bib files 
@@ -193,9 +201,9 @@
     - *DONE* write footnote describing the research
     - *DONE* write acknowledgment for the funding
     - *DONE* check that table can be formatted ok. 
+    - *DONE* add footnote explaining how the paper seeks to do the multiple multiply
+    - *DONE* rewrite abstract
     - add Ingmar on numbers, etc
     - add in the extra example of coding activity from codeology
     - get desrosiere on politics of large numbers
-    - rewrite abstract
     - run the whole doc as a rmd
-    - add footnote explaining how the paper seeks to do the multiple multiply
