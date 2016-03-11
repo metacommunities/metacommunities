@@ -1,0 +1,35 @@
+# Null language repos
+
+Null language repos may comprise 70% of the total repo count on Github. 
+So much effort has gone to show how different languages are used, and how they have different communities. What about all of the repos that have no language? Do they matter?
+
+```{r null_language, cache=TRUE}
+knit_hooks$set(inline = function(x) {
+  prettyNum(x, big.mark=",")
+  })
+library(bigrquery)
+query =  "SELECT count(distinct(repository_url)) as repo_count FROM [githubarchive:github.timeline] WHERE repository_language IS NULL"
+query3 =  "SELECT count(distinct(repository_url)) as repo_count FROM [githubarchive:github.timeline] WHERE repository_language IS NOT NULL"
+query2 =  "SELECT count(distinct(repository_url)) as repo_count FROM [githubarchive:github.timeline]"
+null_count = query_exec(query, 'metacommunities')
+full_count = query_exec(query2, 'metacommunities')
+lang_count = query_exec(query3, 'metacommunities')
+null_count
+full_count
+lang_count
+query4 =  "SELECT count(repository_url) as Events FROM [githubarchive:github.timeline] WHERE repository_language IS NULL"
+null_event_lang_count = query_exec(query4, 'metacommunities')
+null_event_lang_count
+query5 =  "SELECT count(repository_url) as Events FROM [githubarchive:github.timeline]"
+total_events = query_exec(query5, 'metacommunities')
+total_events
+null_proportion =round( null_event_lang_count/total_events*100)
+null_proportion
+```
+
+
+That's pretty amazing -- `r null_count` repositories of the total `r full_count` repositories do not have a language recorded. `r lang_count` repositories do have a language recorded or detected. Put differently, of the `r total_events` in the timeline data, `r null_event_lang_count` come from repositories with no programming language. That is, around `r round(null_event_lang_count/total_events*100)`%. A significant amount of work is going into these repositories.  
+
+What is going on here? 
+
+

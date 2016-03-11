@@ -25,3 +25,8 @@
  - no way to aggregate, accommodate or articulate full variety, balance and disparity, all of which can be quantified ... 
 
 
+
+## Fri Mar 11 10:17:34 GMT 2016
+- got a bit distracted in doing a mini-analysis of repos with null language. so many of them. wrote a minianalysis -- repo_language/null_language_repos.rmd -- has it. There are some crazy figures there -- only 15 million repos? 11 million have no language? 20% of all events go into these ... 
+
+
