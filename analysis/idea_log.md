@@ -28,3 +28,8 @@
 ## Wed Mar  9 13:17:20 GMT 2016
  - reading zach holman on deployment -- https://zachholman.com/posts/deploying-software -- useful in describing some of the experiments, containers, etc of contemporary infrastrustructures -- versions, branches, etc
 
+## Fri Mar 11 09:35:28 GMT 2016
+- going through old fork-pullrequest queries -- could use these to engage with the problems of centralisation on Github
+- also looking at null language repositories on gh -- 10M repos have no language -- that is a major fraction -- what is going on in them. That would be worth looking into. Might make a new mini-analysis branch on that.  
+
+
