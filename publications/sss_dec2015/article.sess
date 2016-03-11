@@ -3,32 +3,31 @@ if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
+cd ~/R/metacommunities/publications/sss_dec2015
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 sss.md
+badd +0 sss.rmd
 badd +0 log.md
 badd +0 plan.md
 badd +0 number.md
 badd +0 capital_numbers.md
-badd +0 accounting_number.rmd
 argglobal
 silent! argdel *
-argadd sss.md
+argadd sss.rmd
 argadd log.md
 argadd plan.md
 argadd number.md
 argadd capital_numbers.md
-argadd accounting_number.rmd
-edit sss.md
+edit sss.rmd
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
-setlocal fdm=expr
+setlocal fdm=syntax
 setlocal fde=pandoc#folding#FoldExpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
@@ -36,12 +35,13 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 1 - ((0 * winheight(0) + 21) / 43)
+let s:l = 1 - ((0 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
 normal! 0
+lcd ~/R/metacommunities/publications/sss_dec2015
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
