@@ -31,5 +31,7 @@
 ## Fri Mar 11 09:35:28 GMT 2016
 - going through old fork-pullrequest queries -- could use these to engage with the problems of centralisation on Github
 - also looking at null language repositories on gh -- 10M repos have no language -- that is a major fraction -- what is going on in them. That would be worth looking into. Might make a new mini-analysis branch on that.  
+- ok, did do that -- but put stuff in analysis/repo_language branch
+- also thinking about posting on gh as too centralized -- that's what I've thought for a while. But how to analyse it? What is the centring effect? Are there places that the centring breaks down and in what ways? This connects to wider debates about platforms and hubs on the internet. Is Github a good case study of this?
 
 
