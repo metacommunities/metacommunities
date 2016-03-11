@@ -35,7 +35,7 @@
         group by type
         order by event desc
 
-    /* show many comments and commit messages mention 'config'?*/
+/* show many comments and commit messages mention 'config'?*/
 
         SELECT repository_url, payload_comment_body, payload_commit_msg,
         count(repository_url) as url_count
@@ -45,28 +45,28 @@
         order by url_count desc
         LIMIT 1000
 
-    /* How many events of different types */
+/* How many events of different types */
 
         SELECT type, count(type) as events FROM [githubarchive:github.timeline] group by type order by events desc LIMIT 1000
 
-    /* How many events per actor */
+/* How many events per actor */
 
         SELECT actor_attributes_login, count(type) AS events
         FROM  [githubarchive:github.timeline]
         group by actor_attributes_login
         order by events desc
 
-    /*the top repository names by event count */
+/*the top repository names by event count */
         SELECT repository_name, count(repository_name) as count FROM [githubarchive:github.timeline] 
         group by repository_name
         order by count desc
         LIMIT 1000
 
-    /* same query, but collapsing repo names into each other a bit more by de-capitalising them */
+/* same query, but collapsing repo names into each other a bit more by de-capitalising them */
 
         SELECT lower(repository_name) as repository_name, count(lower(repository_name)) as count FROM [githubarchive:github.timeline] group by repository_name order by count desc LIMIT 1000
 
-    /*Stu's query on repositories: how often repos are used
+/*Stu's query on repositories: how often repos are used
         ------------------------------------------------ */
         SELECT RepoEvents, COUNT(*) AS Freq
         FROM
@@ -78,7 +78,7 @@
         GROUP BY RepoEvents
         ORDER BY Freq DESC
 
-    /*  Top 100 Repos by number of events */
+/*  Top 100 Repos by number of events */
 
         SELECT repository_name, RepoEvents
         FROM
@@ -92,7 +92,7 @@
         limit 100;
 
 
-    /*fork - pull requests - only 1 month time window to deal with size of data - 3
+/*fork - pull requests - only 1 month time window to deal with size of data - 3
     */
         SELECT
             ForkTable.repository_url,
@@ -136,7 +136,7 @@
 
 
 
-    /* Pull request events, discrete pull requests, and merged pull requests - per repo */ 
+/* Pull request events, discrete pull requests, and merged pull requests - per repo */ 
 
         SELECT payload_pull_request_base_repo_url, 
         count(payload_pull_request_base_repo_url) as PullRequestEvents, 
@@ -149,7 +149,7 @@
         limit 1000;
 
 
-    /* attempting to construct the fork-pull request table* the join method is clunky/
+/* attempting to construct the fork-pull request table* the join method is clunky/
 
         SELECT pulltable.repository_url,forktable.fork as forks, count(type) as pullrequests
         FROM
@@ -173,7 +173,7 @@
         limit 100;
 
 
-    /* much simpler way to do fork-pullrequest table using the sum(if ...) approach*/
+/* much simpler way to do fork-pullrequest table using the sum(if ...) approach*/
 
         select repository_url, SUM(IF(type='ForkEvent', 1,0)) as fork,
         SUM(IF(type='PullRequestEvent', 1,0)) as pullrequest
@@ -218,33 +218,40 @@
         ORDER BY PullRequestEvents DESC
         limit 1000;
 
-    /* Looking for forks which have supplanted their parents
+/* Looking for forks which have supplanted their parents
         Start with finding the 200k fork repos which have the most PushEvents
         This query excludes those created before 2012-03-12 
         because we need their ForkEvent to be included in the data or we can't ascertain their parent.
         Results have been saved as 200k_active_forks
         */
 
-        SELECT repository_url,
-        count(repository_url) AS PushEvents,
-        count(distinct(actor_attributes_login)) AS Pushers,
-        sum(IF(actor_attributes_login = repository_owner, 1, 0)) AS PushesByOwner,
-        min(repository_watchers) AS minWatchers,
-        max(repository_watchers) as maxWatchers,
-        min(repository_size) AS minSize,
-        max(repository_size) AS maxSize,
-        min(repository_forks) AS minForks,
-        max(repository_forks) AS maxForks,
-        min(repository_created_at) AS created_at,
-        max(created_at) AS last_push,
-        FROM [github_explore.timeline]
-        WHERE type = 'PushEvent' AND repository_fork = 'true' 
-        AND PARSE_UTC_USEC(repository_created_at) >= PARSE_UTC_USEC('2012-03-12 00:00:00') 
-        GROUP EACH BY repository_url
-        ORDER BY PushEvents Desc
-        LIMIT 200000
+        SELECT
+          repository_url,
+          COUNT(repository_url) AS PushEvents,
+          COUNT(DISTINCT(actor_attributes_login)) AS Pushers,
+          SUM(IF(actor_attributes_login = repository_owner, 1, 0)) AS PushesByOwner,
+          MIN(repository_watchers) AS minWatchers,
+          MAX(repository_watchers) AS maxWatchers,
+          MIN(repository_size) AS minSize,
+          MAX(repository_size) AS maxSize,
+          MIN(repository_forks) AS minForks,
+          MAX(repository_forks) AS maxForks,
+          MIN(repository_created_at) AS created_at,
+          MAX(created_at) AS last_push,
+        FROM
+          [githubarchive:github.timeline]
+        WHERE
+          type = 'PushEvent'
+          AND repository_fork = 'true'
+          AND PARSE_UTC_USEC(repository_created_at) >= PARSE_UTC_USEC('2012-03-12 00:00:00')
+        GROUP EACH BY
+          repository_url
+        ORDER BY
+          PushEvents DESC
+        LIMIT
+          100
 
-    /* Get table of pushers for fork repos */
+/* Get table of pushers for fork repos */
 
         SELECT repository_url AS fork_url,
         actor_attributes_login AS pusher,
@@ -260,7 +267,7 @@
 
 
 
-    /* This creates a table linking the active fork repos to their parent repos Saved as active_forks_parents */
+/* This creates a table linking the active fork repos to their parent repos Saved as active_forks_parents */
 
         SELECT
         ForkTable.fork_url, ParentTable.repository_url
@@ -284,7 +291,7 @@
          ON
           ForkTable.fork_url=ParentTable.url 
 
-    /* This one uses the table linking forks to their parents and produces a table of values for the parent repos Saved as 200k_active_forks_parentdata */
+/* This one uses the table linking forks to their parents and produces a table of values for the parent repos Saved as 200k_active_forks_parentdata */
 
         SELECT Parent.repo AS parent_repo,
         Parent.PushEvents,
@@ -322,7 +329,7 @@
         AS parentstable
         ON Parent.repo = parentstable.parent
 
-    /* Same as above but just want names of pushers
+/* Same as above but just want names of pushers
         Extracted to ipython
         */
         SELECT Parent.repo AS parent_repo,
@@ -348,7 +355,7 @@
         ON Parent.repo = parentstable.parent
 
 
-    /* This query is to add information on pull requests made/received in relation to the forked repos (with the forked repo as head)
+/* This query is to add information on pull requests made/received in relation to the forked repos (with the forked repo as head)
         */ 
         SELECT PR.headurl AS HeadURL,
         PR.baseurl AS BaseURL,
@@ -385,7 +392,7 @@
         ON PR.headurl = headtable.head
         ORDER BY HeadURL
 
-        /* This query is to add information on pull requests made/received in relation to the forked repos (with the forked repo as base)
+/* This query is to add information on pull requests made/received in relation to the forked repos (with the forked repo as base)
         saved as: 200k_active_forks_PRbase 
         */ 
         SELECT PR.baseurl AS BaseURL,
@@ -423,7 +430,7 @@
         ON PR.baseurl = forktable.fork
         ORDER BY BaseURL
 
-    /* This query is to add information on pull requests made/received in relation to the parent repos (with the parent repo as base)
+/* This query is to add information on pull requests made/received in relation to the parent repos (with the parent repo as base)
         saved as: 200k_active_parents_PRbase 
         */ 
         SELECT PR.baseurl AS BaseURL,
@@ -461,7 +468,7 @@
         ON PR.baseurl = parenttable.parent
         ORDER BY BaseURL
 
-    /* This query is to add information on pull requests made/received in relation to the parent repos (with the parent repo as head)
+/* This query is to add information on pull requests made/received in relation to the parent repos (with the parent repo as head)
         saved as: 200k_active_parents_PRheads
         */ 
         SELECT PR.headurl AS HeadURL,
@@ -500,12 +507,7 @@
         ORDER BY BaseURL
 
 
-
-
-
-
-
-    /* This query is for the repo census and produces mostly counts of the number of events
+/* This query is for the repo census and produces mostly counts of the number of events
         Because there are so many repos it needs to be done in stages through the python API, which is slow...
         */
         SELECT repository_url,
@@ -539,12 +541,12 @@
         max(repository_forks) AS maxForks,
         max(repository_language) AS language,
         IF(max(repository_fork) = 'true', 1, 0) AS fork
-        FROM [github_explore.timeline]
+        FROM [githubarchive:github.timeline]
         GROUP EACH BY repository_url
         ORDER BY Events Desc
 
 
-    /* The following queries are for looking at ongoing relationships between base and head repos through pull requests
+/* The following queries are for looking at ongoing relationships between base and head repos through pull requests
         I've saved most or all of the results as tables, because getting at the data I wanted involved layers of custom-made tables
         The first one gets base/head pairs which are not intra-repo - cutting it off at 200k and ordering by pull request events 
         means that we are left with pairs that have a minimum 4 events 
@@ -557,7 +559,7 @@
         ORDER BY pullrequestevents DESC
         LIMIT 200000
 
-    /* table of users who pushed to base repo of pair
+/* table of users who pushed to base repo of pair
         saved as: PR_Base_repo_Push_By_User
         */
         SELECT Base.baseurl AS BaseURL,
@@ -583,7 +585,7 @@
         ON Base.baseurl = basetable.base
         ORDER BY BaseURL
 
-    /* table of users who pushed to head repo of pair
+/* table of users who pushed to head repo of pair
         saved as: PR_Head_repo_Push_By_User
         */
         SELECT Head.headurl AS HeadURL,
@@ -609,7 +611,7 @@
         ON Head.headurl = headtable.head
         ORDER BY HeadURL
 
-    /* table of pull requests (opens, closes, distincts) grouped by user and repo and whether they were merged plus more counts (self-merges) and times 
+/* table of pull requests (opens, closes, distincts) grouped by user and repo and whether they were merged plus more counts (self-merges) and times 
         saved as: PR_Users_NoIntra
         */
         SELECT PR.headurl AS HeadURL,
@@ -647,7 +649,7 @@
         ON PR.headurl = headtable.head
         ORDER BY HeadURL
 
-    /*Looking at table of memberevents to see if users were added to base repo and when
+/*Looking at table of memberevents to see if users were added to base repo and when
         saved as: PR_AddedUsers_NoIntra
         */
         SELECT Base.baseurl AS BaseURL,
@@ -669,7 +671,7 @@
         ON Base.baseurl = basetable.base
         ORDER BY BaseURL
 
-    /*GHTorrent query - looking at name duplications and whether they are forks
+/*GHTorrent query - looking at name duplications and whether they are forks
         */
         SELECT name, 
         count(name) AS numprojects, 
@@ -678,7 +680,7 @@
         GROUP BY name 
         ORDER BY numprojects desc
 
-    /*The $1800 query - iterate on payload_pull_request_base_repo_url until bank account is empty*/
+/*The $1800 query - iterate on payload_pull_request_base_repo_url until bank account is empty*/
 
             SELECT payload_pull_request_head_repo_url, 
                 count(payload_pull_request_head_repo_url) as PullRequestEvents, 
@@ -701,51 +703,20 @@
             ORDER BY PullRequestEvents DESC 
                 LIMIT 5000000;
 
-    /* Null Language repos */
+/* Null language repo count*/
+    SELECT
+      count(distinct(repository_url)) as repo_count
+    FROM
+      [githubarchive:github.timeline]
+    WHERE
+      repository_language IS NULL
+ 
+/* Null Language repos */
         SELECT repository_url, count(repository_url) AS PushEvents, count(distinct(actor_attributes_login)) AS Pushers, max(repository_size) AS maxSize
-        FROM [githubarchive:github.tcount(payload_pull_request_head_repo_url) as PullRequestEvents, 
-                count(distinct(payload_pull_request_id)) as DistinctPullRequests,
-                count(distinct(payload_pull_request_head_repo_url)) as DistinctHeadRepos,
-                sum(IF(payload_action = 'opened', 1, 0)) AS PullRequestOpenEvents,
-                sum(IF(payload_action = 'closed', 1, 0)) AS PullRequestCloseEvents,
-                sum(IF(payload_pull_request_head_repo_url == payload_pull_request_base_repo_url AND payload_action = 'opened', 1, 0)) AS IntraRepoPullRequestOpenEvents,
-                sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
-                count(distinct(payload_pull_request_merged_by_login)) AS UsersWhoMerge,
-                sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0)) AS PullRequestMergedBySameUser,
-                min(created_at) AS FirstPullRequest,
-                max(created_at) AS LastPullRequest,
-                min(payload_pull_request_head_repo_created_at) AS HeadRepoCreated,
-                max(payload_pull_request_head_repo_fork) AS Fork,
-                max(payload_pull_request_base_repo_url) AS payload_pull_request_base_repo_url,count(payload_pull_request_head_repo_url) as PullRequestEvents, 
-                count(distinct(payload_pull_request_id)) as DistinctPullRequests,
-                count(distinct(payload_pull_request_head_repo_url)) as DistinctHeadRepos,
-                sum(IF(payload_action = 'opened', 1, 0)) AS PullRequestOpenEvents,
-                sum(IF(payload_action = 'closed', 1, 0)) AS PullRequestCloseEvents,
-                sum(IF(payload_pull_request_head_repo_url == payload_pull_request_base_repo_url AND payload_action = 'opened', 1, 0)) AS IntraRepoPullRequestOpenEvents,
-                sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
-                count(distinct(payload_pull_request_merged_by_login)) AS UsersWhoMerge,
-                sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0)) AS PullRequestMergedBySameUser,
-                min(created_at) AS FirstPullRequest,
-                max(created_at) AS LastPullRequest,
-                min(payload_pull_request_head_repo_created_at) AS HeadRepoCreated,
-                max(payload_pull_request_head_repo_fork) AS Fork,
-                max(payload_pull_request_base_repo_url) AS payload_pull_request_base_repo_url,count(payload_pull_request_head_repo_url) as PullRequestEvents, 
-                count(distinct(payload_pull_request_id)) as DistinctPullRequests,
-                count(distinct(payload_pull_request_head_repo_url)) as DistinctHeadRepos,
-                sum(IF(payload_action = 'opened', 1, 0)) AS PullRequestOpenEvents,
-                sum(IF(payload_action = 'closed', 1, 0)) AS PullRequestCloseEvents,
-                sum(IF(payload_pull_request_head_repo_url == payload_pull_request_base_repo_url AND payload_action = 'opened', 1, 0)) AS IntraRepoPullRequestOpenEvents,
-                sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
-                count(distinct(payload_pull_request_merged_by_login)) AS UsersWhoMerge,
-                sum(IF(payload_pull_request_merged_by_login == payload_pull_request_user_login, 1, 0)) AS PullRequestMergedBySameUser,
-                min(created_at) AS FirstPullRequest,
-                max(created_at) AS LastPullRequest,
-                min(payload_pull_request_head_repo_created_at) AS HeadRepoCreated,
-                max(payload_pull_request_head_repo_fork) AS Fork,
-                max(payload_pull_request_base_repo_url) AS payload_pull_request_base_repo_url,imeline]
+        FROM [githubarchive:github.timeline]
         WHERE repository_language IS NULL AND type = 'PushEvent'
         GROUP EACH BY repository_url
-        #HAVING PushEvents > 1 AND maxSize > 0
+        HAVING PushEvents > 1 AND Pushers > 1 AND maxSize > 0
         ORDER BY PushEvents DESC
 
 
