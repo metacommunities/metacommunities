@@ -16,3 +16,5 @@ all_repos*
 *ipynb_*
 .httr-oauth
 .rope*
+cache/*
+cache
