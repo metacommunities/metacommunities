@@ -95,11 +95,12 @@ Numbers such as  29 million  or  12 million  capitalize the capillary flow of as
 
 A database purporting to contain the whole associative fabric of Github suddenly appeared in mid-2012. Ilya Grigorik, a 'Web Performance Engineer' at Google, launched a Github repository `igrigorik/githubarchive` linked to a website `GithubArchive.org` dedicated to amalgamating all the Github API public event data -- the so-called 'timeline' --  in one place [@Grigorik_2012].  Grigorik, or `igrigorik`not only published all the data in a cloud-based data store but transformed that data, whose formatting we have discussed above, into the flat tabular forms familiar in much statistical work, and made it available through Google's newly launched cloud computing service, GoogleBigQuery.[^1] The [Github timeline data](https://bigquery.cloud.google.com/table/githubarchive:github.timeline) was listed, along with all the words in Shakespeare and all the US birth name records, as one of three dataset exemplars that people could use to learn about GoogleBigQuery [@Google_2016]. Like the data on GithubArchive itself, the GoogleBigQuery copy of the Github public timeline data was updated hourly. Reaching back to  2012, it comprises around 290 million public events.[^6] Table 1 shows the kinds of categorizations, valuing and aggregations of practice that become visible through this dataset. The table results from the simple query `select type, count(type) as events from [githubarchive:github.timeline] group by type order by events descending` and such queries  are typical of the enumerative practices that such data attracts. 
 
-```{r event_table, results='asis', echo=FALSE}
+```{r event_table,  echo=FALSE}
 library(xtable)
+options(xtable.comment = FALSE)
 df = read.csv('data/event_counts.csv')
-tab = xtable(df, label='Events in Github timeline')
-print(tab, 'latex')
+tab = xtable(df, label='tab:events_timeline', caption='Events in Github timeline')
+print(tab, type='html')
 
 ```
 

@@ -192,27 +192,33 @@ Could then add to that the number of repos that are forks.
 - added the screenshots and now trying to run pandoc
 - knitting file, and found whole duplicated section on dotfiles. How did that happen? 
 
+## Mon Mar 14 12:06:12 UTC 2016
+
+- been in meeting so didn't get much done
+- printed out an odt with most references -- still needs table formatting, etc; and diagrams not appearing. 
+- need to go through and read it, but don't want to do that. Read to page 7/30, so did start
+
 
 ## TODO
-- *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
-- *DONE* add all to zotero and set up bib files 
-- *DONE* Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
-- *DONE* read material on numbers assembled in zotero + archives.
-- *DONE* check citations of Badiou on number
-- *DONE* do some notes from Lucy on configuration
-- *DONE* gather figures for article in one place
-- *DONE*  find the actor/repo count for late october 2015 https://web.archive.org/web/20151216055610/https://github.com/about
-- *DONE* add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. including ones hosted on Github itself like gitlab
-- *DONE* read Badiou again to see if anything there goes along with work on number
-- *DONE IN PART* add some discussion of Espeland on performativity of number into background -- this will have to address numericality. What is STS's numericality?
-- *DONE* move the table of event counts up higher
-- *DONE* write footnote describing the research
-- *DONE* write acknowledgment for the funding
-- *DONE* check that table can be formatted ok. 
-- *DONE* add footnote explaining how the paper seeks to do the multiple multiply
-- *DONE* rewrite abstract
-- add Ingmar on numbers, etc
-- add in the extra example of coding activity from codeology
-- get desrosiere on politics of large numbers
-- run the whole doc as a rmd
-- check the 29 million against Github timeline data
+     1	- *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
+     2	- *DONE* add all to zotero and set up bib files 
+     3	- *DONE* Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
+     4	- *DONE* read material on numbers assembled in zotero + archives.
+     5	- *DONE* check citations of Badiou on number
+     6	- *DONE* do some notes from Lucy on configuration
+     7	- *DONE* gather figures for article in one place
+     8	- *DONE*  find the actor/repo count for late october 2015 https://web.archive.org/web/20151216055610/https://github.com/about
+     9	- *DONE* add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. including ones hosted on Github itself like gitlab
+    10	- *DONE* read Badiou again to see if anything there goes along with work on number
+    11	- *DONE IN PART* add some discussion of Espeland on performativity of number into background -- this will have to address numericality. What is STS's numericality?
+    12	- *DONE* move the table of event counts up higher
+    13	- *DONE* write footnote describing the research
+    14	- *DONE* write acknowledgment for the funding
+    15	- *DONE* check that table can be formatted ok. 
+    16	- *DONE* add footnote explaining how the paper seeks to do the multiple multiply
+    17	- *DONE* rewrite abstract
+    18	- *DONE* run the whole doc as a rmd
+    19	- add Ingmar on numbers, etc
+    20	- add in the extra example of coding activity from codeology
+    21	- get desrosiere on politics of large numbers
+    22	- check the 29 million against Github timeline data
