@@ -198,6 +198,14 @@ Could then add to that the number of repos that are forks.
 - printed out an odt with most references -- still needs table formatting, etc; and diagrams not appearing. 
 - need to go through and read it, but don't want to do that. Read to page 7/30, so did start
 
+## Tue Mar 15 09:36:09 UTC 2016
+
+- fixing up the table formatting at the moment. Changed xtable to kable. Could also use pander ... 
+- now fixing up references -- moving urls into zotero
+- went through the printout reading it again -- found quite  a few problems. Glad I did this. Also shows the need for much more work on diagrams. Do I have, for instance, some code that re-generates the event distributions? I'm sure I have, but where is it? In this branch or some other?
+- got a bit distracted working on the hp to look at a million names -- had to do a lot of configuration work to get bigrquery running and to get a million names downloaded
+
+
 
 ## TODO
      1	- *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
@@ -218,7 +226,10 @@ Could then add to that the number of repos that are forks.
     16	- *DONE* add footnote explaining how the paper seeks to do the multiple multiply
     17	- *DONE* rewrite abstract
     18	- *DONE* run the whole doc as a rmd
+    23  - *DONE* put in Gage from WSJ on Github valuation
     19	- add Ingmar on numbers, etc
     20	- add in the extra example of coding activity from codeology
     21	- get desrosiere on politics of large numbers
     22	- check the 29 million against Github timeline data
+    24  - redo event extract as diagram?
+    25  - redo figure with events showing their distribution -- 
