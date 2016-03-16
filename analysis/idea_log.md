@@ -35,3 +35,8 @@
 - also thinking about posting on gh as too centralized -- that's what I've thought for a while. But how to analyse it? What is the centring effect? Are there places that the centring breaks down and in what ways? This connects to wider debates about platforms and hubs on the internet. Is Github a good case study of this?
 
 
+## Wed Mar 16 18:52:50 GMT 2016
+
+- people leaving Github  -- there is a posting about that on some blog -- how could I look at that?
+- the API -- are there any controversies about the API? Could use Bucher to talk about that a bit. 
+
