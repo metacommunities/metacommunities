@@ -206,6 +206,15 @@ Could then add to that the number of repos that are forks.
 - got a bit distracted working on the hp to look at a million names -- had to do a lot of configuration work to get bigrquery running and to get a million names downloaded
 
 
+## Wed Mar 16 10:01:06 UTC 2016
+
+- labelling figures. Not going to use the latex approach  -- too much pfaffing
+- brought across repo events figure from analysis/repo_census work
+- had some ideas, after teaching yesterday, that I should be saying more about where I am in this, and while I was running this morning, thought of how I hope for so much from software, and how I get going into hoping to find something there. 
+- it is an irony that we can't tell who is a person and what is a machine in the making of software. And we can't tell what is really software and what is talk about software (configurations/) 
+- added Bucher on APIs -- could do more on this perhaps
+- go to page 14/30 in adding revisions
+
 
 ## TODO
      1	- *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
