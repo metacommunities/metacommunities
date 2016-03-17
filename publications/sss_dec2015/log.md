@@ -216,6 +216,12 @@ Could then add to that the number of repos that are forks.
 - go to page 14/30 in adding revisions
 
 
+## Thu Mar 17 09:31:22 UTC 2016
+
+- starting from p14 -- played around with worktrees, etc. Still have a problem with ideas branch. 
+- went through more corrections <17. This seems slow, but quite a bit of work to do here. Total manuscript pages  = 24, so getting there. 
+- really need to redo the distribution of events figure -- ok, i've brought in the repo_event counts figure from repo_census ... At least it's on the full timeline. Could re-do Richards three graphs, but would need to update the original tables to do that. 
+
 ## TODO
      1	- *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
      2	- *DONE* add all to zotero and set up bib files 
@@ -236,9 +242,9 @@ Could then add to that the number of repos that are forks.
     17	- *DONE* rewrite abstract
     18	- *DONE* run the whole doc as a rmd
     23  - *DONE* put in Gage from WSJ on Github valuation
+    25  - *DONE* redo figure with events showing their distribution -- 
     19	- add Ingmar on numbers, etc
     20	- add in the extra example of coding activity from codeology
     21	- get desrosiere on politics of large numbers
     22	- check the 29 million against Github timeline data
     24  - redo event extract as diagram?
-    25  - redo figure with events showing their distribution -- 
