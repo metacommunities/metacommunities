@@ -2,16 +2,14 @@
 
 Through this view of numbers in the making, we can see just how remarkable it is that indicators become part of calculative infrastructures at all. Nafus 2014
 
-We thus explore the interlinked movement of numbers, media, and value in social media as a kind of dynamic assemblage. gerlitz and lury
+reactivity: We thus explore the interlinked movement of numbers, media, and value in social media as a kind of dynamic assemblage. gerlitz and lury
 
 works to impede calculation by an overload of qualculative resources. law and callon
 
  In the first section, we construct a broad definition of calculation, grounded on the anthropology of science and techniques.
 
-    Isolating objects from their context, grouping them in the same frame,
-    establishing original relations between them, classifying them and summing
-    them up are all costly activities that raise the question of calculative power. 1232
-    
+    Isolating objects from their context, grouping them in the same frame, establishing original relations between them, classifying them and summing them up are all costly activities that raise the question of calculative power. 1232 
+
     Calculative agencies are as numerous and diverse as the tools they use and the hybrid collectives to which those tools belong. Algorithmic configurations where calculative agencies and calculable goods come across each other are also multiple and diverse. These three elements (goods, agents and exchanges) constitute three possible starting-points for exploring markets as complex calculative devices. 1245
 
     muniesa and callon
@@ -21,6 +19,7 @@ works to impede calculation by an overload of qualculative resources. law and ca
 I develop an analytic vocabulary to give an account of the intensive properties of what I call enumerated entities, and link the shift to the move from a disciplinary to a control society.Verran 2011
 
 The conclusion reaffirms the importance of an ethnographic approach to widely used numerical forms, such as percentage, in all contexts, as they mediate public understanding and aspiration. Guyer
+
 s participant-storyteller, telling stories to facilitate epistemic flourishing within and as part of a historically located community of practice. Kenney on verran
 
 Porter, Desrosiere, Hacking, etc.

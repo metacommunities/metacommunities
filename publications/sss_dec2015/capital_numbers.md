@@ -7,6 +7,7 @@ loss of life as punishment
 accumulated wealth
 accumulation with obscure prodigality
 peripheries -- opposites of capitals
+captation - cochoy
 
 
 ## number
@@ -18,3 +19,12 @@ social science -- literalisation and mathematisation
 weaving the social fabric
 different kinds of numbers
 numericality does end with enumeration
+prime numbers
+false numbers
+calculative agency
+indicators
+percentage
+real numbers
+parameters
+totals
+complex numbers

@@ -1,5 +1,6 @@
 
-# log publication/sss
+# log publication/sss /home/mackenza/metacommunities/publications/sss_dec2015
+
 
 ## Wed Dec 16 11:24:51 GMT 2015
 
@@ -86,14 +87,71 @@ Could then add to that the number of repos that are forks.
 ## Tue Feb 16 16:44:59 UTC 2016
 
 - looked up Desrosiere's more recent work and added reference to the zotero folder -- maybe useful, but nothing specific came up ... 
+- good to use scopus to get chapters from books
+
+## Wed Feb 17 10:05:13 UTC 2016
+- pfaffed with extracting images from slides for a while. In case needed for article
+- put a lot more into abstract, using literature on calculation, and trying to stay true to the configuration work needed to do the counting. 
+- looked at who cites Badiou on number - some papers in EP D. Nothing crucial there. 
+
+
+## Thu Feb 18 05:39:27 GMT 2016
+
+- on train to london - very early. Working out which bits of the abstract I have already written
+- added reactivity of numbers from Gerlitz -- that's useful for many of the lower level numbers on Github
+- turned the abstract into a series of headings for the new doc sss.md 7 sections overall, two of which could be intro and conclusion
+- wrote the first section on sts and numbers, and the 2nd section on STS calculative agency ... 
+- started the section on capital numbers -- a bit of repetition coming in here. But has the idea of 'capitalised number' as a better term. 
+
+## Sun Feb 21 22:43:17 GMT 2016
+
+- need to add some stuff on gitorious, gitlab, bitbucket, etc.
+- there is a full list of gitorious repos -- 120k -- that made me think of Harman's tool being, and Bryant's onto-graphy as a theoretical framings. 
+
+## Mon Feb 22 14:45:00 UTC 2016
+
+- growing sense of being locked into github and why that might be problematic http://agateau.com/2016/github-lock-in/ -- should I include this?
+
+
+## Tue Feb 23 10:00:26 UTC 2016
+
+- got a bit distracted looking at numbers over time in Github wayback archive, and writing a script about it.
+- trying to get my head back into what I wrote on the train last Thursday
+- got cochoy on captation (in archive); could add to the notion of capital number
+- managed to get sample event in, and started to link to counting ... a bit wobbly, but might work. Might need to bring in the interface methods argument?
+
+
+## Wed Feb 24 13:33:22 UTC 2016
+
+- got into the sensemaking material ok. struggling a bit to keep the sts literature there -- did a bit on Latour, but nothing too substantial. 
+- worked with the idea that the naming of entities allows their association, and this association is intensive; this grows the capital numbers; but also places a burden of increasing nameability or naming on all things. 
+
+
+## Thu Feb 25 11:45:59 UTC 2016
+
+- today things went a bit better. Got rest of Github data challenge examples in -- 3800 words, and used them to frame capital numbers. Added more Latour on partial wholes. Which wholes are we partial to? Does he use partial in that sense? Not really. Also note the importance of Tarde here ... 
+- added extra references and subcollection to metacommunities on academic literature on gh. Probably need to move some more references in there
+- haven't managed to include any screenshots of the data projects -- need to choose one or two for that. 
+
+## Fri Feb 26 09:29:28 GMT 2016
+
+- started on the imitation work -- ok for repos I think -- how do I know that 50% of repositories are clones? Also need to do this for people?
+- trying to sort out the queries to do that
+-
 
 
 # TODO
 
 - *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
 - *DONE* add all to zotero and set up bib files 
-- Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
+- *DONE* Write section on capital numbers - will need to include examples such as Facebook, perhaps genome, maybe iphones, etc;
 - *DONE* read material on numbers assembled in zotero + archives.
 - read Badiou again to see if anything there goes along with work on number
-- check citations of Badiou on number
+- **DONE** check citations of Badiou on number
 - get desrosiere on politics of large numbers
+- do some notes from Lucy on configuration
+- add Ingmar on numbers, etc
+- add in the point about there being other repositories -- gitlab, bitbucket, gitorious, code.google, etc. including ones hosted on Github itself like gitlab
+- add in the extra example of coding activity from codeology
+- gather figures for article in one place
+

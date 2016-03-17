@@ -2921,3 +2921,9 @@ ON new.owner = old.repository_organization
 -- test of virtualization comments
 SELECT repository_name, type, created_at, payload_commit, payload_commit_msg FROM [githubarchive:github.timeline] 
 where payload_commit_msg != "null" and regexp_match(payload_commit_msg, 'virtualiz') limit 10
+
+
+/* how many distinct actors and repositories are on gh */
+
+SELECT  count(distinct(actor)) as number_of_actors, count(distinct(repository_url)) AS number_of_repos
+FROM  [githubarchive:github.timeline]
