@@ -222,6 +222,16 @@ Could then add to that the number of repos that are forks.
 - went through more corrections <17. This seems slow, but quite a bit of work to do here. Total manuscript pages  = 24, so getting there. 
 - really need to redo the distribution of events figure -- ok, i've brought in the repo_event counts figure from repo_census ... At least it's on the full timeline. Could re-do Richards three graphs, but would need to update the original tables to do that. 
 
+
+## Fri Mar 18 10:11:48 GMT 2016
+- spent a while installing new pandoc and pandoc filter for fignumbers
+- writing a build script for the article
+- need to decide whether to put android and bootstrap images in. In either case, they still need re-building to get to 2015. They are both in there!
+- spent ages getting bibliography sorted --  2 hours? Seems ok now. Mainly moving things into the right folders. Wish there was a better way ... 
+- and finally got clean pdfs and docx from pandoc -- forgot to see the xelatex engine for a while and that was making more errors. pdf looks good.
+- now need to revise manuscript from p18 onwards
+
+
 ## TODO
      1	- *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
      2	- *DONE* add all to zotero and set up bib files 
@@ -243,8 +253,9 @@ Could then add to that the number of repos that are forks.
     18	- *DONE* run the whole doc as a rmd
     23  - *DONE* put in Gage from WSJ on Github valuation
     25  - *DONE* redo figure with events showing their distribution -- 
+    24  - *DONE* redo event extract as diagram?
     19	- add Ingmar on numbers, etc
     20	- add in the extra example of coding activity from codeology
     21	- get desrosiere on politics of large numbers
     22	- check the 29 million against Github timeline data
-    24  - redo event extract as diagram?
+    23  - read abstract, intro and conclusion out aloud before finalising
