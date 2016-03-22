@@ -232,6 +232,11 @@ Could then add to that the number of repos that are forks.
 - now need to revise manuscript from p18 onwards
 
 
+## Tue Mar 22 09:50:02 UTC 2016
+- didn't get to do anything yesterday, and this morning, playing around with external disks. Can see the time -- its an hour in and I've done nothing
+-managed to hand edit 4 pages, and then enter them. Maybe a bit better. 
+- at the conclusion now. Looks ok. Just need to do the two diagrams again -- that should be enjoyable. 
+
 ## TODO
      1	- *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
      2	- *DONE* add all to zotero and set up bib files 
