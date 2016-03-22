@@ -9,6 +9,10 @@ These network visualisations show the network of relationships around a key UK i
 
 ## Codeology
 
+http://codeology.braintreepayments.com/error
+
+http://flowingdata.com/2016/02/24/code-as-microorganism/
+http://veniversum.github.io/git-visualizerC
 
 - GitHub Data Challenge: 2012, 2013, and 2014 winners.
 - Analyzing Millions of GitHub Commits (O'Reilly Strata talk)
