@@ -6,6 +6,12 @@ by creation dates"""
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import seaborn
+
+# configure graphics
+seaborn.set_style("whitegrid")
+seaborn.set_style("ticks")
+seaborn.despine(trim=True)
 
 
 def load_fork_dataframe_and_group_by_week(forkfile = 'data/bootstrap_fork_events.csv'):
@@ -13,15 +19,21 @@ def load_fork_dataframe_and_group_by_week(forkfile = 'data/bootstrap_fork_events
     @return: the fork dataframe and a dataframe grouped by repostory
     name and week"""
 
+    # forkfile = 'data/bootstrap_fork_events.csv'
     # boot fork dataframe has repo names, repository_url, created_at
-    print 'loading fork file'
-    fork_df = pd.read_csv(forkfile, parse_dates = True,  header=0, sep='\t')
+    print 'loading fork file' + forkfile
+    fork_df = pd.read_csv(forkfile, parse_dates = True,  header=0, sep=',')
+    # fork_df.columns
+    # fork_df.head()
     fork_df.index = pd.to_datetime(fork_df['created_at'])
 
     #resample forks by the week
     fork_week = fork_df.groupby('repository_name').resample('W', how='count')
     #get rid of repo URLS for the moment - I don't know how to do this properly ...
     fork_week_name = fork_week.ix[::2]
+    fork_week_name.head()
+    fork_week_name.shape
+    fork_week_name.index()
     fork_week_name.index = fork_week_name.index.droplevel(2)
     return (fork_df, fork_week_name)
 
