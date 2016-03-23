@@ -237,6 +237,11 @@ Could then add to that the number of repos that are forks.
 -managed to hand edit 4 pages, and then enter them. Maybe a bit better. 
 - at the conclusion now. Looks ok. Just need to do the two diagrams again -- that should be enjoyable. 
 
+## Wed Mar 23 17:10:52 UTC 2016
+- crap, didn't have time to do anything much today, and now time has run out. 
+
+
+
 ## TODO
      1	- *DONE* assemble the sts references on number that I'm referring to -- Porter, Desrosieres, Hacking, Mackenzie, Verran, Scandinavia journal, Latour, Law, Callon
      2	- *DONE* add all to zotero and set up bib files 

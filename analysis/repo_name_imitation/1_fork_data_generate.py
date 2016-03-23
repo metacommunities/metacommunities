@@ -1,9 +1,7 @@
 # coding: utf-8
 
 import pandas as pd
-import matplotlib.pyplot as plt
 import os.path
-import seaborn
 import sys
 
 testing = False
@@ -16,10 +14,6 @@ else:
 file_name = 'data/{}_fork_events.csv'.format(repo_name)
 
 
-# configure graphics
-seaborn.set_style("whitegrid")
-seaborn.set_style("ticks")
-seaborn.despine(trim=True)
 
 # get repo forks from BigQuery
 # this assumes you setup access to the BigQuery githubarchive dataset
