@@ -1,2 +1,9 @@
+# 29 million and counting: capital numbers and the calculative agencies of science and technology studies. 
 
-# 29 million and counting: capital numbers and their obscure numericalities
+## keywords: number, device, configuration, platform, capital, software
+
+## Adrian Mackenzie
+
+## a.mackenzie@lancaster.ac.uk
+
+## 24 March 2016

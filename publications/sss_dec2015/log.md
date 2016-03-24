@@ -242,7 +242,10 @@ Could then add to that the number of repos that are forks.
 
 ## Thu Mar 24 08:48:47 GMT 2016
 - did a bit of work on fork diagrams in R, but they don't look at good as the matplotlib ones. 
-- found myself going back into ipython notebook to do this. 
+- found myself going back into ipython notebook to do this.  took quite a bit of work, but got this working again. well almost -- some problems with one part of the script. But it does run and produce plots. 
+- back in the manuscript, played with introductory paragraphs and the title
+- submitted the manuscript. Saving docx and odt as separate file to keep
+
 
 
 
