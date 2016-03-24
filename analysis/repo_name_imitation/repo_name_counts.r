@@ -1,14 +1,8 @@
-library(bigrquery)
-# collecting a million names 
-
-query_collect = "SELECT repository_name, repository_owner FROM [githubarchive:github.timeline] LIMIT 1000000"
-names = query_exec(query_collect, 'metacommunities', max_pages=1000)
-write.csv(names, 'data/one_million_names.csv')
-
 #basic idea here is count the most common names and see if that accounts for a lot of the repos
+library(bigrquery)
 query = "SELECT lower(repository_name) as repository_name, count(lower(repository_name)) as count FROM [githubarchive:github.timeline] group by repository_name order by count desc LIMIT 1000"
 query = "SELECT repository_name, lower(repository_name) as repository_name_lower, count(lower(repository_name)) as count FROM [githubarchive:github.timeline] group by repository_name_lower, repository_name order by count desc LIMIT 1000"
-df = query_exec(query, 'metacommunities', max_pages= Inf) 
+df = query_exec(query, 'metacommunities') 
 event_total = 289000000
 sum(df$count)/event_total * 100
 
