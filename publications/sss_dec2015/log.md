@@ -240,6 +240,10 @@ Could then add to that the number of repos that are forks.
 ## Wed Mar 23 17:10:52 UTC 2016
 - crap, didn't have time to do anything much today, and now time has run out. 
 
+## Thu Mar 24 08:48:47 GMT 2016
+- did a bit of work on fork diagrams in R, but they don't look at good as the matplotlib ones. 
+- found myself going back into ipython notebook to do this. 
+
 
 
 ## TODO

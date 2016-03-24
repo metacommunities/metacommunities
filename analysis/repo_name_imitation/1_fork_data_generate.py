@@ -3,6 +3,8 @@
 import pandas as pd
 import os.path
 import sys
+import matplotlib.pyplot as plt
+import seaborn
 
 testing = False
 
