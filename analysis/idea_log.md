@@ -40,3 +40,7 @@
 - people leaving Github  -- there is a posting about that on some blog -- how could I look at that?
 - the API -- are there any controversies about the API? Could use Bucher to talk about that a bit. 
 
+## Thu Mar 24 14:32:05 GMT 2016
+
+- just submitted sss manuscript and looking at how to 'release' it. But found this 'integrations' page https://github.com/integrations. Could perhaps use that to track how some code moves through infrastructures. Many different forms of integrations shown there, but so what? Can anything of this be gleaned from event data?
+
