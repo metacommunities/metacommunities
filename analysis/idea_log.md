@@ -44,3 +44,8 @@
 
 - just submitted sss manuscript and looking at how to 'release' it. But found this 'integrations' page https://github.com/integrations. Could perhaps use that to track how some code moves through infrastructures. Many different forms of integrations shown there, but so what? Can anything of this be gleaned from event data?
 
+## Tue Mar 29 17:19:33 BST 2016
+
+- playing around a lot with torch and nn and names. Have run ltstm  models on 1M github names. Not sure how to use the deeplearning stuff. Could either - 
+    - find ways of exploring what the nodes of the network are seeing. Given the low validation error, the LTSTM model is pretty capable of developing a generative model of repo names. 
+    - develop a training set and use the classifiers, as documents in the torch tutorials to extract all the names from github repositories. 
