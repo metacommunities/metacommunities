@@ -49,3 +49,8 @@
 - playing around a lot with torch and nn and names. Have run ltstm  models on 1M github names. Not sure how to use the deeplearning stuff. Could either - 
     - find ways of exploring what the nodes of the network are seeing. Given the low validation error, the LTSTM model is pretty capable of developing a generative model of repo names. 
     - develop a training set and use the classifiers, as documents in the torch tutorials to extract all the names from github repositories. 
+
+## Thu Mar 31 10:31:02 BST 2016
+
+- The Sense of Dissonance: Accounts of Worth in Economic Life, David Stark, has really interesting stuff about work and organizations. If we did a paper on github as a kind of work, as immaterial labour, etc, this would be a good reference
+
