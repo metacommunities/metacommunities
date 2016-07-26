@@ -1,0 +1,8 @@
+379 para 1: indent -- it is a quote; remove ':' at end of paragraph
+380 para 1: delete first 'also' in last sentence of paragraph
+380 para 3: delete 'the' before 'designating'
+382 para 1: surround 'asdf' with quotes; surround '1234' with quotes
+387 para 1: insert 'repository' after 'github/Github'  
+387 para 3: append 's' to 'refashion'
+387 para 3: insert ', and' after 'operating' on line 2 
+387 para 3: insert ',' after 'variations' on line 3 
