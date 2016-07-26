@@ -58,3 +58,11 @@
 ## Mon Jun 13 21:38:50 BST 2016
 
 - returning to nn stuff and names. Looking at allamanis' work (see zotero libraries) on source code -- mainly on summarization of source code -- could perhaps adapt that to Github names but in combination with some other features, like programming language, etc. 
+
+
+## Tue Jul 26 09:52:42 BST 2016
+
+- did proofs for infrastructures handbook and looked quite a bit at heroku-travis-ci and various other entities -- could try to do something more with those in relation to infrastructure and its contemporary transformation; especially in the light of 'stack'; 
+- also found some new literature on data mining Github -- added some to zotero and archive  -- reasonable attempts to understand popularity of projects on Github, albeit with little sense of software culture; Weber's focus  on Python is quite good; the brazilian piece has useful stuff on 'node'; also has a guide to some other recent literature. 
+- such a study would include docker, travis, jenkins, chef, puppet, vm, PaaS, IaaS, SaaS, etc. What would it try to explain?  
+- would be good to contrast all of these with node and javascript, and all that happens around that. 
