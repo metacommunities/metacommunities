@@ -14,3 +14,4 @@ adrian/repo-topics/data/*
 *.json
 all_repos*
 *ipynb_*
+.ropeproject
