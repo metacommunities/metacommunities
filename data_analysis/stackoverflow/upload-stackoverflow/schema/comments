@@ -1,9 +1,0 @@
-[
-  {"name": "Id", "type": "integer", "mode": "required"},
-  {"name": "PostId", "type": "integer", "mode": "required"},
-  {"name": "Score", "type": "integer", "mode": "nullable"},
-  {"name": "Text", "type": "string", "mode": "nullable"},
-  {"name": "CreationDate", "type": "timestamp", "mode": "nullable"},
-  {"name": "UserDisplayName", "type": "string", "mode": "nullable"},
-  {"name": "UserId", "type": "integer", "mode": "nullable"}
-]

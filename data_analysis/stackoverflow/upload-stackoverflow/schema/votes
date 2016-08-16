@@ -1,8 +1,0 @@
-[
-  {"name": "Id", "type": "integer", "mode": "required"},
-  {"name": "PostId", "type": "integer", "mode": "required"},
-  {"name": "UserId", "type": "integer", "mode": "nullable"},
-  {"name": "VoteTypeId", "type": "integer", "mode": "nullable"},
-  {"name": "CreationDate", "type": "timestamp", "mode": "nullable"},
-  {"name": "BountyAmount", "type": "integer", "mode": "nullable"}
-]
