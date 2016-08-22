@@ -66,3 +66,12 @@
 - also found some new literature on data mining Github -- added some to zotero and archive  -- reasonable attempts to understand popularity of projects on Github, albeit with little sense of software culture; Weber's focus  on Python is quite good; the brazilian piece has useful stuff on 'node'; also has a guide to some other recent literature. 
 - such a study would include docker, travis, jenkins, chef, puppet, vm, PaaS, IaaS, SaaS, etc. What would it try to explain?  
 - would be good to contrast all of these with node and javascript, and all that happens around that. 
+
+
+
+
+## Mon Aug 22 12:25:45 BST 2016
+
+ - been doing slides for barcelona, and see that _configuration_ is actually a good way to talk about a whole slew of things to do with  Github.  
+ - looked at a few notes on config -- ranging Suchman, Woolgar, Arendt to Badiou -- quite a few views on configuration -- all suggesting what a strange entity configuration is. 
+- would be worth doing a proper search on 'configuration' in STS, theory, and perhaps computer science?
