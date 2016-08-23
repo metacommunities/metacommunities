@@ -40,3 +40,29 @@
 - people leaving Github  -- there is a posting about that on some blog -- how could I look at that?
 - the API -- are there any controversies about the API? Could use Bucher to talk about that a bit. 
 
+## Thu Mar 24 14:32:05 GMT 2016
+
+- just submitted sss manuscript and looking at how to 'release' it. But found this 'integrations' page https://github.com/integrations. Could perhaps use that to track how some code moves through infrastructures. Many different forms of integrations shown there, but so what? Can anything of this be gleaned from event data?
+
+## Tue Mar 29 17:19:33 BST 2016
+
+- playing around a lot with torch and nn and names. Have run ltstm  models on 1M github names. Not sure how to use the deeplearning stuff. Could either - 
+    - find ways of exploring what the nodes of the network are seeing. Given the low validation error, the LTSTM model is pretty capable of developing a generative model of repo names. 
+    - develop a training set and use the classifiers, as documents in the torch tutorials to extract all the names from github repositories. 
+
+## Thu Mar 31 10:31:02 BST 2016
+
+- The Sense of Dissonance: Accounts of Worth in Economic Life, David Stark, has really interesting stuff about work and organizations. If we did a paper on github as a kind of work, as immaterial labour, etc, this would be a good reference
+
+
+## Mon Jun 13 21:38:50 BST 2016
+
+- returning to nn stuff and names. Looking at allamanis' work (see zotero libraries) on source code -- mainly on summarization of source code -- could perhaps adapt that to Github names but in combination with some other features, like programming language, etc. 
+
+
+## Tue Jul 26 09:52:42 BST 2016
+
+- did proofs for infrastructures handbook and looked quite a bit at heroku-travis-ci and various other entities -- could try to do something more with those in relation to infrastructure and its contemporary transformation; especially in the light of 'stack'; 
+- also found some new literature on data mining Github -- added some to zotero and archive  -- reasonable attempts to understand popularity of projects on Github, albeit with little sense of software culture; Weber's focus  on Python is quite good; the brazilian piece has useful stuff on 'node'; also has a guide to some other recent literature. 
+- such a study would include docker, travis, jenkins, chef, puppet, vm, PaaS, IaaS, SaaS, etc. What would it try to explain?  
+- would be good to contrast all of these with node and javascript, and all that happens around that. 
