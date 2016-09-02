@@ -59,7 +59,6 @@
 
 - returning to nn stuff and names. Looking at allamanis' work (see zotero libraries) on source code -- mainly on summarization of source code -- could perhaps adapt that to Github names but in combination with some other features, like programming language, etc. 
 
-
 ## Tue Jul 26 09:52:42 BST 2016
 
 - did proofs for infrastructures handbook and looked quite a bit at heroku-travis-ci and various other entities -- could try to do something more with those in relation to infrastructure and its contemporary transformation; especially in the light of 'stack'; 
@@ -67,17 +66,20 @@
 - such a study would include docker, travis, jenkins, chef, puppet, vm, PaaS, IaaS, SaaS, etc. What would it try to explain?  
 - would be good to contrast all of these with node and javascript, and all that happens around that. 
 
-
-
-
 ## Mon Aug 22 12:25:45 BST 2016
 
  - been doing slides for barcelona, and see that _configuration_ is actually a good way to talk about a whole slew of things to do with  Github.  
  - looked at a few notes on config -- ranging Suchman, Woolgar, Arendt to Badiou -- quite a few views on configuration -- all suggesting what a strange entity configuration is. 
 - would be worth doing a proper search on 'configuration' in STS, theory, and perhaps computer science?
 
+## Thu 25 Aug 11:14:51 BST 2016
 
-
+- did the search on `configuration` -- there is not much there. The research on configuration is curiously marginal, even though the term is used quite often (as in 'spatial configuration'). Would be good to look at the STS literature -- Akrich, Suchman, Woolgar -- again with contemporary configurations in mind.  
 
 ## Fri Sep  2 11:16:57 CEST 2016
+
 - hand-eye configuration: use Steve Jackson's idea of the hand to work on config and dotfiles; then use the keystrokes to highlight the digitality of abstraction  
+- would be worth doing a proper search on 'configuration' in STS, theory, and perhaps computer science? DONE -- see below
+
+
+
