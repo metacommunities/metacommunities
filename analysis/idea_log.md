@@ -75,3 +75,9 @@
  - been doing slides for barcelona, and see that _configuration_ is actually a good way to talk about a whole slew of things to do with  Github.  
  - looked at a few notes on config -- ranging Suchman, Woolgar, Arendt to Badiou -- quite a few views on configuration -- all suggesting what a strange entity configuration is. 
 - would be worth doing a proper search on 'configuration' in STS, theory, and perhaps computer science?
+
+
+
+
+## Fri Sep  2 11:16:57 CEST 2016
+- hand-eye configuration: use Steve Jackson's idea of the hand to work on config and dotfiles; then use the keystrokes to highlight the digitality of abstraction  
