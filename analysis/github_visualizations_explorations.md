@@ -1,14 +1,16 @@
 # List of Github explorers and visualizations
 
-## http://nesta-innovators.mastodonc.com/network/
 
+## Using big data to find innovators. A project funded by Nesta.
 
-Using big data to find innovators. A project funded by Nesta.
-
-These network visualisations show the network of relationships around a key UK innovator, by mapping all the people with >7 followers who the original innovator has a reciprocal relationship with. Use the drop-down list to select the 'seed' person for the network, and then explore by zooming and clicking on nodes. Lines between two people indicate that they follow one another's work, and you can also see their Github profiles, and the Twitter profiles for the same handles.
+ http://nesta-innovators.mastodonc.com/network/
+    These network visualisations show the network of relationships around a key UK innovator, by mapping all the people with >7 followers who the original innovator has a reciprocal relationship with. Use the drop-down list to select the 'seed' person for the network, and then explore by zooming and clicking on nodes. Lines between two people indicate that they follow one another's work, and you can also see their Github profiles, and the Twitter profiles for the same handles.
 
 ## Codeology
 
+http://codeology.braintreepayments.com/error
+http://flowingdata.com/2016/02/24/code-as-microorganism/
+http://veniversum.github.io/git-visualizerC
 
 - GitHub Data Challenge: 2012, 2013, and 2014 winners.
 - Analyzing Millions of GitHub Commits (O'Reilly Strata talk)

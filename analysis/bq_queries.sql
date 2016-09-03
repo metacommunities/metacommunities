@@ -11,7 +11,6 @@ GROUP BY RepoEvents
 ORDER BY Freq DESC
 
 /*  Top 100 Repos by number of events */
-
 SELECT repository_name, RepoEvents
 FROM
 (
@@ -759,9 +758,6 @@ INNER JOIN EACH
 AS forktable
 ON parenttable.fork = forktable.ForkURL
 ORDER BY parent_url ASC
-
-
-
 
 
 
@@ -2632,10 +2628,6 @@ GROUP BY date
 ORDER BY date
 
 
-
-
-
-
 SELECT repository_url, max(repository_owner) AS owner, max(repository_organization) AS organization, max(repository_language) AS language, min(repository_created_at) AS repo_created,
 max(repository_fork) AS Fork,
 max(repository_watchers) AS Watchers,
@@ -2818,11 +2810,11 @@ SELECT repository_url,
 	WHERE type = 'WatchEvent' AND repository_url = '", r, "' AND created_at > '2012-09-17 00:00:00'
 	GROUP EACH BY repository_url, date", sep = "")
 
-	
-/* facebook_forks */
+/*facebook_forks*/
+
 SELECT url FROM [github_explore.timeline] WHERE repository_owner = 'facebook' AND type = 'ForkEvent' GROUP BY url
 
-/* link to repo_types */
+/*link to repo_types */
 
 SELECT
 old.url AS repository_url,
@@ -2901,7 +2893,6 @@ OUTER LEFT JOIN EACH
 AS new
 ON new.repository_url = old.url
 ORDER BY repo_created ASC
-	
 
 /* how many repos are owned by orgsnisations */
 SELECT
@@ -2917,13 +2908,10 @@ INNER JOIN EACH
 AS new
 ON new.owner = old.repository_organization
 
-	
 -- test of virtualization comments
 SELECT repository_name, type, created_at, payload_commit, payload_commit_msg FROM [githubarchive:github.timeline] 
 where payload_commit_msg != "null" and regexp_match(payload_commit_msg, 'virtualiz') limit 10
 
-
 /* how many distinct actors and repositories are on gh */
-
 SELECT  count(distinct(actor)) as number_of_actors, count(distinct(repository_url)) AS number_of_repos
 FROM  [githubarchive:github.timeline]
