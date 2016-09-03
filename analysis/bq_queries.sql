@@ -2915,3 +2915,12 @@ where payload_commit_msg != "null" and regexp_match(payload_commit_msg, 'virtual
 /* how many distinct actors and repositories are on gh */
 SELECT  count(distinct(actor)) as number_of_actors, count(distinct(repository_url)) AS number_of_repos
 FROM  [githubarchive:github.timeline]
+
+-- /*trying to look at top repositories changing month by month
+-- this creates a reasonable list for a year
+select repo.name, event, week_of_year, month, year from 
+  (SELECT   repo.name, count(created_at)  as event, month(created_at) as month, year(created_at) as year, week(created_at) as week_of_year 
+    FROM (table_date_range([githubarchive:day.], timestamp("2015-01-01"), timestamp("2015-12-31")))
+      where type =='PullRequestEvent'
+        group by repo.name, week_of_year, month, year order by week_of_year asc, event desc) as event_week
+        where event_week.event > 200
