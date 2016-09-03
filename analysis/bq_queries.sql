@@ -2924,3 +2924,30 @@ select repo.name, event, week_of_year, month, year from
       where type =='PullRequestEvent'
         group by repo.name, week_of_year, month, year order by week_of_year asc, event desc) as event_week
         where event_week.event > 200
+
+-- better query for top repos month by month
+select
+year, month, pos, repo.name
+FROM (
+SELECT 
+    year, month,
+    RANK() OVER (PARTITION BY month ORDER BY events DESC) AS pos,
+    repo.name,
+    events
+    FROM (
+        SELECT
+        month(created_at) as month,
+        year(created_at) as year,
+        repo.name,
+        count(*) as events
+        FROM
+        [githubarchive:year.2012],
+        [githubarchive:year.2013],
+        [githubarchive:year.2014]
+        GROUP BY
+        year, month, repo.name, order by year, month asc, events desc
+        )
+)
+WHERE pos <=5
+GROUP BY year, month, pos, repo.name
+ORDER BY year, month, pos
