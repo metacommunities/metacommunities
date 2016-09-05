@@ -16,7 +16,6 @@
 - re-did abstract for a third time -- came up with a better title -- intersectional assemblages and analytic affiliations, etc. Should be more doable. And I don't need to worry about the big data work too much
 - sending abstract off.
 
-
 ##TODO
 
 - look at who cites Kelty 2005 and Coleman 2009, etc. 
