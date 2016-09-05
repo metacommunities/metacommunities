@@ -1,9 +1,11 @@
 # queries gha   for most watched repos each month over the last few years
 # and saves the results as a spreadsheet
+library(bigrquery)
 library(dplyr)
+library(tidyr)
+library(reshape2)
 
 options(dplyr.width = Inf)
-library(bigrquery)
 
 query ="
     SELECT
@@ -32,3 +34,9 @@ pos_df
 table(pos_df$year, pos_df$month)
 pos_df = df %>% group_by(year, month) %>% mutate(pos =min_rank(desc(events))) %>% filter(pos <=10)
 write.csv(file = '../data/repos_most_watched_2012-2016.csv', pos_df)
+
+# reshape rankings into year x repo
+
+pos_df = read.csv('../data/repos_most_watched_2012-2016.csv')
+wide = pos_df %>% dcast(year+month ~ repo_name, value.var='pos')
+head(wide)
