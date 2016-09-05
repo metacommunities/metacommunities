@@ -1,3 +1,4 @@
+
 /*Stu's query on repositories: how often repos are used
 ------------------------------------------------ */
 SELECT RepoEvents, COUNT(*) AS Freq
@@ -27,6 +28,7 @@ limit 100;
 - only 1 month time window to deal with size of data
 - 3
 */
+
 SELECT
     ForkTable.repository_url,
     COUNT(DISTINCT ForkTable.url) AS f2p_number,
@@ -83,8 +85,8 @@ ORDER BY PullRequests DESC
 limit 1000;
 
 
-/* attempting to construct the fork-pull request table*
-the join method is clunky/
+-- /* attempting to construct the fork-pull request table*
+-- the join method is clunky/
 
 SELECT pulltable.repository_url,forktable.fork as forks, count(type) as pullrequests
 FROM
@@ -441,15 +443,10 @@ AS parenttable
 ON PR.headurl = parenttable.parent
 ORDER BY BaseURL
 
-
-
-
-
-
-
 /* This query is for the repo census and produces mostly counts of the number of events
 Because there are so many repos it needs to be done in stages through the python API, which is slow...
 */
+
 SELECT repository_url,
 count(repository_url) AS Events,
 count(distinct(actor_attributes_login)) AS Actors,
@@ -2918,6 +2915,7 @@ FROM  [githubarchive:github.timeline]
 
 -- /*trying to look at top repositories changing month by month
 -- this creates a reasonable list for a year
+
 select repo.name, event, week_of_year, month, year from 
   (SELECT   repo.name, count(created_at)  as event, month(created_at) as month, year(created_at) as year, week(created_at) as week_of_year 
     FROM (table_date_range([githubarchive:day.], timestamp("2015-01-01"), timestamp("2015-12-31")))
@@ -2926,8 +2924,9 @@ select repo.name, event, week_of_year, month, year from
         where event_week.event > 200
 
 -- better query for top repos month by month
-select
-year, month, pos, repo.name
+-- still not quite right -- sometimes missing rankings
+
+select year, month, pos, repo.name
 FROM (
 SELECT 
     year, month,
@@ -2944,10 +2943,86 @@ SELECT
         [githubarchive:year.2012],
         [githubarchive:year.2013],
         [githubarchive:year.2014]
+        WHERE LENGTH(repo.name) >=2 
         GROUP BY
         year, month, repo.name, order by year, month asc, events desc
         )
-)
 WHERE pos <=5
 GROUP BY year, month, pos, repo.name
 ORDER BY year, month, pos
+
+-- struggling with these queries to get bq to execute them within resource limits -- why do they take so much resource? Especially from 2014 onwards
+-- think it works better with table_date_range on days and raising the threshold on the event counts
+
+select
+  year, month, pos, repo.name
+  FROM (
+  SELECT 
+year, month,
+RANK() OVER (PARTITION BY month ORDER BY events DESC) AS pos,
+repo.name,
+events
+FROM (
+SELECT
+month(created_at) as month,
+year(created_at) as year,
+repo.name,
+count(*) as events
+FROM
+--       [githubarchive:year.2012],
+--       [githubarchive:month.201510],
+--       [githubarchive:year.2013],
+--       [githubarchive:year.2014]
+TABLE_DATE_RANGE([githubarchive:day.], 
+TIMESTAMP('2015-01-01'), 
+TIMESTAMP('2015-12-31')
+)
+  WHERE LENGTH(repo.name) >=2 
+  GROUP EACH BY year, month, repo.name 
+  HAVING events > 200
+  ORDER BY year, month asc, events desc
+    )
+)
+WHERE pos <=10
+GROUP BY year, month, pos, repo.name
+ORDER BY year, month, pos
+
+-- I used this query on Watch events to look at interest in repositories over last couple of years
+
+select
+year, month, pos, repo.name, repo.url
+FROM (
+SELECT 
+year, month,
+DENSE_RANK() OVER (PARTITION BY month ORDER BY events DESC) AS pos,
+repo.name,
+repo.url,
+events
+FROM (
+SELECT
+month(created_at) as month,
+year(created_at) as year,
+repo.name,
+repo.url,
+count(*) as events
+FROM
+--       [githubarchive:year.2012],
+--       [githubarchive:month.201510],
+[githubarchive:year.2013],
+[githubarchive:year.2014],
+[githubarchive:year.2015] 
+--       TABLE_DATE_RANGE([githubarchive:day.], 
+--           TIMESTAMP('2012-01-01'), 
+--           TIMESTAMP('2013-12-31')
+--         )
+WHERE LENGTH(repo.name) >= 2 and type =='WatchEvent'
+  GROUP EACH BY year, month, repo.name, repo.url 
+    HAVING events > 300
+      ORDER BY year, month asc, events desc
+)
+)
+WHERE pos <=10
+GROUP EACH BY year, month, pos, repo.name, repo.url
+ORDER BY year, month, pos
+
+

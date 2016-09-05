@@ -85,3 +85,8 @@
 - problem: how to write a bq that shows for any given month the 10 most active repositories. It would be an event count broken down by month? It would include clones? Or perhaps only as a point of comparison. 
     select repository_name, count(type) as events, extract_month_year(date) as month_year from GithubArchive Group
     by repository_name order by month_year, events desc limit 10
+
+
+## Mon Sep  5 14:19:09 BST 2016
+
+- really got back into bigqueries over weekend. Added a couple to sql file. Also starting some code to analyse them -- just a few lines of dplyr really ... 
