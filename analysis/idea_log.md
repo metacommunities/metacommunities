@@ -90,3 +90,6 @@
 ## Mon Sep  5 14:19:09 BST 2016
 
 - really got back into bigqueries over weekend. Added a couple to sql file. Also starting some code to analyse them -- just a few lines of dplyr really ... 
+- wrote script to filter top results per month; easy to change event type in the query. Could then compare different events -- fork, pullrequest, issue, member, watch, public, release, etc.
+- added script to analysis/social_practices/
+- would it be possible to classify repos by topic and category? and could that be predicted?
