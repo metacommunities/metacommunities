@@ -16,6 +16,11 @@
 - re-did abstract for a third time -- came up with a better title -- intersectional assemblages and analytic affiliations, etc. Should be more doable. And I don't need to worry about the big data work too much
 - sending abstract off.
 
+
+## Tue Sep  6 12:43:09 BST 2016
+
+- started writing the chapter, mainly drawing on EASST paper approach -- big number as the site of encounter
+
 ##TODO
 
 - look at who cites Kelty 2005 and Coleman 2009, etc. 
