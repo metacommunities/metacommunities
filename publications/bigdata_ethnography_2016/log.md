@@ -1,6 +1,11 @@
 
 # publication/bigdata_ethnography_2016
 
+##TODO
+
+- look at who cites Kelty 2005 and Coleman 2009, etc. 
+- add global assemblage into general references for gh -- gh as platform, but one that cannot fully capture the flows that run across it ... 
+
 ## Thu Feb  4 12:13:59 GMT 2016
 - drafting abstract for book chapter
 
@@ -23,7 +28,8 @@
 
 - started writing the chapter, mainly drawing on EASST paper approach -- big number as the site of encounter
 
-##TODO
 
-- look at who cites Kelty 2005 and Coleman 2009, etc. 
-- add global assemblage into general references for gh -- gh as platform, but one that cannot fully capture the flows that run across it ... 
+
+## Wed  7 Sep 09:27:42 BST 2016
+- not sure how to include in next part of paper -- for instance, the query ...  
+
