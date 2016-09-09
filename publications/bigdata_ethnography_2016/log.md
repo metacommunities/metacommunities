@@ -33,3 +33,14 @@
 ## Wed  7 Sep 09:27:42 BST 2016
 - not sure how to include in next part of paper -- for instance, the query ...  
 
+
+
+## Thu Sep  8 16:52:30 BST 2016
+
+- moved numbers barcelona doc across from other branch so that I can start this main document again. 
+- got very distracted in tensorflow configuration work -- typical of  big data stuff
+
+
+## Fri Sep  9 09:15:28 BST 2016
+
+- is TensorFlow (now working with GPU on Docker image) such a distraction? Seems to me that Docker is probably the real interest at the moment since it seems to change configuration work 
