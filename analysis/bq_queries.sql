@@ -735,7 +735,7 @@ GROUP EACH BY repository_organization, repository_url
 ORDER BY repository_organization ASC
 
 
-/* Joins on above to produce a list of forks MADE BY ORGANISATIONS
+-- /* Joins on above to produce a list of forks MADE BY ORGANISATIONS
 SELECT parenttable.fork AS fork_url,
 parenttable.ParentUrl AS parent_url,
 parenttable.created_at AS creation_date,
@@ -2919,9 +2919,9 @@ FROM  [githubarchive:github.timeline]
 select repo.name, event, week_of_year, month, year from 
   (SELECT   repo.name, count(created_at)  as event, month(created_at) as month, year(created_at) as year, week(created_at) as week_of_year 
     FROM (table_date_range([githubarchive:day.], timestamp("2015-01-01"), timestamp("2015-12-31")))
-      where type =='PullRequestEvent'
-        group by repo.name, week_of_year, month, year order by week_of_year asc, event desc) as event_week
-        where event_week.event > 200
+where type =='PullRequestEvent'
+group by repo.name, week_of_year, month, year order by week_of_year asc, event desc) as event_week
+where event_week.event > 200
 
 -- better query for top repos month by month
 -- still not quite right -- sometimes missing rankings
@@ -3025,4 +3025,39 @@ WHERE pos <=10
 GROUP EACH BY year, month, pos, repo.name, repo.url
 ORDER BY year, month, pos
 
+-- tracking down configuration related stuff -- 
 
+SELECT repo.url, count(*) cnt, year(created_at) yr, month(created_at) wk
+FROM 
+[githubarchive:year.2011],
+[githubarchive:year.2012],
+[githubarchive:year.2013],
+[githubarchive:year.2014],
+[githubarchive:year.2015]
+where repo.url contains('docker')
+group by repo.url,yr,wk
+having cnt>100
+order by yr, wk, cnt desc
+limit 2000
+
+-- count number of repositories in gha -- 
+
+SELECT count(distinct(repo.url))
+FROM 
+    [githubarchive:year.2011],
+    [githubarchive:year.2012],
+    [githubarchive:year.2013],
+    [githubarchive:year.2014],
+    [githubarchive:year.2015]
+
+-- count number of repos by month 2011-2015 -- 
+SELECT year(created_at) year, month(created_at) month, count(distinct(repo.url)), type, count(type) as evt
+FROM 
+[githubarchive:year.2011],
+[githubarchive:year.2012],
+[githubarchive:year.2013],
+[githubarchive:year.2014],
+[githubarchive:year.2015]
+where type=='PushEvent' or type == 'ForkEvent'
+group by year,month, type
+order by year,month, evt desc

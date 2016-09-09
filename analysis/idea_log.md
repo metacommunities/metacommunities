@@ -93,3 +93,24 @@
 - wrote script to filter top results per month; easy to change event type in the query. Could then compare different events -- fork, pullrequest, issue, member, watch, public, release, etc.
 - added script to analysis/social_practices/
 - would it be possible to classify repos by topic and category? and could that be predicted?
+
+## Fri Sep  9 09:45:11 BST 2016
+
+- pfaffing a lot with docker containers -- trying again to see if that gives a significant handle on 'configuration.' Could imagine looking at CI, containerisation, vms, cloud platforms
+- could use a list of their names to track down configuration-related developments 
+- here's the query:
+
+       > SELECT repo.url, count(*) cnt, year(created_at) yr, month(created_at) wk
+        FROM 
+            [githubarchive:year.2011],
+            [githubarchive:year.2012],
+            [githubarchive:year.2013],
+            [githubarchive:year.2014],
+            [githubarchive:year.2015]
+        where repo.url contains('docker')
+        group by repo.url,yr,wk
+        having cnt>100
+        order by yr, wk, cnt desc 
+        limit 2000
+
+- would also be able to engage with Bratton's idea of **'stack'** -- look at Docker, Travis, OpenStack, Jenkins, 
