@@ -2919,9 +2919,8 @@ FROM  [githubarchive:github.timeline]
 select repo.name, event, week_of_year, month, year from 
   (SELECT   repo.name, count(created_at)  as event, month(created_at) as month, year(created_at) as year, week(created_at) as week_of_year 
     FROM (table_date_range([githubarchive:day.], timestamp("2015-01-01"), timestamp("2015-12-31")))
-where type =='PullRequestEvent'
+where type == 'PullRequestEvent'
 group by repo.name, week_of_year, month, year order by week_of_year asc, event desc) as event_week
-where event_week.event > 200
 
 -- better query for top repos month by month
 -- still not quite right -- sometimes missing rankings
@@ -2977,13 +2976,13 @@ TABLE_DATE_RANGE([githubarchive:day.],
 TIMESTAMP('2015-01-01'), 
 TIMESTAMP('2015-12-31')
 )
-  WHERE LENGTH(repo.name) >=2 
+  WHERE LENGTH(repo.name) >= 2 
   GROUP EACH BY year, month, repo.name 
   HAVING events > 200
   ORDER BY year, month asc, events desc
     )
 )
-WHERE pos <=10
+WHERE pos <= 10
 GROUP BY year, month, pos, repo.name
 ORDER BY year, month, pos
 
@@ -3000,11 +2999,11 @@ repo.url,
 events
 FROM (
 SELECT
-month(created_at) as month,
-year(created_at) as year,
-repo.name,
-repo.url,
-count(*) as events
+    month(created_at) as month,
+    year(created_at) as year,
+    repo.name,
+    repo.url,
+    count(*) as events
 FROM
 --       [githubarchive:year.2012],
 --       [githubarchive:month.201510],
@@ -3061,3 +3060,34 @@ FROM
 where type=='PushEvent' or type == 'ForkEvent'
 group by year,month, type
 order by year,month, evt desc
+
+-- count repos with just or two events
+
+select SUM(cnt) from
+(
+SELECT repo.url, count(*) cnt
+FROM
+[githubarchive:year.2011],
+[githubarchive:year.2012],
+[githubarchive:year.2013],
+[githubarchive:year.2014],
+[githubarchive:year.2015]
+group by repo.url
+having cnt <= 2 )
+
+-- count event types for repos with less than 2 events
+
+select type, count(type) as evt_count from
+(
+SELECT repo.url, type, count(*) cnt
+FROM
+    [githubarchive:year.2011],
+    [githubarchive:year.2012],
+    [githubarchive:year.2013],
+    [githubarchive:year.2014],
+    [githubarchive:year.2015]
+group by repo.url, type
+having cnt <= 2 )
+group by type
+order by evt_count desc
+limit 100
