@@ -111,6 +111,6 @@
         group by repo.url,yr,wk
         having cnt>100
         order by yr, wk, cnt desc 
-        limit 2000
+        limit 200$
 
-- would also be able to engage with Bratton's idea of **'stack'** -- look at Docker, Travis, OpenStack, Jenkins, 
+- would also be able to engage with Bratton's idea of **'stack'** -- look at Docker, Travis, OpenStack, Jenkins, kubernetes, etc.
