@@ -44,3 +44,13 @@
 ## Fri Sep  9 09:15:28 BST 2016
 
 - is TensorFlow (now working with GPU on Docker image) such a distraction? Seems to me that Docker is probably the real interest at the moment since it seems to change configuration work 
+
+
+## Tue Sep 13 11:38:36 BST 2016
+
+- been putting many more of the queries into the text -- that's the real focus now -- working with these queries. Could put all the queries into Gists, and just link them all. Or could make the whole paper into a DockerContainer. ...  
+- managed to write the rest of the events section, adding new queries to bolster it out. 
+
+
+
+
