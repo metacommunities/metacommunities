@@ -3091,3 +3091,23 @@ having cnt <= 2 )
 group by type
 order by evt_count desc
 limit 100
+
+-- count and rank top 50 forks for each year -- 
+
+SELECT repo.url, cnt, rnk, yr FROM (
+SELECT
+repo.url, COUNT(type) AS cnt, YEAR(created_at) AS yr, RANK() OVER (PARTITION BY yr ORDER BY cnt DESC) AS rnk, type
+FROM
+[githubarchive:year.2011], [githubarchive:year.2012], [githubarchive:year.2013], [githubarchive:year.2014], [githubarchive:year.2015],
+TABLE_DATE_RANGE([githubarchive:day.], TIMESTAMP('2016-01-01'), TIMESTAMP('2016-06-31'))
+WHERE type= 'ForkEvent'
+GROUP BY repo.url, yr, type
+ORDER BY yr, rnk )
+GROUP BY repo.url, yr, rnk, cnt
+HAVING rnk <=50
+ORDER BY yr, rnk
+LIMIT 1000
+
+
+
+
