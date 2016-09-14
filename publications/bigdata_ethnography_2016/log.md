@@ -54,3 +54,7 @@
 
 
 
+
+## Wed 14 Sep 17:20:04 BST 2016
+-struggled quite a lot of with associative imitation graphs -- working on converting those from ipython,etc to ggplot format. But not sure if it is worth the effort. 
+- does give some ideas of working with names as I try to do it ... 
