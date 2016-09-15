@@ -145,25 +145,91 @@ What are these events? The event of creating a named repository is primary, foll
 ```{r android_associations, echo=FALSE, cache=TRUE}
     library(bigrquery)
     library(ggplot2)
-    query_android = "SELECT repo.name, COUNT(type) AS cnt, DATE(created_at) AS date, YEAR(created_at) AS yr, MONTH(created_at) mth
+    library(readr)
+    library(dplyr)
+
+
+    construct_query <- function(query_term) {
+        query_full = gsub(pattern='\\n', replacement =' ', x=paste("SELECT
+        repo.name,
+        created_at,
+        COUNT(type) AS cnt
         FROM
-        [githubarchive:year.2011], [githubarchive:year.2012], [githubarchive:year.2013], [githubarchive:year.2014], [githubarchive:year.2015],
+        [githubarchive:year.2011],
+        [githubarchive:year.2012],
+        [githubarchive:year.2013],
+        [githubarchive:year.2014],
+        [githubarchive:year.2015],
         TABLE_DATE_RANGE([githubarchive:day.], TIMESTAMP('2016-01-01'), TIMESTAMP('2016-06-31'))
         WHERE
-        type= 'ForkEvent' AND repo.name CONTAINS('android')
+        type= 'ForkEvent'
+        AND LOWER(repo.name) CONTAINS('",
+        query_term,
+        "')
         GROUP BY
-        repo.name, date, yr, mth
-        HAVING
-        cnt > 3
+        repo.name,
+        created_at,
         ORDER BY
-            yr, mth, cnt DESC"
-    df_and = query_exec('metacommunities', query= query_android)
-    head(df_and)
+        created_at,
+        cnt DESC", sep=''))
+        return(query_full)
+    }
+    
+
+    fetch_data <- function(query_term, pages_to_fetch=4, force_refresh=FALSE) {
+        query_full = construct_query(query_term)
+        file = paste('data/', query_term, '_forks.csv',sep='')
+        if (file.exists(file) && force_refresh == FALSE) {
+            df_and = read_csv(file)
+        } else {
+            df_and = query_exec('metacommunities', query= query_full, max_pages= pages_to_fetch )
+            write_csv(path=file, x= df_and)
+        }
+        head(df_and)
+        nrow(df_and)
+        return(df_and)
+    }
+
+
+    plot_forks <- function(df_and, query_term, fork_count_cutoff, binwidth, without_query = FALSE){
+        top_forks = df_and %>%group_by(repo_name) %>% summarise(evt_cnt = n()) %>% filter(evt_cnt>fork_count_cutoff) %>% arrange(desc(evt_cnt))
+        nrow(top_forks)
+        if (without_query){
+            to_plot= df_and[df_and$repo_name %in% top_forks$repo_name[-1], ]
+        } else {
+            to_plot = df_and[df_and$repo_name %in% top_forks$repo_name, ]
+        }
+        nrow(to_plot)
+        binw = binwidth
+        g = ggplot(to_plot, aes(x=as.Date(created_at),   fill=repo_name)) + geom_line(aes(y = ..count..),  color='black',size=0.2, alpha=0.3,  stat = "bin",position='stack', binwidth=binw) +  theme(legend.position='blank') + geom_area(aes(y = ..count..), stat='bin',alpha=0.4,  binwidth=binw)  + scale_colour_brewer(type='div', palette='RdYlGn') + ylab('Fork counts') + xlab('Date of Fork')
+
+        if (without_query){
+            g + ggtitle(paste('Forks associated with the name `', query_term, '` alone', sep=''))
+            } else {
+            g +  ggtitle(paste('Forks associated with the name `', query_term, '`', sep=''))
+            }
+    }
+
+    query_term = 'android'
+    fork_count_cutoff = 50
+    binwidth=10 
+    pages_to_fetch= Inf
+    df_and = fetch_data(query_term, Inf, TRUE)
+    plot_forks(df_and, query_term, fork_count_cutoff, binwidth, FALSE)
+
 ```
 
-While it is hard to grasp the texture of imitative processes in event data, they clearly figure deeply in the composition of the capital numbers. We can observe some  localised aspects  of propagation of imitation. In the years 2012-2014, both mobile devices and user interfaces were being intensively transformed in coding work in complex ways (e.g. the growth of apps, and the transformation of webpages from static HTML-formatted text to thoroughly dynamic script-driven mutables).   Both Figure \ref{fig:bootstrap_forks} and \ref{fig:android_forks} count imitations in the form of copying code, but in ways that go beyond the formal copying mechanisms offered by Github itself (for instance in the 'Fork' button that appears on the top right hand side of any repository on Github; for example [https://github.com/twbs/bootstrap](https://github.com/twbs/bootstrap)). Imitations appears in two different ways in these figures. The broad bands of color rippling horizontally  across the middle of the figures graph the counts of copies being made each day on Github of popular repositories using the Fork action. (In forking, the repository name remains the same.)   But the much more dense striations  on either side of the central bands, seen for instance in Figure \ref{fig:android_forks}, count repositories whose names incorporate the important repository, but vary it in some way. These repositories have some association with the `android` repository, but diverge from it in a multiplicity of ways. A repository may, for instance, relate to the popular  Twitter `bootstrap` repository yet combine it with a range of other platforms and devices such as `android` or `jQuery`. 
 
-In striated zones of associative imitation, it is possible to count something different. Imitations augment the average everydayness of coding work with forms of associative investment and affective identification.  In this work, important repositories act as high visibility markers around which forms of identity take hold and multiply. Unlike the capital numbers with their total aggregates of people or repositories, the imitative fluxes that bulk out and pad in these diagrams have diverse networks of association.  The implication here is that by counting elements within the capital numbers, we can begin to glimpse the pathways of generative circulation that enliven and literally join together in contemporary technologies.     
+While it is hard to grasp the texture of imitative processes in event data, they figure deeply in the composition of the capital numbers. We can observe some  localised aspects  of propagation of imitation by going beyond the formatted data of the API or  GithubArchive data. Much social media platform data relies heavily on unique names (hence, for instance, Facebook's insistence that every user has a single unique identity). Yet the associative play of names (of people and things) attests to processes of associative imitations that continually   In the years 2012-2015, both mobile devices and user interfaces were being intensively transformed in complex ways (e.g. the growth of apps, and the transformation of webpages from static HTML-formatted text to thoroughly dynamic script-driven surfaces composed for many elements). While these transformation were not directly the work of 'big data' practices, they are intricately connected to it by virtue of the proliferation of devices, the deeper integration of networks of association they implement and not least, the changes in the texture of contemporary experiences of interfaces.    Both Figure \ref{fig:bootstrap_assoiation} and \ref{fig:android_associations} attempt to figure something of this proliferating-integrating process of change.  Both figures  count imitations in the form of copying code, but in ways that go beyond the formal copying mechanisms offered by Github itself (for instance in the 'Fork' button that appears on the top right hand side of any repository on Github).
+
+```{r bootstraph_association, echo=FALSE, cache=TRUE}
+    query_term='bootstrap'
+    df = fetch_data(query_term, 4)
+    plot_forks(df, query_term, 10, 10, FALSE)
+
+We might call this form of composition, as it configures capital numbers, stacked associative imitation. Associative imitation appears in two different ways in these figures. The broad bands of color rippling horizontally  across the base of the figures graph the counts of copies being made each day on Github of popular repositories such as `android` or `bootstrap` using the Fork action. (In forking, the repository name remains the same.)   But the much more dense striations running above the base ribbons,  seen for instance in Figure \ref{fig:android_associations}, count repositories whose names combine the base repository (e.g. `android`) but vary it in some way. These repositories associate with the base` repository, but diverge from it in a multiplicity of ways. A repository may, for instance, relate to the popular  `bootstrap` repository yet combine it with a range of other platforms and devices such as `android` or `jQuery`. 
+
+In the striated zones of associo-imitation plotted in the figures, it is possible to count something that is neither the long tail nor a link-based network of affiliations.   The cross-ply of repository imitations identify the average everydayness of coding work with forms of associative investment and affective identification that range across many different repositories.  In this work,  repositories act as high visibility markers around which waves of hybridisation stack up. Unlike the capital numbers with their total aggregates of people or repositories, the imitative fluxes that bulk out and pad in these diagrams have diverse networks of association.  The implication here is that by counting elements within the capital numbers, we can begin to glimpse the pathways of generative circulation that enliven and literally join together in contemporary technologies.      
 
 ## De-capitalising configuration
 

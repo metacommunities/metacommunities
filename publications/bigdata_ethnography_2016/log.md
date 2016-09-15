@@ -58,3 +58,11 @@
 ## Wed 14 Sep 17:20:04 BST 2016
 -struggled quite a lot of with associative imitation graphs -- working on converting those from ipython,etc to ggplot format. But not sure if it is worth the effort. 
 - does give some ideas of working with names as I try to do it ... 
+
+
+## Thu Sep 15 13:19:06 BST 2016
+
+- all morning working on 'streamgraphs' for forks -- this has been a huge effort, but now have functions that plot them for any repo. 
+- seems to be some shift in the data at end of 2014 -- everything shifts in the counts. 
+- put in the two stacked plots for android and bootstrap. Need to write a bit more commentary on what is going on here. 
+- and perhaps think whether counting FOrks is the right thing to do ... 
