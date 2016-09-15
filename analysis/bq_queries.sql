@@ -3109,5 +3109,27 @@ ORDER BY yr, rnk
 LIMIT 1000
 
 
+-- query I used to build associative forks for bigdata ethno article using ggplot--
 
-
+"SELECT
+        repo.name,
+        created_at,
+        COUNT(type) AS cnt
+        FROM
+        [githubarchive:year.2011],
+        [githubarchive:year.2012],
+        [githubarchive:year.2013],
+        [githubarchive:year.2014],
+        [githubarchive:year.2015],
+        TABLE_DATE_RANGE([githubarchive:day.], TIMESTAMP('2016-01-01'), TIMESTAMP('2016-06-31'))
+        WHERE
+        type= 'ForkEvent'
+        AND LOWER(repo.name) CONTAINS('",
+        query_term,
+        "')
+        GROUP BY
+        repo.name,
+        created_at,
+        ORDER BY
+        created_at,
+        cnt DESC
