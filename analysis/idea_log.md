@@ -114,3 +114,8 @@
         limit 200$
 
 - would also be able to engage with Bratton's idea of **'stack'** -- look at Docker, Travis, OpenStack, Jenkins, kubernetes, etc.
+
+
+## Thu Sep 15 15:08:53 BST 2016
+
+- stack idea keeps coming back at the moment -- could use Leigh Star account of layers to intervene in this. Show how layers are done today in the 'stack,' the main layered entity of contemporary infrastructures. She has really good analysis of how 'layers' work in vlsi chip design.  
