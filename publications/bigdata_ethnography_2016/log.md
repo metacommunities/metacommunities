@@ -66,3 +66,11 @@
 - seems to be some shift in the data at end of 2014 -- everything shifts in the counts. 
 - put in the two stacked plots for android and bootstrap. Need to write a bit more commentary on what is going on here. 
 - and perhaps think whether counting FOrks is the right thing to do ... 
+
+
+## Fri Sep 16 10:17:26 BST 2016
+ great morning working on chapter -- going back through early parts and fixing them up by adding in literature, some bits of code and a general focusing of the arguments.
+- still have not put in the configuration material, but am around 5000 words at the moment.
+- also realized something very obvious but important -- I can't count all the repos because I don't know how many are private. But I can see event id numbers - I saw them using the 'events' api. IF event ideas on the public api are consecutive for all events, then I can estimate home many private repos there are, and how private repos have grown by imputing them from events. See fuller discussion of this in ideas log. 
+- almost ready to bring in the configuration -- the question for me is how to make it more reflexive ... 
+
