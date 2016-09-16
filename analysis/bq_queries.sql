@@ -2906,6 +2906,7 @@ AS new
 ON new.owner = old.repository_organization
 
 -- test of virtualization comments
+
 SELECT repository_name, type, created_at, payload_commit, payload_commit_msg FROM [githubarchive:github.timeline] 
 where payload_commit_msg != "null" and regexp_match(payload_commit_msg, 'virtualiz') limit 10
 
@@ -3111,7 +3112,7 @@ LIMIT 1000
 
 -- query I used to build associative forks for bigdata ethno article using ggplot--
 
-"SELECT
+SELECT
         repo.name,
         created_at,
         COUNT(type) AS cnt
@@ -3133,3 +3134,33 @@ LIMIT 1000
         ORDER BY
         created_at,
         cnt DESC
+
+-- trying to count differences between ids -- 
+-- this one does not work -- exceeds resources-- 
+
+SELECT id,created_at, 
+SUM(INTEGER(id)) over(ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) as prev 
+FROM [githubarchive:year.2011] 
+ LIMIT 100
+
+-- get series of repo ids for counting missing -- 
+SELECT repo.id, repo.name, count(distinct(type)) as id
+FROM [githubarchive:year.2015] 
+group by repo.id, repo.name
+order by repo.id, id desc
+limit 50
+
+-- shows the problem of missing event ids
+select max(id) as max, min(id) as min
+from 
+[githubarchive:year.2011],
+[githubarchive:year.2012],
+-- [githubarchive:month.201404],
+-- [githubarchive:month.201405],
+-- [githubarchive:month.201406],
+-- [githubarchive:month.201407],
+-- [githubarchive:month.201408],
+-- [githubarchive:month.201409],
+-- [githubarchive:year.2014],
+[githubarchive:month.201606]
+where id IS NOT NULL

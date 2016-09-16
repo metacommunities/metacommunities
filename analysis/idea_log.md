@@ -119,3 +119,12 @@
 ## Thu Sep 15 15:08:53 BST 2016
 
 - stack idea keeps coming back at the moment -- could use Leigh Star account of layers to intervene in this. Show how layers are done today in the 'stack,' the main layered entity of contemporary infrastructures. She has really good analysis of how 'layers' work in vlsi chip design.  
+
+
+## Fri Sep 16 10:21:16 BST 2016
+
+- just had really good idea that might totally change how I count -- the _series_ of event ids in the api are consecutive. That means I can measure the gaps in those ids to impute the presence of private repos, and perhaps also get a sense of how the capital number, the surplus value form, of Github takes shape. 
+- tried to write a lag query on bquery, but didn't work ... 
+- played a bit with repo.ids -- they may have the same property -- they seem to be consecutive but with gaps in the numbers. Excellent opportunity to use Whitehead on this. 
+- also had the Gödelian idea of constructing an event number that uniquely expresses each repoid, actorid, eventid, and UTCdate and then putting them in order. But would be the point of that? To create a super-searchable list of everything that happens? To look for patterns in those numbers? Not sure. Probably better to just focus on getting a good set of event.ids, and the seeing what can be done with those. Even just the basic proportion of events that are private would a useful find.  
+- that aside:found typical problem -- event ids are only in GoogleBigQuery for some years (2011, 2012, 2015, some of 2014). Are they in GithubArchive? Need to check that  - perhaps by grepping in gz tarballs. ... 
