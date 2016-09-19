@@ -2,9 +2,9 @@
 
 ## Introduction
 
-I report here on a deliberately naive attempt to re-count a single number: approximately 29 million code repositories on [Github](http://github.com)  at a particular point in time (late 2015). The number appeared in a research  project primarily focused largely on transformations in the social life of coding, programming and software development amidst apps, clouds, virtualization and the troubled life of code commons.  The project  explicitly sought to experiment with data-intensive methods, infrastructures and tools -- cloud computing services such as Google Compute, data analytic and visualization tools such as `R,` `Python` and `IPython` notebooks, large data stores such as` BigQuery`, streaming data from social media platform APIs (Application Programmer Interfaces), predictive models especially in the form of machine learning classifiers (support vector machines, Naive Bayes classifiers, random forests) --  in making sense of what happens on  Github *en masse.[^12]*  Somewhat recursively (although I don't want to make too much of this recursion, since I do not think it amounts to a recursive public [@Kelty_2008]), Github happens to be the media platform that hosts the code development of many big data tools and infrastructures (`hadoop`, `tensorflow`, `ipython`, `flow`, `d3.js`,  `spark`, etc.). It also directly hosts  all of the text, code, figures, intermediate results and configuration information for the research project itself, including this chapter in various operational and executable forms [@Metacommunities_2016].
+I report here on a deliberately naive attempt to re-count a single number: approximately 29 million code repositories on [Github](http://github.com)  at a particular point in time (late 2015). The number appeared in a research  project primarily focused largely on transformations in the social life of coding, programming and software development amidst apps, clouds, virtualization and the troubled life of code commons.  In exploring 'how people build software' [@Github_2015], the project  explicitly sought to experiment with data-intensive methods, infrastructures and tools -- cloud computing services such as Google Compute, data analytic and visualization tools such as `R,` `Python` and `IPython` notebooks, large data stores such as` BigQuery`, streaming data from social media platform APIs (Application Programmer Interfaces), predictive models especially in the form of machine learning classifiers (support vector machines, Naive Bayes classifiers, random forests) --  in making sense of what happens on  Github *en masse.*[^12]  Somewhat recursively (although I don't want to make too much of this recursion, since I do not think it amounts to a recursive public [@Kelty_2008]), Github happens to be the *platform*  that hosts the code development of many big data tools and infrastructures (`hadoop`, `tensorflow`, `ipython`, `flow`, `d3.js`,  `spark`, etc.). It also directly hosts  all of the text, code, figures, intermediate results and configuration information for the research project I describe, including this chapter in various operational and executable forms [@Metacommunities_2016].
 
-The approximate number 29 million  will in this chapter serve as a synecdoche for big data in several ways. The number, a count of all the repositories on Github in late 2014, is a part standing in for the whole. On the one hand, Github as a platform used by millions of people is a typical setting open to, affected and shaped by big data practices. On the other hand, what happens on Github -- coding, software development, configuration, modification and transformation of information infrastructures -- is very much shapes  big data practices. Crucially, because the openness of code repositories is always connected to the closed or private repositories that actually yield revenue for Github as a San Francisco-based business, it is inherently difficult to count all the repositories. 'All' here inevitably means 'some,' by maybe that is all-ways the problem for big data.      
+The approximate number 29 million  will in this chapter serve as a synecdoche for big data in several ways. The number, a count of all the repositories on Github in late 2015, is a small part standing in for the whole. On the one hand, Github as a platform used by millions of people is a typical setting open to, affected and shaped by big data practices. On the other hand, what happens on Github -- coding, software development, configuration, modification and transformation of information infrastructures -- is very much shapes  big data practices. Crucially, because the openness of code repositories is always connected to the closed or private repositories that actually yield revenue for Github as a San Francisco-based business, it is inherently difficult to count all the repositories. 'All' here inevitably means 'some,' by maybe that is all-ways a problem for big data.      
 
 Focusing on just one biggish number --  29 million -- that presents itself as the sum of all repositories is inevitably severely myopic. The story of an encounter with this single number will, I hope, evoke and exemplify the appeal, frustrations, hopes and some material configurations associated with contemporary data practices that envision working with 'all the data' [@Mayer-Schonberger_2013]. This number, one of a series of similar numbers,  exists and exerts effects in different ways on counting and accounting. I'm interested in its composition, its instability, the 'stories,' imaginings and materialisations it authorises, and its practically problematic relation to big data infrastructures.
 
@@ -251,4 +251,48 @@ In the striated zones of associo-imitation plotted in the figures, it is possibl
 
 ## De-capitalising configuration
 
+Densely populated with counts of ephemeral repositories, stacked with associative imitations, the capital number 29 million seemed in the light of these re-counting to be a sieve-like entity, full of differently configured processes. Yet still the count was not exhaustively accounted for in these different counts.     The very act of counting these imitations has a device-specificity, in its reliance on the Github platform API, the GithubArchive timeline dataset and the GoogleBigQuery cloud analytic's platform, and indeed Github itself as the repository of the code and text comprising this article [@Metacommunities_2016]. Unlike the network-tracing approach, it can perhaps take into account the ways in which the platform itself works to shape networked associations. Whenever we count or calculate in any form, device-specific configurations materialise in the numbers.  The expansively contagious nature of imitation inevitably encounters device-specific configurations.       
+
+```{r event_proportions, echo=FALSE, cache=TRUE}
+
+    query_evt = "SELECT
+        count(type)  
+        FROM
+        [githubarchive:year.2011],
+        [githubarchive:year.2012],
+        [githubarchive:year.2013],
+        [githubarchive:year.2014],
+        [githubarchive:year.2015]"
+    total_events = query_exec('metacommunities', query = query_evt)[1]
+
+    query_top_repos = "SELECT
+        TOP(LOWER(repo.name),30000),
+        COUNT(*) AS cnt
+        FROM
+            [githubarchive:year.2011],
+            [githubarchive:year.2012],
+            [githubarchive:year.2013],
+            [githubarchive:year.2014],
+            [githubarchive:year.2015],
+        "
+    total_events
+    top_df = query_exec('metacommunities', query = query_top_repos)
+    top_prop = sum(top_df$cnt)/total_events * 100 
+```
+
+One sense of how numbers embody device-specific configurations can be seen by examining high event-count repositories on Github.  The top 0.1% of repositories attract around `r round(top_prop)`% of all events during 2011-2015. (The query de-capitalises the repository names for the purposes of aggregation (e.g. a repository called `DotFile` will be counted along with `dotfile`)). Given the flattening of the names to lower case produced by this query, we cannot readily see how those events are distributed. But these highly eventful repositories, which only comprise a tiny percentage of the 29 million on  Github, absorb many events. What happens in these high event count repositories? 
+ 
+Several major traits appear in these high event-count repositories. Many events come from off-platform. Github, despite its own figuration as a hub where coding is done socially, functions as an element in wider configurations.   For instance, the repository `eclipse.platform.common` accounts for almost 2 million events in the timeline data. A single repository attracting two million events (or almost 1% of the total event count in the timeline data)  suggests something highly significant in the geography of coding work. Perhaps the fact that `eclipse` is itself part of the Eclipse Foundation,  'an amazing open source community of Tools, Projects and Collaborative Working Groups' [@EclipseFoundation_2016] with almost a thousand of its own projects, might help explain the large number of events. More significantly, the high-frequency event traffic in `eclipse.platform.common` is an example of how Github itself functions as part of a configuration.  The `eclipse` repositories are not actively developed on  Github. They are mirrored  or themselves copied from the hundreds of `git` repositories found at (git://git.eclipse.org)[git://git.eclipse.org]. Like many other significant repositories (`linux`, `android`, `mozilla`, `apache`), high event counts often configure Github itself as part of a wider network of relations. 
+
+
+Conversely, even where repository events do originate on Github, many of them concern Github or  technical configurations closely associated with Github.   For instance, the list of names of high-event count repositories centres on a few highly repeated names such as `test`, `dot`, `sample` and `try_git`. For instance, the many repositories that contain the term `dot` as in `dotfile` or `vimdot` suggest that Github repositories act as stores for the settings and configurations specific to coding work (e.g. `vimdot` repositories hold customised settings for the popular `vim` text editor).  Terms like `test`, `hello`, and `try` or `demo` also stream through this set of repository names. These repositories often attest to non-code uses of Github and sometimes (for instance, in the case of `KenanSulayman/heartbeat` with its several million commit events) to surprising or experimental re-purposings of the Github platform. 
+
+Do configuration-oriented practices around Github affect the capital numbers and the value and importance they are meant to convey? Configuration is, as science and technology studies scholars have emphasised, vital to the very existence of technologies.  If many of the 29 million repositories on Github function as elements in the configuration of coding work rather than as bodies of code in their own right, then any account of what happens cannot assume that analysis of Github data primarily concerns 'how people build software' [@Github_2015]. Or, put more constructively, it suggests that much of what counts as software on Github -- code repositories -- in actuality concerns the arrangements that people make with each and themselves in order to work with software. In this respect, the capital numbers are always also configurative numbers. There is no work on software without the 'how' of building software, the configuration work.   
+
+In this context, too, our  -- the five researchers directly involved in the research -- work on the Github API, GithubArchive datasets and the GoogleBigQuery platform was full of configurative events, themselves tending to slightly increase the capital numbers (although we only added one repository). 
+
 HERE
+
+## Conclusion
+
+## References

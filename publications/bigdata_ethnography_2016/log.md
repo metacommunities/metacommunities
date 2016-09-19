@@ -74,3 +74,9 @@
 - also realized something very obvious but important -- I can't count all the repos because I don't know how many are private. But I can see event id numbers - I saw them using the 'events' api. IF event ideas on the public api are consecutive for all events, then I can estimate home many private repos there are, and how private repos have grown by imputing them from events. See fuller discussion of this in ideas log. 
 - almost ready to bring in the configuration -- the question for me is how to make it more reflexive ... 
 
+
+
+## Mon 19 Sep 14:04:55 BST 2016
+
+- brought in the configuration passage -- bring word coutn to 6100. Wrote and ran some queries, now included in the text to count events and top 0.1% of repositories contributing 25% of event count. 
+- and introduced the topic of what we are doing with our own work.  need to write a bit more reflexively here. Should try to do that. 
