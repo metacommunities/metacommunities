@@ -52,28 +52,6 @@ cat(rawToChar(req$content))
 
 The two lines in the vignette or `Gist` as it would be called on  Github, fetch the latest public events from the API, and display them. Rather than displaying them big data in practice would feed them all into some datastore awaiting further analysis. 
 
-```
-{
-"id": "2111998059",
-"type": "WatchEvent",
-"actor": {
-"id": 1459103,
-"login": "mmemetea",
-"gravatar_id": "4532d1e4885f579ca7d9aa8748418817",
-"url": "https://api.github.com/users/mmemetea",
-"avatar_url": "https://avatars.githubusercontent.com/u/1459103?"
-},
-"repo": {
-"id": 14802742,
-"name": "OpenSensorsIO/azondi",
-"url": "https://api.github.com/repos/OpenSensorsIO/azondi"
-},
-"payload": {
-"action": "started"
-},
-"public": true,
-}
-```
 
 What would it mean to count things using formatted, API  data? These JSON records conjoin elements together.  The relatively simple  `WatchEvent` on Github shown in the data extract above documents how an `actor` calling themselves `mmemetea` associates as a `Watcher` with a  repository called `azondi`, a software project coordinated by the 'organisation' `OpenSensorsIO`.[^2]  Note that the event also has various attributes -- it is a `public` event, it has a 'payload' (often much more complicated than simply `started`) -- and includes various indexical references or `id`s that link the event to other groups of people, organisations, repositories and images (`gravatar_id`). The intricate  syntax of this data -- many brackets, inverted commas, colons, commas -- attests to a complex social configuration which links actors, actions, places and times in discrete events ordered in time. The discreteness of components in this event - actor, organisation, repository, payload, gravatar, etc. --  attests to the potential for the precise configuration of elements around a given repository to change or rearranged in some way. New actors might be added; relations might appear between entities; the location of entities might shift, and forms of association ('organizations') might subsume or grow out or around all of this. In short, each event in the timeline API suggests another small re-configuration in the totality of elements comprising Github. 
 
@@ -284,14 +262,13 @@ One sense of how numbers embody device-specific configurations can be seen by ex
  
 Several major traits appear in these high event-count repositories. Many events come from off-platform. Github, despite its own figuration as a hub where coding is done socially, functions as an element in wider configurations.   For instance, the repository `eclipse.platform.common` accounts for almost 2 million events in the timeline data. A single repository attracting two million events (or almost 1% of the total event count in the timeline data)  suggests something highly significant in the geography of coding work. Perhaps the fact that `eclipse` is itself part of the Eclipse Foundation,  'an amazing open source community of Tools, Projects and Collaborative Working Groups' [@EclipseFoundation_2016] with almost a thousand of its own projects, might help explain the large number of events. More significantly, the high-frequency event traffic in `eclipse.platform.common` is an example of how Github itself functions as part of a configuration.  The `eclipse` repositories are not actively developed on  Github. They are mirrored  or themselves copied from the hundreds of `git` repositories found at (git://git.eclipse.org)[git://git.eclipse.org]. Like many other significant repositories (`linux`, `android`, `mozilla`, `apache`), high event counts often configure Github itself as part of a wider network of relations. 
 
-
 Conversely, even where repository events do originate on Github, many of them concern Github or  technical configurations closely associated with Github.   For instance, the list of names of high-event count repositories centres on a few highly repeated names such as `test`, `dot`, `sample` and `try_git`. For instance, the many repositories that contain the term `dot` as in `dotfile` or `vimdot` suggest that Github repositories act as stores for the settings and configurations specific to coding work (e.g. `vimdot` repositories hold customised settings for the popular `vim` text editor).  Terms like `test`, `hello`, and `try` or `demo` also stream through this set of repository names. These repositories often attest to non-code uses of Github and sometimes (for instance, in the case of `KenanSulayman/heartbeat` with its several million commit events) to surprising or experimental re-purposings of the Github platform. 
 
 Do configuration-oriented practices around Github affect the capital numbers and the value and importance they are meant to convey? Configuration is, as science and technology studies scholars have emphasised, vital to the very existence of technologies.  If many of the 29 million repositories on Github function as elements in the configuration of coding work rather than as bodies of code in their own right, then any account of what happens cannot assume that analysis of Github data primarily concerns 'how people build software' [@Github_2015]. Or, put more constructively, it suggests that much of what counts as software on Github -- code repositories -- in actuality concerns the arrangements that people make with each and themselves in order to work with software. In this respect, the capital numbers are always also configurative numbers. There is no work on software without the 'how' of building software, the configuration work.   
 
-In this context, too, our  -- the five researchers directly involved in the research -- work on the Github API, GithubArchive datasets and the GoogleBigQuery platform was full of configurative events, themselves tending to slightly increase the capital numbers (although we only added one repository). The repository for this project contains thousands of lines of code written in Python, R and in specialized languages such as SQL (Structured Query Language)[@Metacommunities_2016]. According to the  Github API, user `rian39` added around 10 million lines of code and deleted 8 million, leaving a net contribution of around 2 million lines.  
+In this context, too, our  -- the five researchers directly involved in the research -- work on the Github API, GithubArchive datasets and the GoogleBigQuery platform was full of configurative events, themselves tending to slightly increase the capital numbers (although we only added one repository). The repository for this project contains thousands of lines of code written in Python, R and in specialized languages such as SQL (Structured Query Language)[@Metacommunities_2016] as well as tens of thousands of lines of text. According to the  Github API, user `rian39` added around 10 million lines of code and deleted 8 million, leaving a net contribution of around 2 million lines to the `metacommunities` repository during the years 2012-2016 [@Metacommunities_2016a]. While those numbers might be read as attesting to extraordinary levels of code productivity, they actually include many lines of data stored in the Github repository, alongside code, drafts of documents and configuration related information. The deletion of 8 million lines suggests that some of the main activities in the repository were changes to do with cleaning up, tidying and re-arranging files and documents in the repository.     
 
-HERE
+Perhaps this level of contribution activity to a repository suggests something important about configuration in big data practice. Most of the 10 million lines add and 8 million lines deleted were configuration-related work as we -- I in particular -- sought to make sense of capital numbers such as 29 million, and tried to differentiate that sense-making from the flood of data challenges, hackathons and  other usages of the GithubArchive data that were also offering geographical, sentiment, logistic and temporal narratives about 'how people build software.  In the process of trying to re-count the capital number, we 'built software' that generated 400 or images, 100 or so data files, and around 1000 other files ,    
 
 ## Conclusion
 

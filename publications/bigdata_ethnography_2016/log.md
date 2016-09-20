@@ -80,3 +80,8 @@
 
 - brought in the configuration passage -- bring word coutn to 6100. Wrote and ran some queries, now included in the text to count events and top 0.1% of repositories contributing 25% of event count. 
 - and introduced the topic of what we are doing with our own work.  need to write a bit more reflexively here. Should try to do that. 
+
+
+## Tue Sep 20 16:23:37 BST 2016
+- finding it hard to write reflexively about the work with the data; seem to stay firmly in the observational/critical mode. 
+- started by trying to just list the number of files.  And then got into using bq ls -j etc to list all the queries and jobs on GoogleBigQuery, so that becomes a way of looking at configuration. 
