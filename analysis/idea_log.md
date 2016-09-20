@@ -128,3 +128,7 @@
 - played a bit with repo.ids -- they may have the same property -- they seem to be consecutive but with gaps in the numbers. Excellent opportunity to use Whitehead on this. 
 - also had the Gödelian idea of constructing an event number that uniquely expresses each repoid, actorid, eventid, and UTCdate and then putting them in order. But would be the point of that? To create a super-searchable list of everything that happens? To look for patterns in those numbers? Not sure. Probably better to just focus on getting a good set of event.ids, and the seeing what can be done with those. Even just the basic proportion of events that are private would a useful find.  
 - that aside:found typical problem -- event ids are only in GoogleBigQuery for some years (2011, 2012, 2015, some of 2014). Are they in GithubArchive? Need to check that  - perhaps by grepping in gz tarballs. ... 
+
+
+## Tue Sep 20 22:45:56 BST 2016
+- starting to play with jobs from GoogleBigQuery as a way of looking at how much data have been through and what that means in terms of configuration, and its materialization
