@@ -268,7 +268,25 @@ Do configuration-oriented practices around Github affect the capital numbers and
 
 In this context, too, our  -- the five researchers directly involved in the research -- work on the Github API, GithubArchive datasets and the GoogleBigQuery platform was full of configurative events, themselves tending to slightly increase the capital numbers (although we only added one repository). The repository for this project contains thousands of lines of code written in Python, R and in specialized languages such as SQL (Structured Query Language)[@Metacommunities_2016] as well as tens of thousands of lines of text. According to the  Github API, user `rian39` added around 10 million lines of code and deleted 8 million, leaving a net contribution of around 2 million lines to the `metacommunities` repository during the years 2012-2016 [@Metacommunities_2016a]. While those numbers might be read as attesting to extraordinary levels of code productivity, they actually include many lines of data stored in the Github repository, alongside code, drafts of documents and configuration related information. The deletion of 8 million lines suggests that some of the main activities in the repository were changes to do with cleaning up, tidying and re-arranging files and documents in the repository.     
 
-Perhaps this level of contribution activity to a repository suggests something important about configuration in big data practice. Most of the 10 million lines add and 8 million lines deleted were configuration-related work as we -- I in particular -- sought to make sense of capital numbers such as 29 million, and tried to differentiate that sense-making from the flood of data challenges, hackathons and  other usages of the GithubArchive data that were also offering geographical, sentiment, logistic and temporal narratives about 'how people build software.  In the process of trying to re-count the capital number, we 'built software' that generated 400 or images, 100 or so data files, and around 1000 other files ,    
+```{r bigquery, cache=TRUE, echo=FALSE}
+    library(jsonlite)
+    library(ggplot2)
+    library(dplyr)
+    j = stream_in(file('data/jobs.json'), flatten=TRUE)
+    s=sum(na.omit(as.numeric(j$statistics$totalBytesProcessed)))/1e12
+    print(s)
+    bytes = as.numeric(j$statistics$totalBytesProcessed)
+    gbytes = bytes/1e9
+    dates = as.Date(as.POSIXct(as.numeric(j$statistics$creationTime)/1000, origin="1970-01-01"))
+    df= data.frame(date = dates, vol = bytes, gB = gbytes)
+    dim(df)
+    g = ggplot(df, aes(x=date, y=gB)) + geom_point(position='dodge') + ggtitle(paste(s, ' terabytes of BigQuery processing in counting a capital number'))
+    g + ylab('Gigabytes of data processed')
+    day_df = df %>% select(date, gB) %>% group_by(date) %>% mutate(day_sum = sum(gB, na.rm=TRUE)) 
+    ggplot(day_df, aes(x=date, y=day_sum)) + geom_point() + ggtitle('Gb processes each day')
+```
+
+Perhaps this level of contribution activity to a repository suggests something important about configurative numbers in big data practice. Most of the 10 million lines add and 8 million lines deleted were configuration-related work as we -- I in particular -- sought to make sense of capital numbers such as 29 million, and tried to differentiate that sense-making from the flood of data challenges, hackathons and  other usages of the GithubArchive data that were also offering geographical, sentiment, logistic and temporal narratives about 'how people build software.  In the process of trying to re-count the capital number, we 'built software' that generated 400 or images, 100 or so data files, and around 1000 other files, or 22000 queries on GoogleBigQuery. Figure \ref{fig:bigquery} shows something of the flow of data involved in this effort.  Suchman's suggestion that configuration always concerns both composition of elements and materialising imaginaries seems particularly resonant here. Why write so much code, process so much data, create so many figures and images, and indeed organise all of this work in the sometimes maddeningly precise version control system of a `git` repository on Github? Why     
 
 ## Conclusion
 

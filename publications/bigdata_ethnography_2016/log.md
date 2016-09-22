@@ -85,3 +85,11 @@
 ## Tue Sep 20 16:23:37 BST 2016
 - finding it hard to write reflexively about the work with the data; seem to stay firmly in the observational/critical mode. 
 - started by trying to just list the number of files.  And then got into using bq ls -j etc to list all the queries and jobs on GoogleBigQuery, so that becomes a way of looking at configuration. 
+
+
+## Thu Sep 22 12:00:06 BST 2016
+
+- really got stuck in trying to download and analyse bq job data, but now finally working -- needed to use json stream_in, etc
+- wrote bash script to get jobs, job ids, and then all the job details, and some R script to plot dates and bytes processed
+- did some graphs in the text of the amount of data processed over the years
+- added scripts to analysis

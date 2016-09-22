@@ -91,7 +91,6 @@ Several major traits appear in these high event-count repositories. Many events 
 
 In addition, even where events do originate on Github, many of them concern Github or  technical configurations closely associated with Github.   For instance, the list of names of high-event count repositories includes many containing a set of terms centred on a few highly repeated items. On the one hand, the sharing of names -- for instance, the many repositories that contain the term `dot` as in `dotfile` or `vimdot` -- suggests the imitation or repetition that Tarde describes. On the other hand, terms like `dot`, `test`, `hello`, `config`, `doc`, `build`, `setting` or `demo` also stream through this set of repository names. Many repository names proliferate from these stems. All of these stems relate to device-specific configurations and work done to sustain the configuration of devices in particular places. 
 
-
 ## Conclusion
 
 Capital numbers, I have suggested,  enumerate an aggregate, imbue it with importance linked to infrastructural scale and complexity, and promise to generate further accumulation. As we have seen, the capital numbers attract many further aggregations in the form of data archives (GithubArchive) and oligoptic visualization. Configurative numbers, in resonance with the configuration work that gives rise to them, account for the both the accumulation and the heterogeneity of events, people and things, and for their re-counting. 
