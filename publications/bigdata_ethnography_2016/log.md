@@ -93,3 +93,11 @@
 - wrote bash script to get jobs, job ids, and then all the job details, and some R script to plot dates and bytes processed
 - did some graphs in the text of the amount of data processed over the years
 - added scripts to analysis
+
+
+## Fri Sep 23 09:31:07 BST 2016
+
+- still working on graphs; have the 22000 jobs on bigquery; have done cumulative data volume graphic -- now need to write commentary on it.   
+- sent chapter off with preliminary conclusion; 150 pages long, so has massive amounts of printout ... 
+- had another idea: that the attempt to deal with Github meant engaging with a lot of configuration work; and this configuration work is really important to  big data more generally. So all that repository stuff, all the data, is really an encounter with big data, not just Github. That point should go in the conclusion. TODO. 
+- 

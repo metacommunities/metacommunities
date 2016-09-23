@@ -42,7 +42,20 @@ How could I  actually count software project or people? Like many other people, 
 
 By convention much API data from social media sites has an 'event' structure that links named actors and named entities to specific infrastructural locations (usually coded as an URL) at a particular time (the 'timestamp'). While not all big data has this timestamp-actor-location-links texture, it is common enough to stand in as typical of the data that big data infrastructures and practices encounter. As Noortje Marres has persuasively argued, these data formats are not 'neutral' or in any way particularly good for social research, since they tend to pre-structure the kinds of engagement that one might have with the data [@Marres_2012a]. Work needs to be done with and against the data format. 
 
-In our/my case -- I'm not sure how to report on the work I did with others in this project -- I wanted to write code, which I like doing, to gather, aggregate, clean, explore, visualize and model what has happening. And a total 'all-the-data' scale, since that is big data practice, and I was interpellated by big data/data science practice. The code vignette shown below gathers the last few hundred events on the  Github timeline, and is  a typical starting point.  
+```{r user, echo=TRUE, cache=TRUE}
+    library(curl)
+    library(jsonlite)
+    con2 = curl('https://api.github.com/repos/metacommunities/metacommunities/languages')
+    lang = fromJSON(readLines(con2), flatten=TRUE)
+    lang
+    con3 = curl('https://api.github.com/repos/metacommunities/metacommunities/contributors')
+    people = fromJSON(readLines(con3), flatten=TRUE)
+    people
+    con4 = curl('https://api.github.com/repos/metacommunities/metacommunities/branches')
+    branches = fromJSON(readLines(con4), flatten=TRUE)
+    nrow(branches)
+```
+In our/my case -- I'm not sure how to report on the work I did with others in this project -- I wanted to write code, which I like doing, to gather, aggregate, clean, explore, visualize and model what has happening. The code vignette shown above summarises some of this (I return to the configurative events behind this summary below). And a total 'all-the-data' scale, since that is big data practice, and I was interpellated by big data/data science practice. The code vignette shown below gathers the last few hundred events on the  Github timeline, and is  a typical starting point.  
 
 ```{r events, echo=TRUE, cache=TRUE}
 library(curl)
@@ -266,7 +279,8 @@ Conversely, even where repository events do originate on Github, many of them co
 
 Do configuration-oriented practices around Github affect the capital numbers and the value and importance they are meant to convey? Configuration is, as science and technology studies scholars have emphasised, vital to the very existence of technologies.  If many of the 29 million repositories on Github function as elements in the configuration of coding work rather than as bodies of code in their own right, then any account of what happens cannot assume that analysis of Github data primarily concerns 'how people build software' [@Github_2015]. Or, put more constructively, it suggests that much of what counts as software on Github -- code repositories -- in actuality concerns the arrangements that people make with each and themselves in order to work with software. In this respect, the capital numbers are always also configurative numbers. There is no work on software without the 'how' of building software, the configuration work.   
 
-In this context, too, our  -- the five researchers directly involved in the research -- work on the Github API, GithubArchive datasets and the GoogleBigQuery platform was full of configurative events, themselves tending to slightly increase the capital numbers (although we only added one repository). The repository for this project contains thousands of lines of code written in Python, R and in specialized languages such as SQL (Structured Query Language)[@Metacommunities_2016] as well as tens of thousands of lines of text. According to the  Github API, user `rian39` added around 10 million lines of code and deleted 8 million, leaving a net contribution of around 2 million lines to the `metacommunities` repository during the years 2012-2016 [@Metacommunities_2016a]. While those numbers might be read as attesting to extraordinary levels of code productivity, they actually include many lines of data stored in the Github repository, alongside code, drafts of documents and configuration related information. The deletion of 8 million lines suggests that some of the main activities in the repository were changes to do with cleaning up, tidying and re-arranging files and documents in the repository.     
+
+In this context, too, our  -- the five researchers directly involved in the research -- work on the Github API, GithubArchive datasets and the GoogleBigQuery platform was full of configurative events, themselves tending to slightly increase the capital numbers (although we only added one repository to Github). The repository for this project contains thousands of lines of code written in Python, R and in specialized languages such as SQL (Structured Query Language)[@Metacommunities_2016] as well as tens of thousands of lines of text distributed across `r nrow(branches)` branches of the repository. According to the  Github API, user `rian39` added around 10 million lines of code and deleted 8 million, leaving a net contribution of around 2 million lines to the `metacommunities` repository during the years 2012-2016 [@Metacommunities_2016a]. While those numbers might be read as attesting to extraordinary levels of code productivity, they actually include many lines of data stored in the Github repository, alongside code, drafts of documents and configuration related information. The deletion of 8 million lines suggests that some of the main activities in the repository were changes to do with cleaning up, tidying and re-arranging files and documents in the repository.     
 
 ```{r bigquery, cache=TRUE, echo=FALSE}
     library(jsonlite)
@@ -276,18 +290,23 @@ In this context, too, our  -- the five researchers directly involved in the rese
     s=sum(na.omit(as.numeric(j$statistics$totalBytesProcessed)))/1e12
     print(s)
     bytes = as.numeric(j$statistics$totalBytesProcessed)
-    gbytes = bytes/1e9
     dates = as.Date(as.POSIXct(as.numeric(j$statistics$creationTime)/1000, origin="1970-01-01"))
-    df= data.frame(date = dates, vol = bytes, gB = gbytes)
-    dim(df)
-    g = ggplot(df, aes(x=date, y=gB)) + geom_point(position='dodge') + ggtitle(paste(s, ' terabytes of BigQuery processing in counting a capital number'))
-    g + ylab('Gigabytes of data processed')
-    day_df = df %>% select(date, gB) %>% group_by(date) %>% mutate(day_sum = sum(gB, na.rm=TRUE)) 
-    ggplot(day_df, aes(x=date, y=day_sum)) + geom_point() + ggtitle('Gb processes each day')
+    df= data.frame(date = dates, vol = bytes)
+    gbday = df %>% na.omit  %>% arrange((date)) %>% mutate(gbcumul = cumsum(vol/1e9)) %>% group_by(date) %>% mutate(job_count = n())
+    head(gbday)
+    dl = data.frame(x = c(as.Date('2016-07-31'), as.Date('2013-08-13')), y =c(80000,13500) , labs = c(paste(as.character(s), 'terabytes'), '13500 jobs ran overnight')) 
+    g= ggplot(gbday, aes(x=as.Date(date), y=gbcumul)) + geom_line()  + ggtitle(paste(s, ' terabytes of BigQuery processing in counting a capital number'))+ ylab('Gb of data (cumulative)') + xlab('')
+    as.character(s)
+    g = g + geom_text(data=dl, aes(x=x, y=y, label=labs, group=NULL))
+    g
 ```
 
-Perhaps this level of contribution activity to a repository suggests something important about configurative numbers in big data practice. Most of the 10 million lines add and 8 million lines deleted were configuration-related work as we -- I in particular -- sought to make sense of capital numbers such as 29 million, and tried to differentiate that sense-making from the flood of data challenges, hackathons and  other usages of the GithubArchive data that were also offering geographical, sentiment, logistic and temporal narratives about 'how people build software.  In the process of trying to re-count the capital number, we 'built software' that generated 400 or images, 100 or so data files, and around 1000 other files, or 22000 queries on GoogleBigQuery. Figure \ref{fig:bigquery} shows something of the flow of data involved in this effort.  Suchman's suggestion that configuration always concerns both composition of elements and materialising imaginaries seems particularly resonant here. Why write so much code, process so much data, create so many figures and images, and indeed organise all of this work in the sometimes maddeningly precise version control system of a `git` repository on Github? Why     
+Perhaps this level of contribution activity to a repository suggests something important about configurative numbers in big data practice. Most of the 10 million lines added and 8 million lines deleted were configuration-related work as we -- I in particular -- sought to make sense of capital numbers such as 29 million, and tried to differentiate that sense-making from the flood of data challenges, hackathons and  other usages of the GithubArchive data that were also offering geographical, sentiment, logistic and temporal narratives about 'how people build software.  In the process of trying to re-count the capital number, we 'built software' that generated 400 or images, 100 or so data files, and around 1000 other files. More than 22000 queries on GoogleBigQuery took place. Figure \ref{fig:bigquery} shows something of the flow of data involved in this effort. By mid-2016, 80 terabytes of Github data had been searched, queried, tallied, counted, sorted and arranged according the job logging supplied by the Google Compute Platform. This include one day in August 2013 where 12,000 jobs executed. It appears as a steep ascent on the left hand side of the graph. Traversing 40 terabytes, and generating a bill of around \$US2000, the events of that day  triggered a 'reaching out' from Google Compute marketing department who were interested in our 'use case.'  Why write so much code, process so much data, create so many figures and images, and indeed organise all of this work in the sometimes maddeningly precise version control system of a `git` repository on Github? 
 
 ## Conclusion
+
+Suchman's suggestion that configuration always concerns both composition of elements and materialising imaginaries seems particularly resonant here.  It takes work to get contemporary digital data and associated large numbers to do something other than add to the count of capital numbers and their platform-centred aggregates.  Configurative numbers, I have suggested, is one term for the versions of enumeration that result from  re-countings that seek to identify the composition of capital numbers, and to follow some of the imaginaries aggregating in them.    We saw how that re-counting points to many attempts to storify data flows, to  associative-imitative fluxes, and to very extensive configuration work that saturate the data stream with links to what happens elsewhere. 
+
+Where does this leave 29 million repositories? Halved by all the repositories with no more than a single event, halved again by all the repositories that are a copy of other repositories, hollowed out by all the repositories where people do not build software but use the repository for some other purpose (as a backup site for instance), millions of code repositories   remain.  Github released the full source code of 2 million repositories on GoogleBigQuery in mid-2016, perhaps reflecting the reality that the 30 million or so other repositories were not going to add new stories to the platform. 
 
 ## References
