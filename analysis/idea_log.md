@@ -132,3 +132,16 @@
 
 ## Tue Sep 20 22:45:56 BST 2016
 - starting to play with jobs from GoogleBigQuery as a way of looking at how much data have been through and what that means in terms of configuration, and its materialization
+
+
+## Sat Sep 24 11:40:54 BST 2016
+- writing queries to look at pattern of event ids in GithubArchive. Seems like they were switched on in 1 Jan 2015 again. A billion events are shown for that year. So the public events show 212,174,067. But event ids are close to a billion. (Run the query to see this differences: 9.98E+008. That suggests that almost 80% of the events are private. Could that be right? And given that they might be less 'social', what then?
+- started to repeat the same analysis using repo.ids. Quite interesting results and maybe more reliable --  
+-wrote query to get 1st 100 repos by id and look at the their activity over the last 5 years -- most or all are infrastructural elements of Github itself. 
+-wrote query to download 1st million repo.ids and then some R script in repo_census to look at how many ids are missing, and if there is any pattern in that. See repo_census/repo_ids.r
+- wrote queries and some graphs to look at rates of repo creation over all years. Seems to be really uneven at times. Maybe spam or DDos stuff?
+- plotted 10% sample of all ids again date -- seems like a smooth curve and interesting in terms of why there is a gap in the data in 2012. Downloaded some extra data to try to cover that gap. 
+- used gsutil to download table from Google storage -- best to keep it compressed. Wanted to see if data had the same 2012 gap in it.  
+- realized why the curve has so much stuff below -- the Fork and Create events I'm using to count with have the base repo.id in the repo.id field, not the new repo.id
+- TODO: redo the repo.id queries to count the ids of the  forked repos by looking in the payload field and for the CreateEvent looking in the payload field for the ref_type = repository.
+- But maybe I don't really need to do this. As long as a I have list of unique repo.ids and the first date in which they are mentioned, not for what event, then should be ok. Because a branch can only be created after a repository has been created. Will still need to check for Forkers tho, since many people just fork and do nothing else.   

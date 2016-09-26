@@ -73,37 +73,41 @@ f2p_number DESC
 
 /* Pull request events, discrete pull requests, and merged pull requests - per repo
 */
-
-SELECT payload_pull_request_base_repo_url, 
-count(payload_pull_request_base_repo_url) as PullRequestEvents, 
-count(distinct(payload_pull_request_id)) as PullRequests,
-sum(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
-FROM [publicdata:samples.github_timeline]
-WHERE type = 'PullRequestEvent' 
-GROUP BY payload_pull_request_base_repo_url
-ORDER BY PullRequests DESC
-limit 1000;
-
+SELECT
+  payload_pull_request_base_repo_url,
+  COUNT(payload_pull_request_base_repo_url) AS PullRequestEvents,
+  COUNT(DISTINCT(payload_pull_request_id)) AS PullRequests,
+  SUM(IF(payload_pull_request_merged == 'true', 1, 0)) AS MergedPullRequests,
+FROM
+  [publicdata:samples.github_timeline]
+WHERE
+  type = 'PullRequestEvent'
+GROUP BY
+  payload_pull_request_base_repo_url
+ORDER BY
+  PullRequests DESC
+LIMIT
+  1000;
 
 -- /* attempting to construct the fork-pull request table*
 -- the join method is clunky/
 
 SELECT pulltable.repository_url,forktable.fork as forks, count(type) as pullrequests
 FROM
-//left join is all the pullrequest events
+-- //left join is all the pullrequest events
     (SELECT repository_url, type FROM
     [githubarchive:github.timeline]
     WHERE type='PullRequestEvent') as pulltable
 JOIN
-//right join is just the repos with > 1000 forks
-//this limit can be changed by using JOIN EACH
+-- //right join is just the repos with > 1000 forks
+-- //this limit can be changed by using JOIN EACH
     (SELECT repository_url, count(type) as fork
     FROM [githubarchive:github.timeline]
     WHERE (type='ForkEvent')
     GROUP BY repository_url
     having fork > 1000
     order by fork desc) as forktable
-//the inner join is just repository_url
+-- //the inner join is just repository_url
 on pulltable.repository_url = forktable.repository_url
 GROUP BY pulltable.repository_url, forks
 order by forks
@@ -113,7 +117,7 @@ limit 100;
 /* much simpler way to do fork-pullrequest table
 using the sum(if ...) approach*/
 
-select repository_url, SUM(IF(type='ForkEvent', 1,0)) as fork,
+SELECT repository_url, SUM(IF(type='ForkEvent', 1,0)) as fork,
 SUM(IF(type='PullRequestEvent', 1,0)) as pullrequest
 from [githubarchive:github.timeline]
 where (type='ForkEvent') or (type='PullRequestEvent')
@@ -2926,10 +2930,9 @@ group by repo.name, week_of_year, month, year order by week_of_year asc, event d
 -- better query for top repos month by month
 -- still not quite right -- sometimes missing rankings
 
-select year, month, pos, repo.name
+SELECT year, month, pos, repo.name
 FROM (
-SELECT 
-    year, month,
+SELECT year, month,
     RANK() OVER (PARTITION BY month ORDER BY events DESC) AS pos,
     repo.name,
     events
@@ -2957,8 +2960,7 @@ ORDER BY year, month, pos
 select
   year, month, pos, repo.name
   FROM (
-  SELECT 
-year, month,
+  SELECT year, month,
 RANK() OVER (PARTITION BY month ORDER BY events DESC) AS pos,
 repo.name,
 events
@@ -2991,8 +2993,7 @@ ORDER BY year, month, pos
 
 select
 year, month, pos, repo.name, repo.url
-FROM (
-SELECT 
+FROM ( SELECT 
 year, month,
 DENSE_RANK() OVER (PARTITION BY month ORDER BY events DESC) AS pos,
 repo.name,
@@ -3164,3 +3165,120 @@ from
 -- [githubarchive:year.2014],
 [githubarchive:month.201606]
 where id IS NOT NULL
+
+--  better query to look for event id patterns
+SELECT
+  created_at,
+  id
+FROM
+  [githubarchive:year.2015]
+WHERE
+  id == (
+  SELECT
+    MIN(id) AS min
+  FROM
+    [githubarchive:year.2015])
+  OR id == (
+  SELECT
+    MAX(id)
+  FROM
+    [githubarchive:year.2015])
+
+
+-- id number analysis by year for repo.id; gives better results--
+SELECT
+  MIN(repo.id),
+  MAX(repo.id),
+  YEAR(created_at) yr
+FROM
+  [githubarchive:year.2015],
+  [githubarchive:year.2014],
+  [githubarchive:year.2013],
+  [githubarchive:year.2012],
+  [githubarchive:year.2011]
+GROUP BY
+  yr
+ORDER BY
+  yr
+
+-- get first 100 repos by id and look their activity over the years
+SELECT
+  repo.name,
+  REGEXP_EXTRACT(repo.name, r'(/\w*)') AS short,
+  repo.id,
+  COUNT(*) AS count,
+  YEAR(created_at) AS yr
+FROM
+  [githubarchive:year.2015],
+  [githubarchive:year.2014],
+  [githubarchive:year.2013],
+  [githubarchive:year.2012],
+  [githubarchive:year.2011]
+WHERE
+  repo.id BETWEEN 1
+  AND 100
+GROUP BY
+  short,
+  repo.id,
+  repo.name,
+  yr
+ORDER BY
+  repo.id,
+  yr
+
+-- get get a list of 1M repo.ids --
+SELECT
+  unique(repo.id)
+FROM
+  [githubarchive:year.2015],
+  [githubarchive:year.2014],
+  [githubarchive:year.2013],
+  [githubarchive:year.2012],
+  [githubarchive:year.2011]
+WHERE
+  repo.id BETWEEN 1
+  AND 1000000
+group by
+  repo.id
+order by repo.id
+
+-- show repo.ids by date --
+SELECT
+  repo.id AS id,
+  MIN(DATE(created_at)) AS start_date FROM
+  --   [githubarchive:year.2015],
+  --   [githubarchive:year.2014],
+  --   [githubarchive:year.2013],
+  [githubarchive:year.2012],
+  [githubarchive:year.2011]
+WHERE
+  repo.id BETWEEN 5000000
+  AND 6000000
+  AND (type == 'CreateEvent'
+    OR type == 'ForkEvent')
+GROUP BY
+  id
+ORDER BY
+  id
+
+-- get 10% sample of repo ids with creation dates
+
+SELECT
+  repo.id AS id,
+  MIN(DATE(created_at)) AS start_date,
+  IF(ABS(HASH(repo.id)) % 10 == 1, TRUE, FALSE) AS included
+FROM
+  [githubarchive:year.2015],
+  [githubarchive:year.2014],
+  [githubarchive:year.2013],
+  [githubarchive:year.2012],
+  [githubarchive:year.2011] WHERE
+  (type == 'CreateEvent'
+    OR type == 'ForkEvent')
+GROUP BY
+  id,
+  included
+HAVING
+  included = TRUE
+ORDER BY
+  id
