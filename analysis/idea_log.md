@@ -13,6 +13,9 @@
     - could also extend it to include repo name and org name
     - would need to craft search queries for different topics  -- 'docker or chef or etc.'
 
+## Mon Feb 22 14:48:22 UTC 2016
+- how would you analyse who is leaving Github? http://agateau.com/2016/github-lock-in/
+
 ## Tue Mar  8 22:05:30 GMT 2016
 
 - having Stirling piece on  'general framework for analyzing diversity' -- could redo the metacommunity argument using that ... 
