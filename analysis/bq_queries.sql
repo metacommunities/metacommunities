@@ -2805,7 +2805,7 @@ SELECT repository_url,
 	count(repository_url) AS Watches
 	FROM [githubarchive:github.timeline]
 	WHERE type = 'WatchEvent' AND repository_url = '", r, "' AND created_at > '2012-09-17 00:00:00'
-	GROUP EACH BY repository_url, date", sep = "")
+	GROUP EACH BY repository_url, date
 
 /*facebook_forks*/
 
