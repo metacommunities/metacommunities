@@ -145,3 +145,11 @@
 - realized why the curve has so much stuff below -- the Fork and Create events I'm using to count with have the base repo.id in the repo.id field, not the new repo.id
 - TODO: redo the repo.id queries to count the ids of the  forked repos by looking in the payload field and for the CreateEvent looking in the payload field for the ref_type = repository.
 - But maybe I don't really need to do this. As long as a I have list of unique repo.ids and the first date in which they are mentioned, not for what event, then should be ok. Because a branch can only be created after a repository has been created. Will still need to check for Forkers tho, since many people just fork and do nothing else.   
+
+
+
+
+## Mon Oct 10 15:35:27 BST 2016
+
+- played quite a bit on weekend with gz archive on hpo to look at flows of events around important repos -- e.g. tensorflow with its 50k watchers. Also theano is big
+ - had the idea of following the outflow of just repository across a whole range of places to see how a set of concerns are taken up .. 
