@@ -1,5 +1,25 @@
-# 29 million and counting: capital numbers and the calculative agencies of science and technology studies. 
 
+---
+title: "29 million and counting: capital numbers and  calculative agencies"
+author: "Adrian Mackenzie"
+date: "`r Sys.Date()`"
+output:
+tufte::tufte_handout: default
+citation_package: biber
+latex_engine: xelatex
+bibliography: /home/mackenza/ref_bibs/uni.bib
+link-citations: yes
+header-includes:
+    - \usepackage{setspace}
+    - \doublespacing
+---
+
+
+# Abstract
+
+This paper reports on an  attempt to re-count a single large number, in this case, the approximately 29 million code repositories on the social media platform Github. Science studies and related fields have a decades-long interest in numbers and counting, in the power-politics of numbering  and the diversity of numbering and calculative practices in science, business, health and government. Debates have recently centred on the inherent instability of enumeration in practice, the reactivity of numbers in media assemblages, the being of number, the productive falseness of numbers  or the configuration of market calculations. This attention to the specificity of numbers stands against a background of sociological debates about challenges to empirical methods posed by increasingly abundant digital enumerations. How amidst these accounts of number could STS itself work with numbers differently? Does STS have any calculative agency  amidst its field settings, documents and data sets? The paper proposes a configurative treatment of large numbers in two respects.  It  analyses the sense-making processes that practically invest in and supplement those numbers with measurements, calculations, diagrams, figures and statements relating to belonging, association, accumulation and growth. It also re-counts large numbers by paying attention to the acts of imitation, copying, cloning and duplication characteristic of digital practices, and the complex, device-specific   configurations that give rise to them. 
+
+# 29 million and counting: capital numbers and  calculative agencies
 
 At almost every point in its history, STS has taken an active interest in what numbers do, who they matter to, and how they are made. The extraordinary diversity of numbering practices studied by STS and affiliated fields include  enumerations [@Verran_2001],  measurements [@Latour_1987], prices [@Callon_2005a], risks and chance [@Porter_1996], statistics [@Hacking_1990], indices [@Nafus_2014], metrics [@Burrows_2012], percentages [@Guyer_2014], model parameters, or even computable numbers [@Mackenzie_1997b], as well as problematic and contested numbers [@Verran_2012; @Lampland_2010; @Miller_2009]. From this rich panoply of work, many lessons concerning the historical, contextual, material and political fabric of numbers can be drawn.  Crucial to our elementary senses of the multiple, numbers and numberings effloresce in reef-like growths that resist  any attempt to harmonise their essence in a single mathematical formalism such as set or number theory. STS work has not itself shied away from working with and producing numbers. We need only think of the many metrical components of actor network theorists in their work on co-word analyses of scientific literature [@Callon_1991a],   the software that Thomas Kuhn describes in the appendices to  _The Structure of Scientific Revolutions_ [@Kuhn_1996] or the ongoing scientometric strands of STS research [@Leydesdorff_2013].
 
@@ -92,6 +112,7 @@ A database purporting to contain the whole associative fabric of Github suddenly
 
 ```{r event_table,  echo=FALSE, results='markup'}
 library(xtable)
+library(knitr)
 options(xtable.comment = FALSE)
 df = read.csv('data/event_counts.csv', stringsAsFactors=FALSE)
 kable(df[df$events>0, c(1,2)], row.names=FALSE, caption='Github event counts 2012-2015')
