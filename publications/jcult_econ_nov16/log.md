@@ -32,4 +32,5 @@
 - TODO: decide what to do about Badiou -- does it help or not ... I like the idea of fragments of a multiplicity; and the idea might be that capital numbers always fragment multiples. 
 - could have a go at re-writing the abstract, see if that helps me decide what to do about the numbers ... DONE in abstract.md 
 - TODO: put small section about how capital numbers figure in social media more generally and suggest why github is an interesting case (people + things; recursive). 
-- looking at internet archive pages for Github and can see where numbers first began to appear -- seems to be around 75k in 2008. By end of 2010, people and repositories are lists: 440k people hosting over 1.3 million repos. Interesting that people host repos ... 
+- looking at internet archive pages for Github and can see where numbers first began to appear -- seems to be around 75k in 2008. By end of 2010, people and repositories are lists: 440k people hosting over 1.3 million repos. Interesting that people host repos ...
+- TODO: 1 for $0.50; 12 for $1.00; 144 for $1.50: what can you buy in a hardware store? 
