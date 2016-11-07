@@ -27,7 +27,7 @@
 - having second thoughts about sts journal submission. Might be better fit with jcultecon, but keep the methodology discussion more in the background as a piece for a methods journal. 
 - started editing paper version with a view to JCE. Will need to edit about 33 pages, so 12/day ...  
 - actually read the reports, which was hard, but probably worthwhile. Maybe the sss paper was just too confusing and perhaps not saying much about the numbers ...  But ref 4 didn't think that, and that is the most engaged review. 
-- TODO: write much more simply about what happens on gh or at least, say why it is not possible to do that. 
+- TODO: write much more simply about what happens on gh or at least, say why it is not possible to do that. Could also talk about how Github added to an existing practice, and re-configured it as a social network practice; 
 - TODO: write about data challenges as pre-competitive competitions that valorise the numbers and the data. 
 - TODO: decide what to do about Badiou -- does it help or not ... I like the idea of fragments of a multiplicity; and the idea might be that capital numbers always fragment multiples. 
 - could have a go at re-writing the abstract, see if that helps me decide what to do about the numbers ... DONE in abstract.md 
