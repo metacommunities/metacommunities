@@ -3,57 +3,31 @@ if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/R/metacommunities/publications/jcultecon_oct2016
+cd ~/R/metacommunities/publications/jcult_econ_nov16
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 abstract.md
-badd +0 log.md
-badd +0 number_jcult_econ.rmd
+badd +1 log.md
+badd +1 number_jcult_econ.rmd
 argglobal
 silent! argdel *
-argadd abstract.md
-edit log.md
+argadd log.md
+argadd number_jcult_econ.rmd
+edit number_jcult_econ.rmd
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
-wincmd _ | wincmd |
-vsplit
-2wincmd h
-wincmd w
+1wincmd h
 wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 56 + 85) / 170)
-exe 'vert 2resize ' . ((&columns * 56 + 85) / 170)
-exe 'vert 3resize ' . ((&columns * 56 + 85) / 170)
+exe 'vert 1resize ' . ((&columns * 97 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 96 + 97) / 194)
 argglobal
-setlocal fdm=manual
-setlocal fde=pandoc#folding#FoldExpr()
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=2
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-2,5fold
-2,5fold
-2
-normal! zo
-let s:l = 1 - ((0 * winheight(0) + 19) / 39)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 0
-lcd ~/R/metacommunities/publications/jcultecon_oct2016
-wincmd w
-argglobal
-edit ~/R/metacommunities/publications/jcultecon_oct2016/abstract.md
+edit number_jcult_econ.rmd
 setlocal fdm=syntax
 setlocal fde=pandoc#folding#FoldExpr()
 setlocal fmr={{{,}}}
@@ -62,17 +36,17 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 1 - ((0 * winheight(0) + 19) / 39)
+let s:l = 1 - ((0 * winheight(0) + 22) / 44)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
 normal! 0
-lcd ~/R/metacommunities/publications/jcultecon_oct2016
+lcd ~/R/metacommunities/publications/jcult_econ_nov16
 wincmd w
 argglobal
-edit ~/R/metacommunities/publications/jcultecon_oct2016/number_jcult_econ.rmd
-setlocal fdm=syntax
+edit ~/R/metacommunities/publications/jcult_econ_nov16/log.md
+setlocal fdm=expr
 setlocal fde=pandoc#folding#FoldExpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
@@ -80,17 +54,16 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 1 - ((0 * winheight(0) + 19) / 39)
+let s:l = 1 - ((0 * winheight(0) + 22) / 44)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
 normal! 0
-lcd ~/R/metacommunities/publications/jcultecon_oct2016
+lcd ~/R/metacommunities/publications/jcult_econ_nov16
 wincmd w
-exe 'vert 1resize ' . ((&columns * 56 + 85) / 170)
-exe 'vert 2resize ' . ((&columns * 56 + 85) / 170)
-exe 'vert 3resize ' . ((&columns * 56 + 85) / 170)
+exe 'vert 1resize ' . ((&columns * 97 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 96 + 97) / 194)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

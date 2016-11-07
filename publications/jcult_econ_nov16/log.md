@@ -8,6 +8,7 @@
 ## Fri  4 Nov 09:35:29 GMT 2016
 - need a todo list for this paper -- that might mean    
     - DONE:printing it
+    - DONE:read the sss reports
     - TODO:cutting it down to size
     - TODO:updating some of the methods talk
     - TODO:bringing in some of the new queries and diagrams I've done
@@ -24,4 +25,11 @@
 
 ## Mon Nov  7 09:09:05 GMT 2016
 - having second thoughts about sts journal submission. Might be better fit with jcultecon, but keep the methodology discussion more in the background as a piece for a methods journal. 
+- started editing paper version with a view to JCE. Will need to edit about 33 pages, so 12/day ...  
+- actually read the reports, which was hard, but probably worthwhile. Maybe the sss paper was just too confusing and perhaps not saying much about the numbers ...  But ref 4 didn't think that, and that is the most engaged review. 
+- TODO: write much more simply about what happens on gh or at least, say why it is not possible to do that. 
+- TODO: write about data challenges as pre-competitive competitions that valorise the numbers and the data. 
+- TODO: decide what to do about Badiou -- does it help or not ... I like the idea of fragments of a multiplicity; and the idea might be that capital numbers always fragment multiples. 
+- could have a go at re-writing the abstract, see if that helps me decide what to do about the numbers ... DONE in abstract.md 
+- TODO: put small section about how capital numbers figure in social media more generally and suggest why github is an interesting case (people + things; recursive). 
 
