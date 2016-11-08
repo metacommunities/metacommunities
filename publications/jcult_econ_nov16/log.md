@@ -33,4 +33,10 @@
 - could have a go at re-writing the abstract, see if that helps me decide what to do about the numbers ... DONE in abstract.md 
 - TODO: put small section about how capital numbers figure in social media more generally and suggest why github is an interesting case (people + things; recursive). 
 - looking at internet archive pages for Github and can see where numbers first began to appear -- seems to be around 75k in 2008. By end of 2010, people and repositories are lists: 440k people hosting over 1.3 million repos. Interesting that people host repos ...
-- TODO: 1 for $0.50; 12 for $1.00; 144 for $1.50: what can you buy in a hardware store? 
+- TODO: 1 for \$0.50; 12 for \$1.00; 144 for \$1.50: what can you buy in a hardware store? 
+
+
+## Tue  8 Nov 12:21:58 GMT 2016
+
+- read up to the conclusion in the print out. Have been cutting quite a lot of the theory -- no Tarde? No Latour? 
+- have identified a couple of places where more could be added and perhaps new minianalysis undertaken. For instance, non-code repos -- if there are 10M of them, what is happening there .. 
