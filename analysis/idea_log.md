@@ -155,3 +155,7 @@
 ## Mon Nov  7 12:24:20 GMT 2016
 
 - started work on jcultecon, but also seen some new literature on commons -- the undercommons, etc. Also skeggs article ~/archive/Skeggs-2014-The_British_Journal_of_Sociology.pdf has some useful references on commons and value. Also stuff in UNSW thesis to look at. 
+
+
+## Thu Nov 17 21:34:26 GMT 2016
+- also on open, TODO: check onlineopen.org -- has Pasquinelli, etc.  
