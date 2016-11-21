@@ -159,3 +159,7 @@
 
 ## Thu Nov 17 21:34:26 GMT 2016
 - also on open, TODO: check onlineopen.org -- has Pasquinelli, etc.  
+
+## Mon Nov 21 17:14:52 GMT 2016
+- reading MEOT, had ideas about where the coder sits in relation to ensembles. It seems that they are not inventors, operators or any of those position. What is individuate through them? How do they become part of the associated milieu of the ensemble? Would be good to clarify some of these different positions by reference to different projects on  Github. This mean a different understanding of 'social coding.'   
+
