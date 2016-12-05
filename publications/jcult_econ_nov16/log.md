@@ -40,3 +40,13 @@
 
 - read up to the conclusion in the print out. Have been cutting quite a lot of the theory -- no Tarde? No Latour? 
 - have identified a couple of places where more could be added and perhaps new minianalysis undertaken. For instance, non-code repos -- if there are 10M of them, what is happening there .. 
+
+## Mon  5 Dec 11:41:13 GMT 2016
+
+ - finally getting back to this -- spent last 3-4 weeks on facebook paper. Could I convert this paper, in the context of the 'obscure central zone' into a methods chapter for the obscure central zones project? maybe would be ok to do that. 
+ - after reading so much Simondon, find myself reframing the paper in terms of configuration and technical ensembles. I've rewritten the abstract -- see abstract.md 2nd-version
+ - Abstract: feel like this new abstract will help a bit. 
+ - DONE: set up the new blank file and start bringing bits into it. 
+ - TODO: add notes to Simondon file on obscure central zone of technical ensemble -- this will come mainly from the conclusion; 
+ - changed the title include configurations and technical ensemble
+
