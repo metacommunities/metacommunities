@@ -50,3 +50,13 @@
  - TODO: add notes to Simondon file on obscure central zone of technical ensemble -- this will come mainly from the conclusion; 
  - changed the title include configurations and technical ensemble
 
+## Tue Dec  6 10:25:41 GMT 2016
+
+- find it hard to start work Tue Dec  6 10:36:03 GMT 2016 as the time shows.
+- feel better about the obscure central zone thing, but TODO: go through the manuscript and mark all the bits of the paper that would fit that approach. In some ways, its just a re-framing of the configuration argument.   
+- but to re-write in that way will mean a new paper basically. Unless I can bring the two together -- the tightest focus on this would be to say that the capital numbers tend to compress the middle zone into what can be known from the perspective of property and work.  The data visualizations and the big data treatments try to address the assemble but are constantly realigned to the realities of capital and work. 
+- what if infrastructures have been a bit of a distraction for engagements with the technical ensemble? The technicity of the ensemble does not lie in infrastructures. It resides, as Simondon says, in combines or inter-commutativity.  
+- Tue Dec  6 12:13:26 GMT 2016 -- almost 2 hours later -- haven't done much on the paper, instead went three first 3 chapters of _Learning Javascript_ to get some sense of what is happening with Javascript, jquery, node, etc. Not sure that is very useful for focusing here.  
+- DONE: bring 1000 words across from previous version
+- ALMOST DONE: write a new intro that puts technical ensemble ahead of the number practice. 
+- github/about now says 48 million projects: DONE: put into title?
