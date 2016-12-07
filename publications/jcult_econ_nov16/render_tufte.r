@@ -1,6 +1,6 @@
 library(tufte)
 library(rmarkdown)
 library(tint)
-render('number_jcult_econ.rmd',output_format=tufte_handout())
+render('configuration_jcult_econ.rmd',output_format=tufte_handout())
 #render('lists_conversion_experience.rmd',output_format=ioslides_presentation)
 #render('lists_conversion_experience.rmd',output_format=tintPdf())

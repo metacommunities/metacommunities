@@ -58,5 +58,12 @@
 - what if infrastructures have been a bit of a distraction for engagements with the technical ensemble? The technicity of the ensemble does not lie in infrastructures. It resides, as Simondon says, in combines or inter-commutativity.  
 - Tue Dec  6 12:13:26 GMT 2016 -- almost 2 hours later -- haven't done much on the paper, instead went three first 3 chapters of _Learning Javascript_ to get some sense of what is happening with Javascript, jquery, node, etc. Not sure that is very useful for focusing here.  
 - DONE: bring 1000 words across from previous version
-- ALMOST DONE: write a new intro that puts technical ensemble ahead of the number practice. 
+- ALMOST DONE: write a new intro that links technical ensemble ahead of the number practice. 
 - github/about now says 48 million projects: DONE: put into title?
+
+
+## Wed  7 Dec 10:42:48 GMT 2016
+- trying to start again today -- late start; have done some notes on MEOT conclusion in simondon_mode_tech_1989.md . A couple of them are about the obscure central zone, but this mainly relates to the work argument. Is that enough?   
+- too busy to get much done. But trying to bring in the next section of around 1000 words to introduce the notion of configurative and capital numbers.  
+- ok, brought across the notion of capital number, so that is there 
+- TODO: bring the section on configurative numbers as riposte.
