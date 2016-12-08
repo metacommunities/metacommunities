@@ -72,4 +72,6 @@
 - distracted by javascript stuff -- see repo on reveal.js. But what I've learned from this is how close code is to the surface of things. It's not hidden away in some developers machine, its there, right behind CTRL-U on the webpage, and its doing much more. 
 - still doing a lot of pfaffing with reveal, impress.js -- playing with presentation formats. That's because it's hard to do what I need to do .. which is bring in the stuff on configurative numbers ...  
 - maybe would be good to bring in the configurative number stuff much later as 'the answer.'
+- got the part of the manuscript introducing the event -- reintroduced it in terms of ensembles, and git itself as vcs. Add a new json event and used some of the existing text to describe
+- TODO: bring in the section that describes the relation between the event and the capital number. 
 
