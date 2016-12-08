@@ -67,3 +67,9 @@
 - too busy to get much done. But trying to bring in the next section of around 1000 words to introduce the notion of configurative and capital numbers.  
 - ok, brought across the notion of capital number, so that is there 
 - TODO: bring the section on configurative numbers as riposte.
+
+## Thu  8 Dec 09:29:21 GMT 2016
+- distracted by javascript stuff -- see repo on reveal.js. But what I've learned from this is how close code is to the surface of things. It's not hidden away in some developers machine, its there, right behind CTRL-U on the webpage, and its doing much more. 
+- still doing a lot of pfaffing with reveal, impress.js -- playing with presentation formats. That's because it's hard to do what I need to do .. which is bring in the stuff on configurative numbers ...  
+- maybe would be good to bring in the configurative number stuff much later as 'the answer.'
+
