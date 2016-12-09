@@ -75,3 +75,8 @@
 - got the part of the manuscript introducing the event -- reintroduced it in terms of ensembles, and git itself as vcs. Add a new json event and used some of the existing text to describe
 - TODO: bring in the section that describes the relation between the event and the capital number. 
 
+## Fri  9 Dec 09:55:55 GMT 2016
+- moving to th Github data challenges and visualizations, etc. 
+- brought across table 1 and the counts of the data; found myself bringing more commentary from  Github blogs etc to help make sense of what is going on with the counting. 
+- brought across all the data challenge stuff, putting some in footnotes. That brings things to about 4k words (wo references). Looking at my re-counting to see what that does next. Does it help? 
+
