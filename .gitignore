@@ -17,4 +17,4 @@ all_repos*
 .httr-oauth
 .rope*
 cache/*
-cache
+*cache

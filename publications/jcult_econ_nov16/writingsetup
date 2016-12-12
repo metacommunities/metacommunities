@@ -8,26 +8,13 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 ~/R/admonitor/package.json
-badd +1 ~/.vimrc
-badd +706 ~/R/admonitor/data/ui/css/bootstrap.min.css
-badd +255 ~/R/admonitor/data/ui/css/project.css
-badd +1 ~/R/admonitor/data/ui/fonts/copperplate_becker_bold-webfont.eot
-badd +1 ~/R/admonitor/data/click-listener.js
-badd +183 ~/R/admonitor/data/facebook_pages.js
-badd +141 ~/R/admonitor/lib/data/storage.js
 badd +1 log.md
-badd +1 abstract.md
-badd +1 configuration_jcult_econ.rmd
-badd +1 number_jcult_econ.rmd
-badd +1 simondon_mode_tech_1989.md
-badd +1 ~/Documents/metacommunities/publications/jcult_econ_nov16/number_jcult_econ.rmd
-badd +1 ~/Documents/metacommunities/publications/jcult_econ_nov16/simondon_mode_tech_1989.md
-badd +1 ~/Documents/metacommunities/publications/jcult_econ_nov16/log.md
+badd +0 configuration_jcult_econ.rmd
+badd +0 number_jcult_econ.rmd
+badd +0 simondon_mode_tech_1989.md
 argglobal
 silent! argdel *
 argadd log.md
-argadd abstract.md
 argadd configuration_jcult_econ.rmd
 argadd number_jcult_econ.rmd
 argadd simondon_mode_tech_1989.md
@@ -95,7 +82,7 @@ lcd ~/R/metacommunities/publications/jcult_econ_nov16
 wincmd w
 argglobal
 edit ~/R/metacommunities/publications/jcult_econ_nov16/simondon_mode_tech_1989.md
-setlocal fdm=syntax
+setlocal fdm=expr
 setlocal fde=pandoc#folding#FoldExpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
@@ -113,7 +100,7 @@ lcd ~/R/metacommunities/publications/jcult_econ_nov16
 wincmd w
 argglobal
 edit ~/R/metacommunities/publications/jcult_econ_nov16/log.md
-setlocal fdm=syntax
+setlocal fdm=expr
 setlocal fde=pandoc#folding#FoldExpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
@@ -129,7 +116,6 @@ normal! zt
 normal! 0
 lcd ~/R/metacommunities/publications/jcult_econ_nov16
 wincmd w
-2wincmd w
 exe '1resize ' . ((&lines * 21 + 22) / 44)
 exe 'vert 1resize ' . ((&columns * 85 + 85) / 170)
 exe '2resize ' . ((&lines * 20 + 22) / 44)
