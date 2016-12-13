@@ -74,6 +74,16 @@
 ## Mon Dec 12 09:28:02 GMT 2016
 - worried about turning to my own counts -- this is not meant to be a methods paper, yet it risks doing that if it goes with the counting too much. 
 - DONE  I haven't brought in configurative numbers yet, and that needs to be done. And it feels more substantial than just a methods piece ...  
-- wrote a section on enumerative configurations -- does that need to be put at the centre of things? Not convinced by it -- see line 144 -- because it seems like the capital number, which is a single number, is now treated like an ensemble.  Included the hardware store riddle, which helped. 
+- wrote a section on configurative enumerations -- does that need to be put at the centre of things? Not convinced by it -- see line 144 -- because it seems like the capital number, which is a single number, is now treated like an ensemble.  Included the hardware store riddle, which helped. 
 - brought in the first figure and talked about it in more detail. Hopefully the triviality of the name counting won't be lost too much; but I can strengthen it a bit. Feel better after starting to re-write it a bit. 
-- TODO: begin conclusion by talking about the conversion from capital numbers to enumerative configurations. 
+- TODO: begin conclusion by talking about the conversion from capital numbers to configurative enumerations. 
+
+
+## Tue Dec 13 09:06:50 GMT 2016
+
+- nervous about resuming with this, because this is where I actually have to say something useful. ... 
+- wrote about the forks a bit and then ran rmarkdown html a couple of times to see how whether it works. Then got distracted by stuff about journals ...  
+- also did the bootstrap and android fork figures, and tried to frame theme as commutative processes in the technical ensemble. Not sure good that is, but have now set up the next section on 'the generalization of configuration' I want to say -- what if most of what is going on here is configuration ... that configuration is becoming a primary technical process, because it is the main form of concretisation that technical ensembles require today... 
+- suggests what I'm doing more generally in this paper is taking maximum, critical, extreme, outlier, typical and counter-intuitive cases as the basis for recounting. 
+- DONE: bring in eclipse and dot repos as final examples -- they are the final section of the capital numbers; having done that, now re-writing to say less and more.
+- TODO: finish the discussion of dotfiles with the point that the implicit configuration work is much wider than this; and that it is this work that allows the ensemble to take on consistency, etc.  
