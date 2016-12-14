@@ -3,30 +3,30 @@ if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/R/metacommunities/publications/jcult_econ_nov16
+cd ~/Documents/metacommunities/publications/jcult_econ_nov16
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 log.md
-badd +0 configuration_jcult_econ.rmd
-badd +0 number_jcult_econ.rmd
-badd +0 simondon_mode_tech_1989.md
+badd +376 ~/.vimrc
+badd +94 log.md
+badd +1 configuration_jcult_econ.rmd
+badd +1 number_jcult_econ.rmd
+badd +1 simondon_mode_tech_1989.md
+badd +0 ~/R/metacommunities/publications/jcult_econ_nov16/number_jcult_econ.rmd
+badd +1 ~/R/metacommunities/publications/jcult_econ_nov16/simondon_mode_tech_1989.md
+badd +1 ~/R/metacommunities/publications/jcult_econ_nov16/log.md
 argglobal
 silent! argdel *
 argadd log.md
-argadd configuration_jcult_econ.rmd
-argadd number_jcult_econ.rmd
 argadd simondon_mode_tech_1989.md
+argadd number_jcult_econ.rmd
+argadd configuration_jcult_econ.rmd
 edit configuration_jcult_econ.rmd
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
 1wincmd h
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
 wincmd w
 wincmd _ | wincmd |
 split
@@ -36,14 +36,11 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 21 + 22) / 44)
-exe 'vert 1resize ' . ((&columns * 85 + 85) / 170)
+exe 'vert 1resize ' . ((&columns * 84 + 84) / 169)
 exe '2resize ' . ((&lines * 20 + 22) / 44)
-exe 'vert 2resize ' . ((&columns * 85 + 85) / 170)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 169)
 exe '3resize ' . ((&lines * 21 + 22) / 44)
-exe 'vert 3resize ' . ((&columns * 84 + 85) / 170)
-exe '4resize ' . ((&lines * 20 + 22) / 44)
-exe 'vert 4resize ' . ((&columns * 84 + 85) / 170)
+exe 'vert 3resize ' . ((&columns * 84 + 84) / 169)
 argglobal
 edit configuration_jcult_econ.rmd
 setlocal fdm=syntax
@@ -54,16 +51,16 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 1 - ((0 * winheight(0) + 10) / 21)
+let s:l = 1 - ((0 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
 normal! 0
-lcd ~/R/metacommunities/publications/jcult_econ_nov16
+lcd ~/Documents/metacommunities/publications/jcult_econ_nov16
 wincmd w
 argglobal
-edit ~/R/metacommunities/publications/jcult_econ_nov16/number_jcult_econ.rmd
+edit ~/Documents/metacommunities/publications/jcult_econ_nov16/simondon_mode_tech_1989.md
 setlocal fdm=syntax
 setlocal fde=pandoc#folding#FoldExpr()
 setlocal fmr={{{,}}}
@@ -77,12 +74,12 @@ if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
-normal! 0
-lcd ~/R/metacommunities/publications/jcult_econ_nov16
+normal! 02|
+lcd ~/Documents/metacommunities/publications/jcult_econ_nov16
 wincmd w
 argglobal
-edit ~/R/metacommunities/publications/jcult_econ_nov16/simondon_mode_tech_1989.md
-setlocal fdm=expr
+edit ~/Documents/metacommunities/publications/jcult_econ_nov16/log.md
+setlocal fdm=manual
 setlocal fde=pandoc#folding#FoldExpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
@@ -90,40 +87,35 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 1 - ((0 * winheight(0) + 10) / 21)
+silent! normal! zE
+1,6fold
+7,21fold
+22,33fold
+34,37fold
+38,45fold
+46,55fold
+56,61fold
+62,68fold
+69,73fold
+74,81fold
+82,91fold
+92,94fold
+1,94fold
+1
+normal! zo
+let s:l = 94 - ((7 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+94
 normal! 0
-lcd ~/R/metacommunities/publications/jcult_econ_nov16
+lcd ~/Documents/metacommunities/publications/jcult_econ_nov16
 wincmd w
-argglobal
-edit ~/R/metacommunities/publications/jcult_econ_nov16/log.md
-setlocal fdm=expr
-setlocal fde=pandoc#folding#FoldExpr()
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=2
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-let s:l = 1 - ((0 * winheight(0) + 10) / 20)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 0
-lcd ~/R/metacommunities/publications/jcult_econ_nov16
-wincmd w
-exe '1resize ' . ((&lines * 21 + 22) / 44)
-exe 'vert 1resize ' . ((&columns * 85 + 85) / 170)
+exe 'vert 1resize ' . ((&columns * 84 + 84) / 169)
 exe '2resize ' . ((&lines * 20 + 22) / 44)
-exe 'vert 2resize ' . ((&columns * 85 + 85) / 170)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 169)
 exe '3resize ' . ((&lines * 21 + 22) / 44)
-exe 'vert 3resize ' . ((&columns * 84 + 85) / 170)
-exe '4resize ' . ((&lines * 20 + 22) / 44)
-exe 'vert 4resize ' . ((&columns * 84 + 85) / 170)
+exe 'vert 3resize ' . ((&columns * 84 + 84) / 169)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
