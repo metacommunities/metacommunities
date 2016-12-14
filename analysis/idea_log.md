@@ -148,3 +148,21 @@
 - realized why the curve has so much stuff below -- the Fork and Create events I'm using to count with have the base repo.id in the repo.id field, not the new repo.id
 - TODO: redo the repo.id queries to count the ids of the  forked repos by looking in the payload field and for the CreateEvent looking in the payload field for the ref_type = repository.
 - But maybe I don't really need to do this. As long as a I have list of unique repo.ids and the first date in which they are mentioned, not for what event, then should be ok. Because a branch can only be created after a repository has been created. Will still need to check for Forkers tho, since many people just fork and do nothing else.   
+
+## Mon Oct 10 15:35:27 BST 2016
+
+- played quite a bit on weekend with gz archive on hpo to look at flows of events around important repos -- e.g. tensorflow with its 50k watchers. Also theano is big
+ - had the idea of following the outflow of just repository across a whole range of places to see how a set of concerns are taken up .. 
+
+
+## Mon Nov  7 12:24:20 GMT 2016
+
+- started work on jcultecon, but also seen some new literature on commons -- the undercommons, etc. Also skeggs article ~/archive/Skeggs-2014-The_British_Journal_of_Sociology.pdf has some useful references on commons and value. Also stuff in UNSW thesis to look at. 
+
+
+## Thu Nov 17 21:34:26 GMT 2016
+- also on open, TODO: check onlineopen.org -- has Pasquinelli, etc.  
+
+## Mon Nov 21 17:14:52 GMT 2016
+- reading MEOT, had ideas about where the coder sits in relation to ensembles. It seems that they are not inventors, operators or any of those position. What is individuate through them? How do they become part of the associated milieu of the ensemble? Would be good to clarify some of these different positions by reference to different projects on  Github. This mean a different understanding of 'social coding.'   
+
