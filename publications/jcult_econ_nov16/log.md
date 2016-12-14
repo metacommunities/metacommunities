@@ -78,7 +78,6 @@
 - brought in the first figure and talked about it in more detail. Hopefully the triviality of the name counting won't be lost too much; but I can strengthen it a bit. Feel better after starting to re-write it a bit. 
 - TODO: begin conclusion by talking about the conversion from capital numbers to configurative enumerations. 
 
-
 ## Tue Dec 13 09:06:50 GMT 2016
 
 - nervous about resuming with this, because this is where I actually have to say something useful. ... 
@@ -86,12 +85,13 @@
 - also did the bootstrap and android fork figures, and tried to frame theme as commutative processes in the technical ensemble. Not sure good that is, but have now set up the next section on 'the generalization of configuration' I want to say -- what if most of what is going on here is configuration ... that configuration is becoming a primary technical process, because it is the main form of concretisation that technical ensembles require today... 
 - suggests what I'm doing more generally in this paper is taking maximum, critical, extreme, outlier, typical and counter-intuitive cases as the basis for recounting. 
 - DONE: bring in eclipse and dot repos as final examples -- they are the final section of the capital numbers; having done that, now re-writing to say less and more.
-- TODO: finish the discussion of dotfiles with the point that the implicit configuration work is much wider than this; and that it is this work that allows the ensemble to take on consistency, etc.  
+- DONE: finish the discussion of dotfiles with the point that the implicit configuration work is much wider than this; and that it is this work that allows the ensemble to take on consistency, etc.  
 
 
 ## Wed 14 Dec 11:11:41 GMT 2016
 - just starting now due to other stuff. Can I swing this dotfile/configuration stuff around to the technical ensemble enough? Feel like I'm drawing a long bow here ...
 - have written a bit about dotfile stuff, not sure how good it is. TODO: check dotfile discussion makes sense
-- TODO: bring bits of the conclusion in if they are any good
+- DONE: bring bits of the conclusion in if they are any good
+- TODO: rewrite conclusion
 
 
