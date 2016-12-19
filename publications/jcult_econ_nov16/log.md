@@ -100,3 +100,4 @@
 - looking at the conclusion from sss paper -- not sure if there is much I can use. 
 - brought some of the conclusion in. And working on saying what I think about Github.   
 - TODO: try to write something about the specificity of Github in this project. 
+- TODO: add in some broadly relevant literature -- Bratton on stack; Suchman on re-configuration, Gillespie et al on media; perhaps something on infrastructure -- from handbook! 
