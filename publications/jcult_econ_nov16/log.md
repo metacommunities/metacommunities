@@ -99,3 +99,4 @@
 - I've worked on this for 13 sessions. I guess they are roughly 2 hours each. So 26-30 hours work on it so far. Yikes, seems a lot ... 
 - looking at the conclusion from sss paper -- not sure if there is much I can use. 
 - brought some of the conclusion in. And working on saying what I think about Github.   
+- TODO: try to write something about the specificity of Github in this project. 
