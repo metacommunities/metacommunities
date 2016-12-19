@@ -111,7 +111,7 @@
         group by repo.url,yr,wk
         having cnt>100
         order by yr, wk, cnt desc 
-        limit 200$
+        limit 200
 
 - would also be able to engage with Bratton's idea of **'stack'** -- look at Docker, Travis, OpenStack, Jenkins, kubernetes, etc.
 
@@ -138,7 +138,7 @@
 - writing queries to look at pattern of event ids in GithubArchive. Seems like they were switched on in 1 Jan 2015 again. A billion events are shown for that year. So the public events show 212,174,067. But event ids are close to a billion. (Run the query to see this differences: 9.98E+008. That suggests that almost 80% of the events are private. Could that be right? And given that they might be less 'social', what then?
 - started to repeat the same analysis using repo.ids. Quite interesting results and maybe more reliable --  
 -wrote query to get 1st 100 repos by id and look at the their activity over the last 5 years -- most or all are infrastructural elements of Github itself. 
--wrote query to download 1st million repo.ids and then some R script in repo_census to look at how many ids are missing, and if there is any pattern in that. See repo_census/repo_ids.r
+-wrote query to download 1st million repo.ids and then some R script in repo_census to look at how many ids are missing, and if there is any pattern in that. See **analysis/repo_census/repo_ids.r**
 - wrote queries and some graphs to look at rates of repo creation over all years. Seems to be really uneven at times. Maybe spam or DDos stuff?
 - plotted 10% sample of all ids again date -- seems like a smooth curve and interesting in terms of why there is a gap in the data in 2012. Downloaded some extra data to try to cover that gap. 
 - used gsutil to download table from Google storage -- best to keep it compressed. Wanted to see if data had the same 2012 gap in it.  
@@ -151,11 +151,9 @@
 - played quite a bit on weekend with gz archive on hpo to look at flows of events around important repos -- e.g. tensorflow with its 50k watchers. Also theano is big
  - had the idea of following the outflow of just repository across a whole range of places to see how a set of concerns are taken up .. 
 
-
 ## Mon Nov  7 12:24:20 GMT 2016
 
 - started work on jcultecon, but also seen some new literature on commons -- the undercommons, etc. Also skeggs article ~/archive/Skeggs-2014-The_British_Journal_of_Sociology.pdf has some useful references on commons and value. Also stuff in UNSW thesis to look at. 
-
 
 ## Thu Nov 17 21:34:26 GMT 2016
 - also on open, TODO: check onlineopen.org -- has Pasquinelli, etc.  
@@ -163,3 +161,6 @@
 ## Mon Nov 21 17:14:52 GMT 2016
 - reading MEOT, had ideas about where the coder sits in relation to ensembles. It seems that they are not inventors, operators or any of those position. What is individuate through them? How do they become part of the associated milieu of the ensemble? Would be good to clarify some of these different positions by reference to different projects on  Github. This mean a different understanding of 'social coding.'   
 
+## Mon 19 Dec 2016 11:28:46 GMT
+- news accounts of  Github losing millions see [@Newcomer_2016] -- the de-centralised workforce is costing too much! Billboards going up in SF. Also the rise of the competitors -- gitlab, bitbucket -- more focused on corporate;   
+- also GoogleComputer has announced all the stackoverflow data is now on GoogleBigQuery
