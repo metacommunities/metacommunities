@@ -4,6 +4,8 @@ author: "Adrian Mackenzie"
 date: "`r Sys.Date()`"
 output:
     tufte::tufte_handout: default
+    bookdown::tufte_html:
+        toc: true
 citation_package: biber
 latex_engine: xelatex
 bibliography: /home/mackenza/ref_bibs/uni.bib
@@ -24,7 +26,7 @@ An orientation and attunement to configuration, the paper suggests, provides an 
 
 ## Introduction
 
-The reality of technical ensembles is difficult to engage with sociologically. At macro-scale, large  technical ensembles are highly prominent forms of organisation of economic and cultural life. We need only think of Facebook with 1.6 billion users as an example of a technical ensemble.  Its  effects on work, sociality, political  or cultural life are widely discussed and debated.  At the micro-scale of individual experiences, such platforms largely disappear as ensembles, even as their interfaces and their terminals absorb parts of people's lives in on-screen attention. The central zones of technical ensembles, however, remain largely obscure.    Concepts of infrastructure, device, media and assemblage struggle for analytic purchase on the central zone of technical ensembles, a zone where combinations of sub-ensembles, machines, platforms, tools, processes of invention, practices of work, technical, geographical, social and energetic materialities entwine in manifold ways.  Importantly, large technical ensembles have temporalities of concretisation and abstraction, of oriented mutations and adaptation, that cannot be easily conceptualised in terms of tools, machine or infrastructures. The ensembles adhere to collective and social order that is not hierarchically organised, nor purely lateral flow. Today, their associative, imitative and often highly layered fabric owes much to the forms of software development or coding  woven through them. 
+The reality of technical ensembles is difficult to engage with sociologically. At macro-scale, large  technical ensembles are highly prominent forms of organisation of economic and cultural life. We need only think of Facebook with 1.6 billion users as an example of a technical ensemble.  Its  effects on work, sociality, political  or cultural life are widely discussed and debated.  At the micro-scale of individual experiences, such platforms largely disappear as ensembles, even as their interfaces and their terminals absorb parts of people's lives in on-screen attention. The central zones of technical ensembles, however, remain largely obscure. Concepts of infrastructure, device, media and assemblage struggle for analytic purchase on the central zone of technical ensembles, a zone where combinations of sub-ensembles, machines, platforms, tools, processes of invention, practices of work, technical, geographical, social and energetic materialities entwine in manifold ways.  Importantly, large technical ensembles have temporalities of concretisation and abstraction, of oriented mutations and adaptation, that cannot be easily conceptualised in terms of tools, machine or infrastructures. The ensembles adhere to collective and social order that is not hierarchically organised, nor purely lateral flow. Today, their associative, imitative and often highly layered fabric owes much to the forms of software development or coding  woven through them. 
 
 The difficulty of engaging with technical ensembles stems, if Gilbert Simondon is right, from the way in which the reality of technical objects has increasingly crystallised in collections of technical elements such as tools and machines [@Simondon_1989, 81]. In these collections, the reality of the ensemble can be expressed neither in the figure of the proprietor, the executive or chief operator (which in the case of Facebook would be  Mark Zuckerberg), nor in the figure of the myriad workers and users attached to the ensemble (who in the case of Facebook could well be any reader, whether they use Facebook or not [@Marshall_2016]). Neither property nor labour  access the configured and concrete operational reality of the technical ensemble, according to Simondon, because they both tend to treat the ensemble as an individual technical object, not as an ensemble or  as a mutable configuration, and mold perceptions of the technical ensemble according to either the utility or exchange value. 
 
@@ -112,7 +114,7 @@ Github, like many contemporary  technical ensembles, tracks and measures everyth
 
 During 2012-2014 Github organised 'data challenges' [@Github_2013] based on the GithubArchive event data. It invited entrants to these challenges to use the data to make sense of what was happening on Github. We could these data challenges from the perspective of capital numbers:  they occasion practical re-countings of the data that elaborate the capital numbers with greater mobility, value and media or inscriptive form. Given the technical hurdles of working with large amounts of Github data, most entrants to the competitions were themselves developers or data scientists. 
 
-```{r osrc, fig.cap='The Open Source Report Card'}
+```{r osrc, fig.cap='The Open Source Report Card', echo=FALSE}
     library(knitr)
     include_graphics('figure/osrc.png', auto_pdf=TRUE)
 ```
@@ -123,7 +125,7 @@ In response to the Github Data Challenge in 2012, people looked for feelings or 
 
 The capital numbers associated with Github also begin to acquire a geography through the GithubArchive data. Many entrants mapped coders and repositories by geographic location. The  mapping of Github contributions by location performed by David Fischer (http://davidfischer.github.io/gdc2/#languages/All) is typical in that it too counts events, but this time puts the emphasis on the geography of the 'top' repositories, coders and their programming languages [@Fischer_2013a]. 
 
-```{r octoboard, fig.cap='Octoboard: Github activity dashboard '}
+```{r octoboard, fig.cap='Octoboard: Github activity dashboard', echo=FALSE}
     include_graphics('figure/octoboard.png', auto_pdf=TRUE)
 ```
 
@@ -180,7 +182,7 @@ To further expand our sense of how copying and related forms of imitation drive 
 
 ## Extreme repositories and the generalization of configuration
 
-```{r repo_names, echo=FALSE, cache=TRUE}
+```{r repo-names, echo=FALSE, cache=TRUE}
 knit_hooks$set(inline = function(x) {
   prettyNum(x, big.mark=" ")
   })
