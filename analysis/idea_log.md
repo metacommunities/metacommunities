@@ -13,6 +13,9 @@
     - could also extend it to include repo name and org name
     - would need to craft search queries for different topics  -- 'docker or chef or etc.'
 
+## Mon Feb 22 14:48:22 UTC 2016
+- how would you analyse who is leaving Github? http://agateau.com/2016/github-lock-in/
+
 ## Tue Mar  8 22:05:30 GMT 2016
 
 - having Stirling piece on  'general framework for analyzing diversity' -- could redo the metacommunity argument using that ... 
@@ -160,6 +163,10 @@
 
 ## Mon Nov 21 17:14:52 GMT 2016
 - reading MEOT, had ideas about where the coder sits in relation to ensembles. It seems that they are not inventors, operators or any of those position. What is individuate through them? How do they become part of the associated milieu of the ensemble? Would be good to clarify some of these different positions by reference to different projects on  Github. This mean a different understanding of 'social coding.'   
+
+## Wed 14 Dec 14:13:12 GMT 2016
+- actually some of the MEOT ideas have gone into the number paper, but could develop them more fully.
+- also been looking at git internals -- for instance from https://www.git-scm.com/book/en/v2/Git-Internals-Git-References -- this is really useful to understand how things are put together. Amazingly pervasive use of hash functions, and trees. They structure everything it seems. Could develop some digital materiality argument around the hash function perhaps. A low-level account of git would be very geeky ... 
 
 ## Mon 19 Dec 2016 11:28:46 GMT
 - news accounts of  Github losing millions see [@Newcomer_2016] -- the de-centralised workforce is costing too much! Billboards going up in SF. Also the rise of the competitors -- gitlab, bitbucket -- more focused on corporate;   
