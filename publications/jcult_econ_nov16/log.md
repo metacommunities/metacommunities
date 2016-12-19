@@ -101,3 +101,4 @@
 - brought some of the conclusion in. And working on saying what I think about Github.   
 - TODO: try to write something about the specificity of Github in this project. 
 - TODO: add in some broadly relevant literature -- Bratton on stack; Suchman on re-configuration, Gillespie et al on media; perhaps something on infrastructure -- from handbook! 
+- TODO: add in idea that Github is no mere example  -- the fact that we know little of it despite its importance suggests something more is going on
