@@ -2918,7 +2918,7 @@ where payload_commit_msg != "null" and regexp_match(payload_commit_msg, 'virtual
 SELECT  count(distinct(actor)) as number_of_actors, count(distinct(repository_url)) AS number_of_repos
 FROM  [githubarchive:github.timeline]
 
--- /*trying to look at top repositories changing month by month
+-- /*trying to look at top repositories changing month by month*/
 -- this creates a reasonable list for a year
 
 select repo.name, event, week_of_year, month, year from 
