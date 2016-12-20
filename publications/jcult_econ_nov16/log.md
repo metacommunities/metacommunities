@@ -101,4 +101,13 @@
 - brought some of the conclusion in. And working on saying what I think about Github.   
 - TODO: try to write something about the specificity of Github in this project. 
 - TODO: add in some broadly relevant literature -- Bratton on stack; Suchman on re-configuration, Gillespie et al on media; perhaps something on infrastructure -- from handbook! 
-- TODO: add in idea that Github is no mere example  -- the fact that we know little of it despite its importance suggests something more is going on
+- DONE: add in idea that Github is no mere example  -- the fact that we know little of it despite its importance suggests something more is going on
+
+## Tue 20 Dec 10:10:16 GMT 2016
+- lined up a set of books on my shelves at home -- kelty, coleman, suchman, gillespie, lazarratto, bratton, bryant, -- and could extend with Latour (aramis), and a few others like Bowker. These are meant to address the todo from yesterday. How much effort?   Read Lucy on configuration; or reconfiguration -- its quite hard to pin her down  on what configuration does ... But it would be a good readership to have in mind.  
+- I've put some references in the introduction to that list;
+- found myself re-ordering the introduction to put the number back at the top. Otherwise I have to highlight the technical ensemble right throughout. 
+- TODO: the introduction needs re-shaping to flow better - start from HERE in file i.e. line 32
+- TODO: write a note saying that it would be possible to work with other identifiers; 
+ 
+
