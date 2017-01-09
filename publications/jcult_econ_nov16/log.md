@@ -110,4 +110,6 @@
 - TODO: the introduction needs re-shaping to flow better - start from HERE in file i.e. line 32
 - TODO: write a note saying that it would be possible to work with other identifiers; 
  
-
+## Mon 09 Jan 2017 11:08:03 GMT
+- starting work for the first time this year, but not early in the morning -- great to have these notes to work from, because its hard to remember what I was meant to be saying. 
+- slightly daunting todo list -- not sure how many of these I can do. Also I can't remember how polished the paper is. 
