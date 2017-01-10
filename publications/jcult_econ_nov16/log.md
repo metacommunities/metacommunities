@@ -7,7 +7,7 @@
 ## Fri 4 Nov 09:35:29 GMT 2016
 - DONE:printing it - ok, formatting for printing -- not so easy! and printed it
 - DONE:read the sss reports
-- TODO:cutting it down to size
+- DONE:cutting it down to size
 - TODO:updating some of the methods talk
 - TODO:bringing in some of the new queries and diagrams I've done
 - TODO:adding a few notes on the massive ddos
@@ -24,7 +24,7 @@
 - started editing paper version with a view to JCE. Will need to edit about 33 pages, so 12/day ...  
 - actually read the reports, which was hard, but probably worthwhile. Maybe the sss paper was just too confusing and perhaps not saying much about the numbers ...  But ref 4 didn't think that, and that is the most engaged review. 
 - DONE: write much more simply about what happens on gh or at least, say why it is not possible to do that. Could also talk about how Github added to an existing practice, and re-configured it as a social network practice; 
-- TODO: write about data challenges as pre-competitive competitions that valorise the numbers and the data. 
+- DONE: write about data challenges as pre-competitive competitions that valorise the numbers and the data. 
 - DONE: decide what to do about Badiou -- does it help or not ... I like the idea of fragments of a multiplicity; and the idea might be that capital numbers always fragment multiples. 
 - could have a go at re-writing the abstract, see if that helps me decide what to do about the numbers ... DONE in abstract.md 
 - TODO: put small section about how capital numbers figure in social media more generally and suggest why github is an interesting case (people + things; recursive). 
@@ -107,9 +107,15 @@
 - lined up a set of books on my shelves at home -- kelty, coleman, suchman, gillespie, lazarratto, bratton, bryant, -- and could extend with Latour (aramis), and a few others like Bowker. These are meant to address the todo from yesterday. How much effort?   Read Lucy on configuration; or reconfiguration -- its quite hard to pin her down  on what configuration does ... But it would be a good readership to have in mind.  
 - I've put some references in the introduction to that list;
 - found myself re-ordering the introduction to put the number back at the top. Otherwise I have to highlight the technical ensemble right throughout. 
-- TODO: the introduction needs re-shaping to flow better - start from HERE in file i.e. line 32
+- DONE: the introduction needs re-shaping to flow better - start from HERE in file i.e. line 32
 - TODO: write a note saying that it would be possible to work with other identifiers; 
  
 ## Mon 09 Jan 2017 11:08:03 GMT
 - starting work for the first time this year, but not early in the morning -- great to have these notes to work from, because its hard to remember what I was meant to be saying. 
 - slightly daunting todo list -- not sure how many of these I can do. Also I can't remember how polished the paper is. 
+
+## Tue 10 Jan 2017 09:22:47 GMT
+- merged big data ethnography chapter to get scripts for plots.  
+- extracted a list of todos to help me look at what needs to be done. Here's the line: grep 'TODO' % > todo.
+- working on the introduction again -- it seems clunky because it moves between number and technical ensemble. What can I do about that?
+- TODO: align the conclusion with the introduction
