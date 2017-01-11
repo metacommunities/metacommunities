@@ -10,7 +10,7 @@
 - DONE:cutting it down to size
 - TODO:updating some of the methods talk
 - TODO:bringing in some of the new queries and diagrams I've done
-- TODO:adding a few notes on the massive ddos
+- DONE:adding a few notes on the massive ddos
 - DONE: work out a good title
 - DONE: check out recent jcultecon papers -- the virtual si on digital is good starting point http://explore.tandfonline.com/page/ah/journal-of-cultural-economy-digital-world; should refer to articles by Marres & Fish, and possibly some of the stuff on markets; e.g. Callon or Deville on attachments? 
 - Did a search on number, which led to quite a lot of results, but nothing related particularly to the re-counting work I'm proposing. How can I narrow this down? If this was a contribution to STS, then how would keep the method stuff. But JCE, it seems like the attachment, affective, re-counting, etc ideas would be better. In that case, however, where does the counting work I suggest fit? Is counting a method we should adopt more?     
@@ -27,7 +27,7 @@
 - DONE: write about data challenges as pre-competitive competitions that valorise the numbers and the data. 
 - DONE: decide what to do about Badiou -- does it help or not ... I like the idea of fragments of a multiplicity; and the idea might be that capital numbers always fragment multiples. 
 - could have a go at re-writing the abstract, see if that helps me decide what to do about the numbers ... DONE in abstract.md 
-- TODO: put small section about how capital numbers figure in social media more generally and suggest why github is an interesting case (people + things; recursive). 
+- DONE: put small section about how capital numbers figure in social media more generally and suggest why github is an interesting case (people + things; recursive). 
 - looking at internet archive pages for Github and can see where numbers first began to appear -- seems to be around 75k in 2008. By end of 2010, people and repositories are lists: 440k people hosting over 1.3 million repos. Interesting that people host repos ...
 - DONE: 1 for \$0.50; 12 for \$1.00; 144 for \$1.50: what can you buy in a hardware store? 
 
@@ -116,6 +116,11 @@
 
 ## Tue 10 Jan 2017 09:22:47 GMT
 - merged big data ethnography chapter to get scripts for plots.  
-- extracted a list of todos to help me look at what needs to be done. Here's the line: grep 'TODO' % > todo.
+- extracted a list of todos to help me look at what needs to be done. Here's the line: grep 'TODO' % > todo.md
 - working on the introduction again -- it seems clunky because it moves between number and technical ensemble. What can I do about that?
-- TODO: align the conclusion with the introduction
+- DONE: align the conclusion with the introduction
+
+## Wed 11 Jan 2017 09:15:50 GMT
+- hard to start today ...working on the conclusion, checking it maps onto the introduction.   
+-reordered the conclusion quite a lot and think its ok. Also re-did the abstract in the same vein. 
+-TODO: go through the rest of the todos marking key ones ... 
