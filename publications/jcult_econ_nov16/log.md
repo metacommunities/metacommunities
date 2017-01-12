@@ -8,7 +8,7 @@
 - DONE:printing it - ok, formatting for printing -- not so easy! and printed it
 - DONE:read the sss reports
 - DONE:cutting it down to size
-- TODO:updating some of the methods talk
+- MUSTDONE:updating some of the methods talk
 - TODO:bringing in some of the new queries and diagrams I've done
 - DONE:adding a few notes on the massive ddos
 - DONE: work out a good title
@@ -40,12 +40,12 @@
 - after reading so much Simondon, find myself reframing the paper in terms of configuration and technical ensembles. I've rewritten the abstract -- see abstract.md 2nd-version
 - Abstract: feel like this new abstract will help a bit. 
 - DONE: set up the new blank file and start bringing bits into it. 
-- TODO: add notes to Simondon file on obscure central zone of technical ensemble -- this will come mainly from the conclusion; 
+- DONE: add notes to Simondon file on obscure central zone of technical ensemble -- this will come mainly from the conclusion; 
 - changed the title include configurations and technical ensemble
 
 ## Tue 6 Dec 10:25:41 GMT 2016
 - find it hard to start work Tue Dec  6 10:36:03 GMT 2016 as the time shows.
-- feel better about the obscure central zone thing, but TODO: go through the manuscript and mark all the bits of the paper that would fit that approach. In some ways, its just a re-framing of the configuration argument.   
+- feel better about the obscure central zone thing, but DONE: go through the manuscript and mark all the bits of the paper that would fit that approach. In some ways, its just a re-framing of the configuration argument.   
 - but to re-write in that way will mean a new paper basically. Unless I can bring the two together -- the tightest focus on this would be to say that the capital numbers tend to compress the middle zone into what can be known from the perspective of property and work.  The data visualizations and the big data treatments try to address the assemble but are constantly realigned to the realities of capital and work. 
 - what if infrastructures have been a bit of a distraction for engagements with the technical ensemble? The technicity of the ensemble does not lie in infrastructures. It resides, as Simondon says, in combines or inter-commutativity.  
 - Tue Dec  6 12:13:26 GMT 2016 -- almost 2 hours later -- haven't done much on the paper, instead went three first 3 chapters of _Learning Javascript_ to get some sense of what is happening with Javascript, jquery, node, etc. Not sure that is very useful for focusing here.  
@@ -64,7 +64,7 @@
 - still doing a lot of pfaffing with reveal, impress.js -- playing with presentation formats. That's because it's hard to do what I need to do .. which is bring in the stuff on configurative numbers ...  
 - maybe would be good to bring in the configurative number stuff much later as 'the answer.'
 - got the part of the manuscript introducing the event -- reintroduced it in terms of ensembles, and git itself as vcs. Add a new json event and used some of the existing text to describe
-- TODO: bring in the section that describes the relation between the event and the capital number. 
+- DONE: bring in the section that describes the relation between the event and the capital number. 
 
 ## Fri 9 Dec 09:55:55 GMT 2016
 - moving to th Github data challenges and visualizations, etc. 
@@ -76,7 +76,7 @@
 - DONE  I haven't brought in configurative numbers yet, and that needs to be done. And it feels more substantial than just a methods piece ...  
 - wrote a section on configurative enumerations -- does that need to be put at the centre of things? Not convinced by it -- see line 144 -- because it seems like the capital number, which is a single number, is now treated like an ensemble.  Included the hardware store riddle, which helped. 
 - brought in the first figure and talked about it in more detail. Hopefully the triviality of the name counting won't be lost too much; but I can strengthen it a bit. Feel better after starting to re-write it a bit. 
-- TODO: begin conclusion by talking about the conversion from capital numbers to configurative enumerations. 
+- DONE: begin conclusion by talking about the conversion from capital numbers to configurative enumerations. 
 
 ## Tue 13 Dec 09:06:50 GMT 2016
 
@@ -89,7 +89,7 @@
 
 ## Wed 14 Dec 11:11:41 GMT 2016
 - just starting now due to other stuff. Can I swing this dotfile/configuration stuff around to the technical ensemble enough? Feel like I'm drawing a long bow here ...
-- have written a bit about dotfile stuff, not sure how good it is. TODO: check dotfile discussion makes sense
+- have written a bit about dotfile stuff, not sure how good it is. MUSTDONE: check dotfile discussion makes sense
 - DONE: bring bits of the conclusion in if they are any good
 - DONE: rewrite conclusion
 
@@ -99,8 +99,8 @@
 - I've worked on this for 13 sessions. I guess they are roughly 2 hours each. So 26-30 hours work on it so far. Yikes, seems a lot ... 
 - looking at the conclusion from sss paper -- not sure if there is much I can use. 
 - brought some of the conclusion in. And working on saying what I think about Github.   
-- TODO: try to write something about the specificity of Github in this project. 
-- TODO: add in some broadly relevant literature -- Bratton on stack; Suchman on re-configuration, Gillespie et al on media; perhaps something on infrastructure -- from handbook! 
+- DONE: try to write something about the specificity of Github in this project. 
+- MUSTDO: add in some broadly relevant literature -- Bratton on stack; Suchman on re-configuration, Gillespie et al on media; perhaps something on infrastructure -- from handbook! 
 - DONE: add in idea that Github is no mere example  -- the fact that we know little of it despite its importance suggests something more is going on
 
 ## Tue 20 Dec 10:10:16 GMT 2016
@@ -108,7 +108,7 @@
 - I've put some references in the introduction to that list;
 - found myself re-ordering the introduction to put the number back at the top. Otherwise I have to highlight the technical ensemble right throughout. 
 - DONE: the introduction needs re-shaping to flow better - start from HERE in file i.e. line 32
-- TODO: write a note saying that it would be possible to work with other identifiers; 
+- MUSTDONE: write a note saying that it would be possible to work with other identifiers; 
  
 ## Mon 09 Jan 2017 11:08:03 GMT
 - starting work for the first time this year, but not early in the morning -- great to have these notes to work from, because its hard to remember what I was meant to be saying. 
@@ -116,11 +116,17 @@
 
 ## Tue 10 Jan 2017 09:22:47 GMT
 - merged big data ethnography chapter to get scripts for plots.  
-- extracted a list of todos to help me look at what needs to be done. Here's the line: grep 'TODO' % > todo.md
+- extracted a list of todos to help me look at what needs to be done. Here's the line:
+grep 'MUSTDO' % > mustdo.md
 - working on the introduction again -- it seems clunky because it moves between number and technical ensemble. What can I do about that?
 - DONE: align the conclusion with the introduction
 
 ## Wed 11 Jan 2017 09:15:50 GMT
 - hard to start today ...working on the conclusion, checking it maps onto the introduction.   
 -reordered the conclusion quite a lot and think its ok. Also re-did the abstract in the same vein. 
--TODO: go through the rest of the todos marking key ones ... 
+-DONE: go through the rest of the todos marking key ones ... 
+
+## Thu 12 Jan 2017 09:20:40 GMT
+- configuration in Suchman's sense comes together with figure in numeric sense; suggesting that figures can have volume, density, surface, curve together with other things; this is what configurative enumerations might do ... thicken numbers, explore their graphic folds. 
+- went through the TODOs and either did them or demoted them. Felt that I was getting somewhere when I began to identify configuration with the obscure central zone, the margin of indeterminacy that allows machines to be grouped together. It seems that it might be worth following that a bit more, but not in this paper!
+- TODO: fix any missing references
