@@ -171,3 +171,9 @@
 ## Mon 19 Dec 2016 11:28:46 GMT
 - news accounts of  Github losing millions see [@Newcomer_2016] -- the de-centralised workforce is costing too much! Billboards going up in SF. Also the rise of the competitors -- gitlab, bitbucket -- more focused on corporate;   
 - also GoogleComputer has announced all the stackoverflow data is now on GoogleBigQuery
+
+## Mon 16 Jan 2017 12:11:18 GMT
+- idea: would it be possible to look for all  Github sites that are using CI services? How would you do that? Is there an event for that? Something like WebHooks 
+- looking at Github api, but it seems that DeployEvents do not appear in timeline data. So won't appear in any bigquery data. That means that may be many events that do not appear in the data.  
+- so would probably need to use deployment statuses on a set of repos: e.g. https://developer.github.com/v3/repos/deployments/#list-deployment-statuses
+- also started looking at travis-ci api, and what it offers (not much), and then got distracted into setting up ci for my own projects, which is not the point at the moment. So shutting down now!
