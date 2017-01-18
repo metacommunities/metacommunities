@@ -130,3 +130,6 @@ grep 'MUSTDO' % > mustdo.md
 - configuration in Suchman's sense comes together with figure in numeric sense; suggesting that figures can have volume, density, surface, curve together with other things; this is what configurative enumerations might do ... thicken numbers, explore their graphic folds. 
 - went through the TODOs and either did them or demoted them. Felt that I was getting somewhere when I began to identify configuration with the obscure central zone, the margin of indeterminacy that allows machines to be grouped together. It seems that it might be worth following that a bit more, but not in this paper!
 - TODO: fix any missing references
+
+## Wed 18 Jan 2017 10:24:13 GMT
+- been working on paper copy this week, doing roughly ten pages a day.
