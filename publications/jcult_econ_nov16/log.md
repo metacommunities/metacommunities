@@ -133,3 +133,7 @@ grep 'MUSTDO' % > mustdo.md
 
 ## Wed 18 Jan 2017 10:24:13 GMT
 - been working on paper copy this week, doing roughly ten pages a day.
+
+## Thu 19 Jan 2017 09:21:11 GMT
+- starting to add paper revisions into text. Again, 10 pages/day
+- almost got 10 pages done today; TODO: fix long references in zotero e.g. Marshall
