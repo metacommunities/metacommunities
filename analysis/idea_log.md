@@ -177,3 +177,7 @@
 - looking at Github api, but it seems that DeployEvents do not appear in timeline data. So won't appear in any bigquery data. That means that may be many events that do not appear in the data.  
 - so would probably need to use deployment statuses on a set of repos: e.g. https://developer.github.com/v3/repos/deployments/#list-deployment-statuses
 - also started looking at travis-ci api, and what it offers (not much), and then got distracted into setting up ci for my own projects, which is not the point at the moment. So shutting down now!
+
+## Fri 20 Jan 2017 15:42:53 GMT
+- there is a posting about  Github growth and whether it is scale free, and why  http://perfdynamics.blogspot.co.uk/2017/01/github-growth-appears-scale-free.html Could be useful to work with. TODO: look at how it's done 
+
