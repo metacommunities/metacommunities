@@ -140,3 +140,11 @@ grep 'MUSTDO' % > mustdo.md
 
 ## Fri 20 Jan 2017 15:11:50 GMT
 - hoping to get 6 pages down, but starting very late -- only half an hour to do it. 
+- did manage to do the 6 pages
+
+
+## Mon 23 Jan 2017 11:24:16 GMT
+- starting 3 hour block on this paper; at page 17 of 40  
+- 13:30: finished entering all the corrections; almost ready to send. 
+- DONE: fix Wittgenstein reference
+- TODO: generate document with references; submit!
