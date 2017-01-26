@@ -9,6 +9,7 @@ output:
 citation_package: biber
 latex_engine: xelatex
 bibliography: /home/mackenza/ref_bibs/uni.bib
+biblio-style: "harvard"
 link-citations: yes
 header-includes:
     - \usepackage{setspace}
@@ -17,12 +18,7 @@ header-includes:
 
 ## Abstract
 
-Technical ensembles  -- social network sites, online content management systems, streaming media platforms, mobile communication systems, scientific models, supply chain logistics management solutions, or cryptocurrency systems --  stand at the centre  of contemporary cultural processes. 
-This paper examines attempts to enumerate the elements of such technical ensembles by counting, mapping or listing them in the form of large numbers.
-Via a case study of  the code repository platform [Github.com](https://github.com), it analyzes how such enumerations participate in the capitalization of technical ensembles.
-As an alternative to the capitalization of ensembles, the paper also proposes a configurative enumeration of elements of technical ensembles.
-In a configurative enumeration, the diverse composition, the rhythms of imitation, variation and commutation, and the constant relating, tuning, repairing and adjusting of technical elements crucial to the ongoing existence of technical ensembles come into view.
-Configurative enumerations, the paper suggests, might critically articulate some of the inventive realities of technical ensembles, realities which condition and sometimes diverge from their capitalization. 
+Technical ensembles  -- social network sites, online content management systems, streaming media platforms, mobile communication systems, scientific models, supply chain logistics management solutions, or cryptocurrency systems --  stand at the centre  of contemporary cultural processes. This paper examines attempts to enumerate the elements of such technical ensembles by counting, mapping or listing them in the form of large numbers. Via a case study of  the code repository platform [Github.com](https://github.com), it analyzes how such enumerations participate in the capitalization of technical ensembles. As an alternative to the capitalization of ensembles, the paper also proposes a configurative enumeration of elements of technical ensembles. In a configurative enumeration, the diverse composition, the rhythms of imitation, variation and commutation, and the constant relating, tuning, repairing and adjusting of technical elements crucial to the ongoing existence of technical ensembles come into view. Configurative enumerations, the paper suggests, might critically articulate some of the inventive realities of technical ensembles, realities which condition and sometimes diverge from their capitalization. 
 
 ## Introduction
 
@@ -233,6 +229,11 @@ The configurative enumerations presented in the preceding discussion cannot foll
 [^231]: The action of 'naming' lies at the heart of the massive systems of addressability associated with software (see [@Thrift_2002]). 
 
 Is Github typical or symptomatic of technical ensembles more generally? In some respects, Github is a special case. It is an ensemble where ensembles are assembled. And yet, compared to Facebook and many other technical ensembles,  Github is relatively little known despite its importance as a site of ongoing configuration,  invention, maintenance and assembly of diverse cultural-technical objects.  This relative obscurity is perhaps, however, the most typical feature of Github if, as I have been suggesting, the difficulty of engaging with the reality of technical ensembles, a difficulty exacerbated by capital numbers with their tendency to identify value with scale, is their obscurity. The reality-configuring operation of ensembles might be better grasped by treating  numbers such as `48 million`, as the hardware store purchase riddle does, as a matter of composition, putting together, or configuration. 
+
+
+## Acknowledgments
+
+[REMOVED FOR PEER REVIEW]
 
 ## References
 

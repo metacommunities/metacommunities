@@ -148,3 +148,6 @@ grep 'MUSTDO' % > mustdo.md
 - 13:30: finished entering all the corrections; almost ready to send. 
 - DONE: fix Wittgenstein reference
 - TODO: generate document with references; submit!
+
+## Thu 26 Jan 2017 11:06:23 GMT
+-  actually made myself start the submission process - bit of a psy-barrier there. Made some progress. But want to do some other things today as well. So saving halfway through: url - https://mc.manuscriptcentral.com/rjce
