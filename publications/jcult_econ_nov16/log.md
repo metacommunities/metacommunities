@@ -151,3 +151,7 @@ grep 'MUSTDO' % > mustdo.md
 
 ## Thu 26 Jan 2017 11:06:23 GMT
 -  actually made myself start the submission process - bit of a psy-barrier there. Made some progress. But want to do some other things today as well. So saving halfway through: url - https://mc.manuscriptcentral.com/rjce
+
+## Fri 27 Jan 2017 14:35:43 GMT
+- continuing jcultecon submission; had to fix a couple of references, etc; 
+- finally submitted it -- took 90 minutes or so to sort out references, figures, etc. Still not exactly right. 
