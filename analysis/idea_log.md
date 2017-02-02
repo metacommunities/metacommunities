@@ -181,3 +181,6 @@
 ## Fri 20 Jan 2017 15:42:53 GMT
 - there is a posting about  Github growth and whether it is scale free, and why  http://perfdynamics.blogspot.co.uk/2017/01/github-growth-appears-scale-free.html Could be useful to work with. TODO: look at how it's done 
 
+
+## Thu 02 Feb 2017 10:19:59 GMT
+- read Straube on Git; 2016; bdas; also maybe go through bdas more generally for purposes of git 
