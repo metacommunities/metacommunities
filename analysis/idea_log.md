@@ -185,6 +185,9 @@
 ## Thu 02 Feb 2017 10:19:59 GMT
 - read Straube on Git; 2016; bdas; also maybe go through bdas more generally for purposes of git 
 
-
 ## Mon 06 Feb 2017 15:24:04 GMT
 - really interesting development:  Github has introduced machine-learned topics: https://github.com/blog/2309-introducing-topics; see also https://help.github.com/articles/about-topics/ 
+
+## Thu 16 Feb 2017 11:19:05 GMT
+- 300,000 passwords on  Github: GitHub commit search: “remove password”                                                                                                                                  
+// Hacker News                                                                                                                                                         
