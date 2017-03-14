@@ -2,7 +2,7 @@ Metacommunities of the Code Sharing Commons
 ===============
 
 
-This repository documents a one year study of Github software repositories in aggregate. We aimed to study how repositories compose a field of devices interacting with each other through processes of imitation, incorporation, and citation. The idea of 'metacommunities' was to understand the relations between the many, many repositories on Github in terms a community ecology metaphor. 
+This repository documents a one year study of Github software repositories in aggregate. We aimed to study how repositories compose a field of devices interacting with each other through processes of imitation, incorporation, and citation. The idea of 'metacommunities' was to understand the relations between the many, many repositories on Github in terms of a community ecology metaphor. 
 
 This preliminary release of some of the publications, data analysis, scripts, secondary data and figures from the research does not comprise a polished product. It does however provide, via the archival features of Github and `git` itself a reasonably comprehensive record of the work done on the project up to the release date (11 November 2014). Later releases of the project will contain further publications, reports and data analyses. 
 
