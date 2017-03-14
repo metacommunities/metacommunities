@@ -1,5 +1,4 @@
 # ignore gedit backup files
-#mysql_*
 *~
 *.pyc
 *.pyd
@@ -17,3 +16,5 @@ all_repos*
 .httr-oauth
 .rope*
 analysis/platform/github_website_overtime/images
+cache/*
+*cache
