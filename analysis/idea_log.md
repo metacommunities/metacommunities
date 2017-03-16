@@ -181,13 +181,15 @@
 ## Fri 20 Jan 2017 15:42:53 GMT
 - there is a posting about  Github growth and whether it is scale free, and why  http://perfdynamics.blogspot.co.uk/2017/01/github-growth-appears-scale-free.html Could be useful to work with. TODO: look at how it's done 
 
-
 ## Thu 02 Feb 2017 10:19:59 GMT
 - read Straube on Git; 2016; bdas; also maybe go through bdas more generally for purposes of git 
+- downloaded and added to ~/archive/google_analytics/straube_git_topology_2016.pdf
 
 ## Mon 06 Feb 2017 15:24:04 GMT
 - really interesting development:  Github has introduced machine-learned topics: https://github.com/blog/2309-introducing-topics; see also https://help.github.com/articles/about-topics/ 
 
 ## Thu 16 Feb 2017 11:19:05 GMT
-- 300,000 passwords on  Github: GitHub commit search: “remove password”                                                                                                                                  
-// Hacker News                                                                                                                                                         
+- 300,000 passwords on  Github: GitHub commit search: “remove password”                                                                                                                                  // Hacker News                                                                                                                                                         
+
+## Thu 16 Mar 2017 16:03:36 GMT
+-  added Straube and it looks useful -- stuff on queer time around re-basing
