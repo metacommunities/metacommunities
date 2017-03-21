@@ -171,3 +171,8 @@
 ## Mon 19 Dec 2016 11:28:46 GMT
 - news accounts of  Github losing millions see [@Newcomer_2016] -- the de-centralised workforce is costing too much! Billboards going up in SF. Also the rise of the competitors -- gitlab, bitbucket -- more focused on corporate;   
 - also GoogleComputer has announced all the stackoverflow data is now on GoogleBigQuery
+
+## Tue 21 Mar 2017 09:07:53 GMT
+- the paper by Straub --should read that, and re-connect to the question of 'what is a file'. See Harper on this;
+- The SHA-1 collision Shattered affects many aspects of git -- https://shattered.io/ 
+- recent articles in science and nature on scientific software and code reviews -- could look at Github from that angle. 
