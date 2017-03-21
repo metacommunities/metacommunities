@@ -172,7 +172,30 @@
 - news accounts of  Github losing millions see [@Newcomer_2016] -- the de-centralised workforce is costing too much! Billboards going up in SF. Also the rise of the competitors -- gitlab, bitbucket -- more focused on corporate;   
 - also GoogleComputer has announced all the stackoverflow data is now on GoogleBigQuery
 
+## Mon 16 Jan 2017 12:11:18 GMT
+- idea: would it be possible to look for all  Github sites that are using CI services? How would you do that? Is there an event for that? Something like WebHooks 
+- looking at Github api, but it seems that DeployEvents do not appear in timeline data. So won't appear in any bigquery data. That means that may be many events that do not appear in the data.  
+- so would probably need to use deployment statuses on a set of repos: e.g. https://developer.github.com/v3/repos/deployments/#list-deployment-statuses
+- also started looking at travis-ci api, and what it offers (not much), and then got distracted into setting up ci for my own projects, which is not the point at the moment. So shutting down now!
+
+## Fri 20 Jan 2017 15:42:53 GMT
+- there is a posting about  Github growth and whether it is scale free, and why  http://perfdynamics.blogspot.co.uk/2017/01/github-growth-appears-scale-free.html Could be useful to work with. TODO: look at how it's done 
+
+## Thu 02 Feb 2017 10:19:59 GMT
+- read Straube on Git; 2016; bdas; also maybe go through bdas more generally for purposes of git 
+- downloaded and added to ~/archive/google_analytics/straube_git_topology_2016.pdf
+
+## Mon 06 Feb 2017 15:24:04 GMT
+- really interesting development:  Github has introduced machine-learned topics: https://github.com/blog/2309-introducing-topics; see also https://help.github.com/articles/about-topics/ 
+
+## Thu 16 Feb 2017 11:19:05 GMT
+- 300,000 passwords on  Github: GitHub commit search: “remove password”                                                                                                                                  // Hacker News                                                                                                                                                         
+
+## Thu 16 Mar 2017 16:03:36 GMT
+-  added Straube and it looks useful -- stuff on queer time around re-basing
+
 ## Tue 21 Mar 2017 09:07:53 GMT
 - the paper by Straub --should read that, and re-connect to the question of 'what is a file'. See Harper on this;
 - The SHA-1 collision Shattered affects many aspects of git -- https://shattered.io/ 
 - recent articles in science and nature on scientific software and code reviews -- could look at Github from that angle. 
+
