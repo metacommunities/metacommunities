@@ -101,3 +101,7 @@
 - sent chapter off with preliminary conclusion; 150 pages long, so has massive amounts of printout ... 
 - had another idea: that the attempt to deal with Github meant engaging with a lot of configuration work; and this configuration work is really important to  big data more generally. So all that repository stuff, all the data, is really an encounter with big data, not just Github. That point should go in the conclusion. TODO. 
 - 
+
+## Wed 22 Mar 2017 12:52:33 GMT
+- have been working on edits on file sent back by df whole_number_in_partsDNedits.docx
+- have done about 10 pages of edits so far. There are around 30 pages -- should be done for next Tuesday? 
