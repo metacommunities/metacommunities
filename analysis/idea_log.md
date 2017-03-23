@@ -194,5 +194,10 @@
 ## Thu 16 Mar 2017 16:03:36 GMT
 -  added Straube and it looks useful -- stuff on queer time around re-basing
 
+## Tue 21 Mar 2017 09:07:53 GMT
+- the paper by Straub --should read that, and re-connect to the question of 'what is a file'. See Harper on this;
+- The SHA-1 collision Shattered affects many aspects of git -- https://shattered.io/ 
+- recent articles in science and nature on scientific software and code reviews -- could look at Github from that angle. 
+
 ## Thu 23 Mar 2017 16:24:20 GMT
 - could try to use Steve Jackson's broken world thinking in relation to git projects;  
