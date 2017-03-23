@@ -193,3 +193,6 @@
 
 ## Thu 16 Mar 2017 16:03:36 GMT
 -  added Straube and it looks useful -- stuff on queer time around re-basing
+
+## Thu 23 Mar 2017 16:24:20 GMT
+- could try to use Steve Jackson's broken world thinking in relation to git projects;  
