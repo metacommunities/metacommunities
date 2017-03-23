@@ -105,3 +105,6 @@
 ## Wed 22 Mar 2017 12:52:33 GMT
 - have been working on edits on file sent back by df whole_number_in_partsDNedits.docx
 - have done about 10 pages of edits so far. There are around 30 pages -- should be done for next Tuesday? 
+
+## Thu 23 Mar 2017 09:17:42 GMT
+- got through to end of p19 in edits; roughly 50 edits listed so far;   
