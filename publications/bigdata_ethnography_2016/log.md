@@ -108,3 +108,4 @@
 
 ## Thu 23 Mar 2017 09:17:42 GMT
 - got through to end of p19 in edits; roughly 50 edits listed so far;   
+- fixed some of the figure references in the article
