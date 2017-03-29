@@ -58,7 +58,7 @@ Could then add to that the number of repos that are forks.
 - also had the idea of reassessing counting in sts more generally -- how do we do it ourselves?
 
 
- ## Wed Jan 27 11:12:51 GMT 2016
+## Wed Jan 27 11:12:51 GMT 2016
 
 - drifing through Guyer on percentage and ordinals, Dumit on implosion, 
 - had the idea that numbers are a way to think about the bits of infrastructure that are forgotten or hard to study in infrastructural studies ... borrowed this from sss manuscript

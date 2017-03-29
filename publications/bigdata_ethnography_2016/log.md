@@ -109,3 +109,9 @@
 ## Thu 23 Mar 2017 09:17:42 GMT
 - got through to end of p19 in edits; roughly 50 edits listed so far;   
 - fixed some of the figure references in the article
+
+## Wed 29 Mar 2017 09:31:37 BST
+- finished paper edits; there are about 80 including references to go in.  
+- reached edit 17
+- some comments for eds:
+    - found it quite hard to respond to main comment on page 2; problem for me is that I'm not a practising ethnographer, although keenly interested in it. I don't know the contemporary debates well. Could you point me to a couple of things to read for orientation? Could you be something of your own? I did read some George Marcus from JCultEcon, 2014, and added it
