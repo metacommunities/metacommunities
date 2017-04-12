@@ -201,3 +201,10 @@
 
 ## Thu 23 Mar 2017 16:24:20 GMT
 - could try to use Steve Jackson's broken world thinking in relation to git projects;  
+
+## Tue 11 Apr 2017 14:58:05 AEST
+- trying out R metacom package - does it actually offer anything useful in its ideas of site and species? Environmental gradients, etc?  
+    - the package relies on vegan, so installed that too. Sample datasets in that package give some idea of how it works -- e.g. sipoo gives a matrix of birds x islands in an archipelago. Clumping, coherence,  boundaries, etc., all make a difference to this.  
+- the MCSim package does simulations of metacommunity
+    - tutorial here: http://rpubs.com/sokole/159425
+    - not sure this would be any use -- too heavily based on a spatial grid?
