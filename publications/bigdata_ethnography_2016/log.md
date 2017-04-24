@@ -119,3 +119,6 @@
 ## Thu 30 Mar 2017 13:26:22 BST
 - have only got 30 minutes today to work on this; hoping to get 10 edits done 
 - got to about edit 25/80 
+
+## Mon 24 Apr 2017 09:56:06 BST
+- didn't do anything on this in Australia.  
