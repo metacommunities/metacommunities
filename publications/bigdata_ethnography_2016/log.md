@@ -114,11 +114,14 @@
 - finished paper edits; there are about 80 including references to go in.  
 - reached edit 17
 - some comments for eds:
-    - found it quite hard to respond to main comment on page 2; problem for me is that I'm not a practising ethnographer, although keenly interested in it. I don't know the contemporary debates well. Could you point me to a couple of things to read for orientation? Could you be something of your own? I did read some George Marcus from JCultEcon, 2014, and added it
+    - found it quite hard to respond to main comment on page 2; problem for me is that I'm not a practising ethnographer, although keenly interested in it. I don't know the contemporary debates well. Could you point me to a couple of things to read for orientation? Could you be something of your own? I did read some George Marcus from JCultEcon, 2014, and added it; marcus_Prototyping and Contemporary Anthropological Experiments With Ethnographic Method_2012.pdf 
 
 ## Thu 30 Mar 2017 13:26:22 BST
 - have only got 30 minutes today to work on this; hoping to get 10 edits done 
 - got to about edit 25/80 
 
 ## Mon 24 Apr 2017 09:56:06 BST
-- didn't do anything on this in Australia.  
+## Mon 24 Apr 2017 11:44:18 BST
+- didn't do any work on this in Sydney;  if I can do 20 edits each day, should be finished Friday 29 April
+- would be good to include more marcus -- e.g. the space between the ethnographic fieldnotes and the finished article; image of moving through the spaces of natural social action
+- reached edit 40 or so in the paper document
