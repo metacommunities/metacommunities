@@ -122,4 +122,5 @@
 
 ## Mon 24 Apr 2017 11:44:18 BST
 - didn't do any work on this in Sydney;  if I can do 20 edits each day, should be finished Friday 29 April
+- would be good to include more marcus -- e.g. the space between the ethnographic fieldnotes and the finished article; image of moving through the spaces of natural social action
 - reached edit 40 or so in the paper document
