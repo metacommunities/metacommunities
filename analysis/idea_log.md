@@ -201,3 +201,6 @@
 
 ## Thu 23 Mar 2017 16:24:20 GMT
 - could try to use Steve Jackson's broken world thinking in relation to git projects;  
+
+## Mon 24 Apr 2017 13:40:31 BST
+- reading new book on commons and postcapitalism property -- would be good to reframe the ecological account around this;  
