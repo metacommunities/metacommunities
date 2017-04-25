@@ -28,8 +28,6 @@
 
 - started writing the chapter, mainly drawing on EASST paper approach -- big number as the site of encounter
 
-
-
 ## Wed  7 Sep 09:27:42 BST 2016
 - not sure how to include in next part of paper -- for instance, the query ...  
 
@@ -121,7 +119,13 @@
 - got to about edit 25/80 
 
 ## Mon 24 Apr 2017 09:56:06 BST
-## Mon 24 Apr 2017 11:44:18 BST
 - didn't do any work on this in Sydney;  if I can do 20 edits each day, should be finished Friday 29 April
 - would be good to include more marcus -- e.g. the space between the ethnographic fieldnotes and the finished article; image of moving through the spaces of natural social action
 - reached edit 40 or so in the paper document
+
+## Tue 25 Apr 2017 08:47:32 BST
+- after system upgrade, not sure everything will work 
+- TODO: locate the osrc image and add to file
+- TODO: locate the powerlaw event diagram and add to file
+- TODO: check how to limit the query status messages
+- made it up to edit 60 today. 
