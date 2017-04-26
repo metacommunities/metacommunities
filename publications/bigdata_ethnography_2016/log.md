@@ -129,3 +129,7 @@
 - TODO: locate the powerlaw event diagram and add to file
 - TODO: check how to limit the query status messages
 - made it up to edit 60 today. 
+
+## Wed 26 Apr 2017 09:31:29 BST
+- edits are taking forever. Maybe finish today? 
+- all the edits are in, but there are still some todos to play with. Also, not all the data seems to there for the jobs id graphic 
