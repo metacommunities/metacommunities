@@ -211,3 +211,6 @@
  
 ## Mon 24 Apr 2017 13:40:31 BST
 - reading new book on commons and postcapitalism property -- would be good to reframe the ecological account around this;  
+
+## Wed 26 Apr 2017 10:32:55 BST
+- reading Marcus on ethnography and prototyping, and his account of what Rabinow is doing seems really relevant to what I might be trying to get a feeling for in this project. TODO: look at Rabinow; and at intellectual instrumentalities with pragmatic intent. It comes from _Reconstruction in Philsophy_! I should know about it already. Stengers and Savransky's relevance book would also fit here. Requested this from the library ...     
