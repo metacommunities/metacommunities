@@ -49,10 +49,6 @@
 - been putting many more of the queries into the text -- that's the real focus now -- working with these queries. Could put all the queries into Gists, and just link them all. Or could make the whole paper into a DockerContainer. ...  
 - managed to write the rest of the events section, adding new queries to bolster it out. 
 
-
-
-
-
 ## Wed 14 Sep 17:20:04 BST 2016
 -struggled quite a lot of with associative imitation graphs -- working on converting those from ipython,etc to ggplot format. But not sure if it is worth the effort. 
 - does give some ideas of working with names as I try to do it ... 
@@ -133,3 +129,8 @@
 ## Wed 26 Apr 2017 09:31:29 BST
 - edits are taking forever. Maybe finish today? 
 - all the edits are in, but there are still some todos to play with. Also, not all the data seems to there for the jobs id graphic 
+
+## Thu 27 Apr 2017 09:35:45 BST
+- copied the jobs data in zip form to data folder data/jobs.zip
+- haven't succeeded in getting it to unzip on the fly, but will leave that for the moment. 
+- looking for the missing image files - osrc, etc. 
