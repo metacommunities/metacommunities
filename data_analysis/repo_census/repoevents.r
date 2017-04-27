@@ -40,7 +40,7 @@ q = 'SELECT RepoEvents, COUNT(*) AS Freq FROM (
         ) MyTable
     WHERE RepoEvents > 1000
 GROUP each BY RepoEvents ORDER BY Freq DESC limit 10000'
-
+1
 evf = query_exec(query=fq, project='metacommunities')
 ev = query_exec(query=q, project='metacommunities')
 

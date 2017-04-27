@@ -20,7 +20,7 @@ What kinds of engagement can we have with such numbers today amidst perhaps thei
 
 [^16]: A recent special issue of the _Journal of Scandinavian Social Theory_ on numbers offers a useful variety of engagements with the status of number. See for instance [@Guyer_2014] on percentages or [@Gerlitz_2014] on 'kudos' ratings.  
 
-While I'm very drawn to attempts to count things and to weave counts into ethnographic writing, during this project I often wondered about how to count things whilst paying attention to their composition. Marcus enjoins ethnographers to 'make forms of processes' [Marcus_2014,401]. The problem is, seen in  a rather literal-minded way, counting is a process that very easily renders the form of a number. An ethnographic sensibility around numbers at a very minimum entails a double counting or re-counting. In the setting I describe (software development, distributed information and knowledge infrastructures),   numbers and counts are site of entanglement between device-specific materialities and collective imaginaries of order, totality, rank, inclusion, boundary and power.  This double sense of numbers as both a calculatively ordered cutting-framing-summing-up form and as materially specific figuring of differences could well be understood in terms of what Lucy Suchman describes as a 'configuration': 
+While I'm very drawn to attempts to count things and to weave counts into ethnographic writing, during this project I often wondered about how to count things whilst paying attention to their composition. Marcus enjoins ethnographers to 'make forms of processes' [Marcus_2014,401]. The problem is, seen in  a rather literal-minded way, counting is a process that very easily renders the form of a number. An ethnographic sensibility around numbers at a very minimum entails a double counting or re-counting. In the setting I describe (software development, distributed information and knowledge infrastructures), numbers and counts are site of entanglement between device-specific materialities and collective imaginaries of order, totality, rank, inclusion, boundary and power.  This double sense of numbers as both a calculatively ordered cutting-framing-summing-up form and as materially specific figuring of differences could well be understood in terms of what Lucy Suchman describes as a 'configuration': 
 
 >the device of _configuration_ has two broad uses. First, as an aid to delineating the composition and bounds of an object of analysis, in part through the acknowledgment that doing so so is integral not only to the study of technologies, but to their very existence as objects. And second, in drawing our analytic attention to the ways in which technologies materialize cultural imaginaries, just as imaginaries narrate the significance of technological artefacts. Configuration in this sense is a device for studying technologies with particular attention to the imaginaries and materialities that they _join together_, an orientation that resonates as well with the term's common usages to refer to the conjoining of diverse elements in practices of systems design and engineering [@Suchman_2012, 48].
 
@@ -124,12 +124,16 @@ query1 = "SELECT count(distinct(repo.url))
     repo_count = query_exec('metacommunities', query = query1)
 ```
 
-The result: `r repo_count`
+The result: `r repo_count` repositories. 
 
 Could we re-count such capital numbers in order to both further highlight their dynamic composition through flows of association and to highlight some of the highly reactive, imaginary boundary work they might do as they materialize imaginaries of totality, globality or infrastructural control? Could configurative numbers in both their compositional and imaginary-materialising multiplicity be counted? Whilst there is a much configurational work involved even in beginning to count things heterogeneously on an infrastructural scale, I found myself drawn by the  transience of configurations and their imitative composition. Both concerns -- transience and imitation -- are not highlighted in any of the other re-counts of the GithubArchive data. They only became salient to me amidst many other failures to find any interesting story, stable signal or statistical regularity in the Github timeline data.[^40]
 
 [^40]: Nearly all of our attempts to make sense of the data can be found in the Github  repository [https://github.com/metacommunities/metacommunities](https://github.com/metacommunities/metacommunities). The scripts, plots and pieces of writing found there, however, are not highly ordered. The key results lie scattered across different branches of that repository. The somewhat tangled, messy aggregate of materials there attests to our strenuous but often incoherent efforts to find valid statistical regularities in a dataset characterised by tremendous heterogeneity and messiness. More interestingly perhaps, that repository can be  understood as an ethnographic notebook. 
 
+```{r power_time, echo=FALSE, messages=FALSE, fig.cap= 'Events associated with repositories'}
+    library(knitr)
+    include_graphics('figure/repos_events_fork_not_fork_fixed.svg')
+```
 
 When we count people or things (such as software projects), the working assumption is that they have some duration and substantial presence. This assumption, however,  does not hold very true at the scale of large data-streams, where, like sub-atomic particles in a collision, people and things rapidly and unpredictably flash in and out of existence. Transience and instability is an artefact of the datastream. Frustrated by our seeming inability to find anything in the GithubArchive data apart from the obvious importance of well-known software projects such as `linux` or `android`, we were forced to accept transience and ephemeral visibility as a common mode of existence on Github. The transient visibility of people and things in the data takes many forms.  The vast majority of repositories on Github are very short-lived. They attract one or two events. A great proportion of events in the timeline data were absorbed into ephemeral repositories (if that is not too great a contradiction in terms).  Millions of repositories blink into visibility on the timeline for a brief period before falling back into obscurity. Yet they survive in the capital number. The diagram shown in the Figure \@ref(fig:power_time) encapsulates this imitative flux. On the left hand side, millions of repositories receive less than five events during the 18 months. On the right hand side, less than 50 repositories receive more than a thousand events. A similar pattern appears in the other capital number: while some 'people'  emit many thousands of events, others only trigger a few. Already, then, the capital number of repositories on  Github takes on a different composition when viewed from the perspective of duration.
 
@@ -180,7 +184,7 @@ What are these events? The event of creating a named repository is primary, foll
 
 ## The growth of associative imitation
 
-```{r android_associations, fig.cap= 'Repository forks associated with the name `android`,  echo=FALSE, cache=TRUE}
+```{r android_associations, fig.cap= 'Repository forks associated with the name `android`',  echo=FALSE, cache=TRUE}
 
     library(bigrquery)
     library(ggplot2)
@@ -262,7 +266,7 @@ What are these events? The event of creating a named repository is primary, foll
 
 While it is hard to grasp the texture of imitative processes in event data, they figure deeply in the composition of the capital numbers. We can observe some  localised aspects  of propagation of imitation by going beyond the formatted data of the API or  GithubArchive data. Much social media platform data relies heavily on unique names (hence, for instance, Facebook's insistence that every user has a single unique identity). Yet the associative play of names (of people and things) attests to processes of associative imitations that continually overflow any singular naming.   In the years 2012-2015, both mobile devices and user interfaces were being intensively transformed in complex ways (e.g. the growth of apps, and the transformation of webpages from static HTML-formatted text to thoroughly dynamic script-driven surfaces composed for many elements). While these transformation were not directly the work of 'big data' practices, they are intricately connected to it by virtue of the proliferation of devices, the deeper integration of networks of association they implement and not least, the changes in the texture of contemporary experiences of interfaces.  Both Figure \@ref(fig:bootstrap_assoiation) and \@ref(fig:android_associations) attempt to figure something of this proliferating-integrating process of change.  Both figures  count imitations in the form of copying code, but in ways that go beyond the formal copying mechanisms offered by Github itself (for instance in the 'Fork' button that appears on the top right hand side of any repository on Github).
 
-```{r bootstrap_association,  fig.cap= 'Repository forks associated with the name `bootstrap`, echo=FALSE, cache=TRUE}
+```{r bootstrap_association,  fig.cap= 'Repository forks associated with the name `bootstrap`', echo=FALSE, cache=TRUE}
     query_term='bootstrap'
     df = fetch_data(query_term, 4)
     plot_forks(df, query_term, 10, 10, FALSE)
@@ -286,6 +290,7 @@ Densely populated with ephemeral repositories, stacked with associative imitatio
         [githubarchive:year.2013],
         [githubarchive:year.2014],
         [githubarchive:year.2015]"
+
     total_events = query_exec('metacommunities', query = query_evt)[1]
 
     query_top_repos = "SELECT
@@ -299,7 +304,6 @@ Densely populated with ephemeral repositories, stacked with associative imitatio
             [githubarchive:year.2015],
         "
 
-    total_events
     top_df = query_exec('metacommunities', query = query_top_repos)
     top_prop = sum(top_df$cnt)/total_events * 100 
 ```

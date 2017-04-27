@@ -130,3 +130,5 @@
 - looking for the missing image files - osrc, etc. 
 - brought those images in. 
 - change of title: Operative ethnographies and large numbers
+- found the code for the powerlaw diagram and the image. Would be nice to include that code, but at the moment, I'm just using the svg until I can reconstruct it. 
+- knitting has gone ok, as has RMarkdown, but bookdown is not good. Leaving that for the moment as it only affects the fig references. 
