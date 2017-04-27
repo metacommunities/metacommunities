@@ -1,4 +1,3 @@
-
 # publication/bigdata_ethnography_2016
 
 ##TODO
@@ -9,7 +8,6 @@
 ## Thu Feb  4 12:13:59 GMT 2016
 - drafting abstract for book chapter
 
-
 ## Wed Feb 10 15:47:01 GMT 2016
 - starting to look at literature on ethnography and code
     This article investigates the social, technical, and legal affiliations among  'geeks' (hackers, lawyers, activists, and IT entrepreneurs) on the Internet. The mode of association specific to this group is that of 'recursive public sphere'' constituted by a shared imaginary of the technical and legal conditions of possibility for their own association. On the basis of fieldwork conducted in the United States, Europe, and India, I argue that geeks imagine their social existence and relations as much through technical practices (hacking, networking, and code writing) as through discursive argument (rights, identities, and relations). In addition, they consider a 'right to tinker' a form of free speech that takes the form of creating, implementing, modifying, or using specific kinds of software (especially Free Software) rather than verbal discourse.
@@ -17,12 +15,10 @@
     that's Kelty's abstract
 - re-writing abstract to include some of the code literature. Got it down to 11 sentences, and removed much of the imitation argument (keep for large numbers paper). 
 
-
 ## Fri Feb 12 08:34:18 GMT 2016
 
 - re-did abstract for a third time -- came up with a better title -- intersectional assemblages and analytic affiliations, etc. Should be more doable. And I don't need to worry about the big data work too much
 - sending abstract off.
-
 
 ## Tue Sep  6 12:43:09 BST 2016
 
@@ -30,8 +26,6 @@
 
 ## Wed  7 Sep 09:27:42 BST 2016
 - not sure how to include in next part of paper -- for instance, the query ...  
-
-
 
 ## Thu Sep  8 16:52:30 BST 2016
 
@@ -121,7 +115,7 @@
 
 ## Tue 25 Apr 2017 08:47:32 BST
 - after system upgrade, not sure everything will work 
-- TODO: locate the osrc image and add to file
+- DONE: locate the osrc image and add to file
 - TODO: locate the powerlaw event diagram and add to file
 - TODO: check how to limit the query status messages
 - made it up to edit 60 today. 
@@ -134,3 +128,5 @@
 - copied the jobs data in zip form to data folder data/jobs.zip
 - haven't succeeded in getting it to unzip on the fly, but will leave that for the moment. 
 - looking for the missing image files - osrc, etc. 
+- brought those images in. 
+- change of title: Operative ethnographies and large numbers

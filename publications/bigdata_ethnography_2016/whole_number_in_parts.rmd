@@ -1,5 +1,5 @@
 --- 
-title:  "On recursive analytic affiliation: reflecting on the altered conditions of ethnographies of coding"
+title:  "Operative ethnographies and large numbers"
 author: Adrian Mackenzie 
 date: "`r format(Sys.time(), '%d %B %Y')`"
 fontsize: 12pt
