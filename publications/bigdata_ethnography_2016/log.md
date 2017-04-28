@@ -116,7 +116,7 @@
 ## Tue 25 Apr 2017 08:47:32 BST
 - after system upgrade, not sure everything will work 
 - DONE: locate the osrc image and add to file
-- TODO: locate the powerlaw event diagram and add to file
+- DONE: locate the powerlaw event diagram and add to file
 - TODO: check how to limit the query status messages
 - made it up to edit 60 today. 
 
@@ -132,11 +132,12 @@
 - change of title: Operative ethnographies and large numbers
 - found the code for the powerlaw diagram and the image. Would be nice to include that code, but at the moment, I'm just using the svg until I can reconstruct it. 
 - knitting has gone ok, as has RMarkdown, but bookdown is not good. Leaving that for the moment as it only affects the fig references. 
-- TODO: fix up the jobs figure -- that is breaking now for some reason
+- DONE: fix up the jobs figure -- that is breaking now for some reason
 
 ## Fri 28 Apr 2017 09:21:29 BST
 - starting on the jobs figure - small new problem with addressing json fields. Fixed that and saving figure to figure/bigquery_jobs.svg
 - ok, finally done I think, with some rough code still running through it ... 
 - will check out old version and diff them to send to editors
-     
+- sent whole_number_in_parts.docx and whole_number_in_parts_with_tracked_changes.docx today.      
+- TODO: put this online using HTML, etc
 
