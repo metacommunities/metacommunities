@@ -1,4 +1,3 @@
-
 # publication/bigdata_ethnography_2016
 
 ##TODO
@@ -9,7 +8,6 @@
 ## Thu Feb  4 12:13:59 GMT 2016
 - drafting abstract for book chapter
 
-
 ## Wed Feb 10 15:47:01 GMT 2016
 - starting to look at literature on ethnography and code
     This article investigates the social, technical, and legal affiliations among  'geeks' (hackers, lawyers, activists, and IT entrepreneurs) on the Internet. The mode of association specific to this group is that of 'recursive public sphere'' constituted by a shared imaginary of the technical and legal conditions of possibility for their own association. On the basis of fieldwork conducted in the United States, Europe, and India, I argue that geeks imagine their social existence and relations as much through technical practices (hacking, networking, and code writing) as through discursive argument (rights, identities, and relations). In addition, they consider a 'right to tinker' a form of free speech that takes the form of creating, implementing, modifying, or using specific kinds of software (especially Free Software) rather than verbal discourse.
@@ -17,23 +15,17 @@
     that's Kelty's abstract
 - re-writing abstract to include some of the code literature. Got it down to 11 sentences, and removed much of the imitation argument (keep for large numbers paper). 
 
-
 ## Fri Feb 12 08:34:18 GMT 2016
 
 - re-did abstract for a third time -- came up with a better title -- intersectional assemblages and analytic affiliations, etc. Should be more doable. And I don't need to worry about the big data work too much
 - sending abstract off.
 
-
 ## Tue Sep  6 12:43:09 BST 2016
 
 - started writing the chapter, mainly drawing on EASST paper approach -- big number as the site of encounter
 
-
-
 ## Wed  7 Sep 09:27:42 BST 2016
 - not sure how to include in next part of paper -- for instance, the query ...  
-
-
 
 ## Thu Sep  8 16:52:30 BST 2016
 
@@ -50,10 +42,6 @@
 
 - been putting many more of the queries into the text -- that's the real focus now -- working with these queries. Could put all the queries into Gists, and just link them all. Or could make the whole paper into a DockerContainer. ...  
 - managed to write the rest of the events section, adding new queries to bolster it out. 
-
-
-
-
 
 ## Wed 14 Sep 17:20:04 BST 2016
 -struggled quite a lot of with associative imitation graphs -- working on converting those from ipython,etc to ggplot format. But not sure if it is worth the effort. 
@@ -101,3 +89,55 @@
 - sent chapter off with preliminary conclusion; 150 pages long, so has massive amounts of printout ... 
 - had another idea: that the attempt to deal with Github meant engaging with a lot of configuration work; and this configuration work is really important to  big data more generally. So all that repository stuff, all the data, is really an encounter with big data, not just Github. That point should go in the conclusion. TODO. 
 - 
+
+## Wed 22 Mar 2017 12:52:33 GMT
+- have been working on edits on file sent back by df whole_number_in_partsDNedits.docx
+- have done about 10 pages of edits so far. There are around 30 pages -- should be done for next Tuesday? 
+
+## Thu 23 Mar 2017 09:17:42 GMT
+- got through to end of p19 in edits; roughly 50 edits listed so far;   
+- fixed some of the figure references in the article
+
+## Wed 29 Mar 2017 09:31:37 BST
+- finished paper edits; there are about 80 including references to go in.  
+- reached edit 17
+- some comments for eds:
+    - found it quite hard to respond to main comment on page 2; problem for me is that I'm not a practising ethnographer, although keenly interested in it. I don't know the contemporary debates well. Could you point me to a couple of things to read for orientation? Could you be something of your own? I did read some George Marcus from JCultEcon, 2014, and added it; marcus_Prototyping and Contemporary Anthropological Experiments With Ethnographic Method_2012.pdf 
+
+## Thu 30 Mar 2017 13:26:22 BST
+- have only got 30 minutes today to work on this; hoping to get 10 edits done 
+- got to about edit 25/80 
+
+## Mon 24 Apr 2017 09:56:06 BST
+- didn't do any work on this in Sydney;  if I can do 20 edits each day, should be finished Friday 29 April
+- would be good to include more marcus -- e.g. the space between the ethnographic fieldnotes and the finished article; image of moving through the spaces of natural social action
+- reached edit 40 or so in the paper document
+
+## Tue 25 Apr 2017 08:47:32 BST
+- after system upgrade, not sure everything will work 
+- DONE: locate the osrc image and add to file
+- DONE: locate the powerlaw event diagram and add to file
+- TODO: check how to limit the query status messages
+- made it up to edit 60 today. 
+
+## Wed 26 Apr 2017 09:31:29 BST
+- edits are taking forever. Maybe finish today? 
+- all the edits are in, but there are still some todos to play with. Also, not all the data seems to there for the jobs id graphic 
+
+## Thu 27 Apr 2017 09:35:45 BST
+- copied the jobs data in zip form to data folder data/jobs.zip
+- haven't succeeded in getting it to unzip on the fly, but will leave that for the moment. 
+- looking for the missing image files - osrc, etc. 
+- brought those images in. 
+- change of title: Operative ethnographies and large numbers
+- found the code for the powerlaw diagram and the image. Would be nice to include that code, but at the moment, I'm just using the svg until I can reconstruct it. 
+- knitting has gone ok, as has RMarkdown, but bookdown is not good. Leaving that for the moment as it only affects the fig references. 
+- DONE: fix up the jobs figure -- that is breaking now for some reason
+
+## Fri 28 Apr 2017 09:21:29 BST
+- starting on the jobs figure - small new problem with addressing json fields. Fixed that and saving figure to figure/bigquery_jobs.svg
+- ok, finally done I think, with some rough code still running through it ... 
+- will check out old version and diff them to send to editors
+- sent whole_number_in_parts.docx and whole_number_in_parts_with_tracked_changes.docx today.      
+- TODO: put this online using HTML, etc
+
