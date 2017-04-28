@@ -26,7 +26,7 @@ While I'm very drawn to attempts to count things and to weave counts into ethnog
 
 While Suchman's examples of configuration come from software systems, I'm suggesting that a single number -- 29 million repositories on Github -- could be re-counted as a configuration. The argument is that even the listing, enumerating and counting of things in a single number can be seen as a configuration. Practically, a configured number, if such a curly term is permitted, will need to be counted in ways that hold the two aspects Suchman highlights together. A configured number might be integral to the existence of the 'technology,' in this case the 'social coding' platform Github. At the same time,  that number would, in its counting, call our attention to what is being materialized in terms of an imaginary and all that entails.[^13]
 
-[^13]: What is an imaginary? I will not address that question directly here, but all concepts of imaginary (ranging from Lacan's to the more recent proliferation of imaginaries in humanities and social science [@McNeil_2017]) concern a sense of wholeness or completion that allows formations of identity, inclusion, belonging and otherness to take shape. For an example of the concept of imaginary in an account of software and coding, see [@Kelty_2005]. 
+[^13]: What is an imaginary? I will not address that question directly here, but all concepts of imaginary (ranging from Lacan's to the more recent proliferation of imaginaries in humanities and social science [@McNeil_2016]) concern a sense of wholeness or completion that allows formations of identity, inclusion, belonging and otherness to take shape. For an example of the concept of imaginary in an account of software and coding, see [@Kelty_2005]. 
 
 ## Re-counting a capital number on  a platform
 
@@ -137,7 +137,7 @@ Could we re-count such capital numbers in order to both further highlight their 
 
 When we count people or things (such as software projects), the working assumption is that they have some duration and substantial presence. This assumption, however,  does not hold very true at the scale of large data-streams, where, like sub-atomic particles in a collision, people and things rapidly and unpredictably flash in and out of existence. Transience and instability is an artefact of the datastream. Frustrated by our seeming inability to find anything in the GithubArchive data apart from the obvious importance of well-known software projects such as `linux` or `android`, we were forced to accept transience and ephemeral visibility as a common mode of existence on Github. The transient visibility of people and things in the data takes many forms.  The vast majority of repositories on Github are very short-lived. They attract one or two events. A great proportion of events in the timeline data were absorbed into ephemeral repositories (if that is not too great a contradiction in terms).  Millions of repositories blink into visibility on the timeline for a brief period before falling back into obscurity. Yet they survive in the capital number. The diagram shown in the Figure \@ref(fig:power_time) encapsulates this imitative flux. On the left hand side, millions of repositories receive less than five events during the 18 months. On the right hand side, less than 50 repositories receive more than a thousand events. A similar pattern appears in the other capital number: while some 'people'  emit many thousands of events, others only trigger a few. Already, then, the capital number of repositories on  Github takes on a different composition when viewed from the perspective of duration.
 
-The massive asymmetry between the relatively few long duration repositories and the vast mass of transient, abandoned repositories is definitely not another corroboration of 'the long-tail' distributions that social media exponents such as Clay Shirky and Chris Anderson began discussing more than a decade ago and that may have had a large part to play in many of the intensely individualizing tendencies of big data analytics, targetted advertising, predictive feeds and recommendations. (For instance, one reason that Amazon.com stocks so many obscure products, is that the long tail of sales of these items is  potentially more important than the sales of a smaller number of best-sellers [@Byrnjolfsson_2006; @Anderson_2009].)   Rather than the long tail of coding, a scale-free network of code-hubs on Github (itself a hub in networks of code-related infrastructure), or even simply waste, noise or something to be discarded, we might trace the working of associative processes through highly skewed distribution of events.
+The massive asymmetry between the relatively few long duration repositories and the vast mass of transient, abandoned repositories is definitely not another corroboration of 'the long-tail' distributions that social media exponents such as Clay Shirky and Chris Anderson began discussing more than a decade ago and that may have had a large part to play in many of the intensely individualizing tendencies of big data analytics, targetted advertising, predictive feeds and recommendations. (For instance, one reason that Amazon.com stocks so many obscure products, is that the long tail of sales of these items is  potentially more important than the sales of a smaller number of best-sellers [@Brynjolfsson_2006; @Anderson_2009].)   Rather than the long tail of coding, a scale-free network of code-hubs on Github (itself a hub in networks of code-related infrastructure), or even simply waste, noise or something to be discarded, we might trace the working of associative processes through highly skewed distribution of events.
 
 I can only give a brief indication of some prototyping experiments. For instance, counting just the unique names of repositories in the timeline data, counting how often and when they appear as event in the data stream begins to suggest something about the composition of the capital number of repositories. Almost two thirds of the repositories in Github inject only one or two events into the timeline data stream ever. This means that 20 million of the 30 million repositories are just flashes in the timeline data appearing as one or two events. 
 
@@ -324,26 +324,28 @@ Even if we only added one repository to Github, our  -- the five researchers dir
     library(dplyr)
     
     j = stream_in(file('data/jobs.json'), flatten=TRUE)
-    s = sum(na.omit(as.numeric(j$statistics$totalBytesProcessed)))/1e12
-    bytes = as.numeric(j$statistics$totalBytesProcessed)
-    dates = as.Date(as.POSIXct(as.numeric(j$statistics$creationTime)/1000, origin="1970-01-01"))
+    s = sum(na.omit(as.numeric(j$statistics.totalBytesProcessed)))/1e12
+    bytes = as.numeric(j$statistics.totalBytesProcessed)
+    dates = as.Date(as.POSIXct(as.numeric(j$statistics.creationTime)/1000, origin="1970-01-01"))
     df = data.frame(date = dates, vol = bytes)
+
     gbday = df %>% na.omit  %>%
         arrange((date)) %>%
         mutate(gbcumul = cumsum(vol/1e9)) %>%
         group_by(date) %>%
         mutate(job_count = n())
-        
-    gbday 
+
     dl = data.frame(x = c(as.Date('2016-07-31'),
         as.Date('2013-08-13')), y =c(80000,13500) ,
         labs = c(paste(as.character(s), 'terabytes'), '13500 jobs ran overnight')) 
 
-    ggplot(gbday, aes(x=as.Date(date), y=gbcumul)) +
+    g = ggplot(gbday, aes(x=as.Date(date), y=gbcumul)) +
         geom_line()  +
         ylab('Gb of data (cumulative)') +
         xlab('') +
         geom_text(data=dl, aes(x=x, y=y, label=labs, group=NULL))
+    g 
+    ggsave(device='svg', filename= 'figure/bigquery_jobs.svg')
 ```
 
 Perhaps this level of contribution activity to a repository suggests something important about the prototyping of configurative numbers in big data practice. Most of the 10 million lines added and 8 million lines deleted were configuration-related work as we -- I in particular -- sought to make sense of capital numbers such as 29 million, and tried to differentiate that sense-making from the flood of data challenges, hackathons and  other usages of the GithubArchive data that were also offering geographical, sentiment, logistic and temporal narratives about 'how people build software.  In the process of trying to re-count the capital number, we 'built software' that generated 400 or images, 100 or so data files, and around 1000 other files. More than 22000 queries on GoogleBigQuery took place. Figure \@ref(fig:bigquery) shows something of the flow of data involved in this effort. By mid-2016, 80 terabytes of Github data had been searched, queried, tallied, counted, sorted and arranged according the job logging supplied by the Google Compute Platform. This include one day in August 2013 where 12,000 jobs executed. It appears as a steep ascent on the left hand side of the graph. Traversing 40 terabytes, and generating a bill of around \$US2000, the events of that day  triggered a 'reaching out' from Google Compute marketing department who were interested in our 'use case.'  Why write so much code, process so much data, create so many figures and images, and indeed organise all of this work in the sometimes maddeningly precise version control system of a `git` repository on Github? 

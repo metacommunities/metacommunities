@@ -133,3 +133,10 @@
 - found the code for the powerlaw diagram and the image. Would be nice to include that code, but at the moment, I'm just using the svg until I can reconstruct it. 
 - knitting has gone ok, as has RMarkdown, but bookdown is not good. Leaving that for the moment as it only affects the fig references. 
 - TODO: fix up the jobs figure -- that is breaking now for some reason
+
+## Fri 28 Apr 2017 09:21:29 BST
+- starting on the jobs figure - small new problem with addressing json fields. Fixed that and saving figure to figure/bigquery_jobs.svg
+- ok, finally done I think, with some rough code still running through it ... 
+- will check out old version and diff them to send to editors
+     
+

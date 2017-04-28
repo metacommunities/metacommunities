@@ -1,3 +1,4 @@
 library(bookdown)
+library(rmarkdown)
 
-render_book('whole_number_in_parts.rmd', output_format = word_document2())
+render( 'whole_number_in_parts.rmd', word_document2())
