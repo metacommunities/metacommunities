@@ -216,5 +216,5 @@
 - reading Marcus on ethnography and prototyping, and his account of what Rabinow is doing seems really relevant to what I might be trying to get a feeling for in this project. TODO: look at Rabinow; and at intellectual instrumentalities with pragmatic intent. It comes from _Reconstruction in Philsophy_! I should know about it already. Stengers and Savransky's relevance book would also fit here. Requested this from the library ...     
 
 ## Thu 11 May 2017 21:52:32 BST
-- the stackoverflow developer survey has csv files going back to 2011 available. Could maybe do something with this?
+- the stackoverflow developer survey has csv files going back to 2011 available. Could maybe do something with this? https://insights.stackoverflow.com/survey
 - had idea of looking for database usage in gh repos. How have queries and database increased since 2011?
