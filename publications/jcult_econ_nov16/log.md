@@ -158,3 +158,4 @@ grep 'MUSTDO' % > mustdo.md
 
 ## Wed 24 May 2017 10:58:32 BST
 - got reports back last week and put them here: reports.md 
+- starting search on capitalization -- Thrift, Muniesa, etc. Need to get these and add them in. 
