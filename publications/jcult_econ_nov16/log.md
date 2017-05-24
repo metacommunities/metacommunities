@@ -155,3 +155,6 @@ grep 'MUSTDO' % > mustdo.md
 ## Fri 27 Jan 2017 14:35:43 GMT
 - continuing jcultecon submission; had to fix a couple of references, etc; 
 - finally submitted it -- took 90 minutes or so to sort out references, figures, etc. Still not exactly right. 
+
+## Wed 24 May 2017 10:58:32 BST
+- got reports back last week and put them here: reports.md 
