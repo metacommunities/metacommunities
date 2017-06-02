@@ -159,3 +159,13 @@ grep 'MUSTDO' % > mustdo.md
 ## Wed 24 May 2017 10:58:32 BST
 - got reports back last week and put them here: reports.md 
 - starting search on capitalization -- Thrift, Muniesa, etc. Need to get these and add them in. 
+
+## Fri 02 Jun 2017 17:06:14 BST
+- read reports again -- they have some major common points. The two outstanding ones are github as a platform and capital numbers/capitalisation. They both want clarification on that.  
+- TODO: read the leyshon article ~/archive/ensembles/FS_EarlyView_LangleyLeyshon_2016.pdf 
+- Got this quote from it:
+    When placing the platform at the centre of critical understandings of digital economic circulation, moreover, we have suggested that the platform is not merely a manifestation of wider transformations in the relations and structures of contemporary capitalism. For us, analytical attention should be given to the contingent configuration and consequences of the platform as a discrete mode of socio-technical intermediary and capitalist business arrangement. 15
+- TODO for revision:
+    - reframe gh as a platform, but a platform for platform making; 
+    - emphasise the configurative numbers as a methodological response, with political and social implications; 
+    - read what is meant by capitalisation and position paper as a contribution to that ... 
