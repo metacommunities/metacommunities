@@ -179,10 +179,19 @@ grep 'MUSTDO' % > mustdo.md
 - read lanley and leyshon more and add notes to ~/notes/lanley_leyshon_platform_2016.md; it really has quite a lot in it; and summarizes a lot of the existing literature quite well. 
 - read through all the abstracts in JCE to get a sense of what readers are into:
     - not a lot on digital; quite a lot on the need to think the cultural -- what actors do; how they make sense; and how it differs from the business model
-    - found medium article on github business plan: https://medium.com/@moritzplassnig/github-is-doing-much-better-than-bloomberg-thinks-here-is-why-a4580b249044 and as reference [@Plassnig_2016] 
+    - found medium article on github business plan:
+    https://medium.com/@moritzplassnig/github-is-doing-much-better-than-bloomberg-thinks-here-is-why-a4580b249044 and as reference [@Plassnig_2016] 
 - Plan of work: 
     - reframe github as a platform, and talk about the configured practices platforms involves; github as a configurative platform; a meta-platform, and a place to see what platforms do; 
     - redo capital numbers in terms of platform and capitalization;
     - present the paper as a contribution to the literature on capitalization, and potentially resisting some of tis more performative readings. 
     - frame what I'm doing in the counting work - is it ok to count? clarify this as deconstructive? more than that -- configurative is a way of paying attention to ground rent, or something similiar ... or perhaps to the movement/circulation; to understand circulation as a matter of configuration ...  
     - add some software studies to justify attention on software
+
+## Tue 13 Jun 2017 10:23:47 BST
+- there are two ways to rewrite this paper -- one is about the performativity of methods; the other is about platforms, and capitalization. I guess for JCE I'm going for the latter. It fits better with their debates ... 
+- numbered pages on print out -- about 24 pages; so 6 pages/day means 4 days work; 3 days to enter. Finish and resubmit 21 June;   
+- finding more business references -- such as https://www.bloomberg.com/news/articles/2016-12-15/github-is-building-a-coder-s-paradise-it-s-not-coming-cheap    
+- did 6 pages of edits on paper; 
+- c
+
