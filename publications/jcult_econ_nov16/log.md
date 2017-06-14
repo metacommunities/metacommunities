@@ -142,7 +142,6 @@ grep 'MUSTDO' % > mustdo.md
 - hoping to get 6 pages down, but starting very late -- only half an hour to do it. 
 - did manage to do the 6 pages
 
-
 ## Mon 23 Jan 2017 11:24:16 GMT
 - starting 3 hour block on this paper; at page 17 of 40  
 - 13:30: finished entering all the corrections; almost ready to send. 
@@ -150,7 +149,7 @@ grep 'MUSTDO' % > mustdo.md
 - TODO: generate document with references; submit!
 
 ## Thu 26 Jan 2017 11:06:23 GMT
--  actually made myself start the submission process - bit of a psy-barrier there. Made some progress. But want to do some other things today as well. So saving halfway through: url - https://mc.manuscriptcentral.com/rjce
+- actually made myself start the submission process - bit of a psy-barrier there. Made some progress. But want to do some other things today as well. So saving halfway through: url - https://mc.manuscriptcentral.com/rjce
 
 ## Fri 27 Jan 2017 14:35:43 GMT
 - continuing jcultecon submission; had to fix a couple of references, etc; 
