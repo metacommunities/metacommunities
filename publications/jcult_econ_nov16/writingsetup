@@ -1,27 +1,51 @@
 let SessionLoad = 1
-if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/R/metacommunities/publications/jcult_econ_nov16
+cd ~/Documents/metacommunities/publications/jcult_econ_nov16
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 log.md
+badd +183 log.md
+badd +1 ~/Documents/notes/lanley_leyshon_platform_2016.md
+badd +0 ~/Documents/notes/doganova_muniesa_2015.md
+badd +0 ~/Documents/notes/leyshon_thrift_capitalization_2007.md
 badd +0 configuration_jcult_econ.rmd
-badd +0 simondon_mode_tech_1989.md
 argglobal
 silent! argdel *
 argadd log.md
-argadd configuration_jcult_econ.rmd
-argadd simondon_mode_tech_1989.md
-edit log.md
+edit configuration_jcult_econ.rmd
 set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+wincmd w
+wincmd _ | wincmd |
+split
+wincmd _ | wincmd |
+split
+2wincmd k
+wincmd w
+wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
+exe '1resize ' . ((&lines * 21 + 22) / 45)
+exe 'vert 1resize ' . ((&columns * 96 + 96) / 193)
+exe '2resize ' . ((&lines * 21 + 22) / 45)
+exe 'vert 2resize ' . ((&columns * 96 + 96) / 193)
+exe '3resize ' . ((&lines * 14 + 22) / 45)
+exe 'vert 3resize ' . ((&columns * 96 + 96) / 193)
+exe '4resize ' . ((&lines * 14 + 22) / 45)
+exe 'vert 4resize ' . ((&columns * 96 + 96) / 193)
+exe '5resize ' . ((&lines * 13 + 22) / 45)
+exe 'vert 5resize ' . ((&columns * 96 + 96) / 193)
 argglobal
 setlocal fdm=expr
 setlocal fde=pandoc#folding#FoldExpr()
@@ -31,15 +55,100 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 1 - ((0 * winheight(0) + 16) / 33)
+let s:l = 2 - ((1 * winheight(0) + 10) / 21)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+2
+normal! 0
+lcd ~/Documents/metacommunities/publications/jcult_econ_nov16
+wincmd w
+argglobal
+edit ~/Documents/metacommunities/publications/jcult_econ_nov16/log.md
+setlocal fdm=expr
+setlocal fde=pandoc#folding#FoldExpr()
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+1
+normal! zo
+let s:l = 183 - ((13 * winheight(0) + 10) / 21)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+183
+normal! 047|
+lcd ~/Documents/metacommunities/publications/jcult_econ_nov16
+wincmd w
+argglobal
+edit ~/Documents/notes/doganova_muniesa_2015.md
+setlocal fdm=expr
+setlocal fde=pandoc#folding#FoldExpr()
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 1 - ((0 * winheight(0) + 7) / 14)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 061|
+lcd ~/Documents/notes
+wincmd w
+argglobal
+edit ~/Documents/notes/leyshon_thrift_capitalization_2007.md
+setlocal fdm=expr
+setlocal fde=pandoc#folding#FoldExpr()
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 5 - ((4 * winheight(0) + 7) / 14)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+5
+normal! 08|
+lcd ~/Documents/notes
+wincmd w
+argglobal
+edit ~/Documents/notes/lanley_leyshon_platform_2016.md
+setlocal fdm=expr
+setlocal fde=pandoc#folding#FoldExpr()
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 1 - ((0 * winheight(0) + 6) / 13)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
 normal! 0
-lcd ~/R/metacommunities/publications/jcult_econ_nov16
+lcd ~/Documents/notes
+wincmd w
+exe '1resize ' . ((&lines * 21 + 22) / 45)
+exe 'vert 1resize ' . ((&columns * 96 + 96) / 193)
+exe '2resize ' . ((&lines * 21 + 22) / 45)
+exe 'vert 2resize ' . ((&columns * 96 + 96) / 193)
+exe '3resize ' . ((&lines * 14 + 22) / 45)
+exe 'vert 3resize ' . ((&columns * 96 + 96) / 193)
+exe '4resize ' . ((&lines * 14 + 22) / 45)
+exe 'vert 4resize ' . ((&columns * 96 + 96) / 193)
+exe '5resize ' . ((&lines * 13 + 22) / 45)
+exe 'vert 5resize ' . ((&columns * 96 + 96) / 193)
 tabnext 1
-if exists('s:wipebuf')
+if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf

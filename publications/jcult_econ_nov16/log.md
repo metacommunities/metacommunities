@@ -161,10 +161,36 @@ grep 'MUSTDO' % > mustdo.md
 
 ## Fri 02 Jun 2017 17:06:14 BST
 - read reports again -- they have some major common points. The two outstanding ones are github as a platform and capital numbers/capitalisation. They both want clarification on that.  
-- TODO: read the leyshon article ~/archive/ensembles/FS_EarlyView_LangleyLeyshon_2016.pdf 
+- DONE: read the leyshon article ~/archive/ensembles/FS_EarlyView_LangleyLeyshon_2016.pdf 
 - Got this quote from it:
     When placing the platform at the centre of critical understandings of digital economic circulation, moreover, we have suggested that the platform is not merely a manifestation of wider transformations in the relations and structures of contemporary capitalism. For us, analytical attention should be given to the contingent configuration and consequences of the platform as a discrete mode of socio-technical intermediary and capitalist business arrangement. 15
 - TODO for revision:
     - reframe gh as a platform, but a platform for platform making; 
     - emphasise the configurative numbers as a methodological response, with political and social implications; 
     - read what is meant by capitalisation and position paper as a contribution to that ... 
+
+## Mon 12 Jun 2017 09:37:36 BST
+- starting revisions
+= doing the search on capitalization on WoS, and getting Thrift-Leyshon 2007 (~/archive/ensembles/leyshon_thrift_capitalization_2007.pdf), Muniesa is the key reference but haven't been able to get many of his papers -- library has book on order at least. (due 26 June)
+- can read Munieasa's capitalization devices chapter here: https://books.google.co.uk/books?hl=en&lr=&id=vAE7CgAAQBAJ&oi=fnd&pg=PA109&dq=muniesa+fabian&ots=cKsfePV6aT&sig=6JzfWF4RtNW6QmU-Lve6Dep4ppw#v=onepage&q=muniesa%20fabian&f=true
+- I took some notes in ~/notes/doganova_muniesa_2015.md and saved reference in zotero
+- notes on Thrift-Leyshon in ~/notes/leyshon_thrift_capitalization_2007.md reference also in zotero [@Leyshon_2007] 
+- read lanley and leyshon more and add notes to ~/notes/lanley_leyshon_platform_2016.md; it really has quite a lot in it; and summarizes a lot of the existing literature quite well. 
+- read through all the abstracts in JCE to get a sense of what readers are into:
+    - not a lot on digital; quite a lot on the need to think the cultural -- what actors do; how they make sense; and how it differs from the business model
+    - found medium article on github business plan:
+    https://medium.com/@moritzplassnig/github-is-doing-much-better-than-bloomberg-thinks-here-is-why-a4580b249044 and as reference [@Plassnig_2016] 
+- Plan of work: 
+    - reframe github as a platform, and talk about the configured practices platforms involves; github as a configurative platform; a meta-platform, and a place to see what platforms do; 
+    - redo capital numbers in terms of platform and capitalization;
+    - present the paper as a contribution to the literature on capitalization, and potentially resisting some of tis more performative readings. 
+    - frame what I'm doing in the counting work - is it ok to count? clarify this as deconstructive? more than that -- configurative is a way of paying attention to ground rent, or something similiar ... or perhaps to the movement/circulation; to understand circulation as a matter of configuration ...  
+    - add some software studies to justify attention on software
+
+## Tue 13 Jun 2017 10:23:47 BST
+- there are two ways to rewrite this paper -- one is about the performativity of methods; the other is about platforms, and capitalization. I guess for JCE I'm going for the latter. It fits better with their debates ... 
+- numbered pages on print out -- about 24 pages; so 6 pages/day means 4 days work; 3 days to enter. Finish and resubmit 21 June;   
+- finding more business references -- such as https://www.bloomberg.com/news/articles/2016-12-15/github-is-building-a-coder-s-paradise-it-s-not-coming-cheap    
+- did 6 pages of edits on paper; 
+- c
+
