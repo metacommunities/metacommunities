@@ -194,3 +194,11 @@ grep 'MUSTDO' % > mustdo.md
 - did 6 pages of edits on paper; 
 - c
 
+
+## Wed 14 Jun 2017 11:32:05 BST
+- working on next 6 pages -- 7-12; 
+
+
+## Fri 16 Jun 2017 09:05:16 BST
+- did 6 pages yesterday on paper and just starting on conclusion now. 
+
