@@ -201,4 +201,8 @@ grep 'MUSTDO' % > mustdo.md
 
 ## Fri 16 Jun 2017 09:05:16 BST
 - did 6 pages yesterday on paper and just starting on conclusion now. 
+- sort of finished conclusion on paper
 
+## Mon 19 Jun 2017 11:24:54 BST
+- starting to add paper revisions 
+- around 130 edits to put in; to do in 5 days, suggest that I'd do 30/day?
