@@ -206,3 +206,7 @@ grep 'MUSTDO' % > mustdo.md
 ## Mon 19 Jun 2017 11:24:54 BST
 - starting to add paper revisions 
 - around 130 edits to put in; to do in 5 days, suggest that I'd do 30/day?
+
+## Tue 20 Jun 2017 14:28:59 BST
+- should get to 60 today if I can. Might be hard 
+- got to about 65; 10.5/24 pages done
