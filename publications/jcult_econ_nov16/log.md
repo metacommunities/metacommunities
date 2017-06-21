@@ -210,3 +210,7 @@ grep 'MUSTDO' % > mustdo.md
 ## Tue 20 Jun 2017 14:28:59 BST
 - should get to 60 today if I can. Might be hard 
 - got to about 65; 10.5/24 pages done
+
+## Wed 21 Jun 2017 11:36:24 BST
+- need to get to 100 today if possible.  
+- got to 90 so far, but power outage is the problem. Laptop battery is low ... 
