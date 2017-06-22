@@ -192,8 +192,6 @@ grep 'MUSTDO' % > mustdo.md
 - numbered pages on print out -- about 24 pages; so 6 pages/day means 4 days work; 3 days to enter. Finish and resubmit 21 June;   
 - finding more business references -- such as https://www.bloomberg.com/news/articles/2016-12-15/github-is-building-a-coder-s-paradise-it-s-not-coming-cheap    
 - did 6 pages of edits on paper; 
-- c
-
 
 ## Wed 14 Jun 2017 11:32:05 BST
 - working on next 6 pages -- 7-12; 
@@ -214,3 +212,7 @@ grep 'MUSTDO' % > mustdo.md
 ## Wed 21 Jun 2017 11:36:24 BST
 - need to get to 100 today if possible.  
 - got to 90 so far, but power outage is the problem. Laptop battery is low ... 
+
+## Thu 22 Jun 2017 14:00:59 BST
+- didn't think I'd get time today, but now have 2.5 hours or so. Got to 93 edits yesterday. Today should be around 120.  
+- reached around 117/135. Feeling ok the argument I think. 
