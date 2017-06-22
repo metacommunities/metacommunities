@@ -117,7 +117,6 @@ kable(df[df$events>0, c(1,2)], row.names=FALSE, caption='Github event counts 201
 
 ```
 
-HERE
 
 Table \@ref(tab:event-counts) shows a more differentiated view of events on Github.[^13] Github itself  publicly presents all the events on the platform in various ways: through Application Programmer Interfaces (APIs; [@Github_2016]), through online archives such as [GithubArchive](http://www.githubarchive.org) or [GHTorrent](http://ghtorrent.org/)  [@Ghtorrent_2017]  and through cloud-based data analytics platforms such as GoogleBigQuery [@GoogleInc_2016a]. These data-streams document the of changes, aggregations, and commutations occurring as technical platform ensembles take shape, concretise, localize or indeed break down. But with around one million events each day (in December 2016), making sense of these processes might seem difficult. The 300 million or so events summarised in Table \@ref(tab:event-counts) range across a variety of different practices ('push', 'create,' 'watch,' 'pullrequest',  'fork'), yet we can gain little sense of the distribution of the associated actions, what they refer to, or indeed to whom or what they might matter from such data. From the event counts, it seems, we gain nothing better than a slight feeling of awe in front of a post-industrial technical sublime. If we are interested in the obscure central zone of technical platforms, how does the ostensible visibility of practice in data help?
 
