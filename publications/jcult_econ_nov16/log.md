@@ -216,3 +216,7 @@ grep 'MUSTDO' % > mustdo.md
 ## Thu 22 Jun 2017 14:00:59 BST
 - didn't think I'd get time today, but now have 2.5 hours or so. Got to 93 edits yesterday. Today should be around 120.  
 - reached around 117/135. Feeling ok the argument I think. 
+
+## Fri 23 Jun 2017 09:50:03 BST
+- working on final 20 edits or so 
+- got much of the conclusion done, but still needs tidying .. 
