@@ -9,7 +9,7 @@
 - DONE:read the sss reports
 - DONE:cutting it down to size
 - MUSTDONE:updating some of the methods talk
-- TODO:bringing in some of the new queries and diagrams I've done
+- DONE:bringing in some of the new queries and diagrams I've done
 - DONE:adding a few notes on the massive ddos
 - DONE: work out a good title
 - DONE: check out recent jcultecon papers -- the virtual si on digital is good starting point http://explore.tandfonline.com/page/ah/journal-of-cultural-economy-digital-world; should refer to articles by Marres & Fish, and possibly some of the stuff on markets; e.g. Callon or Deville on attachments? 
@@ -128,15 +128,15 @@ grep 'MUSTDO' % > mustdo.md
 
 ## Thu 12 Jan 2017 09:20:40 GMT
 - configuration in Suchman's sense comes together with figure in numeric sense; suggesting that figures can have volume, density, surface, curve together with other things; this is what configurative enumerations might do ... thicken numbers, explore their graphic folds. 
-- went through the TODOs and either did them or demoted them. Felt that I was getting somewhere when I began to identify configuration with the obscure central zone, the margin of indeterminacy that allows machines to be grouped together. It seems that it might be worth following that a bit more, but not in this paper!
-- TODO: fix any missing references
+- went through the todos and either did them or demoted them. Felt that I was getting somewhere when I began to identify configuration with the obscure central zone, the margin of indeterminacy that allows machines to be grouped together. It seems that it might be worth following that a bit more, but not in this paper!
+- DONE: fix any missing references
 
 ## Wed 18 Jan 2017 10:24:13 GMT
 - been working on paper copy this week, doing roughly ten pages a day.
 
 ## Thu 19 Jan 2017 09:21:11 GMT
 - starting to add paper revisions into text. Again, 10 pages/day
-- almost got 10 pages done today; TODO: fix long references in zotero e.g. Marshall
+- almost got 10 pages done today; DONE: fix long references in zotero e.g. Marshall
 
 ## Fri 20 Jan 2017 15:11:50 GMT
 - hoping to get 6 pages down, but starting very late -- only half an hour to do it. 
@@ -146,7 +146,7 @@ grep 'MUSTDO' % > mustdo.md
 - starting 3 hour block on this paper; at page 17 of 40  
 - 13:30: finished entering all the corrections; almost ready to send. 
 - DONE: fix Wittgenstein reference
-- TODO: generate document with references; submit!
+- DONE: generate document with references; submit!
 
 ## Thu 26 Jan 2017 11:06:23 GMT
 - actually made myself start the submission process - bit of a psy-barrier there. Made some progress. But want to do some other things today as well. So saving halfway through: url - https://mc.manuscriptcentral.com/rjce
@@ -164,7 +164,7 @@ grep 'MUSTDO' % > mustdo.md
 - DONE: read the leyshon article ~/archive/ensembles/FS_EarlyView_LangleyLeyshon_2016.pdf 
 - Got this quote from it:
     When placing the platform at the centre of critical understandings of digital economic circulation, moreover, we have suggested that the platform is not merely a manifestation of wider transformations in the relations and structures of contemporary capitalism. For us, analytical attention should be given to the contingent configuration and consequences of the platform as a discrete mode of socio-technical intermediary and capitalist business arrangement. 15
-- TODO for revision:
+- DONE for revision:
     - reframe gh as a platform, but a platform for platform making; 
     - emphasise the configurative numbers as a methodological response, with political and social implications; 
     - read what is meant by capitalisation and position paper as a contribution to that ... 
@@ -220,3 +220,7 @@ grep 'MUSTDO' % > mustdo.md
 ## Fri 23 Jun 2017 09:50:03 BST
 - working on final 20 edits or so 
 - got much of the conclusion done, but still needs tidying .. 
+
+## Mon 26 Jun 2017 09:53:20 BST
+- DONE:  need to write re-submission letter and finish conclusion.  
+- working on the conclusion, but still messy
