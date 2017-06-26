@@ -224,3 +224,5 @@ grep 'MUSTDO' % > mustdo.md
 ## Mon 26 Jun 2017 09:53:20 BST
 - DONE:  need to write re-submission letter and finish conclusion.  
 - working on the conclusion, but still messy
+- TODO; say something about asset geography in conclusion
+- TODO: run the render_tufte.r to get docx
