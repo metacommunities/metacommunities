@@ -226,3 +226,8 @@ grep 'MUSTDO' % > mustdo.md
 - working on the conclusion, but still messy
 - TODO; say something about asset geography in conclusion
 - TODO: run the render_tufte.r to get docx
+
+## Tue 27 Jun 2017 09:59:40 BST
+- finding it hard to finish on this 
+- reworked the conclusion a lot and rewrote the abstract again. 
+- references are all messed up -- need to do a much better import to get ref_bibs up to date again.
