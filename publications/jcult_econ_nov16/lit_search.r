@@ -2,7 +2,7 @@ library(scilitlearn)
 library(dplyr)
 library(ggplot2)
 wos = load_data('data/jcultecon_all.tsv')
-r = search_term(wos, 'device', format_as_bibtex = FALSE)
+r = search_term(wos, 'facebook', format_as_bibtex = FALSE)
 r$AF
 ls(pos='package:scilitlearn')
 cited_references_time(wos)

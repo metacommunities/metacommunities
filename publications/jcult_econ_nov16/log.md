@@ -232,3 +232,8 @@ grep 'MUSTDO' % > mustdo.md
 - reworked the conclusion a lot and rewrote the abstract again. 
 - references are all messed up -- need to do a much better import to get ref_bibs up to date again.
 - fixing TBAs and revising resubmit letter
+
+## Wed 28 Jun 2017 14:02:10 BST
+- fixing references today 
+- generating almost clean set now -- needed to add quite a few from web; somehow lost them elsewhere. Not synced from old laptop?
+- pfaffed a long time with intro, but hopefully it is ready to go in now. 
