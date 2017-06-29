@@ -237,3 +237,7 @@ grep 'MUSTDO' % > mustdo.md
 - fixing references today 
 - generating almost clean set now -- needed to add quite a few from web; somehow lost them elsewhere. Not synced from old laptop?
 - pfaffed a long time with intro, but hopefully it is ready to go in now. 
+
+## Thu 29 Jun 2017 16:18:52 BST
+- got capitalization book [@Muniesa_2017] and added notes in ~/notes/muniesa_capitalization_guide_2017.md 
+- TODO - bring three quotes from this into intro, conclusion and one other place.
