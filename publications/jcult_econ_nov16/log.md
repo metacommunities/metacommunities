@@ -240,4 +240,16 @@ grep 'MUSTDO' % > mustdo.md
 
 ## Thu 29 Jun 2017 16:18:52 BST
 - got capitalization book [@Muniesa_2017] and added notes in ~/notes/muniesa_capitalization_guide_2017.md 
-- TODO - bring three quotes from this into intro, conclusion and one other place.
+- DONE - bring three quotes from this into intro, conclusion and one other place.
+
+## Fri 30 Jun 2017 11:03:48 BST
+- putting capitalization quote from Muniesa et all in. [@Muniesa_2017]  
+- resubmitted!
+    Manuscript ID
+        RJCE-2017-0008.R1
+    Title
+        48 million configurations and counting: platform numbers and their capitalization 
+    Authors
+        Mackenzie, Adrian
+    Date Submitted
+        30-Jun-2017
