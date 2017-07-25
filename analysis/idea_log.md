@@ -218,3 +218,8 @@
 ## Thu 11 May 2017 21:52:32 BST
 - the stackoverflow developer survey has csv files going back to 2011 available. Could maybe do something with this? https://insights.stackoverflow.com/survey
 - had idea of looking for database usage in gh repos. How have queries and database increased since 2011?
+
+## Tue 25 Jul 2017 22:29:58 BST
+- think about hackers and how hacking could be investigated on  Github
+- 5000 labelled repositories available -- could be good training set
+- useR conference has neural net analysis of git commits and pull requests, etc
