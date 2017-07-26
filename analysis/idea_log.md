@@ -221,5 +221,6 @@
 
 ## Tue 25 Jul 2017 22:29:58 BST
 - think about hackers and how hacking could be investigated on  Github
-- 5000 labelled repositories available -- could be good training set
-- useR conference has neural net analysis of git commits and pull requests, etc
+- 5000 labelled repositories available -- could be good training set https://zenodo.org/record/804474#.WXecxIHTXqA
+- useR conference has neural net analysis of git commits and pull requests, etc Analyzing Github pull requests with Neural Embeddings, in R // R-bloggers
+https://www.r-bloggers.com/analyzing-github-pull-requests-with-neural-embeddings-in-r/
