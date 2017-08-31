@@ -224,3 +224,7 @@
 - 5000 labelled repositories available -- could be good training set https://zenodo.org/record/804474#.WXecxIHTXqA
 - useR conference has neural net analysis of git commits and pull requests, etc Analyzing Github pull requests with Neural Embeddings, in R // R-bloggers
 https://www.r-bloggers.com/analyzing-github-pull-requests-with-neural-embeddings-in-r/
+
+## Thu 31 Aug 2017 13:39:03 BST
+-  Github Engineering post about how they developed a topic analysis -- seems they are doing what I was trying to do several years ago. https://githubengineering.com/topics/ 
+- would be great to look at the code etc for this analysis
