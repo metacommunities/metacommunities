@@ -270,7 +270,7 @@ grep 'MUSTDO' % > mustdo.md
 
 ### the reports
 
-EFEREES’ COMMENTS
+REFEREES’ COMMENTS
 
 Referee: 1
 
@@ -301,4 +301,5 @@ Fourth, the paper is still a little opaque in some places, and carelessly writte
 
 Look forward to reading the final version in due course.
 
-TODO: get a definition of platform from Srnicek 
+- TODO: get a definition of platform from Srnicek 
+- Made notes on Srnicek and McAffee in ~/notes/mcaffee_platform_2017.md
