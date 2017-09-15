@@ -270,36 +270,42 @@ grep 'MUSTDO' % > mustdo.md
 
 ### the reports
 
-REFEREES’ COMMENTS
+>Referee: 1
+>
+>Comments to the Author
+>Thank you for providing me with the opportunity to read the revised version of this paper. I appreciate the author’s effort to take into account some of the concerns expressed in my review. The revisions made are visible, and I believe they improve the quality of the paper, but for the moment they remain too superficial to provide a solution to the problems identified in the previous version of the paper. 
 
-Referee: 1
+>My main concern with the previous version of the paper was its lack of clarity, both theoretically and empirically. I still have the same concern reading the revised version. I found the notion of “capital numbers” intriguing but insufficiently developed – hence my suggestion to take a look at the literature on capitalization, and to relate this to the empirical analysis. In the revised version, “capital numbers” have been renamed “platform numbers” and the literature on capitalization is referred to, by in my view this does not solve the problem of analyzing, both theoretically and empirically, the novel concepts proposed in the paper, rather than just putting them forward. Why are the different numbers evoked in the paper “platform numbers”? How are “platform numbers” different from other kinds of numbers that have been discussed in the literature, such as accounting numbers, financial numbers or statistics? I think that these and other questions I raised in my previous review are still relevant, and engaging with them might help the reader grasp what is interesting and specific in the case described in the paper. 
 
-Comments to the Author
-Thank you for providing me with the opportunity to read the revised version of this paper. I appreciate the author’s effort to take into account some of the concerns expressed in my review. The revisions made are visible, and I believe they improve the quality of the paper, but for the moment they remain too superficial to provide a solution to the problems identified in the previous version of the paper. 
+>To help the reader, the paper should also be clearer about what is meant by “platforms”. The introduction states that “many authors” have suggested that platforms “stand at the centre of the processes of capitalization” (p. 3). I believe this refers mainly to Langley and Leyshon (2016), which then should be further discussed. Why are platforms central to capitalization? How do they capitalize and how are they capitalized on? The argument continues stating that Github “lies at the heart of contemporary platformizing practice”, is a “capitalizing platform” and “platformizing platform” (p. 5). I was getting a bit lost here, all the more as the reader is given no clues about what is meant by “platform(ization)” in the paper (the definition proposed in the introduction -- “platformization is the process of rendering an ensemble a platform” (p. 4) – is not very helpful). 
 
-My main concern with the previous version of the paper was its lack of clarity, both theoretically and empirically. I still have the same concern reading the revised version. I found the notion of “capital numbers” intriguing but insufficiently developed – hence my suggestion to take a look at the literature on capitalization, and to relate this to the empirical analysis. In the revised version, “capital numbers” have been renamed “platform numbers” and the literature on capitalization is referred to, by in my view this does not solve the problem of analyzing, both theoretically and empirically, the novel concepts proposed in the paper, rather than just putting them forward. Why are the different numbers evoked in the paper “platform numbers”? How are “platform numbers” different from other kinds of numbers that have been discussed in the literature, such as accounting numbers, financial numbers or statistics? I think that these and other questions I raised in my previous review are still relevant, and engaging with them might help the reader grasp what is interesting and specific in the case described in the paper. 
+>The remainder of the paper, starting from p. 4, has not changed much, except for replacing “capital numbers” by “platform numbers”. A significant addition is made in the beginning of the section entitled “from platform numbers to configurative enumeration”. The two paragraphs on p. 19 are inspiring but hard to follow. The term “enumeration”, which seems to be used interchangeably with the production of platform numbers in the previous section, becomes central here, but once again the reader is given no clues about what is meant by “enumeration” and “configurative enumeration”. The paper states for example that “enumerations of people and things construct an uncertain magnitude whose capitalizing potential derives from the multiple ways in which what is enumerated might be re-counted or re-grouped in asset forms” (p. 19). I find this interesting but somehow obscure. What is the relationship between capitalization, uncertainty and the possibility of re-counting? I also very much like the idea that platform numbers are “configurative” rather than “performative”. But why is this the case? And is this specific to platform numbers, or does it pertain to a broader argument in a “post-performative vein”, as the author puts it in a footnote? What does it mean that platform numbers “do not simply act performatively (…) but derive from pre-capitalizing processes specific to the platform in question” (p. 19) (and what would it mean to “simply act performatively”, by the way?)? All this could become a core argument in the paper, but then it should be more clearly positioned in relation to the literature and the empirical material, announced from the introduction and dealt with throughout the paper. 
+>
+>
+>Referee: 2
+>
+>Comments to the Author
+>The author has responded to my comments on capitalisation and has now usefully included broader arguments on this process into the paper.  This fills a gap in the original version.  
+>
+>The paper is much more convincing as a result, and while I would support publication it needs some further, albeit rather minor, revisions.
+>
+>First, given the discussion of platforms it seems odd not to refer to Nick Srnicek’s 2017 book on Platform Capitalism. It really is an important contribution.  The new McAffe and Brynjolfsson book, Machine, Platform, Crowd, is also useful, if uncritical. 
+>
+>Second, the paper moves towards it towards the end, but making clearer the links between the evolutionary soup that it is GitHub, and the efforts made to exploit developments therein through capitalist business models, might be drawn out even further.  Is this yet another example of work in a public domain being appropriated and exploited for private gain? 
+>
+>Third, while I’m grateful to the author for introducing me to the concept of post-performativity, I wonder whether this is really needed here? It seemed a little late in the paper to throw this in, I'm not really sure what it adds to the main argument, and might be kept for another paper. 
+>
+>Fourth, the paper is still a little opaque in some places, and carelessly written in others. It needs a thorough edit for clarity and grammar. The subject matter is complex, so it would be good to flatten out the language as much as possible.  I did smile at this line in the abstract: ‘constitutive opacity of platforms as ensemble realities’. Opacity indeed. This could be written much more clearly.  There are other examples throughout.  
 
-To help the reader, the paper should also be clearer about what is meant by “platforms”. The introduction states that “many authors” have suggested that platforms “stand at the centre of the processes of capitalization” (p. 3). I believe this refers mainly to Langley and Leyshon (2016), which then should be further discussed. Why are platforms central to capitalization? How do they capitalize and how are they capitalized on? The argument continues stating that Github “lies at the heart of contemporary platformizing practice”, is a “capitalizing platform” and “platformizing platform” (p. 5). I was getting a bit lost here, all the more as the reader is given no clues about what is meant by “platform(ization)” in the paper (the definition proposed in the introduction -- “platformization is the process of rendering an ensemble a platform” (p. 4) – is not very helpful). 
+- DONE: get a definition of platform from Srnicek  srnicek_platform_capitalism_2016.md
+- Made notes on Srnicek and McAfee in ~/notes/mcafee_platform_2017.md
 
-The remainder of the paper, starting from p. 4, has not changed much, except for replacing “capital numbers” by “platform numbers”. A significant addition is made in the beginning of the section entitled “from platform numbers to configurative enumeration”. The two paragraphs on p. 19 are inspiring but hard to follow. The term “enumeration”, which seems to be used interchangeably with the production of platform numbers in the previous section, becomes central here, but once again the reader is given no clues about what is meant by “enumeration” and “configurative enumeration”. The paper states for example that “enumerations of people and things construct an uncertain magnitude whose capitalizing potential derives from the multiple ways in which what is enumerated might be re-counted or re-grouped in asset forms” (p. 19). I find this interesting but somehow obscure. What is the relationship between capitalization, uncertainty and the possibility of re-counting? I also very much like the idea that platform numbers are “configurative” rather than “performative”. But why is this the case? And is this specific to platform numbers, or does it pertain to a broader argument in a “post-performative vein”, as the author puts it in a footnote? What does it mean that platform numbers “do not simply act performatively (…) but derive from pre-capitalizing processes specific to the platform in question” (p. 19) (and what would it mean to “simply act performatively”, by the way?)? All this could become a core argument in the paper, but then it should be more clearly positioned in relation to the literature and the empirical material, announced from the introduction and dealt with throughout the paper. 
-
-
-Referee: 2
-
-Comments to the Author
-The author has responded to my comments on capitalisation and has now usefully included broader arguments on this process into the paper.  This fills a gap in the original version.  
-
-The paper is much more convincing as a result, and while I would support publication it needs some further, albeit rather minor, revisions.
-
-First, given the discussion of platforms it seems odd not to refer to Nick Srnicek’s 2017 book on Platform Capitalism. It really is an important contribution.  The new McAffe and Brynjolfsson book, Machine, Platform, Crowd, is also useful, if uncritical. 
-
-Second, the paper moves towards it towards the end, but making clearer the links between the evolutionary soup that it is GitHub, and the efforts made to exploit developments therein through capitalist business models, might be drawn out even further.  Is this yet another example of work in a public domain being appropriated and exploited for private gain? 
-
-Third, while I’m grateful to the author for introducing me to the concept of post-performativity, I wonder whether this is really needed here? It seemed a little late in the paper to throw this in, I'm not really sure what it adds to the main argument, and might be kept for another paper. 
-
-Fourth, the paper is still a little opaque in some places, and carelessly written in others. It needs a thorough edit for clarity and grammar. The subject matter is complex, so it would be good to flatten out the language as much as possible.  I did smile at this line in the abstract: ‘constitutive opacity of platforms as ensemble realities’. Opacity indeed. This could be written much more clearly.  There are other examples throughout.  
-
-Look forward to reading the final version in due course.
-
-- TODO: get a definition of platform from Srnicek 
-- Made notes on Srnicek and McAffee in ~/notes/mcaffee_platform_2017.md
+## Fri 15 Sep 2017 10:47:54 BST
+- Srnicek is a very short book that says very little about the making of platforms. As if it just occurs, in a just-so implementation of a business model.  McAfee does that even more.  
+- TODO: 
+    - add definitions of platforms and their shortcomings
+    - explain platformizing, configuration .... 
+    - add new refs for srnicek and mcafee; and perhaps 'configurative'
+    - take out post-performativity
+- started writing these revisions in as sections in revisions_sep17.md. 
+- also making edits on abstract.  

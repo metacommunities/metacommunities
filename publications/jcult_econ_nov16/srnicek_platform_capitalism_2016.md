@@ -1,0 +1,1 @@
+/home/mackenza/notes/srnicek_platform_capitalism_2016.md
