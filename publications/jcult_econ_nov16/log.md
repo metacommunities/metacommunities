@@ -303,9 +303,12 @@ grep 'MUSTDO' % > mustdo.md
 ## Fri 15 Sep 2017 10:47:54 BST
 - Srnicek is a very short book that says very little about the making of platforms. As if it just occurs, in a just-so implementation of a business model.  McAfee does that even more.  
 - TODO: 
-    - add definitions of platforms and their shortcomings
+    - DONE: add definitions of platforms and their shortcomings
     - explain platformizing, configuration .... 
     - add new refs for srnicek and mcafee; and perhaps 'configurative'
     - take out post-performativity
 - started writing these revisions in as sections in revisions_sep17.md. 
 - also making edits on abstract.  
+
+## Mon 18 Sep 2017 11:29:58 BST
+- doing the TODOs above, but also trying to work out how much revision is required. The reports are still asking for a lot. The editor less.  
