@@ -313,3 +313,7 @@ grep 'MUSTDO' % > mustdo.md
 ## Mon 18 Sep 2017 11:29:58 BST
 - doing the TODOs above, but also trying to work out how much revision is required. The reports are still asking for a lot. The editor less.  
 - TODO: still need to flesh out example of configurations
+
+## Tue 19 Sep 2017 11:11:30 BST
+- revising 10/34 on paper. Quite a few typos, and need for reorganization. Also put notes of where to add extra text. 
+- reached 11/31 on the paper. 
