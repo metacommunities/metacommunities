@@ -317,3 +317,6 @@ grep 'MUSTDO' % > mustdo.md
 ## Tue 19 Sep 2017 11:11:30 BST
 - revising 10/34 on paper. Quite a few typos, and need for reorganization. Also put notes of where to add extra text. 
 - reached 11/31 on the paper. 
+
+## Wed 20 Sep 2017 12:30:52 BST
+- doing next 10 pages of the paper. Still keeping an eye on the revisions. reached conclusion in edits (24/34 pages)   
