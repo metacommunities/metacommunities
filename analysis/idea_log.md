@@ -215,5 +215,19 @@
 ## Wed 26 Apr 2017 10:32:55 BST
 - reading Marcus on ethnography and prototyping, and his account of what Rabinow is doing seems really relevant to what I might be trying to get a feeling for in this project. TODO: look at Rabinow; and at intellectual instrumentalities with pragmatic intent. It comes from _Reconstruction in Philsophy_! I should know about it already. Stengers and Savransky's relevance book would also fit here. Requested this from the library ...     
 
+## Thu 11 May 2017 21:52:32 BST
+- the stackoverflow developer survey has csv files going back to 2011 available. Could maybe do something with this? https://insights.stackoverflow.com/survey
+- had idea of looking for database usage in gh repos. How have queries and database increased since 2011?
+
+## Tue 25 Jul 2017 22:29:58 BST
+- think about hackers and how hacking could be investigated on  Github
+- 5000 labelled repositories available -- could be good training set https://zenodo.org/record/804474#.WXecxIHTXqA
+- useR conference has neural net analysis of git commits and pull requests, etc Analyzing Github pull requests with Neural Embeddings, in R // R-bloggers
+https://www.r-bloggers.com/analyzing-github-pull-requests-with-neural-embeddings-in-r/
+
+## Thu 31 Aug 2017 13:39:03 BST
+-  Github Engineering post about how they developed a topic analysis -- seems they are doing what I was trying to do several years ago. https://githubengineering.com/topics/ 
+- would be great to look at the code etc for this analysis
+
 ## Wed 20 Sep 2017 13:48:34 BST
 - looking at forks discussion on stackoverflow: forks are not actually copies, they are just personally-named branches. That's pretty amazing, because it really means that there are far less repos on gh   than I thought.  
