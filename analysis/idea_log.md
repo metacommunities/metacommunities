@@ -214,3 +214,6 @@
 
 ## Wed 26 Apr 2017 10:32:55 BST
 - reading Marcus on ethnography and prototyping, and his account of what Rabinow is doing seems really relevant to what I might be trying to get a feeling for in this project. TODO: look at Rabinow; and at intellectual instrumentalities with pragmatic intent. It comes from _Reconstruction in Philsophy_! I should know about it already. Stengers and Savransky's relevance book would also fit here. Requested this from the library ...     
+
+## Wed 20 Sep 2017 13:48:34 BST
+- looking at forks discussion on stackoverflow: forks are not actually copies, they are just personally-named branches. That's pretty amazing, because it really means that there are far less repos on gh   than I thought.  
