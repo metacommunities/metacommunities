@@ -320,3 +320,7 @@ grep 'MUSTDO' % > mustdo.md
 
 ## Wed 20 Sep 2017 12:30:52 BST
 - doing next 10 pages of the paper. Still keeping an eye on the revisions. reached conclusion in edits (24/34 pages)   
+
+## Thu 21 Sep 2017 11:48:33 BST
+- finished paper edits. starting to put them back into the file configuration_jcult_econ.rmd
+- reach page 6 in entering edits, that's line 69 in the file. 
