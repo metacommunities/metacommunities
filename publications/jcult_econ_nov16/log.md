@@ -324,3 +324,10 @@ grep 'MUSTDO' % > mustdo.md
 ## Thu 21 Sep 2017 11:48:33 BST
 - finished paper edits. starting to put them back into the file configuration_jcult_econ.rmd
 - reach page 6 in entering edits, that's line 69 in the file. 
+
+## Fri 22 Sep 2017 11:21:28 BST
+- adding next 15 pages of edits 
+- no, did them all, through to page 34.
+- will now format again ...  seemed to go okay
+- have saved and add tracked changes version as mackenzie_revised_manuscript_sept2017.docx
+- will now write revisions letter
