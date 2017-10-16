@@ -231,3 +231,6 @@ https://www.r-bloggers.com/analyzing-github-pull-requests-with-neural-embeddings
 
 ## Wed 20 Sep 2017 13:48:34 BST
 - looking at forks discussion on stackoverflow: forks are not actually copies, they are just personally-named branches. That's pretty amazing, because it really means that there are far less repos on gh   than I thought.  
+
+## Mon 16 Oct 2017 14:39:07 BST
+- useful todo blog posting on software ecosystems at https://juliasilge.com/blog/tag-network/; could borrow some of this work - the actual blog is https://stackoverflow.blog/2017/10/03/mapping-ecosystems-software-development/ 
