@@ -167,11 +167,13 @@ query2 = "SELECT type, count(type) cnt FROM
 
 df = query_exec('metacommunities', query=query2)
 
-ggplot(df, aes(x=type, y=cnt)) +
+ga  <- ggplot(df, aes(x=type, y=cnt)) +
     geom_bar(stat='identity') +
     coord_flip() +
     xlab('Event count') +
     ylab('Event type')
+ga
+ggsave('figure/event_counts.svg')
 
 social_events = df %>%
     filter(type %in%  c('WatchEvent', 'IssuesEvent', 'PullRequestEvent', 'IssueCommentEvent', 'ForkEvent')) %>%
@@ -253,6 +255,7 @@ What are these events? The event of creating a named repository is primary, foll
             } else {
             g +  ggtitle(paste('Forks associated with the name `', query_term, '`', sep=''))
             }
+        return(g)
     }
 
     query_term = 'android'
@@ -260,7 +263,8 @@ What are these events? The event of creating a named repository is primary, foll
     binwidth=10 
     pages_to_fetch= Inf
     df_and = fetch_data(query_term, Inf, TRUE)
-    plot_forks(df_and, query_term, fork_count_cutoff, binwidth, FALSE)
+    g  <- plot_forks(df_and, query_term, fork_count_cutoff, binwidth, FALSE)
+    g
 ```
 
 
@@ -268,8 +272,10 @@ While it is hard to grasp the texture of imitative processes in event data, they
 
 ```{r bootstrap_association,  fig.cap= 'Repository forks associated with the name `bootstrap`', echo=FALSE, cache=TRUE}
     query_term='bootstrap'
-    df = fetch_data(query_term, 4)
-    plot_forks(df, query_term, 10, 10, FALSE)
+    df = fetch_data(query_term, Inf, TRUE)
+    g2  <- plot_forks(df, query_term, 10, 10, FALSE)
+    g2
+    ggsave('figure/bootstrap_forks.svg')
 ```
 
 We might call this form of composition, as it configures capital numbers, *stacked associative imitation.* Associative imitation appears in two different ways in these figures. The broad bands of color rippling horizontally  across the base of the figures graph the counts of copies being made each day on Github of popular repositories such as `android` or `bootstrap` using the Fork action. (In forking, the repository name remains the same.)   But the much more dense striations running above the base ribbons,  seen for instance in Figure \@ref(fig:android_associations), count repositories whose names combine the base repository (e.g. `android`) but vary it in some way. These repositories associate with the base repository, but diverge from it in a multiplicity of ways. A repository may, for instance, relate to the popular  `bootstrap` repository yet combine it with a range of other platforms and devices such as `android` or `jQuery`. 
