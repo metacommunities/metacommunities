@@ -234,3 +234,9 @@ https://www.r-bloggers.com/analyzing-github-pull-requests-with-neural-embeddings
 
 ## Mon 16 Oct 2017 14:39:07 BST
 - useful todo blog posting on software ecosystems at https://juliasilge.com/blog/tag-network/; could borrow some of this work - the actual blog is https://stackoverflow.blog/2017/10/03/mapping-ecosystems-software-development/ 
+
+## Tue 21 Nov 2017 08:52:09 GMT
+- DejaVu -- project looks at code duplication -- TODO: get the papers for this
+https://blog.acolyer.org/2017/11/20/dejavu-a-map-of-code-duplicates-on-github/amp/
+From the paper at https://dl.acm.org/citation.cfm?doid=3152284.3133908
+- got the paper  -- at ~/archive/ensembles/lopes_dejavu_github_2017.pdf 
