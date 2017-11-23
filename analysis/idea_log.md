@@ -240,3 +240,6 @@ https://www.r-bloggers.com/analyzing-github-pull-requests-with-neural-embeddings
 https://blog.acolyer.org/2017/11/20/dejavu-a-map-of-code-duplicates-on-github/amp/
 From the paper at https://dl.acm.org/citation.cfm?doid=3152284.3133908
 - got the paper  -- at ~/archive/ensembles/lopes_dejavu_github_2017.pdf 
+
+## Thu 23 Nov 2017 10:55:29 GMT
+- duplication could be the focus of a paper -- how much of platform life is duplicated; and if it is, what does it matter. Does this go back to ideas of crowds, powerlaws, etc?    
