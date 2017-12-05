@@ -34,6 +34,11 @@ import requests
 # <markdowncell>
 
 # ## Popular repo names and what they say
+# 
+# Exploring how naming of repos might be help us classify repos.
+# The idea here is that the very banal but common names  tell us something about important kinds of practice. Or least, help us to see around it. 
+# 
+# The repo names here are just a 100,000 sample. 
 
 # <codecell>
 
@@ -75,7 +80,13 @@ repo_words = [i for l in top_names.repos_normed.astype('string').str.strip().str
 # <codecell>
 
 repo_words = pd.Series(repo_words)
-repo_words.value_counts()[:100]
+repo_word_counts = repo_words.value_counts()
+print(repo_word_counts.shape)
+print(repo_word_counts.index)
+
+# <codecell>
+
+repo_words
 
 # <markdowncell>
 
@@ -84,6 +95,8 @@ repo_words.value_counts()[:100]
 # <markdowncell>
 
 # # Github repos that  use github to serve content
+# 
+# A second important category of repos are simply blogs or websites.
 
 # <codecell>
 
