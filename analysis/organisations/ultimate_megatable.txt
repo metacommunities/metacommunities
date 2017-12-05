@@ -1,0 +1,261 @@
+/* two problems with all of this, related to the orgs_api starting point:
+1: created_at field was cut badly, being fixed
+2: orgs with no Name or Company etc. were erroring out - also being fixed (I think)
+*/
+
+
+ALTER TABLE  `organizations_megatable5` ADD PRIMARY KEY (  `repository_organization` );
+
+ALTER TABLE  `organizations_megatable_ultimate` ADD  `org_created` DATE NOT NULL
+UPDATE `organizations_megatable_ultimate` SET org_created = (SELECT created_at FROM orgs_api WHERE orgs_api.login = organizations_megatable_ultimate.repository_organization);
+
+UPDATE `organizations_megatable_ultimate` SET TempTable = 1 WHERE org_created > '2013-06-30 00:00:01';
+UPDATE `organizations_megatable_ultimate` SET TempTable = 2 WHERE org_created <= '2013-06-30 00:00:01' AND org_created > '2013-03-30 00:00:01';
+UPDATE `organizations_megatable_ultimate` SET TempTable = 3 WHERE org_created <= '2013-03-30 00:00:01' AND org_created >  '2012-12-30 00:00:01' ;
+UPDATE `organizations_megatable_ultimate` SET TempTable = 4 WHERE org_created <= '2012-12-30 00:00:01' AND org_created >  '2012-07-30 00:00:01' ;
+UPDATE `organizations_megatable_ultimate` SET TempTable = 5 WHERE org_created <= '2012-07-30 00:00:01' AND org_created >  '2012-03-30 00:00:01' ;
+
+#below is proper version, above is the hack to make it work with dodgy 9-character dates....
+
+ALTER TABLE  `organizations_megatable_ultimate` ADD  `TempTable` INT NOT NULL;
+UPDATE `organizations_megatable_ultimate` SET TempTable = 1 WHERE org_created > '2013-07-01 00:00:01';
+UPDATE `organizations_megatable_ultimate` SET TempTable = 2 WHERE org_created <= '2013-07-01 00:00:01' AND org_created > '2013-04-01 00:00:01';
+UPDATE `organizations_megatable_ultimate` SET TempTable = 3 WHERE org_created <= '2013-04-01 00:00:01' AND org_created >  '2013-01-01 00:00:01' ;
+UPDATE `organizations_megatable_ultimate` SET TempTable = 4 WHERE org_created <= '2013-01-01 00:00:01' AND org_created >  '2012-08-01 00:00:01' ;
+UPDATE `organizations_megatable_ultimate` SET TempTable = 5 WHERE org_created <= '2012-08-01 00:00:01' AND org_created >  '2012-04-01 00:00:01' ;
+
+
+
+
+
+
+
+CREATE TABLE  `git`.`org_early_events` (
+`repository_organization` VARCHAR( 120 ) COLLATE utf8_bin DEFAULT NULL ,
+ `repository_url` VARCHAR( 250 ) COLLATE utf8_bin DEFAULT NULL ,
+ `type` VARCHAR( 50 ) COLLATE utf8_bin DEFAULT NULL ,
+ `created_at` DATETIME DEFAULT NULL ,
+ `repository_size` INT( 11 ) DEFAULT NULL ,
+ `repository_created_at` DATETIME DEFAULT NULL ,
+ `dense_rank` INT( 11 ) DEFAULT NULL ,
+KEY  `repository_organization` (  `repository_organization` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+ALTER TABLE  `orgevents_temp2_20` ADD INDEX (  `repository_organization` )
+ALTER TABLE  `orgevents_temp3_20` ADD INDEX (  `repository_organization` )
+ALTER TABLE  `orgevents_temp4_20` ADD INDEX (  `repository_organization` )
+ALTER TABLE  `orgevents_temp5_20` ADD INDEX (  `repository_organization` )
+
+
+
+/* join orgevents_temp1_20.repository_organization = `organizations_megatable_ultimate`.repository_organization WHERE TempTable = 1 */
+INSERT INTO org_early_events
+(SELECT events.repository_organization AS repository_organization,
+events.repository_url as repository_url,
+events.type as type,
+events.created_at as created_at,
+events.repository_size as repository_size,
+events.repository_created_at as repository_created_at,
+events.dense_rank as dense_rank
+FROM
+	(SELECT repository_organization,
+	repository_url,
+	type,
+	created_at,
+	repository_size,
+	repository_created_at,
+	dense_rank
+	FROM orgevents_temp1_20)
+AS events
+INNER JOIN
+	(SELECT repository_organization
+	FROM organizations_megatable_ultimate
+	WHERE TempTable = 1)
+AS orgs
+ON orgs.repository_organization = events.repository_organization
+ORDER BY created_at ASC);
+
+INSERT INTO org_early_events
+(SELECT events.repository_organization AS repository_organization,
+events.repository_url as repository_url,
+events.type as type,
+events.created_at as created_at,
+events.repository_size as repository_size,
+events.repository_created_at as repository_created_at,
+events.dense_rank as dense_rank
+FROM
+	(SELECT repository_organization,
+	repository_url,
+	type,
+	created_at,
+	repository_size,
+	repository_created_at,
+	dense_rank
+	FROM orgevents_temp2_20)
+AS events
+INNER JOIN
+	(SELECT repository_organization
+	FROM organizations_megatable_ultimate
+	WHERE TempTable = 2)
+AS orgs
+ON orgs.repository_organization = events.repository_organization
+ORDER BY created_at ASC);
+
+INSERT INTO org_early_events
+(SELECT events.repository_organization AS repository_organization,
+events.repository_url as repository_url,
+events.type as type,
+events.created_at as created_at,
+events.repository_size as repository_size,
+events.repository_created_at as repository_created_at,
+events.dense_rank as dense_rank
+FROM
+	(SELECT repository_organization,
+	repository_url,
+	type,
+	created_at,
+	repository_size,
+	repository_created_at,
+	dense_rank
+	FROM orgevents_temp3_20)
+AS events
+INNER JOIN
+	(SELECT repository_organization
+	FROM organizations_megatable_ultimate
+	WHERE TempTable = 3)
+AS orgs
+ON orgs.repository_organization = events.repository_organization
+ORDER BY created_at ASC);
+
+INSERT INTO org_early_events
+(SELECT events.repository_organization AS repository_organization,
+events.repository_url as repository_url,
+events.type as type,
+events.created_at as created_at,
+events.repository_size as repository_size,
+events.repository_created_at as repository_created_at,
+events.dense_rank as dense_rank
+FROM
+	(SELECT repository_organization,
+	repository_url,
+	type,
+	created_at,
+	repository_size,
+	repository_created_at,
+	dense_rank
+	FROM orgevents_temp4_20)
+AS events
+INNER JOIN
+	(SELECT repository_organization
+	FROM organizations_megatable_ultimate
+	WHERE TempTable = 4)
+AS orgs
+ON orgs.repository_organization = events.repository_organization
+ORDER BY created_at ASC);
+
+
+INSERT INTO org_early_events
+(SELECT events.repository_organization AS repository_organization,
+events.repository_url as repository_url,
+events.type as type,
+events.created_at as created_at,
+events.repository_size as repository_size,
+events.repository_created_at as repository_created_at,
+events.dense_rank as dense_rank
+FROM
+	(SELECT repository_organization,
+	repository_url,
+	type,
+	created_at,
+	repository_size,
+	repository_created_at,
+	dense_rank
+	FROM orgevents_temp5_20)
+AS events
+INNER JOIN
+	(SELECT repository_organization
+	FROM organizations_megatable_ultimate
+	WHERE TempTable = 5)
+AS orgs
+ON orgs.repository_organization = events.repository_organization
+ORDER BY created_at ASC);
+
+
+CREATE TABLE  `git`.`org_early_forks` (
+`repository_url` VARCHAR( 280 ) COLLATE utf8_bin DEFAULT NULL ,
+ `repository_organization` VARCHAR( 100 ) COLLATE utf8_bin DEFAULT NULL ,
+ `created_at` DATETIME DEFAULT NULL ,
+ `forked_from` VARCHAR( 280 ) COLLATE utf8_bin DEFAULT NULL ,
+KEY  `repository_organization` (  `repository_organization` ) ,
+KEY  `repository_url` (  `repository_url` ( 255 ) )
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COLLATE = utf8_bin;
+
+#get rid of duplicates
+ALTER IGNORE TABLE org_early_events ADD UNIQUE INDEX(repository_organization, type,  dense_rank);
+
+
+#join between org_early_events and orgforkcreations - not necessary, can account for the forks differently
+#join which merely excludes fork creations which were not early events and saves the remainder - but this excludes forks that weren't interacted with in any other way - use Event20Time below
+INSERT INTO org_early_forks
+(SELECT forks.repository_organization AS repository_organization,
+forks.repository_url as repository_url,
+forks.created_at as created_at,
+forks.forked_from AS forked_from
+FROM
+	(SELECT repository_organization,
+	repository_url,
+	created_at,
+	forked_from
+	FROM orgforkcreations)
+AS forks
+INNER JOIN
+	(SELECT DISTINCT(repository_url)
+	FROM org_early_events)
+AS repos
+ON repos.repository_url = forks.repository_url
+ORDER BY repository_organization ASC);
+
+
+
+
+#now... add the interesting variables to the ultimate table
+ALTER TABLE  `organizations_megatable_ultimate` ADD  `blog` VARCHAR( 250 ) NOT NULL ,
+ADD  `FirstEvent` VARCHAR( 30 ) NOT NULL ,
+ADD  `EarlyEvents` INT NOT NULL ,
+ADD  `MinsTo20Events` DECIMAL( 65, 2 ) NOT NULL ,
+ADD  `First20_Creates` INT NOT NULL ,
+ADD  `First20_Forks` INT NOT NULL ,
+ADD  `First20_Pushes` INT NOT NULL ,
+ADD  `First20_WatchEvents` INT NOT NULL ,
+ADD  `First20_IssueEvents` INT NOT NULL ,
+ADD  `First20_PullRequests` INT NOT NULL ,
+ADD  `First20_DistinctRepos` INT NOT NULL ,
+ADD  `First20_OtherEvents` INT NOT NULL,
+ADD `Event20Time` DATETIME NULL;
+
+
+UPDATE `organizations_megatable_ultimate` SET blog = (SELECT blog from orgs_api WHERE orgs_api.login = `organizations_megatable_ultimate`.repository_organization);
+UPDATE `organizations_megatable_ultimate` SET EarlyEvents = (SELECT count(*) from org_early_events WHERE org_early_events.repository_organization = `organizations_megatable_ultimate`.repository_organization);
+UPDATE `organizations_megatable_ultimate` SET MinsTo20Events = (SELECT (max(unix_timestamp(created_at)) - min(unix_timestamp(created_at)))/60 from org_early_events WHERE org_early_events.repository_organization = `organizations_megatable_ultimate`.repository_organization);
+UPDATE `organizations_megatable_ultimate` SET First20_Creates = (SELECT count(*) from org_early_events WHERE org_early_events.repository_organization = `organizations_megatable_ultimate`.repository_organization AND org_early_events.type = 'CreateEvent');
+UPDATE `organizations_megatable_ultimate` SET Event20Time = (SELECT max(created_at) from org_early_events WHERE org_early_events.repository_organization = `organizations_megatable_ultimate`.repository_organization);
+
+ALTER TABLE  `orgforkcreations` ADD  `cutoff` DATETIME NULL;
+UPDATE orgforkcreations SET cutoff = (SELECT Event20Time FROM organizations_megatable_ultimate WHERE organizations_megatable_ultimate.repository_organization = orgforkcreations.repository_organization);
+
+UPDATE `organizations_megatable_ultimate` SET First20_Forks = (SELECT count(*) from orgforkcreations WHERE orgforkcreations.repository_organization = `organizations_megatable_ultimate`.repository_organization AND orgforkcreations.created_at <= orgforkcreations.cutoff);
+UPDATE `organizations_megatable_ultimate` SET First20_Pushes = (SELECT count(*) from org_early_events WHERE org_early_events.repository_organization = `organizations_megatable_ultimate`.repository_organization AND org_early_events.type = 'PushEvent');
+UPDATE `organizations_megatable_ultimate` SET First20_WatchEvents = (SELECT count(*) from org_early_events WHERE org_early_events.repository_organization = `organizations_megatable_ultimate`.repository_organization AND org_early_events.type = 'WatchEvent');
+UPDATE `organizations_megatable_ultimate` SET First20_IssueEvents = (SELECT count(*) from org_early_events WHERE org_early_events.repository_organization = `organizations_megatable_ultimate`.repository_organization AND (org_early_events.type = 'IssuesEvent' OR org_early_events.type = 'IssueCommentEvent'));
+UPDATE `organizations_megatable_ultimate` SET First20_PullRequests = (SELECT count(*) from org_early_events WHERE org_early_events.repository_organization = `organizations_megatable_ultimate`.repository_organization AND org_early_events.type = 'PullRequestEvent');
+UPDATE `organizations_megatable_ultimate` SET First20_OtherEvents = (SELECT count(*) from org_early_events WHERE org_early_events.repository_organization = `organizations_megatable_ultimate`.repository_organization AND org_early_events.type != 'PullRequestEvent' AND org_early_events.type != 'IssuesEvent' AND org_early_events.type != 'IssueCommentEvent' AND org_early_events.type != 'WatchEvent' AND org_early_events.type != 'PushEvent' AND org_early_events.type = 'CreateEvent');
+UPDATE `organizations_megatable_ultimate` SET First20_DistinctRepos = (SELECT count(distinct(repository_url)) from org_early_events WHERE org_early_events.repository_organization = `organizations_megatable_ultimate`.repository_organization) ;
+
+
+
+
+
+
+
+
+

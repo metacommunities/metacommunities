@@ -1,0 +1,16 @@
+[
+  {"name": "Id", "type": "integer", "mode": "nullable"},
+  {"name": "Reputation", "type": "integer", "mode": "nullable"},
+  {"name": "CreationDate", "type": "timestamp", "mode": "nullable"},
+  {"name": "DisplayName", "type": "string", "mode": "nullable"},
+  {"name": "LastAccessDate", "type": "timestamp", "mode": "nullable"},
+  {"name": "WebsiteUrl", "type": "string", "mode": "nullable"},
+  {"name": "Location", "type": "string", "mode": "nullable"},
+  {"name": "Age", "type": "integer", "mode": "nullable"},
+  {"name": "AboutMe", "type": "string", "mode": "nullable"},
+  {"name": "Views", "type": "integer", "mode": "nullable"},
+  {"name": "UpVotes", "type": "integer", "mode": "nullable"},
+  {"name": "DownVotes", "type": "integer", "mode": "nullable"},
+  {"name": "EmailHash", "type": "string", "mode": "nullable"}
+]
+

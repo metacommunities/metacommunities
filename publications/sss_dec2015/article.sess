@@ -3,22 +3,26 @@ if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/metacommunities/publications/sss_dec2015
+cd ~/R/metacommunities/publications/sss_dec2015
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +5 accounting_number.rmd
-badd +19 log.md
-badd +1 plan.md
-badd +1 todo.md
+badd +1 sss.rmd
+badd +1 log.md
+badd +20 plan.md
+badd +1 number.md
+badd +1 capital_numbers.md
+badd +1 abstract.md
+badd +0 title.md
 argglobal
 silent! argdel *
-argadd accounting_number.rmd
+argadd sss.rmd
 argadd log.md
 argadd plan.md
-argadd todo.md
-edit log.md
+argadd number.md
+argadd capital_numbers.md
+edit title.md
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -28,24 +32,18 @@ split
 1wincmd k
 wincmd w
 wincmd w
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 18 + 22) / 44)
+exe '1resize ' . ((&lines * 20 + 21) / 42)
 exe 'vert 1resize ' . ((&columns * 85 + 85) / 170)
-exe '2resize ' . ((&lines * 23 + 22) / 44)
+exe '2resize ' . ((&lines * 19 + 21) / 42)
 exe 'vert 2resize ' . ((&columns * 85 + 85) / 170)
-exe '3resize ' . ((&lines * 18 + 22) / 44)
 exe 'vert 3resize ' . ((&columns * 84 + 85) / 170)
-exe '4resize ' . ((&lines * 23 + 22) / 44)
-exe 'vert 4resize ' . ((&columns * 84 + 85) / 170)
 argglobal
-setlocal fdm=manual
+edit title.md
+setlocal fdm=expr
 setlocal fde=pandoc#folding#FoldExpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
@@ -53,18 +51,17 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-silent! normal! zE
-let s:l = 42 - ((9 * winheight(0) + 9) / 18)
+let s:l = 1 - ((0 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-42
-normal! 070|
-lcd ~/metacommunities/publications/sss_dec2015
+1
+normal! 0
+lcd ~/R/metacommunities/publications/sss_dec2015
 wincmd w
 argglobal
-edit ~/metacommunities/publications/sss_dec2015/plan.md
-setlocal fdm=manual
+edit ~/R/metacommunities/publications/sss_dec2015/plan.md
+setlocal fdm=expr
 setlocal fde=pandoc#folding#FoldExpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
@@ -72,40 +69,18 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-silent! normal! zE
-18,21fold
-22,36fold
-1,36fold
 1
 normal! zo
-let s:l = 23 - ((13 * winheight(0) + 11) / 23)
+let s:l = 20 - ((9 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-23
+20
 normal! 0
-lcd ~/metacommunities/publications/sss_dec2015
+lcd ~/R/metacommunities/publications/sss_dec2015
 wincmd w
 argglobal
-edit ~/metacommunities/publications/sss_dec2015/plan.md
-setlocal fdm=marker
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-let s:l = 7 - ((5 * winheight(0) + 9) / 18)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-7
-normal! 0
-lcd ~/metacommunities/publications/sss_dec2015
-wincmd w
-argglobal
-edit ~/metacommunities/publications/sss_dec2015/accounting_number.rmd
+edit ~/R/metacommunities/publications/sss_dec2015/sss.rmd
 setlocal fdm=syntax
 setlocal fde=pandoc#folding#FoldExpr()
 setlocal fmr={{{,}}}
@@ -114,22 +89,19 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 5 - ((3 * winheight(0) + 11) / 23)
+let s:l = 1 - ((0 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-5
-normal! 016|
-lcd ~/metacommunities/publications/sss_dec2015
+1
+normal! 0111|
+lcd ~/R/metacommunities/publications/sss_dec2015
 wincmd w
-exe '1resize ' . ((&lines * 18 + 22) / 44)
+exe '1resize ' . ((&lines * 20 + 21) / 42)
 exe 'vert 1resize ' . ((&columns * 85 + 85) / 170)
-exe '2resize ' . ((&lines * 23 + 22) / 44)
+exe '2resize ' . ((&lines * 19 + 21) / 42)
 exe 'vert 2resize ' . ((&columns * 85 + 85) / 170)
-exe '3resize ' . ((&lines * 18 + 22) / 44)
 exe 'vert 3resize ' . ((&columns * 84 + 85) / 170)
-exe '4resize ' . ((&lines * 23 + 22) / 44)
-exe 'vert 4resize ' . ((&columns * 84 + 85) / 170)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

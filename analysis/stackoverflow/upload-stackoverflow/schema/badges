@@ -1,0 +1,6 @@
+[
+  {"name": "Id",     "type": "integer",   "mode": "required"},
+  {"name": "UserId", "type": "integer",   "mode": "required"},
+  {"name": "Name",   "type": "string",    "mode": "nullable"},
+  {"name": "Date",   "type": "timestamp", "mode": "nullable"}
+]

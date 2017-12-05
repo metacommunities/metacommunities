@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Project Relations Visualisation</title>
+    <base href="http://localhost:8080/"></base>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="https://github.com/favicon.ico">
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+</head>
+
+<body>
+    <div id="language-search">
+        <label for="langsearch">Add language: </label>
+        <input type="search" id="langsearch"/>
+        <div id="selected-languages"></div>
+    </div>
+
+    <table id="info">
+        <tr><td>Nodes</td><td><span id="totalNodesLabel">0</span></td></tr>
+        <tr><td>Links</td><td><span id="totalLinksLabel">0</span></td></tr>
+    </table>
+
+    <div id="algo-select" title="Algorith to rank (and filter) edges by.">
+        Ranking algorithm
+        <select id="algo">
+            <option value="rank">Node rank</option>
+            <option value="jung">Pagerank</option>
+        </select>
+    </div>
+
+    <div id="edge-select" title="Maximum number of links to fetch.">
+        Number of links
+        <select id="edge">
+            <option value="1000">1000</option>
+            <option value="2500">2500</option>
+            <option value="5000" selected="true">5000</option>
+            <option value="7500">7500</option>
+            <option value="10000">10000</option>
+        </select>
+    </div>
+
+    <div id="project-search" title="Search for a repo in the displayed graph" style="visibility:hidden;">
+        <label for="projectsearch">Project search: </label>
+        <input type="search" id="projectsearch"/>
+    </div>
+
+    <div id="graph"></div>
+    <div id="hist"></div>
+    <div id="linkbox">
+          <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a><br/>
+          <div class="g-plusone" data-size="medium"></div>
+    </div>
+    <div id="pop-up" style="display:hidden;">
+        <div id="pop-up-title"></div>
+        <div id="pop-up-content"></div>
+    </div>
+</body>
+
+<script src="/scripts/main.js"></script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+</script>
+
+<script type="text/javascript">
+  (function() {
+   var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+   po.src = 'https://apis.google.com/js/plusone.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+   })();
+ </script>
+
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-38537159-1']);
+    _gaq.push(['_setDomainName', 'ghtorrent.org']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+     var ga = document.createElement('script'); ga.type =
+     'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+       : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0];
+     s.parentNode.insertBefore(ga, s);
+     })();
+
+</script>
+</html>

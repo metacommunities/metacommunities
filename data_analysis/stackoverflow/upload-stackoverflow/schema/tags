@@ -1,8 +1,0 @@
-[
-  {"name": "id",                    "type": "integer",   "mode": "nullable"},
-  {"name": "tag",                   "type": "string",    "mode": "nullable"},
-  {"name": "count",                 "type": "integer",   "mode": "nullable"},
-  {"name": "first_question",        "type": "integer",   "mode": "nullable"},
-  {"name": "first_question_date",   "type": "timestamp", "mode": "nullable"}
-]
-
