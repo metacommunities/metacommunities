@@ -141,3 +141,12 @@
 - sent whole_number_in_parts.docx and whole_number_in_parts_with_tracked_changes.docx today.      
 - TODO: put this online using HTML, etc
 
+
+## Mon 13 Nov 2017 13:46:58 GMT
+- have the copyedited chapter back as 7. AMwhole_number_in_parts.docx
+- 3 requests:
+
+"Chapter 7 contains a lot of code. Is it possible to cut down some of this? I’m thinking specifically of the three passages that follow on from ‘A slightly recursive instance of this API-effect can be seen in event data for the project’, ‘The growth of associative imitation’ and ‘tidying and re-arranging files and documents in the repository’.
+2. There are also some issues with the figures in chapter 7. Is there a good reason that three of these aren’t numbered in the standard way? We’d prefer if the numbering ran straight from 7.1 to 7.6. We will also need higher-resolution versions of 7.3 and the three unnumbered figures. Is the colour-coding significant in two of the graphs? This will of course be lost in B&W reproduction."
+
+- responded to these, including generating new figures (numbered in figure folder), and tweaking manuscript paper to generate svg
