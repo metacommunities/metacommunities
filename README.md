@@ -6,8 +6,7 @@ This repository documents a one year study of Github software repositories in ag
 
 This preliminary release of some of the publications, data analysis, scripts, secondary data and figures from the research does not comprise a polished product. It does however provide, via the archival features of Github and `git` itself a reasonably comprehensive record of the work done on the project up to the release date (11 November 2014). Later releases of the project will contain further publications, reports and data analyses. 
 
-
-It is based in Sociology at Lancaster University (UK), led by Adrian Mackenzie. Co-investigators are Matthew Fuller (Goldsmiths, London) and Andrew Goffey (Nottingham). Richard Mills  and Stu Sharples were the postdoctoral researchers working on the project. 
+It is based in Sociology at Lancaster University (UK), led by Adrian Mackenzie. Co-investigators were Matthew Fuller (Goldsmiths, London) and Andrew Goffey (Nottingham). Richard Mills  and Stu Sharples (a.k.a Bedston) were the postdoctoral researchers working on the project. 
 
 The project was funded by the UK Economic and Social Research Council under its 2013 'Google and Data Analytics' funding scheme. 
 
@@ -16,6 +15,12 @@ The project was funded by the UK Economic and Social Research Council under its 
 The main components of the repository are:
 
 1. [Publications](https://github.com/metacommunities/metacommunities/tree/master/publications) - manuscripts in process of publication as well as papers and presentations written for conferences and workshops
+    
+    - [Capital numbers](publications/jcult_econ_nov16/)
+    - [Infrastructures](publications/infrastructures_handbook/)
+    - [Ethnography/counting](publications/bigdata_ethnography_2016/)
+    - [Digital Sociology](publications/handbook_cultural_sociology/)
+    - [Archives](publications/archive_essay/)
 
 2. [Data Analysis](https://github.com/metacommunities/metacommunities/tree/master/data_analysis) -- scripts, sample and secondary data, and figures or plots produced in the course of the work. These range across a number of different foci including:
 
