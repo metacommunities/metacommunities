@@ -243,3 +243,7 @@ From the paper at https://dl.acm.org/citation.cfm?doid=3152284.3133908
 
 ## Thu 23 Nov 2017 10:55:29 GMT
 - duplication could be the focus of a paper -- how much of platform life is duplicated; and if it is, what does it matter. Does this go back to ideas of crowds, powerlaws, etc?    
+
+## Wed 17 Jan 2018 16:04:07 GMT
+- have put a version of the site focused on publication up as 'gh-pages' -- could build blog, etc, around that more; better than using WordPress because it is on  Github?
+- ideas on commoning and common pool resources in market, state, etc settings from De Angelis would be useful; especially if brought together with platform accounts;  
