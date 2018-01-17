@@ -7,7 +7,7 @@ This repository documents a one year study of Github software repositories in ag
 This preliminary release of some of the publications, data analysis, scripts, secondary data and figures from the research does not comprise a polished product. It does however provide, via the archival features of Github and `git` itself a reasonably comprehensive record of the work done on the project up to the release date (11 November 2014). Later releases of the project will contain further publications, reports and data analyses. 
 
 
-It is based in Sociology at Lancaster University (UK), led by Adrian Mackenzie. Co-investigators are Matthew Fuller (Goldsmiths, London) and Andrew Goffey (Nottingham). Richard Mills  and Stu Sharples are the postdoctoral researchers working on the project. 
+It is based in Sociology at Lancaster University (UK), led by Adrian Mackenzie. Co-investigators are Matthew Fuller (Goldsmiths, London) and Andrew Goffey (Nottingham). Richard Mills  and Stu Sharples were the postdoctoral researchers working on the project. 
 
 The project was funded by the UK Economic and Social Research Council under its 2013 'Google and Data Analytics' funding scheme. 
 
