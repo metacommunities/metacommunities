@@ -1,1 +1,0 @@
-/home/mackenza/notes/simondon_mode_tech_1989.md
