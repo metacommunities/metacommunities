@@ -247,3 +247,6 @@ From the paper at https://dl.acm.org/citation.cfm?doid=3152284.3133908
 ## Wed 17 Jan 2018 16:04:07 GMT
 - have put a version of the site focused on publication up as 'gh-pages' -- could build blog, etc, around that more; better than using WordPress because it is on  Github?
 - ideas on commoning and common pool resources in market, state, etc settings from De Angelis would be useful; especially if brought together with platform accounts;  
+
+## Thu 18 Jan 2018 15:01:17 GMT
+- Data Conversations at Lancaster -- http://wp.lancs.ac.uk/highly-relevant/2017/10/10/3rd-data-conversation-software-as-data-summary-and-slides/ -- had quite a lot on  Github and Gitlab, etc; also on containers  
