@@ -250,3 +250,12 @@ From the paper at https://dl.acm.org/citation.cfm?doid=3152284.3133908
 
 ## Thu 18 Jan 2018 15:01:17 GMT
 - Data Conversations at Lancaster -- http://wp.lancs.ac.uk/highly-relevant/2017/10/10/3rd-data-conversation-software-as-data-summary-and-slides/ -- had quite a lot on  Github and Gitlab, etc; also on containers  
+
+## Tue 06 Feb 2018 16:58:01 GMT
+- thinking about gender on Github: how could I ground analysis of that?
+-reading nafus from ~/archive/ensembles/nafus_patch_gender_2011.pdf  - her arguments about code, openness, and gender might apply to platform work? to data science? could possibly track some of this down via stackoverflow? And also check if the flow of stuff, its openness on  Github connects to the gender troubles (see Guardian article on this).  
+
+> Women’s flight from F/LOSS cannot matter because it if it did, participants would have to confront their creations as made by social force rather than revealed ontological fact. 
+
+- check Anthropology of Work Review for stuff on platforms ... 
+- led to article via Guardian on Github gender study ~/archive/ensembles/gender_github_peerj-cs-111.pdf and dawn nafus' 2011 article on 'open' which I should read
