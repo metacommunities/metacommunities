@@ -259,3 +259,6 @@ From the paper at https://dl.acm.org/citation.cfm?doid=3152284.3133908
 
 - check Anthropology of Work Review for stuff on platforms ... 
 - led to article via Guardian on Github gender study ~/archive/ensembles/gender_github_peerj-cs-111.pdf and dawn nafus' 2011 article on 'open' which I should read
+
+## Fri 02 Mar 2018 19:12:18 GMT
+- for  Github analysis on GoogleBigQuery can use what the people listed at Medium article https://medium.com/google-cloud/github-on-bigquery-analyze-all-the-code-b3576fd2b150 have done with dataset at https://bigquery.cloud.google.com/dataset/fh-bigquery:github_extracts?pli=1
