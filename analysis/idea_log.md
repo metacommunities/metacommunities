@@ -262,3 +262,54 @@ From the paper at https://dl.acm.org/citation.cfm?doid=3152284.3133908
 
 ## Fri 02 Mar 2018 19:12:18 GMT
 - for  Github analysis on GoogleBigQuery can use what the people listed at Medium article https://medium.com/google-cloud/github-on-bigquery-analyze-all-the-code-b3576fd2b150 have done with dataset at https://bigquery.cloud.google.com/dataset/fh-bigquery:github_extracts?pli=1
+
+## Mon 05 Mar 2018 09:07:26 GMT
+- also pypi puts all stats on  GoogleBigQuery according to this post: https://mail.python.org/pipermail/distutils-sig/2016-May/028986.html
+- the actual dataset is at https://bigquery.cloud.google.com/table/the-psf:pypi.downloads20180305?tab=preview
+- ran a simple query to see what it would look lie:
+
+```
+query = "SELECT file.project, count(file.project) as cnt
+FROM [the-psf:pypi.downloads20180305] 
+group by file.project
+order by  cnt desc
+LIMIT 1000"
+
+library(bigrquery)
+res = query_exec(query, 'metacommunities')
+res[1:30,]
+
+#       file_project    cnt
+# 1              pip 288604
+# 2              six 241138
+# 3         botocore 238101
+# 4       s3transfer 222797
+# 5  python-dateutil 204412
+# 6          futures 196803
+# 7           pyasn1 191144
+# 8           pyyaml 189702
+# 9         docutils 184246
+# 10      setuptools 183880
+# 11      simplejson 180794
+# 12        jmespath 176755
+# 13             rsa 162791
+# 14          awscli 158597
+# 15           wheel 149222
+# 16        colorama 146922
+# 17        requests 130651
+# 18         chardet 125377
+# 19            idna 109887
+# 20         certifi 100783
+# 21   awscli-cwlogs  96194
+# 22         urllib3  93100
+# 23           boto3  89587
+# 24            pytz  75885
+# 25           numpy  65373
+# 26      markupsafe  61862
+# 27            cffi  59982
+# 28             pbr  52477
+# 29          jinja2  51434
+# 30          enum34  51136
+```
+```
+
