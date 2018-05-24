@@ -150,3 +150,6 @@
 2. There are also some issues with the figures in chapter 7. Is there a good reason that three of these aren’t numbered in the standard way? We’d prefer if the numbering ran straight from 7.1 to 7.6. We will also need higher-resolution versions of 7.3 and the three unnumbered figures. Is the colour-coding significant in two of the graphs? This will of course be lost in B&W reproduction."
 
 - responded to these, including generating new figures (numbered in figure folder), and tweaking manuscript paper to generate svg
+
+## Thu 24 May 2018 16:26:25 BST
+- received proofs and started work on them -- did about 7 pages of 28 or so. They are in mackenzie_proof_9781526134974_07.pdf 
