@@ -314,3 +314,26 @@ res[1:30,]
 ```
 
 - cloud source repos on google https://cloud.google.com/source-repositories/
+
+## Mon 04 Jun 2018 15:21:56 BST
+- microsoft buys  Github for 7.5 billion; 
+
+library(twitteR)
+library(dplyr)
+library(stringr)
+library(ROAuth)
+library(httr)
+
+keys <- readLines('key.txt')
+api_key <- str_split(keys[1], pattern=':')[[1]][2]
+api_secret <- str_split(keys[2], pattern=':')[[1]][2]
+access_token <- str_split(keys[3], pattern=':')[[1]][2]
+access_token_secret <- str_split(keys[4], pattern=':')[[1]][2]
+setup_twitter_oauth( access_token, access_token_secret)
+
+
+tweets_sanders <- searchTwitter('@BernieSanders', n=1500)
+
+library(plyr)
+feed_sanders = laply(tweets_sanders, function(t) t$getText())
+<Paste>
