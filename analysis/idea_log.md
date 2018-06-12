@@ -318,6 +318,8 @@ res[1:30,]
 ## Mon 04 Jun 2018 15:21:56 BST
 - microsoft buys  Github for 7.5 billion; 
 
+```{r microsoft}
+
 library(twitteR)
 library(dplyr)
 library(stringr)
@@ -336,4 +338,8 @@ tweets_sanders <- searchTwitter('@BernieSanders', n=1500)
 
 library(plyr)
 feed_sanders = laply(tweets_sanders, function(t) t$getText())
-<Paste>
+
+```
+
+## Tue 12 Jun 2018 07:48:06 BST
+- Jackson on broken world thinking and repair would be really useful as a way to analyze  Github. Some notes in ~/notes/jackson_repair_2014.md 
