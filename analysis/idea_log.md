@@ -311,7 +311,6 @@ res[1:30,]
 # 29          jinja2  51434
 # 30          enum34  51136
 ```
-```
 
 - cloud source repos on google https://cloud.google.com/source-repositories/
 
@@ -343,3 +342,6 @@ feed_sanders = laply(tweets_sanders, function(t) t$getText())
 
 ## Tue 12 Jun 2018 07:48:06 BST
 - Jackson on broken world thinking and repair would be really useful as a way to analyze  Github. Some notes in ~/notes/jackson_repair_2014.md 
+- the point would be show how much work goes into maintenance, and this would be different to the software engineering and compsci literature focused on innovation and production
+- instead focus on sustainability, on timeliness
+
