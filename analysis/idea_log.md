@@ -28,7 +28,7 @@
 
 
 ## Wed Mar  9 13:17:20 GMT 2016
- - reading zach holman on deployment -- https://zachholman.com/posts/deploying-software -- useful in describing some of the experiments, containers, etc of contemporary infrastrustructures -- versions, branches, etc
+ - reading zach holman on deployment -- https://zachholman.com/posts/deploying-software -- useful in describing some of the experiments, containers, etc of contemporary infrastructures -- versions, branches, etc
 
 ## Fri Mar 11 09:35:28 GMT 2016
 - going through old fork-pullrequest queries -- could use these to engage with the problems of centralisation on Github
@@ -331,8 +331,6 @@ api_secret <- str_split(keys[2], pattern=':')[[1]][2]
 access_token <- str_split(keys[3], pattern=':')[[1]][2]
 access_token_secret <- str_split(keys[4], pattern=':')[[1]][2]
 setup_twitter_oauth( access_token, access_token_secret)
-
-
 tweets_sanders <- searchTwitter('@BernieSanders', n=1500)
 
 library(plyr)
@@ -345,3 +343,10 @@ feed_sanders = laply(tweets_sanders, function(t) t$getText())
 - the point would be show how much work goes into maintenance, and this would be different to the software engineering and compsci literature focused on innovation and production
 - instead focus on sustainability, on timeliness
 
+## Fri 21 Sep 2018 09:10:59 AEST
+- Github mining its own platform: https://githubengineering.com/towards-natural-language-semantic-code-search/
+- news yesterday about google investing in gitlab
+
+## Tue 23 Apr 2019 22:19:17 AEST
+- long gap here!  
+- Github in news because of 996.icu repo recording techwork practices in China. 
