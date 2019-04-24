@@ -350,3 +350,5 @@ feed_sanders = laply(tweets_sanders, function(t) t$getText())
 ## Tue 23 Apr 2019 22:19:17 AEST
 - long gap here!  
 - Github in news because of 996.icu repo recording techwork practices in China. 
+- just at a time when I'm disenchanted, there's a wholesale spread of disaffection with tech work; 
+- the commit times for Github devs might give a sense of 996 in practice? Would it be possible to verify that? Only for public repos ... 
